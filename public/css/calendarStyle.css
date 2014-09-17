@@ -1,0 +1,97 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+body {
+    overflow: auto;
+    font-family: Open Sans;
+    background: #fff;
+}
+.row {
+    margin: 5px;
+}
+.tab-content {
+    margin-bottom: 10px;
+    border: 1px solid #dddddd;
+    border-top: none;
+    display: block;
+}
+.tab-pane {
+    padding: 10px;
+    background: white;
+}
+.ui-draggable {
+    display: inline-block;
+    margin: 10px;
+}
+.divSubject {
+    font-size: 14px;
+    padding: 3px;
+    width: 150px;
+    text-align: center;
+    border: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.divSubject:hover .removeSubject {
+    cursor: pointer;
+    visibility: visible;
+}
+.removeSubject {
+    visibility: hidden;
+    float: right;
+    position: absolute;
+    left: 132px;
+    top: 5px;
+}
+.create {
+    margin-top: 40px;
+}
+.containerCalendar {
+    background-color: #eff4f7;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    padding: 0 20px 20px 20px;
+    position: relative;
+    box-shadow: 10px 10px 5px #999999;
+}
+#clip {
+    position: relative;
+    top: -20px;
+    background: url('../images/paperClipStart.png') repeat-x;
+    height: 60px;
+}
+.nav .navbar-nav .active {
+    background-color: #428bca;
+}
+.titleTextDecoration {
+    font-size: 18pt;
+    color: darkslategray;
+}
+.textDelete {
+    font-size: 16pt;
+}
+.create {
+    margin-top: 40px;
+}
+
+/*popover*/
+
+.own-popover {
+    position: absolute;
+    min-width: 200px;
+    border: 1px solid rgb(150, 139, 139);
+    border-radius: 5px;
+    z-index: 1000;
+    background: #fff;
+    box-shadow: 4px 4px 4px #7B7B74;
+}
+.own-popover .remove-popover {
+    float: right;
+    margin: 3px 5px 0 0px;
+    cursor: pointer;
+}
+.own-popover .popover-header .header-content {
+    padding-left: 10px;
+}
+.own-popover .removePopover:after {
+    clear: both;
+}

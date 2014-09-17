@@ -1,0 +1,58 @@
+.main {
+    margin-top: 50px;
+}
+
+.logo {
+    margin-top: 30px;
+}
+
+.rightFloat {
+    float: right;
+}
+
+.leftFloat {
+    float: left;
+}
+
+.personAvatar {
+    float: left;
+    margin: 0 10px 10px 0;
+    width: 220px;
+
+}
+
+.informationAboutPerson {
+    float: left;
+    min-width: 400px;
+}
+.informationAboutPerson p:first-child{
+    font-weight: 900;
+    font-size: 18px;
+}
+
+
+
+.topImages {
+    overflow: hidden;
+}
+
+.jumbotron {
+    padding: 20px;
+    border: 1px solid #dddddd;
+    overflow: hidden;
+    text-align: justify;
+
+    font-size: 15px;
+}
+
+.over_ttl {
+    background: #afafaf;
+    padding: 2px 5px;
+    margin-right: 10px;
+
+    width: 70px;
+    display: inline-block;
+    *zoom: 1;
+    *display: inline;
+    color: #fff;
+}
