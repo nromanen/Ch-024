@@ -7,7 +7,7 @@ var CalendarView = Backbone.View.extend ({
      * Describes all the selectors we need.
      */
     selectors: {
-        weekButton: '.fc-agendaWeek-button',
+        weekButton:            '.fc-agendaWeek-button',
         removeSubjectCheckbox: '#drop-remove'
     },
 
@@ -15,7 +15,7 @@ var CalendarView = Backbone.View.extend ({
         this.eventsCollection = options.collection;
     },
 
-    /*PRIVATE METHODS*/
+    /* PRIVATE METHODS */
 
     /**
     * Connect all widgets
@@ -25,29 +25,30 @@ var CalendarView = Backbone.View.extend ({
     },
 
     _convertHexColorToRGB: function(color) {
-        return "rgba(" + parseInt(color.substring(1,3),16)+","
-            + parseInt(color.substring(3,5),16)+","+parseInt(color.substring(5,7),16) + ", .5)";
+        return "rgba(" + parseInt(color.substring(1,3),16) + ","
+            + parseInt(color.substring(3,5),16) + "," + parseInt(color.substring(5,7),16) + ", .5)";
     },
 
      /**
       * @param {Date} date
+      * @param {JS Event} jsEvent
       * Add new event object after dropping subject object into calendar.
       */
     _addEvent: function(date, jsEvent, ui) {
         var originalSubjectModel = $(jsEvent.target).data('subject');
         var eventModel = new EventModel({
             subject: originalSubjectModel,
-            title: originalSubjectModel.get('title'),
-            color:  this._convertHexColorToRGB(originalSubjectModel.get('color')) ,
+            title: originalSubjectModel.getTitleAttribute(),
+            color:  this._convertHexColorToRGB(originalSubjectModel.getColorAttribute()) ,
             start: date
         });
         this.eventsCollection.add(eventModel);
-        $("#calendar").fullCalendar('renderEvent', eventModel.toJSON(), true);
+        this.$el.fullCalendar('renderEvent', eventModel.toJSON(), true);
     },
 
     /**
-    *@param {Object} eventObject
-    *Create Event View for updating and deleting event model.
+    * @param {Object} eventObject
+    * Create Event View for updating and deleting event model.
     */
     _showEventModal: function(eventObject) {
         var eventModel = this.eventsCollection.findWhere({title: eventObject.title});
@@ -95,12 +96,11 @@ var CalendarView = Backbone.View.extend ({
         });
     },
 
-    /*PUBLIC METHODS*/
+    /* PUBLIC METHODS */
 
     render: function() {
         $('#calendarContainer').html(this.$el);
         this._initWidgets();
-     //   $('.fc-time-grid-event').popover({trigger:'hover',content:'write a review, create a keyword, invite a friend, and more.',placement:'top'});
         return this;
     }
 

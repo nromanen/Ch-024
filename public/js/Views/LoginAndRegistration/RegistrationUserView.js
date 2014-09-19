@@ -1,17 +1,22 @@
 var RegistrationUserView = Backbone.View.extend({
     selectors:{
-        registerButton: "#register",
-        cancelButton: "#cancel",
-        nameInput: '#name',
-        surnameInput: '#surname',
-        emailInput: '#email',
-        passwordInput: '#password',
+        registerButton: '#register',
+        cancelButton:   '#cancel',
+        nameInput:      '#name',
+        surnameInput:   '#surname',
+        emailInput:     '#email',
+        passwordInput:  '#password',
         repeatPasswordInput: '#repeatPassword',
-        phoneInput: '#phone',
-        regForm: '#regForm'
+        phoneInput:      '#phone',
+        regForm:         '#regForm'
 
     },
     template: _.template($('#registrationTemplate').html()),
+
+    initialize: function() {
+        return true;
+
+    },
 
     serializeForm: function (selector) {
         var out = {};
@@ -45,27 +50,26 @@ var RegistrationUserView = Backbone.View.extend({
         this.$('.errors').html('');
         _.each(errors, function(error){
             this.$('.form-group #'+ error.field + ' + .errors').append('<span>' + error.message + '</span>');
-            /* Треба замінити цей  .css('border', '1px solid red')  на шось розумне*/
-            this.$('#' + error.field).css('border', '1px solid red');
+            this.$('#' + error.field).addClass('borderRed');
         }, this);
     },
 
     /**
      *Validate user registration form
      */
-    _checkForm:function(){
-        var data = {};
-        data.name = this.$(this.selectors.nameInput).val();
-        data.surname = this.$(this.selectors.surnameInput).val();
-        data.email = this.$(this.selectors.emailInput).val();
-        data.password = this.$(this.selectors.passwordInput).val();
-        data.repeatPassword = this.$(this.selectors.repeatPasswordInput).val();
-        data.phone = this.$(this.selectors.phoneInput).val();
+    _checkForm:function(jsEvent){
+
+        var data = $(jsEvent.target).serializeJSON();
         this.model.set(data, {validate:true});
 
-		var str = this.serializeForm($(this.selectors.regForm));
         var sendParams = new RegistrationUserModel();
-        sendParams.fetch({data:{name:str.name,surname:str.surname,phone:str.phone,email:str.email,hash:str.password },type:'POST' });
+        sendParams.fetch({data:{
+            name: str.name,
+            surname: str.surname,
+            phone: str.phone,
+            email: str.email,
+            hash: str.password
+        },type:'POST' });
     },
 
     /**

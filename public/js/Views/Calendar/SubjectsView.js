@@ -1,13 +1,13 @@
 var SubjectsView = Backbone.View.extend({
 
     selectors: {
-        addSubjectButton: ".create",
-        cancelButton: '.cancelBtn',
+        addSubjectButton:    '.create',
+        cancelButton:        '.cancelBtn',
         createSubjectButton: '.saveBtn',
-        subjectTitleInput: '.subjectTitle',
-        subjectBackground: '.subjectBackground',
-        colorPickerInput: '.pick-a-color',
-        subjectContainer: '.tab-content .active'
+        subjectTitleInput:   '.subjectTitle',
+        subjectBackground:   '.subjectBackground',
+        colorPickerInput:    '.pick-a-color',
+        subjectContainer:    '.tab-content .active'
     },
 
     template: _.template($('#createSubjectModalWindowTemplate').html()),
@@ -17,7 +17,7 @@ var SubjectsView = Backbone.View.extend({
         $(this.selectors.addSubjectButton).on('click', $.proxy(this.render, this));
     },
 
-    /*PRIVATE METHODS*/
+    /* PRIVATE METHODS */
 
     _attachEvents: function() {
         this.$(this.selectors.createSubjectButton).on('click', $.proxy(this._addNewSubjectInCollection, this));
@@ -26,33 +26,33 @@ var SubjectsView = Backbone.View.extend({
 
 
     /**
-     *Add new subject in collection
+     * Add new subject in collection
      */
     _addNewSubjectInCollection: function() {
         var subjectTitle = this.$(this.selectors.subjectTitleInput).val();
         var subjectModel = new SubjectModel;
 
         if (subjectTitle) {
-            subjectModel.set({title: subjectTitle});
-        //    console.log(this.$(this.selectors.colorPickerInput).val());
-            subjectModel.set({color: "#" + this.$(this.selectors.colorPickerInput).val()}) ;
+            subjectModel.setTitleAttribute(subjectTitle);
+            subjectModel.setColorAttribute("#" + this.$(this.selectors.colorPickerInput).val()) ;
             $(this.selectors.subjectContainer).append(new SubjectView({
                 model: subjectModel
             }).render().el);
             this.collection.add(subjectModel);
         }
+
         this._shutdownModalWindow();
     },
 
     /**
-     *Shutdown modal window
+     * Shutdown modal window
      */
     _shutdownModalWindow: function() {
         this.remove();
         $('.modal-backdrop').remove();
     },
 
-    /*PUBLIC METHODS*/
+    /* PUBLIC METHODS */
 
     render: function() {
         this.$el = $(this.template());

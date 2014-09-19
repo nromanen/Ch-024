@@ -2,10 +2,10 @@ var EventView = Backbone.View.extend({
 
     selectors: {
         saveEventChangesButton: '.saveBtn',
-        deleteEventButton: '.deleteBtn',
-        cancelButton:'.cancelBtn',
-        classroomForExamInput: '.classForExam',
-        amountOfStudentsInput: '.amountOfStud'
+        deleteEventButton:      '.deleteBtn',
+        cancelButton:           '.cancelBtn',
+        classroomForExamInput:  '.classForExam',
+        amountOfStudentsInput:  '.amountOfStud'
     },
 
     initialize: function(options) {
@@ -13,7 +13,7 @@ var EventView = Backbone.View.extend({
         this.model.off().on('click', this.render, this);
     },
 
-    /*PRIVATE METHODS*/
+    /* PRIVATE METHODS */
 
     _attachEvents: function() {
         this.$(this.selectors.saveEventChangesButton).on('click', $.proxy(this._saveEventChanges,this));
@@ -31,11 +31,11 @@ var EventView = Backbone.View.extend({
             classroom: this.$(this.selectors.classroomForExamInput).val(),
             editable: false,
             textColor: 'black',
-            color: this.eventObject.color.substr(0,this.eventObject.color.length- 3)+'1)'
+            color: this.eventObject.color.substr(0,this.eventObject.color.length - 3) + '1)'
         });
         this.eventObject.editable = false;
         this.eventObject.textColor = 'black';
-        this.eventObject.color = this.eventObject.color.substr(0,this.eventObject.color.length- 3)+'1)';
+        this.eventObject.color = this.eventObject.color.substr(0,this.eventObject.color.length - 3) + '1)';
 
          },
 
@@ -45,7 +45,6 @@ var EventView = Backbone.View.extend({
     _saveEventChanges: function() {
         this._updateCalendarEvent();
         $("#calendar").fullCalendar('updateEvent', this.eventObject);
-
         this._shutdownModalWindow();
      },
 
@@ -65,14 +64,14 @@ var EventView = Backbone.View.extend({
      * Set correct template
      */
     _setTemplate: function() {
-        if(this.model.get('editable') === true){
+        if(this.model.getEditableAttribute() === true){
             this.template = _.template($('#saveEventModalWindowTemplate').html());
             return;
         }
         this.template = _.template($('#deleteEventModalWindowTemplate').html());
     },
 
-    /*PUBLIC METHODS*/
+    /* PUBLIC METHODS */
 
     render: function() {
         this._setTemplate();

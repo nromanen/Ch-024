@@ -5,5 +5,5 @@ var LoginUserModel = Backbone.Model.extend({
             password: ''
         }
     },
-	url: '/signin'
+	urlRoot: '/signin'
 });

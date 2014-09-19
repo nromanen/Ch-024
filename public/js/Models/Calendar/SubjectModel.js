@@ -11,6 +11,22 @@ var SubjectModel = Backbone.Model.extend({
 
     deleteSubject: function() {
     	this.destroy();
+    },
+
+    setTitleAttribute: function(value) {
+        this.set('title', value);
+    },
+
+    getTitleAttribute: function() {
+        return this.get('title');
+    },
+
+    setColorAttribute: function(value) {
+        this.set('color', value);
+    },
+
+    getColorAttribute: function() {
+        return this.get('color');
     }
 
 });
