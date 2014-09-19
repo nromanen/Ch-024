@@ -42,9 +42,6 @@ body {
     left: 132px;
     top: 5px;
 }
-.create {
-    margin-top: 40px;
-}
 .containerCalendar {
     background-color: #eff4f7;
     margin-top: 50px;
@@ -70,7 +67,7 @@ body {
     font-size: 16pt;
 }
 .create {
-    margin-top: 40px;
+    margin-top: 5px;
 }
 
 /*popover*/
@@ -112,9 +109,6 @@ body {
 .blueText{
     color: #2a6496;
     margin-top: 20px;
-}
-.glyphicon{
-    margin-right: 25px;
 }
 .rightAlign{
     text-align: right;

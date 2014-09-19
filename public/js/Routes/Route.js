@@ -1,7 +1,7 @@
 var Router = Backbone.Router.extend({
 
     routes: {
-        "":         "loginPage",
+        "":         "homePage",
         "home":     "homePage",
         "help":     "helpPage",
         "about":    "aboutPage",
@@ -25,6 +25,9 @@ var Router = Backbone.Router.extend({
             }).render();
             new SubjectsView({
                 collection: this.subjectsCollection
+            });
+            new CategoriesView({
+                collection: new CategoriesCollection
             });
             //this.selectMenuItem('home-menu');
         });
