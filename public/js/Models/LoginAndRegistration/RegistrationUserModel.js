@@ -61,7 +61,7 @@
             errors.push({field: 'phone',
                 message: 'Phone is not correct!'});
         }
-        return errors;
+        return errors.length ? errors : false;
         //return true;
 
 	},

@@ -66,8 +66,7 @@ var CalendarView = Backbone.View.extend ({
             hideEvent: 'mouseout',
             html: _.template($('#ownPopoverTemplate').html()),
             content: _.extend(eventModel, {
-                start: eventModel.start.format('YYYY-MM-DD HH:mm'),
-                end: eventModel.start.format('YYYY-MM-DD HH:mm')
+                start: eventModel.start.format('YYYY-MM-DD HH:mm')
             })
         });
         $('.own-popover').remove();
