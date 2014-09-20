@@ -18,7 +18,6 @@ var EventView = Backbone.View.extend({
     _attachEvents: function() {
         this.$(this.selectors.saveEventChangesButton).on('click', $.proxy(this._saveEventChanges,this));
         this.$(this.selectors.deleteEventButton).on('click', $.proxy(this._deleteEvent,this));
-        this.$(this.selectors.cancelButton).on('click', $.proxy(this._shutdownModalWindow,this));
     },
 
     /**
@@ -45,20 +44,11 @@ var EventView = Backbone.View.extend({
     _saveEventChanges: function() {
         this._updateCalendarEvent();
         $("#calendar").fullCalendar('updateEvent', this.eventObject);
-        this._shutdownModalWindow();
      },
 
     _deleteEvent: function() {
-        this._shutdownModalWindow();
-     },
 
-    /**
-     * Shutdown the Modal Window
-     */
-    _shutdownModalWindow: function() {
-        this.remove();
-        $('.modal-backdrop').remove();
-    },
+     },
 
     /**
      * Set correct template

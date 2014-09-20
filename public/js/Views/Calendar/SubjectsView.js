@@ -21,7 +21,6 @@ var SubjectsView = Backbone.View.extend({
 
     _attachEvents: function() {
         this.$(this.selectors.createSubjectButton).on('click', $.proxy(this._addNewSubjectInCollection, this));
-        this.$(this.selectors.cancelButton).on('click', $.proxy(this._shutdownModalWindow, this));
     },
 
 
@@ -40,16 +39,6 @@ var SubjectsView = Backbone.View.extend({
             }).render().el);
             this.collection.add(subjectModel);
         }
-
-        this._shutdownModalWindow();
-    },
-
-    /**
-     * Shutdown modal window
-     */
-    _shutdownModalWindow: function() {
-        this.remove();
-        $('.modal-backdrop').remove();
     },
 
     /* PUBLIC METHODS */

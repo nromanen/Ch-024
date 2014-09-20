@@ -88,27 +88,25 @@
 
 <script type="text/template" id="homeTemplate">
     <div class="row" id="subjectContainer">
-    <div id="navTabs" class="col-xs-11 col-sm-11 col-md-11 col-lg-11">
+    <div id="navTabs" class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
         <!-- Nav tabs -->
-        <ul class="nav nav-tabs" role="tablist">
-            <li class="active"><a href="#itcm" role="tab" data-toggle="tab">IT and Configuration Management</a>
-            </li>
-            <li><a href="#qc" role="tab" data-toggle="tab">Quality Control</a>
-            </li>
-            <li><a href="#sd" role="tab" data-toggle="tab">Software Development</a>
-            </li>
+        <ul class="nav nav-tabs" role="tablist" id="navTabContainer">
+            <li class="active"><a href="#itcm" role="tab" data-toggle="tab">IT and Configuration Management</a></li>
+            <li><a href="#qc" role="tab" data-toggle="tab">Quality Control</a></li>
+            <li><a href="#sd" role="tab" data-toggle="tab">Software Development</a></li>
         </ul>
 
         <!-- Tab panes -->
-        <div class="tab-content">
+        <div class="tab-content" id="navTabPaneContainer">
             <div class="tab-pane active" id="itcm"></div>
             <div class="tab-pane" id="qc"></div>
             <div class="tab-pane" id="sd"></div>
         </div>
     </div>
-    <div id="buttonCreate" class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+    <div id="buttonCreate" class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
         <div id='external-events'>
-            <input type="button" value="+" class="create btn btn-default" />
+            <input type="button" value="+ category" class="createCategory btn btn-default"/>
+            <input type="button" value="+ subject" class="create btn btn-default" />
         </div>
     </div>
 </div>
@@ -316,8 +314,8 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button class="saveBtn btn-lg">Save</button>
-                            <button class="cancelBtn btn-lg ">Cancel</button>
+                            <button class="saveBtn btn-lg" data-dismiss="modal">Save</button>
+                            <button class="cancelBtn btn-lg" data-dismiss="modal">Cancel</button>
                         </div>
                     </div>
                 </div>
@@ -342,8 +340,8 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button class="saveBtn btn-lg">Save</button>
-                            <button class="cancelBtn btn-lg ">Cancel</button>
+                            <button class="saveBtn btn-lg" data-dismiss="modal">Save</button>
+                            <button class="cancelBtn btn-lg" data-dismiss="modal">Cancel</button>
                         </div>
                     </div>
                 </div>
@@ -360,8 +358,30 @@
                             <span class="text-danger textDelete">Do you really want to delete this event? </span>
                         </div>
                         <div class="modal-footer">
-                            <button class="deleteBtn btn-lg">Delete</button>
-                            <button class="cancelBtn btn-lg ">Cancel</button>
+                            <button class="deleteBtn btn-lg" data-dismiss="modal">Delete</button>
+                            <button class="cancelBtn btn-lg" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </script>
+
+    <!--Template for creating new category-->
+    <script type="text/template" id="createCategoryModalWindowTemplate">
+            <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog"
+                 aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header"><span class="titleTextDecoration">Create new category</span></div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label>Input category title:</label>
+                                <input type="text" class="categoryTitle form-control"/>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="saveBtn btn-lg" data-dismiss="modal">Save</button>
+                            <button class="cancelBtn btn-lg " data-dismiss="modal">Cancel</button>
                         </div>
                     </div>
                 </div>
@@ -507,6 +527,16 @@
             </div>
         </script>
 
+        <!--navTab Category template-->
+        <script type="text/template" id="navTabCategoryTemplate">
+            <a href="#<%=id%>" role="tab" data-toggle="tab"><%=title%><span class="glyphicon glyphicon-remove removeCategory"> </span></a>
+        </script>
+
+        <!--navTab Pane Category template-->
+        <script type="text/template" id="navTabPaneCategoryTemplate">
+            <div class="tab-pane" id="<%=id%>"></div>
+        </script>
+
         <!--Frameworks-->
         <script type="text/javascript" src="js/Vendor/jquery/moment.min.js"></script>
         <script type="text/javascript" src="js/Vendor/jquery/jquery.min.js"></script>
@@ -529,10 +559,12 @@
         <script type="text/javascript" src="js/Models/LoginAndRegistration/SettingsUserModel.js"></script>
         <script type="text/javascript" src="js/Models/LoginAndRegistration/LoginUserModel.js"></script>
         <script type="text/javascript" src="js/Models/LoginAndRegistration/RegistrationUserModel.js"></script>
+        <script type="text/javascript" src="js/Models/Calendar/CategoryModel.js"></script>
 
         <!--Collections-->
         <script type="text/javascript" src="js/Collections/EventsCollection.js"></script>
         <script type="text/javascript" src="js/Collections/SubjectsCollection.js"></script>
+        <script type="text/javascript" src="js/Collections/CategoriesCollection.js"></script>
 
         <!--Views-->
         <script type="text/javascript" src="js/Views/Calendar/CalendarView.js"></script>
@@ -543,6 +575,8 @@
         <script type="text/javascript" src="js/Views/LoginAndRegistration/SettingsUserView.js"></script>
         <script type="text/javascript" src="js/Views/LoginAndRegistration/LoginUserView.js"></script>
         <script type="text/javascript" src="js/Views/LoginAndRegistration/RegistrationUserView.js"></script>
+        <script type="text/javascript" src="js/Views/Calendar/CategoryView.js"></script>
+        <script type="text/javascript" src="js/Views/Calendar/CategoriesView.js"></script>
 
         <!--Routes-->
         <script type="text/javascript" src="js/Routes/Route.js"></script>
