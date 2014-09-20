@@ -5,7 +5,7 @@ var SubjectModel = Backbone.Model.extend({
             //subjectId - model id will be changed
             //category: CategoryModel,
             title: '',
-            color:''
+            color: ''
         }
     },
 

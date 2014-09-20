@@ -1,5 +1,5 @@
 ﻿var RegistrationUserModel = Backbone.Model.extend({
-    url: '/signup',
+
 	defaults: {
         //id - model id will be replaced with id from db
 	    name:'',
@@ -7,61 +7,64 @@
         email:'',
         password:'',
         repeatPassword:'',
-        phone:'',
-        role: false
+        phone:''
 	},
+
+    constants: {
+        PATTERN_NAME : /^[A-Z][a-z]+[-]?[A-Za-z]*$/,
+        PATTERN_SURNAME : /^[A-Z][a-z]+[-]?[A-Za-z]*$/,
+        PATTERN_MAIL : /^\w+[-_\.]*\w+@\w+-?\w+\.[a-z]{2,4}$/,
+        PATTERN_PHONE : /^[+](380)-\d{2}-\d{3}-\d{2}-\d{2}$/,
+        SEARCH_ERR : -1,
+        NAME_LENGTH : 1,
+        PASS_LENGTH : 6
+    },
 
 	validate: function(attrs){
 
         var errors = [];
-        var PATTERN_NAME = /^[A-Z][a-z]+[-]?[A-Za-z]*$/;
-        var PATTERN_SURNAME = /^[A-Z][a-z]+[-]?[A-Za-z]*$/;
-        var PATTERN_MAIL = /^\w+[-_\.]*\w+@\w+-?\w+\.[a-z]{2,4}$/;
-        var PATTERN_PHONE = /^[+](380)-\d{2}-\d{3}-\d{2}-\d{2}$/; //+380-##-###-##-##
-
-        if ( attrs.name.search(PATTERN_NAME) === -1 || attrs.name.length <= 1 ) {
+        if ( attrs.name.search(this.constants.PATTERN_NAME) === this.constants.SEARCH_ERR ||
+            attrs.name.length <= this.constants.NAME_LENGTH ) {
             errors.push({
                 field: 'name',
                 message: 'Name is not correct!'
             });
         }
 
-        if ( attrs.surname.search(PATTERN_SURNAME) === -1 || attrs.surname.length <= 1 ) {
+        if ( attrs.surname.search(this.constants.PATTERN_SURNAME) === this.constants.SEARCH_ERR ||
+            attrs.surname.length <= this.constants.NAME_LENGTH ) {
             errors.push({
                 field: 'surname',
                 message: 'Surname is not correct!'
             });
         }
 
-        if ( attrs.email.search(PATTERN_MAIL) === -1 ) {
+        if ( attrs.email.search(this.constants.PATTERN_MAIL) === this.constants.SEARCH_ERR ) {
             errors.push({
                 field: 'email',
                 message: 'Mail is not correct!'
             });
         }
 
-        if ( attrs.password.length <= 6 ) {
+        if ( attrs.password.length <= this.constants.PASS_LENGTH ) {
             errors.push({
                 field: 'password',
-                message: 'Password is short!'
-            });
+                message: 'Password is short!'});
         }
 
         if ( attrs.password !== attrs.repeatPassword) {
-            errors.push({
-                field: 'repeatPassword',
-                message: 'Password adn repeat password do not similar!'
-            });
+            errors.push({field: 'repeatPassword',
+                message: 'Password adn repeat password do not similar!'});
         }
 
-        if ( attrs.phone.search(PATTERN_PHONE) === -1) {
-            errors.push({
-                field: 'phone',
-                message: 'Phone is not correct!'
-            });
+        if ( attrs.phone.search(this.constants.PATTERN_PHONE) === this.constants.SEARCH_ERR) {
+            errors.push({field: 'phone',
+                message: 'Phone is not correct!'});
         }
-
         return errors;
         //return true;
-	}
+
+	},
+
+    urlRoot: '/signup'
 });
