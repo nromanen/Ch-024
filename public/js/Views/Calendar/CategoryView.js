@@ -1,16 +1,20 @@
-var CategoryView = Backbone.View.extend({
+define('CategoryView', ['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
+    var CategoryView = Backbone.View.extend({
 
-	tagName: 'li',
+        tagName: 'li',
 
-	selectors: {
-		createCategoryButton: ".createCategory"
-	},
+        selectors: {
+            createCategoryButton: ".createCategory"
+        },
 
-	template: _.template($('#navTabCategoryTemplate').html()),
+        template: _.template($('#navTabCategoryTemplate').html()),
 
-	render: function () {
-		this.$el.html(this.template(this.model.toJSON()));
-		console.log(this.el);
-		return this;
-	}
+        render: function() {
+            this.$el.html(this.template(this.model.toJSON()));
+            console.log(this.el);
+            return this;
+        }
+    });
+    
+    return CategoryView;
 });

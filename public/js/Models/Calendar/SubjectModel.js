@@ -1,32 +1,36 @@
-var SubjectModel = Backbone.Model.extend({
+define('SubjectModel', ['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
+    var SubjectModel = Backbone.Model.extend({
 
-    defaults:function() {
-        return {
-            //subjectId - model id will be changed
-            //category: CategoryModel,
-            title: '',
-            color:''
+        defaults: function() {
+            return {
+                //subjectId - model id will be changed
+                //category: CategoryModel,
+                title: '',
+                color: ''
+            }
+        },
+
+        deleteSubject: function() {
+            this.destroy();
+        },
+
+        setTitleAttribute: function(value) {
+            this.set('title', value);
+        },
+
+        getTitleAttribute: function() {
+            return this.get('title');
+        },
+
+        setColorAttribute: function(value) {
+            this.set('color', value);
+        },
+
+        getColorAttribute: function() {
+            return this.get('color');
         }
-    },
 
-    deleteSubject: function() {
-    	this.destroy();
-    },
+    });
 
-    setTitleAttribute: function(value) {
-        this.set('title', value);
-    },
-
-    getTitleAttribute: function() {
-        return this.get('title');
-    },
-
-    setColorAttribute: function(value) {
-        this.set('color', value);
-    },
-
-    getColorAttribute: function() {
-        return this.get('color');
-    }
-
+    return SubjectModel;
 });
