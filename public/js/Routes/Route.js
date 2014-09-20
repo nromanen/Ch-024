@@ -1,6 +1,6 @@
-require(['jquery', 'underscore', 'backbone', 'TemplateView', 'LoginUserView', 'EventsCollection', 'SubjectsCollection',
-    'CalendarView', 'SubjectsView', 'CategoriesView', 'CategoriesCollection', 'SettingsUserView', 'SettingsUserModel'],
-    function($, _, Backbone, TemplateView, LoginUserView, EventsCollection, SubjectsCollection, CalendarView, SubjectsView,
+require(['jquery', 'underscore', 'backbone', 'TemplateView', 'LoginUserModel', 'LoginUserView', 'EventsCollection', 'CalendarView',
+    'SubjectsCollection', 'SubjectsView', 'CategoriesView', 'CategoriesCollection', 'SettingsUserView', 'SettingsUserModel'],
+    function($, _, Backbone, TemplateView, LoginUserModel, LoginUserView, EventsCollection, CalendarView, SubjectsCollection, SubjectsView,
         CategoriesView, CategoriesCollection, SettingsUserView, SettingsUserModel) {
 
     var Router = Backbone.Router.extend({
