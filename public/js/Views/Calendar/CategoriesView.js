@@ -14,19 +14,33 @@ var CategoriesView = Backbone.View.extend({
 
     initialize: function() {
         $(this.selectors.addCategoryButton).on('click', $.proxy(this.render, this));
+
+        this._addNewCategoriesFromCollection();
+
+        $(this.selectors.navTabContainer + " li:first").addClass('active');
+        $(this.selectors.navTabPaneContainer + " div:first").addClass('active');
     },
 
     _attachEvents: function() {
         this.$(this.selectors.createSubjectButton).on('click', $.proxy(this._addNewCategoryFormModal, this));
     },
 
+    _addNewCategoriesFromCollection: function () {
+        this.collection.each( function(model) {
+            $(this.selectors.navTabContainer).append(new CategoryView({
+                model: model
+            }).render().el);
+
+            $(this.selectors.navTabPaneContainer).append(this.templateTabPane(model.toJSON()));
+        }, this);
+    },
+
     _addNewCategoryFormModal: function() {
         var CategoryTitle = this.$(this.selectors.categoryTitleInput).val();
 
         if (CategoryTitle) {
-            var categoryModel = new CategoryModel({
-                title: CategoryTitle
-            });
+            var categoryModel = new CategoryModel;
+            categoryModel.setTitleAttribute(CategoryTitle);
 
             $(this.selectors.navTabContainer).append(new CategoryView({
                 model: categoryModel
@@ -34,7 +48,7 @@ var CategoriesView = Backbone.View.extend({
 
             $(this.selectors.navTabPaneContainer).append(this.templateTabPane(categoryModel.toJSON()));
 
-            this.collection.add(categoryModel);
+            this.collection.addModel(categoryModel);
         }
 
         // console.log(this.collection);

@@ -90,18 +90,10 @@
     <div class="row" id="subjectContainer">
     <div id="navTabs" class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
         <!-- Nav tabs -->
-        <ul class="nav nav-tabs" role="tablist" id="navTabContainer">
-            <li class="active"><a href="#itcm" role="tab" data-toggle="tab">IT and Configuration Management</a></li>
-            <li><a href="#qc" role="tab" data-toggle="tab">Quality Control</a></li>
-            <li><a href="#sd" role="tab" data-toggle="tab">Software Development</a></li>
-        </ul>
+        <ul class="nav nav-tabs" role="tablist" id="navTabContainer"></ul>
 
         <!-- Tab panes -->
-        <div class="tab-content" id="navTabPaneContainer">
-            <div class="tab-pane active" id="itcm"></div>
-            <div class="tab-pane" id="qc"></div>
-            <div class="tab-pane" id="sd"></div>
-        </div>
+        <div class="tab-content" id="navTabPaneContainer"> </div>
     </div>
     <div id="buttonCreate" class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
         <div id='external-events'>
@@ -309,6 +301,10 @@
                                 <input type="text" class="subjectTitle form-control"/>
                             </div>
                             <div class="form-group">
+                                <label>Choose category:</label>
+                                <select class="categoryTitle form-control"></select>
+                            </div>
+                            <div class="form-group">
                                 <label>Input color:</label>
                                 <input type="text" value="185f96" name="back-ground" class="pick-a-color form-control">
                             </div>
@@ -321,6 +317,12 @@
                 </div>
             </div>
     </script>
+
+    <!--Template for a new category in input of Modal Window (Create Subject)-->
+  <script type="text/template" id="optionForSelect">
+    <option value="<%=id%>"><%=title%></option>
+  </script>
+
 
     <!--Template for event modal window if this.modal.get('editable')===true-->
     <script type="text/template" id="saveEventModalWindowTemplate">
