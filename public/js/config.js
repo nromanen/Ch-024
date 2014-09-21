@@ -14,10 +14,11 @@ var require = {
         'ownpopover': 'Vendor/ownPopover',
         'tooltip': 'Vendor/tooltip',
         'jqueryjson': 'Vendor/jqueryJSON',
+        'text': 'Vendor/text',
 
         /*
-		Our models, collections, views, etc
-		 */
+        Our models, collections, views, etc
+         */
 
         // Models
         'EventModel': 'Models/Calendar/EventModel',
@@ -54,22 +55,30 @@ var require = {
             exports: 'Backbone'
         },
         'jqueryui': {
-        	deps: ['jquery']
+            deps: ['jquery']
         },
         'fullcalendar': {
-        	deps: ['moment', 'jquery', 'jqueryui']
+            deps: ['moment', 'jquery', 'jqueryui']
         },
         'bootstrap': {
-        	deps: ['jquery']
+            deps: ['jquery']
         },
         'pickacolor': {
-        	deps: ['bootstrap', 'jquery', 'tinycolor']
+            deps: ['bootstrap', 'jquery', 'tinycolor']
         },
         'tinycolor': {
-        	deps: ['bootstrap', 'jquery']
+            deps: ['bootstrap', 'jquery']
         },
         'ownpopover': {
-        	deps: ['jquery']
+            deps: ['jquery']
+        }
+    },
+
+    config: {
+        text: {
+            useXhr: function(url, protocol, hostname, port) {
+                return true;
+            }
         }
     }
 };
