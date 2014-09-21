@@ -1,4 +1,4 @@
-define('CategoryView', ['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
+define('CategoryView', ['jquery', 'underscore', 'backbone', 'text!../js/Templates/navTabCategoryTemplate.html'], function($, _, Backbone, navTabCategoryTemplate) {
     var CategoryView = Backbone.View.extend({
 
         tagName: 'li',
@@ -7,7 +7,7 @@ define('CategoryView', ['jquery', 'underscore', 'backbone'], function($, _, Back
             createCategoryButton: ".createCategory"
         },
 
-        template: _.template($('#navTabCategoryTemplate').html()),
+        template: _.template(navTabCategoryTemplate),
 
         render: function() {
             this.$el.html(this.template(this.model.toJSON()));

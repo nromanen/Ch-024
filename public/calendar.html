@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html>
 
-    <head>
+<head>
 
-        <title>Calendar</title>
+    <title>Calendar</title>
 
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-        <link rel="stylesheet" href="css/calendarJQuery/fullcalendar.min.css">
-        <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
-        <link rel="stylesheet" href="css/pick-a-color/pick-a-color-1.2.3.min.css">
-        <link rel="stylesheet" href="css/calendarJQuery/fullcalendar.print.css" media="print">
-        <link rel="stylesheet" href="css/calendarStyle.css">
-        <link rel="stylesheet" href="css/settingsPage.css">
-        <link rel="stylesheet" href="css/loginPage.css">
-        <link rel="stylesheet" href="css/aboutPage.css">
+    <link rel="stylesheet" href="css/calendarJQuery/fullcalendar.min.css">
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="css/pick-a-color/pick-a-color-1.2.3.min.css">
+    <link rel="stylesheet" href="css/calendarJQuery/fullcalendar.print.css" media="print">
+    <link rel="stylesheet" href="css/calendarStyle.css">
+    <link rel="stylesheet" href="css/settingsPage.css">
+    <link rel="stylesheet" href="css/loginPage.css">
+    <link rel="stylesheet" href="css/aboutPage.css">
 
-    </head>
+</head>
 
 
 <body>
@@ -27,263 +27,17 @@
         <header></header>
 
         <main>
-           
+
         </main>
 
         <footer></footer>
     </div>
 
-    <!--Template for a new subject-->
-    <script type="text/template" id="newSubjectTemplate">
-            <span class="fc-event divSubject" style="background-color: <%=color%>;"><%=title%>
-                <span class="glyphicon glyphicon-remove removeSubject"> </span>
-            </span>
-    </script>
+    <!--RequireJS-->
+    <script src="js/config.js"></script>
+    <script data-main="Routes/Route" src="js/Vendor/require.js"></script>
 
-    <!--Template for creating new subject-->
-    <script type="text/template" id="createSubjectModalWindowTemplate">
-            <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog"
-                 aria-labelledby="mySmallModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-sm">
-                    <div class="modal-content">
-                        <div class="modal-header"><span class="titleTextDecoration">Create new subject</span></div>
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label>Input subject title:</label>
-                                <input type="text" class="subjectTitle form-control"/>
-                            </div>
-                            <div class="form-group">
-                                <label>Input color:</label>
-                                <input type="text" value="185f96" name="back-ground" class="pick-a-color form-control">
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button class="saveBtn btn-lg" data-dismiss="modal">Save</button>
-                            <button class="cancelBtn btn-lg" data-dismiss="modal">Cancel</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-    </script>
-
-    <!--Template for event modal window if this.modal.get('editable')===true-->
-    <script type="text/template" id="saveEventModalWindowTemplate">
-            <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog"
-                 aria-labelledby="mySmallModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-sm">
-                    <div class="modal-content">
-                        <div class="modal-header"><span class="titleTextDecoration"><%=title%></span></div>
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label>Input the number of classroom:</label>
-                                <input type="text" class="classForExam form-control"/>
-                            </div>
-                            <div class="form-group">
-                                <label>Input the amount of students:</label>
-                                <input type="text" class="amountOfStud form-control"/>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button class="saveBtn btn-lg" data-dismiss="modal">Save</button>
-                            <button class="cancelBtn btn-lg" data-dismiss="modal">Cancel</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-    </script>
-    <!--Template for event modal window if this.modal.get('editable')===false-->
-     <script type="text/template" id="deleteEventModalWindowTemplate">
-            <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog"
-                 aria-labelledby="mySmallModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-sm">
-                    <div class="modal-content">
-                        <div class="modal-header"><span class="titleTextDecoration"><%=title%></span></div>
-                        <div class="modal-body">
-                            <span class="text-danger textDelete">Do you really want to delete this event? </span>
-                        </div>
-                        <div class="modal-footer">
-                            <button class="deleteBtn btn-lg" data-dismiss="modal">Delete</button>
-                            <button class="cancelBtn btn-lg" data-dismiss="modal">Cancel</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-    </script>
-
-    <!--Template for creating new category-->
-    <script type="text/template" id="createCategoryModalWindowTemplate">
-            <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog"
-                 aria-labelledby="mySmallModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-sm">
-                    <div class="modal-content">
-                        <div class="modal-header"><span class="titleTextDecoration">Create new category</span></div>
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label>Input category title:</label>
-                                <input type="text" class="categoryTitle form-control"/>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button class="saveBtn btn-lg" data-dismiss="modal">Save</button>
-                            <button class="cancelBtn btn-lg " data-dismiss="modal">Cancel</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-    </script>
-
-    <!--User Login Template-->
-    <script type="text/template" id="loginTemplate">
-    <header class="container">
-            <div class="row">
-                <a class="logo" href="#">Our project</a>
-                <a class="it_a" href="#">
-                    <img src="images/ss.jpg" alt="" />
-                </a>
-            </div>
-    </header>
-    <section class="cover">
-
-            <div class="container">
-                <div class="row">
-                    <div class="caption promo">
-                        <h1>exam</h1>
-
-                        <h3>SoftServe IT Academy project</h3>
-                    </div>
-                    <div class="col-md-3 pull-right b_regForm b_login">
-                        <div class="caption">
-                            <h3>Log In</h3>
-                        </div>
-                        <form class="form-horizontal" role="form">
-                            <div class="form-group">
-                                <div class="col-sm-12">
-                                    <input type="email" class="form-control" name="email" id="inputEmail" placeholder="Email">
-                                    <input type="password" name="password" class="form-control" id="inputPassword" placeholder="Password">
-                                    <button type="button" class="btn btn-success btn-default" id="submitButton">Sign In</button>
-                                    <input type="button" class="btn btn-default btn-info" id="registerButton" value="Sign up" />
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-    </section>
-
-    <footer class="block container">
-        <div class="row">
-            <p class="copy col-md-6">Всі права захищено @SoftServe IT Academy group CH-024</p>
-            <nav>
-                <ul class="col-md-6 ">
-                    <li><a href="#">About</a>
-                    </li>
-                    <li><a href="#">Terms</a>
-                    </li>
-                    <li><a href="#">Team</a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-    </footer>
-    </script>
-
-    <!--User Register Template-->
-    <script type="text/template" id="registrationTemplate">
-        <div class="modal fade bs-example-modal-sm b_reg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-sm">
-                <div class="modal-content">
-
-                    <div class="modal-header">
-                        <h3>Registration:</h3>
-                    </div>
-
-                    <div class="modal-body">
-                        <form role="form" id="regForm">
-
-                            <div class="form-group">
-                                <label for="name">Input name:</label>
-                                <input type="text" class="form-control" placeholder="Name" id="name" name="name">
-
-                                <div class="errors text-danger"></div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="surname">Input surname:</label>
-                                <input type="text" class="form-control" placeholder="Surname" id="surname" name="surname">
-
-                                <div class="errors text-danger"></div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="email">Input email:</label>
-                                <input type="text" class="form-control" placeholder="Email" id="email" name="email">
-
-                                <div class="errors text-danger"></div>
-                            </div>
-                            <div class="form-group">
-                                <label for="password">Input password:</label>
-                                <input type="password" class="form-control" placeholder="Password" id="password" name="password">
-
-                                <div class="errors text-danger"></div>
-                            </div>
-                            <div class="form-group">
-                                <label for="repeatPassword">Repeat password:</label>
-                                <input type="password" class="form-control" placeholder="Repeat Password" id="repeatPassword">
-
-                                <div class="errors text-danger"></div>
-                            </div>
-                            <div class="form-group">
-                                <label for="phone">Input phone:</label>
-                                <input type="text" class="form-control" placeholder="Phone" id="phone" name="phone">
-
-                                <div class="errors text-danger"></div>
-                            </div>
-
-                            <input type="button" class="btn btn-success" value="Register" id="register" />
-                            <input type="button" class="btn btn-danger" value="Cancel" id="cancel" />
-
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        </script>
-
-        <!--Popover template-->
-        <script type="text/template" id="ownPopoverTemplate">
-            <div class="own-popover">
-                <div class="popover-header">
-                    <span class="glyphicon glyphicon-remove remove-popover"></span>
-                    <span class="header-content"><%=title%></span>
-                </div>
-                <div class="popover-content">
-                    <span>Start event: <%=start%></span>
-                    </br>
-                    <span>Classroom: <%=classroom%></span>
-                    </br>
-                    <span>Amount of students: <%=amountOfStudents%></span>
-                </div>
-                <div class="footer-content">
-                    <input type="button" value="Assign" class="btn-success">
-                </div>
-            </div>
-        </script>
-
-        <!--navTab Category template-->
-        <script type="text/template" id="navTabCategoryTemplate">
-            <a href="#<%=id%>" role="tab" data-toggle="tab"><%=title%><span class="glyphicon glyphicon-remove removeCategory"> </span></a>
-        </script>
-
-        <!--navTab Pane Category template-->
-        <script type="text/template" id="navTabPaneCategoryTemplate">
-            <div class="tab-pane" id="<%=id%>"></div>
-        </script>
-
-        <!--RequireJS-->
-        <script src="js/config.js"></script>
-        <script data-main="Routes/Route" src="js/Vendor/require.js"></script>
-
-        <!-- Frameworks
+    <!-- Frameworks
         <script type="text/javascript" src="js/Vendor/jquery/moment.min.js"></script>
         <script type="text/javascript" src="js/Vendor/jquery/jquery.min.js"></script>
         <script type="text/javascript" src="js/Vendor/jquery/jquery-ui.custom.min.js"></script>
@@ -326,6 +80,6 @@
         Routes
         <script type="text/javascript" src="js/Routes/Route.js"></script>-->
 
-    </body>
+</body>
 
 </html>

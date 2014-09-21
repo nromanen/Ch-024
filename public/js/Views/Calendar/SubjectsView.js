@@ -1,5 +1,6 @@
-define('SubjectsView', ['jquery', 'underscore', 'backbone', 'tinycolor', 'pickacolor', 'SubjectModel', 'SubjectView'],
-    function($, _, Backbone, tinycolor, pickacolor, SubjectModel, SubjectView) {
+define('SubjectsView', ['jquery', 'underscore', 'backbone', 'tinycolor', 'pickacolor', 'SubjectModel',
+    'SubjectView', 'text!../js/Templates/createSubjectModalWindowTemplate.html'],
+    function($, _, Backbone, tinycolor, pickacolor, SubjectModel, SubjectView, createSubjectModalWindowTemplate) {
     window.tinycolor = tinycolor;
 
     var SubjectsView = Backbone.View.extend({
@@ -14,7 +15,7 @@ define('SubjectsView', ['jquery', 'underscore', 'backbone', 'tinycolor', 'pickac
             subjectContainer: '.tab-content .active'
         },
 
-        template: _.template($('#createSubjectModalWindowTemplate').html()),
+        template: _.template(createSubjectModalWindowTemplate),
 
         initialize: function(options) {
             this.collection = options.collection;
@@ -25,6 +26,7 @@ define('SubjectsView', ['jquery', 'underscore', 'backbone', 'tinycolor', 'pickac
 
         _attachEvents: function() {
             this.$(this.selectors.createSubjectButton).on('click', $.proxy(this._addNewSubjectInCollection, this));
+            this.$(this.selectors.cancelButton).on('click', $.proxy(this._deleteNewSubjectInCollection, this));
         },
 
 
@@ -43,6 +45,12 @@ define('SubjectsView', ['jquery', 'underscore', 'backbone', 'tinycolor', 'pickac
                 }).render().el);
                 this.collection.add(subjectModel);
             }
+            $('.modal-backdrop').remove();
+        },
+
+        _deleteNewSubjectInCollection: function() {
+            this.$el.modal('hide');
+            $('.modal-backdrop').remove();
         },
 
         /* PUBLIC METHODS */

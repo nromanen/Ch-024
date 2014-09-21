@@ -1,4 +1,6 @@
-define('EventView', ['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
+define('EventView', ['jquery', 'underscore', 'backbone', 'text!../js/Templates/saveEventModalWindowTemplate.html',
+    'text!../js/Templates/deleteEventModalWindowTemplate.html'],
+    function($, _, Backbone, saveEventModalWindowTemplate, deleteEventModalWindowTemplate) {
     var EventView = Backbone.View.extend({
 
         selectors: {
@@ -19,6 +21,7 @@ define('EventView', ['jquery', 'underscore', 'backbone'], function($, _, Backbon
         _attachEvents: function() {
             this.$(this.selectors.saveEventChangesButton).on('click', $.proxy(this._saveEventChanges, this));
             this.$(this.selectors.deleteEventButton).on('click', $.proxy(this._deleteEvent, this));
+            this.$(this.selectors.cancelButton).on('click', $.proxy(this._cancelEvent, this));
         },
 
         /**
@@ -36,7 +39,7 @@ define('EventView', ['jquery', 'underscore', 'backbone'], function($, _, Backbon
             this.eventObject.editable = false;
             this.eventObject.textColor = 'black';
             this.eventObject.color = this.eventObject.color.substr(0, this.eventObject.color.length - 3) + '1)';
-
+            $('.modal-backdrop').remove();
         },
 
         /**
@@ -45,10 +48,17 @@ define('EventView', ['jquery', 'underscore', 'backbone'], function($, _, Backbon
         _saveEventChanges: function() {
             this._updateCalendarEvent();
             $("#calendar").fullCalendar('updateEvent', this.eventObject);
+            $('.modal-backdrop').remove();
         },
 
         _deleteEvent: function() {
+            this.$el.modal('hide');
+            $('.modal-backdrop').remove();
+        },
 
+        _cancelEvent: function() {
+            this.$el.modal('hide');
+            $('.modal-backdrop').remove();
         },
 
         /**
@@ -56,10 +66,10 @@ define('EventView', ['jquery', 'underscore', 'backbone'], function($, _, Backbon
          */
         _setTemplate: function() {
             if (this.model.getEditableAttribute() === true) {
-                this.template = _.template($('#saveEventModalWindowTemplate').html());
+                this.template = _.template(saveEventModalWindowTemplate);
                 return;
             }
-            this.template = _.template($('#deleteEventModalWindowTemplate').html());
+            this.template = _.template(deleteEventModalWindowTemplate);
         },
 
         /* PUBLIC METHODS */

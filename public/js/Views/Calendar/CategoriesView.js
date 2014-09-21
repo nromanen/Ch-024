@@ -1,4 +1,6 @@
-define('CategoriesView', ['jquery', 'underscore', 'backbone', 'CategoryModel', 'CategoryView'], function($, _, Backbone, CategoryModel, CategoryView) {
+define('CategoriesView', ['jquery', 'underscore', 'backbone', 'CategoryModel', 'CategoryView',
+    'text!../js/Templates/createSubjectModalWindowTemplate.html', 'text!../js/Templates/navTabPaneCategoryTemplate.html'],
+    function($, _, Backbone, CategoryModel, CategoryView, createSubjectModalWindowTemplate, navTabPaneCategoryTemplate) {
     var CategoriesView = Backbone.View.extend({
 
         selectors: {
@@ -10,8 +12,8 @@ define('CategoriesView', ['jquery', 'underscore', 'backbone', 'CategoryModel', '
             categoryTitleInput: '.categoryTitle'
         },
 
-        templateModalWindow: _.template($('#createCategoryModalWindowTemplate').html()),
-        templateTabPane: _.template($('#navTabPaneCategoryTemplate').html()),
+        templateModalWindow: _.template(createSubjectModalWindowTemplate),
+        templateTabPane: _.template(navTabPaneCategoryTemplate),
 
         initialize: function() {
             $(this.selectors.addCategoryButton).on('click', $.proxy(this.render, this));
@@ -19,6 +21,7 @@ define('CategoriesView', ['jquery', 'underscore', 'backbone', 'CategoryModel', '
 
         _attachEvents: function() {
             this.$(this.selectors.createSubjectButton).on('click', $.proxy(this._addNewCategory, this));
+            this.$(this.selectors.cancelButton).on('click', $.proxy(this._deleteCategory, this));
         },
 
         _addNewCategory: function() {
@@ -37,8 +40,13 @@ define('CategoriesView', ['jquery', 'underscore', 'backbone', 'CategoryModel', '
 
                 this.collection.add(categoryModel);
             }
-
+            $('.modal-backdrop').remove();
             // console.log(this.collection);
+        },
+
+        _deleteCategory: function() {
+            this.$el.modal('hide');
+            $('.modal-backdrop').remove();
         },
 
         render: function() {

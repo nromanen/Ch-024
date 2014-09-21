@@ -1,4 +1,6 @@
-define('LoginUserView', ['jquery', 'underscore', 'backbone', 'LoginUserModel', 'RegistrationUserModel'], function($, _, Backbone, LoginUserModel, RegistrationUserModel) {
+define('LoginUserView', ['jquery', 'underscore', 'backbone', 'LoginUserModel', 'RegistrationUserModel',
+    'text!../js/Templates/loginTemplate.html'],
+    function($, _, Backbone, LoginUserModel, RegistrationUserModel, loginTemplate) {
     var LoginUserView = Backbone.View.extend({
 
         selectors: {
@@ -8,7 +10,7 @@ define('LoginUserView', ['jquery', 'underscore', 'backbone', 'LoginUserModel', '
 
         loginFormContainer: $('body'),
 
-        template: _.template($('#loginTemplate').html()),
+        template: _.template(loginTemplate),
 
         /* PRIVATE METHODS */
 

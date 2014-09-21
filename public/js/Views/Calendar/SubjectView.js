@@ -1,4 +1,5 @@
-define('SubjectView', ['jquery', 'underscore', 'backbone', 'jqueryui', 'fullcalendar'], function($, _, Backbone) {
+define('SubjectView', ['jquery', 'underscore', 'backbone', 'jqueryui', 'fullcalendar',
+    'text!../js/Templates/newSubjectTemplate.html'], function($, _, Backbone, jqueryui, fullcalendar, newSubjectTemplate) {
     var SubjectView = Backbone.View.extend({
 
         selectors: {
@@ -6,7 +7,7 @@ define('SubjectView', ['jquery', 'underscore', 'backbone', 'jqueryui', 'fullcale
             subjectButton: ".divSubject"
         },
 
-        template: _.template($('#newSubjectTemplate').html()),
+        template: _.template(newSubjectTemplate),
 
         initialize: function() {
             this.model.bind('destroy', this.remove, this);
