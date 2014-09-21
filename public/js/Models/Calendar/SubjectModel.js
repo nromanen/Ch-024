@@ -3,7 +3,7 @@ var SubjectModel = Backbone.Model.extend({
     defaults:function() {
         return {
             //subjectId - model id will be changed
-            //category: CategoryModel,
+            // category: CategoryModel,
             title: '',
             color:''
         }

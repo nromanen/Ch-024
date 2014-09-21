@@ -42,6 +42,16 @@ body {
     left: 132px;
     top: 5px;
 }
+
+#navTabContainer li:hover .removeCategory {
+    cursor: pointer;
+    visibility: visible;
+}
+.removeCategory {
+    visibility: hidden;
+    float: right;
+    position: absolute;
+}
 .containerCalendar {
     background-color: #eff4f7;
     margin-top: 50px;

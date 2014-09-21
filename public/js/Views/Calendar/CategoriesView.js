@@ -17,10 +17,10 @@ var CategoriesView = Backbone.View.extend({
     },
 
     _attachEvents: function() {
-        this.$(this.selectors.createSubjectButton).on('click', $.proxy(this._addNewCategory, this));
+        this.$(this.selectors.createSubjectButton).on('click', $.proxy(this._addNewCategoryFormModal, this));
     },
 
-    _addNewCategory: function() {
+    _addNewCategoryFormModal: function() {
         var CategoryTitle = this.$(this.selectors.categoryTitleInput).val();
 
         if (CategoryTitle) {
