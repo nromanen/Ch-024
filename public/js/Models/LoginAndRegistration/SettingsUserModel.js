@@ -7,8 +7,6 @@ var SettingsUserModel = Backbone.Model.extend({
         editPhone: ''
     },
 
-
-
     validate: function(attrs) {
         var errors = [];
         var PATTERN_MAIL = /^\w+[-_\.]*\w+@\w+-?\w+\.[a-z]{2,4}$/;

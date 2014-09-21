@@ -18,23 +18,6 @@ var RegistrationUserView = Backbone.View.extend({
 
     },
 
-    serializeForm: function (selector) {
-        var out = {};
-        var arr = selector.serializeArray();
-        $.each(arr, function() {
-            if (out[this.name] !== undefined) {
-                if (!out[this.name].push) {
-                    out[this.name] = [out[this.name]];
-                }
-                out[this.name].push(this.value || '');
-            } else {
-                out[this.name] = this.value || '';
-            }
-        });
-        return out;
-    },
-
-
     _attachEvents: function () {
         this.$(this.selectors.registerButton).on('click', $.proxy(this._checkForm,this));
         this.$(this.selectors.cancelButton).on('click', $.proxy(this._shutdownModalWindow,this));
@@ -58,18 +41,9 @@ var RegistrationUserView = Backbone.View.extend({
      *Validate user registration form
      */
     _checkForm:function(jsEvent){
-
-        var data = $(jsEvent.target).serializeJSON();
+        var data = this.$el.serializeJSON();
         this.model.set(data, {validate:true});
-
-        var sendParams = new RegistrationUserModel();
-        sendParams.fetch({data:{
-            name: str.name,
-            surname: str.surname,
-            phone: str.phone,
-            email: str.email,
-            hash: str.password
-        },type:'POST' });
+        this.model.save();
     },
 
     /**
