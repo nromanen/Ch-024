@@ -6,7 +6,8 @@ var express = require('express'),
     config = require('./lib/config.js'),
     log = require('./lib/log.js')(module),
     user = require('./functions/user.js');
-    subject = require('./functions/subject.js');
+    subject = require('./functions/subject.js'),
+    cryptor = require('cryptor');
 
 
 app.set('port', process.env.PORT || 3000);
@@ -45,6 +46,10 @@ app.post('/subject/:cat', subject.create);
 app.get('/subject/:cat', subject.get);
 
 app.get('/subject', subject.get);
+
+
+
+app.get('/mail', user.sendMail);
 
 
 
