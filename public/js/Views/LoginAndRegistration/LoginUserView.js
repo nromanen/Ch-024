@@ -20,7 +20,7 @@ var LoginUserView = Backbone.View.extend({
         /*You can write here everything you need for login*/
         var data = $('form', this.loginFormContainer).serializeJSON();
         var loginModel = new LoginUserModel();
-        loginModel.fetch(data);
+        loginModel.fetch({data:data,type: 'POST'});
         return false;
     },
 

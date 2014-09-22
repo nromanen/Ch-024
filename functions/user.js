@@ -60,7 +60,7 @@ exports.signUp = function (req, res) {
         surname: req.body.surname,
         email: req.body.email,
         phone: req.body.phone,
-        password: req.body.hash
+        password: req.body.password
     });
 
     data.save(function (err) {
