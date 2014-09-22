@@ -88,27 +88,17 @@
 
 <script type="text/template" id="homeTemplate">
     <div class="row" id="subjectContainer">
-    <div id="navTabs" class="col-xs-11 col-sm-11 col-md-11 col-lg-11">
+    <div id="navTabs" class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
         <!-- Nav tabs -->
-        <ul class="nav nav-tabs" role="tablist">
-            <li class="active"><a href="#itcm" role="tab" data-toggle="tab">IT and Configuration Management</a>
-            </li>
-            <li><a href="#qc" role="tab" data-toggle="tab">Quality Control</a>
-            </li>
-            <li><a href="#sd" role="tab" data-toggle="tab">Software Development</a>
-            </li>
-        </ul>
+        <ul class="nav nav-tabs" role="tablist" id="navTabContainer"></ul>
 
         <!-- Tab panes -->
-        <div class="tab-content">
-            <div class="tab-pane active" id="itcm"></div>
-            <div class="tab-pane" id="qc"></div>
-            <div class="tab-pane" id="sd"></div>
-        </div>
+        <div class="tab-content" id="navTabPaneContainer"> </div>
     </div>
-    <div id="buttonCreate" class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+    <div id="buttonCreate" class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
         <div id='external-events'>
-            <input type="button" value="+" class="create btn btn-default" />
+            <input type="button" value="+ category" class="createCategory btn btn-default"/>
+            <input type="button" value="+ subject" class="create btn btn-default" />
         </div>
     </div>
 </div>
@@ -151,7 +141,7 @@
         <img class="personAvatar" src="images/YuriiAvatar.png" alt="Avatar">
         <div class="informationAboutPerson">
             <p>Yurii Lysenko</p>
-            <p><span class="over_ttl">Motive:</span>I don't like coffee, but  I like Web-development.</p>
+            <p><span class="over_ttl">Motive:</span>I like Web-development.</p>
             <p><span class="over_ttl">Role:</span> Support</p>
             <p><span class="over_ttl">Skills:</span> Less, HTML, CSS, JS, BackboneJS, jQuery</p>
             <p><span class="over_ttl">E-mail:</span> yorik.cv@gmail.com</p>
@@ -259,45 +249,27 @@
 <script type="text/template" id="footerTemplate">
     <div>
         <div class="row">
-            <div class="col-sm-2">
-                <h6>Copyright &copy; 2014 {name}</h6>
+            <div class="col-sm-4 blueText"> 
+                    Coded with
+                    <span class="glyphicon glyphicon-heart"></span>
             </div>
-            <!-- end col-sm-2 -->
 
-            <div class="col-sm-4">
-                <h6>About Us</h6>
-                <p>IT Academy SoftServe</p>
+            <div class="col-sm-1">               
+                <a href="http://twitter.com"class="socialMedia">a</a>
             </div>
-            <!-- end col-sm-4 -->
-
-            <div class="col-sm-2">
-                <h6>Navigation</h6>
-                <ul class="unstyled">
-                    <li><a href="#home">Home</a>
-                    </li>
-                    <li><a href="#help">Help</a>
-                    </li>
-                    <li><a href="#about">About Us</a>
-                </ul>
+            <div class="col-sm-1">               
+                <a href="http://facebook.com"class="socialMedia">b</a>
             </div>
-            <!-- end col-sm-2 -->
-
-            <div class="col-sm-2">
-                <h6>Follow Us</h6>
-                <ul class="unstyled">
-                    <li><a href="#">Twitter</a>
-                    </li>
-                    <li><a href="#">Facebook</a>
-                    </li>
-                    <li><a href="#">Google Plus</a>
-                    </li>
-                </ul>
+            <div class="col-sm-1">               
+                <a href="http://plus.google.com"class="socialMedia">c</a>
             </div>
-            <!-- end col-sm-2 -->
+            <div class="col-sm-1">               
+                <a href="https://github.com/nromanen/Ch-024"class="socialMedia">Q</a>
+            </div>
 
-            <div class="col-sm-2">
-                <h6>Coded with
-                    <span class="glyphicon glyphicon-heart"></span>Team IT Academy SoftServe</h6>
+
+            <div class="col-sm-4 rightAlign blueText">
+                All Rights Reserved. SoftServe 2014.
             </div>
             <!-- end col-sm-2 -->
         </div>
@@ -329,18 +301,28 @@
                                 <input type="text" class="subjectTitle form-control"/>
                             </div>
                             <div class="form-group">
+                                <label>Choose category:</label>
+                                <select class="categoryTitle form-control"></select>
+                            </div>
+                            <div class="form-group">
                                 <label>Input color:</label>
                                 <input type="text" value="185f96" name="back-ground" class="pick-a-color form-control">
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button class="saveBtn btn-lg">Save</button>
-                            <button class="cancelBtn btn-lg ">Cancel</button>
+                            <button class="saveBtn btn-lg" data-dismiss="modal">Save</button>
+                            <button class="cancelBtn btn-lg" data-dismiss="modal">Cancel</button>
                         </div>
                     </div>
                 </div>
             </div>
     </script>
+
+    <!--Template for a new category in input of Modal Window (Create Subject)-->
+  <script type="text/template" id="optionForSelect">
+    <option value="<%=id%>"><%=title%></option>
+  </script>
+
 
     <!--Template for event modal window if this.modal.get('editable')===true-->
     <script type="text/template" id="saveEventModalWindowTemplate">
@@ -360,8 +342,8 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button class="saveBtn btn-lg">Save</button>
-                            <button class="cancelBtn btn-lg ">Cancel</button>
+                            <button class="saveBtn btn-lg" data-dismiss="modal">Save</button>
+                            <button class="cancelBtn btn-lg" data-dismiss="modal">Cancel</button>
                         </div>
                     </div>
                 </div>
@@ -378,8 +360,30 @@
                             <span class="text-danger textDelete">Do you really want to delete this event? </span>
                         </div>
                         <div class="modal-footer">
-                            <button class="deleteBtn btn-lg">Delete</button>
-                            <button class="cancelBtn btn-lg ">Cancel</button>
+                            <button class="deleteBtn btn-lg" data-dismiss="modal">Delete</button>
+                            <button class="cancelBtn btn-lg" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </script>
+
+    <!--Template for creating new category-->
+    <script type="text/template" id="createCategoryModalWindowTemplate">
+            <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog"
+                 aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header"><span class="titleTextDecoration">Create new category</span></div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label>Input category title:</label>
+                                <input type="text" class="categoryTitle form-control"/>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="saveBtn btn-lg" data-dismiss="modal">Save</button>
+                            <button class="cancelBtn btn-lg " data-dismiss="modal">Cancel</button>
                         </div>
                     </div>
                 </div>
@@ -482,7 +486,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="repeatPassword">Repeat password:</label>
-                                <input type="password" class="form-control" placeholder="Repeat Password" id="repeatPassword">
+                                <input type="password" class="form-control" placeholder="Repeat Password" id="repeatPassword" name="repeatPassword">
 
                                 <div class="errors text-danger"></div>
                             </div>
@@ -513,6 +517,8 @@
                 <div class="popover-content">
                     <span>Start event: <%=start%></span>
                     </br>
+                    <span>End event: <%=end%></span>
+                    </br>
                     <span>Classroom: <%=classroom%></span>
                     </br>
                     <span>Amount of students: <%=amountOfStudents%></span>
@@ -521,6 +527,16 @@
                     <input type="button" value="Assign" class="btn-success">
                 </div>
             </div>
+        </script>
+
+        <!--navTab Category template-->
+        <script type="text/template" id="navTabCategoryTemplate">
+            <a href="#<%=id%>" role="tab" data-toggle="tab"><%=title%><span class="glyphicon glyphicon-remove removeCategory"> </span></a>
+        </script>
+
+        <!--navTab Pane Category template-->
+        <script type="text/template" id="navTabPaneCategoryTemplate">
+            <div class="tab-pane" id="<%=id%>"></div>
         </script>
 
         <!--Frameworks-->
@@ -536,28 +552,33 @@
         <script type="text/javascript" src="js/Vendor/bootstrap/js/bootstrap.js"></script>
         <script type="text/javascript" src="js/Vendor/ownPopover.js"></script>
         <script type="text/javascript" src="js/Vendor/tooltip.js"></script>
+        <script type="text/javascript" src="js/Vendor/jqueryJSON.js"></script>
 
 
     <!--Models-->
-        <script type="text/javascript" src="js/Models/EventModel.js"></script>
-        <script type="text/javascript" src="js/Models/SubjectModel.js"></script>
-        <script type="text/javascript" src="js/Models/SettingsUserModel.js"></script>
-        <script type="text/javascript" src="js/Models/LoginUserModel.js"></script>
-        <script type="text/javascript" src="js/Models/RegistrationUserModel.js"></script>
+        <script type="text/javascript" src="js/Models/Calendar/EventModel.js"></script>
+        <script type="text/javascript" src="js/Models/Calendar/SubjectModel.js"></script>
+        <script type="text/javascript" src="js/Models/LoginAndRegistration/SettingsUserModel.js"></script>
+        <script type="text/javascript" src="js/Models/LoginAndRegistration/LoginUserModel.js"></script>
+        <script type="text/javascript" src="js/Models/LoginAndRegistration/RegistrationUserModel.js"></script>
+        <script type="text/javascript" src="js/Models/Calendar/CategoryModel.js"></script>
 
         <!--Collections-->
         <script type="text/javascript" src="js/Collections/EventsCollection.js"></script>
         <script type="text/javascript" src="js/Collections/SubjectsCollection.js"></script>
+        <script type="text/javascript" src="js/Collections/CategoriesCollection.js"></script>
 
         <!--Views-->
-        <script type="text/javascript" src="js/Views/CalendarView.js"></script>
-        <script type="text/javascript" src="js/Views/SubjectView.js"></script>
-        <script type="text/javascript" src="js/Views/EventView.js"></script>
-        <script type="text/javascript" src="js/Views/SubjectsView.js"></script>
+        <script type="text/javascript" src="js/Views/Calendar/CalendarView.js"></script>
+        <script type="text/javascript" src="js/Views/Calendar/SubjectView.js"></script>
+        <script type="text/javascript" src="js/Views/Calendar/EventView.js"></script>
+        <script type="text/javascript" src="js/Views/Calendar/SubjectsView.js"></script>
         <script type="text/javascript" src="js/Views/TemplateView.js"></script>
-        <script type="text/javascript" src="js/Views/SettingsUserView.js"></script>
-        <script type="text/javascript" src="js/Views/LoginUserView.js"></script>
-        <script type="text/javascript" src="js/Views/RegistrationUserView.js"></script>
+        <script type="text/javascript" src="js/Views/LoginAndRegistration/SettingsUserView.js"></script>
+        <script type="text/javascript" src="js/Views/LoginAndRegistration/LoginUserView.js"></script>
+        <script type="text/javascript" src="js/Views/LoginAndRegistration/RegistrationUserView.js"></script>
+        <script type="text/javascript" src="js/Views/Calendar/CategoryView.js"></script>
+        <script type="text/javascript" src="js/Views/Calendar/CategoriesView.js"></script>
 
         <!--Routes-->
         <script type="text/javascript" src="js/Routes/Route.js"></script>

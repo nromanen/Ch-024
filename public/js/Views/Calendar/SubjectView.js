@@ -11,7 +11,7 @@ var SubjectView = Backbone.View.extend({
         this.model.bind('destroy', this.remove, this);
     },
 
-    /*PRIVATE METHODS*/
+    /* PRIVATE METHODS */
 
     /**
      * Handle all events
@@ -22,19 +22,19 @@ var SubjectView = Backbone.View.extend({
 
     /**
      * Remove subject object.
-     *deleteSubject() is the SubjectModel function for removing models
+     * deleteSubject() is the SubjectModel function for removing models
      */
     _removeSubject: function() {
         this.model.deleteSubject();
     },
 
-    /*PUBLIC METHODS*/
+    /* PUBLIC METHODS */
 
     render: function() {
         this.$el.html(this.template(this.model.toJSON())).draggable({
             zIndex: 999,
-            revert: true, // will cause the event to go back to its
-            revertDuration: 0 //  original position after the drag
+            revert: true,       // will cause the event to go back to its
+            revertDuration: 0   //  original position after the drag
         });
         this.$el.addClass('fc-event');
         this.$el.data('subject', this.model);

@@ -13,7 +13,7 @@ var SettingsUserModel = Backbone.Model.extend({
         var PATTERN_PHONE = /^[+](380)-\d{2}-\d{3}-\d{2}-\d{2}$/;
 
 
-        if (attrs.editEmail.search(PATTERN_MAIL) == -1) {
+        if (attrs.editEmail.search(PATTERN_MAIL) === -1) {
             errors.push({
                 field: 'editEmail',
                 message: 'Email is not correct!'
@@ -36,7 +36,7 @@ var SettingsUserModel = Backbone.Model.extend({
             });
         }
 
-        if (attrs.editPhone.search(PATTERN_PHONE) == -1) {
+        if (attrs.editPhone.search(PATTERN_PHONE) === -1) {
             errors.push({
                 field: 'editPhone',
                 message: 'Phone is not correct!'

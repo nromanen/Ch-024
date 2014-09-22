@@ -20,11 +20,19 @@ var Router = Backbone.Router.extend({
             new HomeTemplateView().render();
             this.eventsCollection = new EventsCollection();
             this.subjectsCollection = new SubjectsCollection();
+            this.categoriesCollection = new CategoriesCollection([
+                    {title: "IT and Configuration Management"}, 
+                    {title: "Quality Control"},
+                    {title: "Software Development"}]);
             new CalendarView ({
                 collection: this.eventsCollection
             }).render();
             new SubjectsView({
-                collection: this.subjectsCollection
+                collectionSubject: this.subjectsCollection,
+                collectionCategory: this.categoriesCollection
+            });
+            new CategoriesView({
+                collection: this.categoriesCollection
             });
             //this.selectMenuItem('home-menu');
         });

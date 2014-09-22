@@ -1,9 +1,10 @@
 var LoginUserModel = Backbone.Model.extend({
-    defaults:function(){
+    defaults: function() {
         return{
             login:'',
             password: ''
         }
     },
-	url: '/signin'
+
+	urlRoot: '/signin'
 });
