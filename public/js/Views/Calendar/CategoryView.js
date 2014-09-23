@@ -1,30 +1,28 @@
 var CategoryView = Backbone.View.extend({
 
-	tagName: 'li',
-
-	selectors: {
-		createCategoryButton: ".createCategory",
-		removeCategoryButton: ".removeCategory"
-	},
-
-	template: _.template($('#navTabCategoryTemplate').html()),
-
-	initialize: function() {
-		this.model.bind('destroy', this.remove, this);
-	},
-
-	_attachEvents: function() {
-        this.$(this.selectors.removeCategoryButton).on('click', $.proxy(this._removeCategory, this));
+    selectors: {
+        navTabContainer: "#navTabContainer",
+        navTabPaneContainer: "#navTabPaneContainer"
     },
 
-    // _removeCategory: function() {
-    //     this.model.deleteCategory();
-    //     // console.log(this.model);
-    // },
+    _createNavTabPane: function() {
+      return  new navTabPaneCategoryView({
+          model: this.model
+      }).render().el;
+    },
+
+    _createNavTab: function() {
+        return  new navTabCategoryView({
+            model: this.model
+        }).render().el;
+    },
+
 
 	render: function () {
-		this.$el.html(this.template(this.model.toJSON()));
-		this._attachEvents();
+		this.$el = $('#subjectContainer');
+        this.$(this.selectors.navTabContainer).append(this._createNavTab());
+        this.$(this.selectors.navTabPaneContainer).append(this._createNavTabPane());
+		//this._attachEvents();
 		return this;
 	}
 });

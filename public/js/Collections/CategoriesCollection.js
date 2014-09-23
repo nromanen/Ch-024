@@ -4,10 +4,6 @@ var CategoriesCollection = Backbone.Collection.extend({
 
     findModelById: function(id) {
     	return this.findWhere({id: id});
-    },
-
-    addModel: function(model) {
-    	this.add(model);
     }
 
 });

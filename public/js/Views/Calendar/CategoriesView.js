@@ -1,7 +1,7 @@
 var CategoriesView = Backbone.View.extend({
 
     selectors: {
-        createSubjectButton: '.saveBtn',
+        createCategoryButton: '.saveBtn',
         cancelButton: '.cancelBtn',
         navTabContainer: "#navTabContainer",
         navTabPaneContainer: "#navTabPaneContainer",
@@ -9,30 +9,25 @@ var CategoriesView = Backbone.View.extend({
         categoryTitleInput: '.categoryTitle'
     },
 
-    templateModalWindow: _.template($('#createCategoryModalWindowTemplate').html()),
-    templateTabPane: _.template($('#navTabPaneCategoryTemplate').html()),
+    template: _.template($('#createCategoryModalWindowTemplate').html()),
 
-    initialize: function() {
-        $(this.selectors.addCategoryButton).on('click', $.proxy(this.render, this));
-
-        this._addNewCategoriesFromCollection();
-
-        $(this.selectors.navTabContainer + " li:first").addClass('active');
-        $(this.selectors.navTabPaneContainer + " div:first").addClass('active');
+    initialize: function(options) {
+        this._attachEvents();
+        this.collection = options.collection;
+        this.collection.on('add', $.proxy(this._renderCategoriesFromCollection, this));
     },
 
     _attachEvents: function() {
-        this.$(this.selectors.createSubjectButton).on('click', $.proxy(this._addNewCategoryFormModal, this));
+        this.$(this.selectors.createCategoryButton).off().on('click', $.proxy(this._addNewCategoryFormModal, this));
+        $(this.selectors.addCategoryButton).off().on('click', $.proxy(this.render, this));
     },
 
-    _addNewCategoriesFromCollection: function () {
-        this.collection.each( function(model) {
-            $(this.selectors.navTabContainer).append(new CategoryView({
-                model: model
-            }).render().el);
-
-            $(this.selectors.navTabPaneContainer).append(this.templateTabPane(model.toJSON()));
-        }, this);
+    _renderCategoriesFromCollection: function (model) {
+        new CategoryView({
+            model: model
+        }).render();
+        $(this.selectors.navTabContainer + " li:first").addClass('active');
+        $(this.selectors.navTabPaneContainer + " div:first").addClass('active');
     },
 
     _addNewCategoryFormModal: function() {
@@ -41,21 +36,12 @@ var CategoriesView = Backbone.View.extend({
         if (CategoryTitle) {
             var categoryModel = new CategoryModel;
             categoryModel.setTitleAttribute(CategoryTitle);
-
-            $(this.selectors.navTabContainer).append(new CategoryView({
-                model: categoryModel
-            }).render().el);
-
-            $(this.selectors.navTabPaneContainer).append(this.templateTabPane(categoryModel.toJSON()));
-
-            this.collection.addModel(categoryModel);
+            this.collection.add(categoryModel);
         }
-
-        // console.log(this.collection);
     },
 
     render: function() {
-        this.$el = $(this.templateModalWindow());
+        this.$el = $(this.template());
         this.$el.modal('show');
         this._attachEvents();
         return this;

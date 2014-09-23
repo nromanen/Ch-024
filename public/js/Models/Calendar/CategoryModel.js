@@ -19,4 +19,8 @@ var CategoryModel = Backbone.Model.extend({
         return this.get('title');
     },
 
+    getIdAttribute: function() {
+        return this.get('id');
+    }
+
 });

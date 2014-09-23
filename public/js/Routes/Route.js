@@ -20,20 +20,21 @@ var Router = Backbone.Router.extend({
             new HomeTemplateView().render();
             this.eventsCollection = new EventsCollection();
             this.subjectsCollection = new SubjectsCollection();
-            this.categoriesCollection = new CategoriesCollection([
-                    {title: "IT and Configuration Management"}, 
-                    {title: "Quality Control"},
-                    {title: "Software Development"}]);
+            this.categoriesCollection = new CategoriesCollection();
             new CalendarView ({
                 collection: this.eventsCollection
             }).render();
+            new CategoriesView({
+                collection: this.categoriesCollection
+            });
             new SubjectsView({
                 collectionSubject: this.subjectsCollection,
                 collectionCategory: this.categoriesCollection
             });
-            new CategoriesView({
-                collection: this.categoriesCollection
-            });
+            this.categoriesCollection.add([
+                {title: "IT and Configuration Management"},
+                {title: "Quality Control"},
+                {title: "Software Development"}]);
             //this.selectMenuItem('home-menu');
         });
 

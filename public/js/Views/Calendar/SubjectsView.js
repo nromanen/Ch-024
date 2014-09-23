@@ -7,8 +7,8 @@ var SubjectsView = Backbone.View.extend({
         subjectTitleInput:   '.subjectTitle',
         subjectBackground:   '.subjectBackground',
         colorPickerInput:    '.pick-a-color',
-        categoryInputSelect: '.categoryTitle',
-        subjectContainer:    '.tab-content #',
+        categoryTitleInput:  '.categoryTitle',
+        subjectContainer:    '.tab-content #'
     },
 
     template: _.template($('#createSubjectModalWindowTemplate').html()),
@@ -21,13 +21,14 @@ var SubjectsView = Backbone.View.extend({
 
         this.collectionSubject = options.collectionSubject;
         this.collectionCategory = options.collectionCategory;
-        $(this.selectors.addSubjectButton).on('click', $.proxy(this.render, this));
+        this.collectionSubject.on('add', $.proxy(this._renderSubjectsFromCollection, this));
     },
 
     /* PRIVATE METHODS */
 
     _attachEvents: function() {
         this.$(this.selectors.createSubjectButton).on('click', $.proxy(this._addNewSubjectInCollection, this));
+        $(this.selectors.addSubjectButton).on('click', $.proxy(this.render, this));
     },
 
     /**
@@ -35,31 +36,40 @@ var SubjectsView = Backbone.View.extend({
      */
     _addNewSubjectInCollection: function() {
         var subjectTitle = this.$(this.selectors.subjectTitleInput).val();
-        var idCategory =  this.$(this.selectors.categoryInputSelect).val();
+        var idCategory =  this.$(this.selectors.categoryTitleInput).val();
         var categoryModel = this.collectionCategory.findModelById(idCategory);
         var subjectModel = new SubjectModel;
 
         if (subjectTitle) {
-            subjectModel.setTitleAttribute(subjectTitle);
-            subjectModel.setColorAttribute("#" + this.$(this.selectors.colorPickerInput).val());
-            subjectModel.setCategoryAttribute(categoryModel);
-            $(this.selectors.subjectContainer + idCategory).append(new SubjectView({
-                model: subjectModel
-            }).render().el);
+            subjectModel.set({
+                title: subjectTitle,
+                color: "#" + this.$(this.selectors.colorPickerInput).val(),
+                category: categoryModel
+            });
             this.collectionSubject.add(subjectModel);
-            // console.log(subjectModel);
+            this._clearFieldsInModal();
         }
+    },
+
+    _renderSubjectsFromCollection: function(model) {
+        $(this.selectors.subjectContainer +
+            model.getCategoryAttribute().getIdAttribute()).append(
+                new SubjectView({
+                    model: model
+                }).render().el);
+    },
+
+    _clearFieldsInModal: function() {
+        $(this.selectors.subjectTitleInput).val('');
+        $(this.selectors.categoryTitleInput).html('');
     },
 
     /**
      * Add categories into list
      */
     _fillCategoryList: function() {
-        $(this.selectors.subjectTitleInput).val('');
-        $(this.selectors.categoryInputSelect).html('');
-
         this.collectionCategory.each(function(model){
-            this.$(this.selectors.categoryInputSelect).append(this.templateOptionForSelectCategory(model.toJSON()));
+            this.$(this.selectors.categoryTitleInput).append(this.templateOptionForSelectCategory(model.toJSON()));
         }, this);
     },
 
@@ -68,7 +78,6 @@ var SubjectsView = Backbone.View.extend({
     render: function() {
         this.$el.modal('show');
         this._fillCategoryList();
-
         return this;
     }
 });
