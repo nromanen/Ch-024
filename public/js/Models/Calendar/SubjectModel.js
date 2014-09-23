@@ -13,27 +13,27 @@ var SubjectModel = Backbone.Model.extend({
     	this.destroy();
     },
 
-    setTitleAttribute: function(value) {
+    setTitle: function(value) {
         this.set('title', value);
     },
 
-    getTitleAttribute: function() {
+    getTitle: function() {
         return this.get('title');
     },
 
-    setColorAttribute: function(value) {
+    setColor: function(value) {
         this.set('color', value);
     },
 
-    getColorAttribute: function() {
+    getColor: function() {
         return this.get('color');
     },
 
-    setCategoryAttribute: function(value) {
+    setCategory: function(value) {
         this.set('category', value);
     },
 
-    getCategoryAttribute: function() {
+    getCategory: function() {
         return this.get('category');
     }
 

@@ -5,7 +5,6 @@ var SubjectsView = Backbone.View.extend({
         cancelButton:        '.cancelBtn',
         createSubjectButton: '.saveBtn',
         subjectTitleInput:   '.subjectTitle',
-        subjectBackground:   '.subjectBackground', //do we use this?
         colorPickerInput:    '.pick-a-color',
         categoryTitleInput:  '.categoryTitle',
         subjectContainer:    '.tab-content #'
@@ -21,38 +20,36 @@ var SubjectsView = Backbone.View.extend({
 
         this.collectionSubject = options.collectionSubject;
         this.collectionCategory = options.collectionCategory;
-        this.collectionSubject.on('add', $.proxy(this._renderSubjectsFromCollection, this));
+        this.collectionSubject.on('add', $.proxy(this._renderSubject, this));
     },
 
     /* PRIVATE METHODS */
 
     _attachEvents: function() {
-        this.$(this.selectors.createSubjectButton).on('click', $.proxy(this._addNewSubjectInCollection, this));
+        this.$(this.selectors.createSubjectButton).on('click', $.proxy(this._addNewSubject, this));
         $(this.selectors.addSubjectButton).on('click', $.proxy(this.render, this));
     },
 
     /**
      * Add new subject in collection
      */
-    _addNewSubjectInCollection: function() { //rename _addNewSubject
+    _addNewSubject: function() {
         var subjectTitle = this.$(this.selectors.subjectTitleInput).val();
-        var idCategory =  this.$(this.selectors.categoryTitleInput).val(); // categoryId
-        var categoryModel = this.collectionCategory.findModelById(idCategory);
+        var categoryId =  this.$(this.selectors.categoryTitleInput).val();
+        var categoryModel = this.collectionCategory.findModelById(categoryId);
         var subjectModel = new SubjectModel;
 
         if (subjectTitle) {
-            subjectModel.set({ //сетери
-                title: subjectTitle,
-                color: "#" + this.$(this.selectors.colorPickerInput).val(),
-                category: categoryModel
-            });
+            subjectModel.setTitle(subjectTitle);
+            subjectModel.setColor("#" + this.$(this.selectors.colorPickerInput).val());
+            subjectModel.setCategory(categoryModel);
             this.collectionSubject.add(subjectModel);
         }
     },
 
-    _renderSubjectsFromCollection: function(model) { //renderSubjects
+    _renderSubject: function(model) {
         $(this.selectors.subjectContainer +
-            model.getCategoryAttribute().getIdAttribute()).append( // delete attribute from name
+            model.getCategory().getId()).append(
                 new SubjectView({
                     model: model
                 }).render().el);

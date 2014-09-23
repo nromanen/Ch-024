@@ -3,16 +3,16 @@ var CalendarView = Backbone.View.extend ({
     calendarContainer: $('#calendarContainer'),
 
     id: 'calendar',
+
     /**
      * Describes all the selectors we need.
      */
     selectors: {
-        weekButton:            '.fc-agendaWeek-button',
-        removeSubjectCheckbox: '#drop-remove' //remove
+        weekButton: '.fc-agendaWeek-button'
     },
 
     initialize: function(options){
-        this.eventsCollection = options.collection;
+        this.calendarEventsCollection = options.collection;
     },
 
     /* PRIVATE METHODS */
@@ -25,8 +25,10 @@ var CalendarView = Backbone.View.extend ({
     },
 
     _convertHexColorToRGB: function(color) {
+        var OPACITY = .5;
         return "rgba(" + parseInt(color.substring(1,3),16) + ","
-            + parseInt(color.substring(3,5),16) + "," + parseInt(color.substring(5,7),16) + ", .5)"; //use constant
+            + parseInt(color.substring(3,5),16) + "," + parseInt(color.substring(5,7),16) + ","+
+            OPACITY +")";
     },
 
      /**
@@ -36,41 +38,41 @@ var CalendarView = Backbone.View.extend ({
       */
     _addEvent: function(date, jsEvent, ui) {
         var originalSubjectModel = $(jsEvent.target).data('subject');
-        var eventModel = new EventModel({
+        var calendarEventModel = new CalendarEventModel({
             subject: originalSubjectModel,
-            title: originalSubjectModel.getTitleAttribute(),
-            color:  this._convertHexColorToRGB(originalSubjectModel.getColorAttribute()) ,
+            title: originalSubjectModel.getTitle(),
+            color:  this._convertHexColorToRGB(originalSubjectModel.getColor()) ,
             start: date
         });
-        this.eventsCollection.add(eventModel);
-        this.$el.fullCalendar('renderEvent', eventModel.toJSON(), true);
+        this.calendarEventsCollection.add(calendarEventModel);
+        this.$el.fullCalendar('renderEvent', calendarEventModel.toJSON(), true);
     },
 
     /**
     * @param {Object} eventObject
     * Create Event View for updating and deleting event model.
     */
-    _showEventModal: function(eventObject) { //rename name method _showCalendarEventModel, same parametr
-        var eventModel = this.eventsCollection.findWhere({title: eventObject.title});
-        eventModel.trigger('click'); //rename cclick to showCalendarEvwntModal
-        new EventView({
-            model: eventModel,
-            eventObject: eventObject
+    _showCalendarEventModal: function(calendarEventObject) {
+        var calendarEventModel = this.calendarEventsCollection.findWhere({title: calendarEventObject.title});
+        calendarEventModel.trigger('showCalendarEventModal');
+        new CalendarEventView({
+            model: calendarEventModel,
+            calendarEventObject: calendarEventObject
         });
     },
 
-    _showPopover: _.debounce(function(eventObject, jsEvent, ui) {
-        var eventModel = this.eventsCollection.findWhere({title: eventObject.title}).toJSON(); ///rename calendarEventModal
+    _showPopover: _.debounce(function(calendarEventObject, jsEvent, ui) {
+        var calendarEventModel = this.calendarEventsCollection.findWhere({title: calendarEventObject.title}).toJSON();
         $(jsEvent.target).ownpopover({
             showEvent: 'mouseover',
             hideEvent: 'mouseout',
             html: _.template($('#ownPopoverTemplate').html()),
-            content: _.extend(eventModel, {
-                start: eventModel.start.format('YYYY-MM-DD HH:mm')
+            content: _.extend(calendarEventModel, {
+            start: calendarEventModel.start.format('YYYY-MM-DD HH:mm')
             })
         });
         $('.own-popover').remove();
-    }, 150, false), //150, false in constants
+    }, 150, false),
 
     /**
      * Connect fullCalendar widget.
@@ -91,7 +93,7 @@ var CalendarView = Backbone.View.extend ({
             droppable: true,
             lang: "uk",
             drop: _.bind(this._addEvent, this),
-            eventClick: _.bind(this._showEventModal, this),
+            eventClick: _.bind(this._showCalendarEventModal, this),
             eventMouseover: _.bind(this._showPopover, this)
         });
     },

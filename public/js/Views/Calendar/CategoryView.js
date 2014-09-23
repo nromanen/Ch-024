@@ -22,7 +22,6 @@ var CategoryView = Backbone.View.extend({
 		this.$el = $('#subjectContainer');
         this.$(this.selectors.navTabContainer).append(this._createNavTab());
         this.$(this.selectors.navTabPaneContainer).append(this._createNavTabPane());
-		//this._attachEvents();
 		return this;
 	}
 });

@@ -11,15 +11,15 @@ var CategoryModel = Backbone.Model.extend({
     	this.destroy();
     },
 
-    setTitleAttribute: function(value) {
+    setTitle: function(value) {
         this.set('title', value);
     },
 
-    getTitleAttribute: function() {
+    getTitle: function() {
         return this.get('title');
     },
 
-    getIdAttribute: function() {
+    getId: function() {
         return this.get('id');
     }
 

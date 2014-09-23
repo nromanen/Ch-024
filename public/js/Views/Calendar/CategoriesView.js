@@ -15,15 +15,15 @@ var CategoriesView = Backbone.View.extend({
         this.$el = $(this.template());
         this._attachEvents();
         this.collection = options.collection;
-        this.collection.on('add', $.proxy(this._renderCategoriesFromCollection, this));
+        this.collection.on('add', $.proxy(this._renderCategory, this));
     },
 
     _attachEvents: function() {
-        this.$(this.selectors.createCategoryButton).off().on('click', $.proxy(this._addNewCategoryFormModal, this));
+        this.$(this.selectors.createCategoryButton).off().on('click', $.proxy(this._addNewCategory, this));
         $(this.selectors.addCategoryButton).off().on('click', $.proxy(this.render, this));
     },
 
-    _renderCategoriesFromCollection: function (model) { //rename to _renderCategory
+    _renderCategory: function (model) {
         new CategoryView({
             model: model
         }).render();
@@ -31,12 +31,12 @@ var CategoriesView = Backbone.View.extend({
         $(this.selectors.navTabPaneContainer + " div:first").addClass('active');
     },
 
-    _addNewCategoryFormModal: function() { //rename _addNewCategory
+    _addNewCategory: function() {
         var CategoryTitle = this.$(this.selectors.categoryTitleInput).val();
 
         if (CategoryTitle) {
             var categoryModel = new CategoryModel;
-            categoryModel.setTitleAttribute(CategoryTitle);
+            categoryModel.setTitle(CategoryTitle);
             this.collection.add(categoryModel);
         }
     },

@@ -10,19 +10,19 @@ var Router = Backbone.Router.extend({
     },
 
     initialize: function() {
-        this._headerContainer();
-        this._footerContainer();
+        this._renderHeader();
+        this._renderFooter();
         this._initializeEvents();
     },
 
     _initializeEvents: function() {
         this.on('route:homePage', function() {
             new HomeTemplateView().render();
-            this.eventsCollection = new EventsCollection(); //rename CalendarEvents
+            this.calendarEventsCollection = new CalendarEventsCollection();
             this.subjectsCollection = new SubjectsCollection();
             this.categoriesCollection = new CategoriesCollection();
             new CalendarView ({
-                collection: this.eventsCollection
+                collection: this.calendarEventsCollection
             }).render();
             new CategoriesView({
                 collection: this.categoriesCollection
@@ -58,11 +58,11 @@ var Router = Backbone.Router.extend({
         });
     },
 
-    _headerContainer: function() { //rename RenderHeader
+    _renderHeader: function() {
         new NavBarTemplateView().render();
     },
 
-    _footerContainer: function() { ////rename RenderFooter
+    _renderFooter: function() {
         new FooterTemplateView().render();
     }
   /*  selectMenuItem: function(menuItem) {
