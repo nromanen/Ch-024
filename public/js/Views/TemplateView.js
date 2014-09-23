@@ -1,83 +1,100 @@
-var NavBarTemplateView = Backbone.View.extend({
+define('TemplateView', ['jquery', 'underscore', 'backbone', 'text', 'text!../js/Templates/aboutTemplate.html',
+        'text!../js/Templates/navBarTemplate.html', 'text!../js/Templates/footerTemplate.html', 'text!../js/Templates/homeTemplate.html',
+        'text!../js/Templates/helpTemplate.html', 'text!../js/Templates/settingsTemplate.html'],
 
-    template: _.template($('#navBarTemplate').html()),
+    function($, _, Backbone, text, aboutTemplate, navBarTemplate, footerTemplate, homeTemplate,
+        helpTemplate, settingsTemplate) {
 
-    selectors: {
-        headerTeg: 'header'
-    },
+        var NavBarTemplateView = Backbone.View.extend({
 
-    render: function() {
-        $(this.selectors.headerTeg).html(this.template());
-        return this;
-    }
-});
+            template: _.template(navBarTemplate),
 
-var FooterTemplateView = Backbone.View.extend({
+            selectors: {
+                headerTeg: 'header'
+            },
 
-    template: _.template($('#footerTemplate').html()),
+            render: function() {
+                $(this.selectors.headerTeg).html(this.template());
+                return this;
+            }
+        });
 
-    selectors: {
-        footerTag: 'footer'
-    },
+        var FooterTemplateView = Backbone.View.extend({
 
-    render: function() {
-        $(this.selectors.footerTag).html(this.template());
-        return this;
-    }
-});
+            template: _.template(footerTemplate),
 
-var HomeTemplateView = Backbone.View.extend({
+            selectors: {
+                footerTag: 'footer'
+            },
 
-    template: _.template($('#homeTemplate').html()),
+            render: function() {
+                $(this.selectors.footerTag).html(this.template());
+                return this;
+            }
+        });
 
-    selectors: {
-        mainTag: 'main'
-    },
+        var HomeTemplateView = Backbone.View.extend({
 
-    render: function() {
-        $(this.selectors.mainTag).html(this.template());
-        return this;
-    }
-});
+            template: _.template(homeTemplate),
 
-var AboutTemplateView = Backbone.View.extend({
+            selectors: {
+                mainTag: 'main'
+            },
 
-    template: _.template($('#aboutTemplate').html()),
+            render: function() {
+                $(this.selectors.mainTag).html(this.template());
+                return this;
+            }
+        });
 
-    selectors: {
-        mainTag: 'main'
-    },
+        var AboutTemplateView = Backbone.View.extend({
 
-    render: function() {
-        $(this.selectors.mainTag).html(this.template());
-        return this;
-    }
-});
+            template: _.template(aboutTemplate),
 
-var HelpTemplateView = Backbone.View.extend({
+            selectors: {
+                mainTag: 'main'
+            },
 
-    template: _.template($('#helpTemplate').html()),
+            render: function() {
+                $(this.selectors.mainTag).html(this.template());
+                return this;
+            }
+        });
 
-    selectors: {
-        mainTag: 'main'
-    },
+        var HelpTemplateView = Backbone.View.extend({
 
-    render: function() {
-        $(this.selectors.mainTag).html(this.template());
-        return this;
-    }
-});
+            template: _.template(helpTemplate),
 
-var SettingsTemplateView = Backbone.View.extend({
+            selectors: {
+                mainTag: 'main'
+            },
 
-    template: _.template($('#settingsTemplate').html()),
+            render: function() {
+                $(this.selectors.mainTag).html(this.template());
+                return this;
+            }
+        });
 
-    selectors: {
-        mainTag: 'main'
-    },
+        var SettingsTemplateView = Backbone.View.extend({
 
-    render: function() {
-        $(this.selectors.mainTag).html(this.template());
-        return this;
-    }
-});
+            template: _.template(settingsTemplate),
+
+            selectors: {
+                mainTag: 'main'
+            },
+
+            render: function() {
+                $(this.selectors.mainTag).html(this.template());
+                return this;
+            }
+        });
+
+        return {
+            NavBarTemplateView: NavBarTemplateView,
+            FooterTemplateView: FooterTemplateView,
+            HomeTemplateView: HomeTemplateView,
+            AboutTemplateView: AboutTemplateView,
+            HelpTemplateView: HelpTemplateView,
+            SettingsTemplateView: SettingsTemplateView
+        };
+    });

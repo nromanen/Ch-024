@@ -1,4 +1,5 @@
-var SubjectModel = Backbone.Model.extend({
+define('SubjectModel', ['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
+    var SubjectModel = Backbone.Model.extend({
 
     defaults:function() {
         return {
@@ -9,9 +10,9 @@ var SubjectModel = Backbone.Model.extend({
         }
     },
 
-    deleteSubject: function() {
-    	this.destroy();
-    },
+        deleteSubject: function() {
+            this.destroy();
+        },
 
     setTitle: function(value) {
         this.set('title', value);
@@ -37,4 +38,7 @@ var SubjectModel = Backbone.Model.extend({
         return this.get('category');
     }
 
+    });
+
+    return SubjectModel;
 });

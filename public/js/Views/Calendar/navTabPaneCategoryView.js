@@ -1,16 +1,22 @@
-var navTabPaneCategoryView = Backbone.View.extend({
+define('SubjectsView', ['jquery', 'underscore', 'backbone', 'tinycolor', 'pickacolor', 'SubjectModel',
+    'SubjectView', 'text!../js/Templates/createSubjectModalWindowTemplate.html'],
+    function($, _, Backbone, tinycolor, pickacolor, SubjectModel, SubjectView, createSubjectModalWindowTemplate) {
 
-    className: 'tab-pane',
+        var navTabPaneCategoryView = Backbone.View.extend({
 
-    id : function() {
-        return this.model.cid;
-    },
+        className: 'tab-pane',
 
-    initialize: function() {
-        this.model.bind('destroy', this.remove, this);
-    },
+        id : function() {
+            return this.model.cid;
+        },
 
-    render: function() {
-        return this;
-    }
+        initialize: function() {
+            this.model.bind('destroy', this.remove, this);
+        },
+
+        render: function() {
+            return this;
+        }
+    });
+    return navTabPaneCategoryView;
 });

@@ -1,20 +1,23 @@
-var LoginUserView = Backbone.View.extend({
+define('LoginUserView', ['jquery', 'underscore', 'backbone', 'LoginUserModel', 'RegistrationUserModel',
+    'text!../js/Templates/loginTemplate.html'],
+    function($, _, Backbone, LoginUserModel, RegistrationUserModel, loginTemplate) {
+    var LoginUserView = Backbone.View.extend({
 
-    selectors: {
-        userLoginButton:    '#submitButton',
-        userRegisterButton: '#registerButton'
-    },
+        selectors: {
+            userLoginButton: '#submitButton',
+            userRegisterButton: '#registerButton'
+        },
 
-    loginFormContainer: $('body'),
+        loginFormContainer: $('body'),
 
-    template: _.template($('#loginTemplate').html()),
+        template: _.template(loginTemplate),
 
-    /* PRIVATE METHODS */
+        /* PRIVATE METHODS */
 
-    _attachEvents: function () {
-        $(this.selectors.userLoginButton).on('click', $.proxy(this._loginUser, this));
-        $(this.selectors.userRegisterButton).on('click', $.proxy(this._registerUser, this));
-    },
+        _attachEvents: function() {
+            $(this.selectors.userLoginButton).on('click', $.proxy(this._loginUser, this));
+            $(this.selectors.userRegisterButton).on('click', $.proxy(this._registerUser, this));
+        },
 
     _loginUser: function () {
         /*You can write here everything you need for login*/
@@ -24,20 +27,23 @@ var LoginUserView = Backbone.View.extend({
         return false;
     },
 
-    /**
-     * Open registration form
-     */
-    _registerUser: function () {
-        new RegistrationUserView({
-            model: new RegistrationUserModel
-        }).render();
-    },
+        /*
+         * Open registration form
+         */
+        _registerUser: function() {
+            new RegistrationUserView({
+                model: new RegistrationUserModel
+            }).render();
+        },
 
-    /*PUBLIC METHODS*/
+        /*PUBLIC METHODS*/
 
-    render: function () {
-        this.loginFormContainer.html(this.template());
-        this._attachEvents();
-        return this;
-    }
+        render: function() {
+            this.loginFormContainer.html(this.template());
+            this._attachEvents();
+            return this;
+        }
+    });
+
+    return LoginUserView;
 });

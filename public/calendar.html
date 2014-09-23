@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html>
 
-    <head>
+<head>
 
-        <title>Calendar</title>
+    <title>Calendar</title>
 
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-        <link rel="stylesheet" href="css/calendarJQuery/fullcalendar.min.css">
-        <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
-        <link rel="stylesheet" href="css/pick-a-color/pick-a-color-1.2.3.min.css">
-        <link rel="stylesheet" href="css/calendarJQuery/fullcalendar.print.css" media="print">
-        <link rel="stylesheet" href="css/calendarStyle.css">
-        <link rel="stylesheet" href="css/settingsPage.css">
-        <link rel="stylesheet" href="css/loginPage.css">
-        <link rel="stylesheet" href="css/aboutPage.css">
+    <link rel="stylesheet" href="css/calendarJQuery/fullcalendar.min.css">
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="css/pick-a-color/pick-a-color-1.2.3.min.css">
+    <link rel="stylesheet" href="css/calendarJQuery/fullcalendar.print.css" media="print">
+    <link rel="stylesheet" href="css/calendarStyle.css">
+    <link rel="stylesheet" href="css/settingsPage.css">
+    <link rel="stylesheet" href="css/loginPage.css">
+    <link rel="stylesheet" href="css/aboutPage.css">
 
-    </head>
+</head>
 
 
 <body>
@@ -27,13 +27,15 @@
         <header></header>
 
         <main>
-           
+
         </main>
 
         <footer></footer>
     </div>
 
-    <!--templates-->
+    <!--RequireJS-->
+    <script src="js/config.js"></script>
+    <script data-main="Routes/Route" src="js/Vendor/require.js"></script>
 
 <script type="text/template" id="navBarTemplate">
     <!-- NavBar -->
@@ -540,6 +542,7 @@
         </script>
 
         <!--Frameworks-->
+    <!-- Frameworks
         <script type="text/javascript" src="js/Vendor/jquery/moment.min.js"></script>
         <script type="text/javascript" src="js/Vendor/jquery/jquery.min.js"></script>
         <script type="text/javascript" src="js/Vendor/jquery/jquery-ui.custom.min.js"></script>
@@ -554,8 +557,7 @@
         <script type="text/javascript" src="js/Vendor/tooltip.js"></script>
         <script type="text/javascript" src="js/Vendor/jqueryJSON.js"></script>
 
-
-    <!--Models-->
+        Models
         <script type="text/javascript" src="js/Models/Calendar/CalendarEventModel.js"></script>
         <script type="text/javascript" src="js/Models/Calendar/SubjectModel.js"></script>
         <script type="text/javascript" src="js/Models/LoginAndRegistration/SettingsUserModel.js"></script>
@@ -563,12 +565,14 @@
         <script type="text/javascript" src="js/Models/LoginAndRegistration/RegistrationUserModel.js"></script>
         <script type="text/javascript" src="js/Models/Calendar/CategoryModel.js"></script>
 
+        Collections
+        <script type="text/javascript" src="js/Collections/CalendarEventsCollection.js"></script>
         <!--Collections-->
         <script type="text/javascript" src="js/Collections/CalendarEventsCollection.js"></script>
         <script type="text/javascript" src="js/Collections/SubjectsCollection.js"></script>
         <script type="text/javascript" src="js/Collections/CategoriesCollection.js"></script>
 
-        <!--Views-->
+        Views
         <script type="text/javascript" src="js/Views/Calendar/CalendarView.js"></script>
         <script type="text/javascript" src="js/Views/Calendar/SubjectView.js"></script>
         <script type="text/javascript" src="js/Views/Calendar/CalendarEventView.js"></script>
@@ -582,10 +586,9 @@
         <script type="text/javascript" src="js/Views/Calendar/CategoryView.js"></script>
         <script type="text/javascript" src="js/Views/Calendar/CategoriesView.js"></script>
 
-        <!--Routes-->
-        <script type="text/javascript" src="js/Routes/Route.js"></script>
+        <!--Routes
+        <script type="text/javascript" src="js/Routes/Route.js"></script>-->
 
-
-    </body>
+</body>
 
 </html>

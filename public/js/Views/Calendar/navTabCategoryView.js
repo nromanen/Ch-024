@@ -1,30 +1,35 @@
-var navTabCategoryView = Backbone.View.extend({
+define('SubjectsView', ['jquery', 'underscore', 'backbone', 'tinycolor', 'pickacolor', 'SubjectModel',
+    'SubjectView', 'text!../js/Templates/createSubjectModalWindowTemplate.html'],
+    function($, _, Backbone, tinycolor, pickacolor, SubjectModel, SubjectView, createSubjectModalWindowTemplate) {
 
-    tagName: 'li',
+        var navTabCategoryView = Backbone.View.extend({
 
-    template: _.template($('#navTabCategoryTemplate').html()),
+        tagName: 'li',
 
-    selectors: {
-        removeCategoryButton: ".removeCategory"
-    },
+        template: _.template($('#navTabCategoryTemplate').html()),
 
-    initialize: function() {
-        this.model.bind('destroy', this.remove, this);
-    },
+        selectors: {
+            removeCategoryButton: ".removeCategory"
+        },
 
-    _attachEvents: function() {
-        this.$(this.selectors.removeCategoryButton).on('click', $.proxy(this._removeCategory, this));
-    },
+        initialize: function() {
+            this.model.bind('destroy', this.remove, this);
+        },
 
-    _removeCategory: function() {
-        this.model.destroy();
-    },
+        _attachEvents: function() {
+            this.$(this.selectors.removeCategoryButton).on('click', $.proxy(this._removeCategory, this));
+        },
 
-    render: function() {
-        this.$el.html(this.template(this.model.toJSON()));
-        this._attachEvents();
-        return this;
-    }
+        _removeCategory: function() {
+            this.model.destroy();
+        },
 
+        render: function() {
+            this.$el.html(this.template(this.model.toJSON()));
+            this._attachEvents();
+            return this;
+        }
+
+    });
+    return navTabCategoryView;
 });
-

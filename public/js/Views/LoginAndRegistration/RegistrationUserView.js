@@ -1,22 +1,24 @@
-var RegistrationUserView = Backbone.View.extend({
-    selectors:{
-        registerButton: '#register',
-        cancelButton:   '#cancel',
-        nameInput:      '#name',
-        surnameInput:   '#surname',
-        emailInput:     '#email',
-        passwordInput:  '#password',
-        repeatPasswordInput: '#repeatPassword',
-        phoneInput:      '#phone',
-        regForm:         '#regForm'
+define('RegistrationUserView', ['jquery', 'underscore', 'backbone', 'RegistrationUserModel', 'text!../js/Templates/registrationTemplate.html'],
+    function($, _, Backbone, RegistrationUserModel, registrationTemplate) {
+    var RegistrationUserView = Backbone.View.extend({
+        selectors: {
+            registerButton: '#register',
+            cancelButton: '#cancel',
+            nameInput: '#name',
+            surnameInput: '#surname',
+            emailInput: '#email',
+            passwordInput: '#password',
+            repeatPasswordInput: '#repeatPassword',
+            phoneInput: '#phone',
+            regForm: '#regForm'
 
-    },
-    template: _.template($('#registrationTemplate').html()),
+        },
+        template: _.template(registrationTemplate),
 
-    initialize: function() {
-        return true;
+        initialize: function() {
+            return true;
 
-    },
+        },
 
     _attachEvents: function () {
         this.$(this.selectors.registerButton).on('click', $.proxy(this._checkForm,this));
@@ -46,20 +48,21 @@ var RegistrationUserView = Backbone.View.extend({
         this.model.save();
     },
 
-    /**
-     *Shutdown modal window
-     */
-    _shutdownModalWindow: function(){
-        this.remove();
-        $('.modal-backdrop').remove();
-    },
+        /**
+         *Shutdown modal window
+         */
+        _shutdownModalWindow: function() {
+            this.remove();
+            $('.modal-backdrop').remove();
+        },
 
-    render:function(){
-        this.$el = $(this.template());
-        this.$el.modal('show');
-        this._attachEvents();
-        return this;
-    }
+        render: function() {
+            this.$el = $(this.template());
+            this.$el.modal('show');
+            this._attachEvents();
+            return this;
+        }
+    });
+    
+    return RegistrationUserView;
 });
-
-

@@ -1,4 +1,7 @@
-var CategoriesView = Backbone.View.extend({
+define('CategoriesView', ['jquery', 'underscore', 'backbone', 'CategoryModel', 'CategoryView',
+    'text!../js/Templates/createCategoryModalWindowTemplate.html', 'text!../js/Templates/navTabPaneCategoryTemplate.html'],
+    function($, _, Backbone, CategoryModel, CategoryView, createCategoryModalWindowTemplate, navTabPaneCategoryTemplate) {
+    var CategoriesView = Backbone.View.extend({
 
     selectors: {
         createCategoryButton: '.saveBtn',
@@ -46,3 +49,5 @@ var CategoriesView = Backbone.View.extend({
         return this;
     }
 });
+        return CategoriesView;
+    });

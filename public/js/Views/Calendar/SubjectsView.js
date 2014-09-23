@@ -1,5 +1,9 @@
-var SubjectsView = Backbone.View.extend({
+define('SubjectsView', ['jquery', 'underscore', 'backbone', 'tinycolor', 'pickacolor', 'SubjectModel',
+    'SubjectView', 'text!../js/Templates/createSubjectModalWindowTemplate.html'],
+    function($, _, Backbone, tinycolor, pickacolor, SubjectModel, SubjectView, createSubjectModalWindowTemplate) {
+    window.tinycolor = tinycolor;
 
+    var SubjectsView = Backbone.View.extend({
     selectors: {
         addSubjectButton:    '.create',
         cancelButton:        '.cancelBtn',
@@ -79,3 +83,5 @@ var SubjectsView = Backbone.View.extend({
         return this;
     }
 });
+        return SubjectsView;
+    });

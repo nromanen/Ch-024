@@ -1,4 +1,5 @@
-var CategoryView = Backbone.View.extend({
+define('CategoryView', ['jquery', 'underscore', 'backbone', 'text!../js/Templates/navTabCategoryTemplate.html'], function($, _, Backbone, navTabCategoryTemplate) {
+    var CategoryView = Backbone.View.extend({
 
     selectors: {
         navTabContainer: "#navTabContainer",
@@ -24,4 +25,6 @@ var CategoryView = Backbone.View.extend({
         this.$(this.selectors.navTabPaneContainer).append(this._createNavTabPane());
 		return this;
 	}
+});
+    return CategoryView;
 });

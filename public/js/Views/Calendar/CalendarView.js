@@ -1,6 +1,8 @@
-var CalendarView = Backbone.View.extend ({
+define('CalendarView', ['jquery', 'underscore', 'backbone', 'moment', 'jqueryui',
+    'fullcalendar', 'CalendarEventModel', 'ownpopover', 'CalendarEventView', 'text!../js/Templates/ownPopoverTemplate.html'],
+    function($, _, Backbone, moment, jqueryui, fullcalendar, EventModel, ownpopover, EventView, ownPopoverTemplate) {
 
-    calendarContainer: $('#calendarContainer'),
+    var CalendarView = Backbone.View.extend({
 
     id: 'calendar',
 
@@ -52,12 +54,12 @@ var CalendarView = Backbone.View.extend ({
     * @param {Object} eventObject
     * Create Event View for updating and deleting event model.
     */
-    _showCalendarEventModal: function(calendarEventObject) {
-        var calendarEventModel = this.calendarEventsCollection.findWhere({title: calendarEventObject.title});
-        calendarEventModel.trigger('showCalendarEventModal');
+    _showCalendarEventModal: function(eventObject) {
+        var eventModel = this.eventsCollection.findWhere({title: eventObject.title});
+        eventModel.trigger('click');
         new CalendarEventView({
-            model: calendarEventModel,
-            calendarEventObject: calendarEventObject
+            model: eventModel,
+            eventObject: eventObject
         });
     },
 
@@ -107,3 +109,5 @@ var CalendarView = Backbone.View.extend ({
     }
 
 });
+        return CalendarView;
+    });

@@ -1,14 +1,14 @@
-﻿var RegistrationUserModel = Backbone.Model.extend({
-
-	defaults: {
-        //id - model id will be replaced with id from db
-	    name:'',
-        surname:'',
-        email:'',
-        password:'',
-        repeatPassword:'',
-        phone:''
-	},
+define('RegistrationUserModel', ['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
+    var RegistrationUserModel = Backbone.Model.extend({
+        defaults: {
+            //id - model id will be replaced with id from db
+            name: '',
+            surname: '',
+            email: '',
+            password: '',
+            repeatPassword: '',
+            phone: ''
+        },
 
     constants: {
         PATTERN_NAME : /^[A-Z][a-z]+[-]?[A-Za-z]*$/,
@@ -63,8 +63,11 @@
         }
       //  return errors.length ? errors : false;
         return false;
+    },
 
-	},
+
 
     urlRoot: '/signup'
+});    
+    return RegistrationUserModel;
 });
