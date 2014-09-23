@@ -47,7 +47,6 @@ var SubjectsView = Backbone.View.extend({
                 category: categoryModel
             });
             this.collectionSubject.add(subjectModel);
-            this._clearFieldsInModal();
         }
     },
 
@@ -68,6 +67,8 @@ var SubjectsView = Backbone.View.extend({
      * Add categories into list
      */
     _fillCategoryList: function() {
+        this._clearFieldsInModal();
+
         this.collectionCategory.each(function(model){
             this.$(this.selectors.categoryTitleInput).append(this.templateOptionForSelectCategory(model.toJSON()));
         }, this);

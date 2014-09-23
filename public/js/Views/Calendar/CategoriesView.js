@@ -12,6 +12,7 @@ var CategoriesView = Backbone.View.extend({
     template: _.template($('#createCategoryModalWindowTemplate').html()),
 
     initialize: function(options) {
+        this.$el = $(this.template());
         this._attachEvents();
         this.collection = options.collection;
         this.collection.on('add', $.proxy(this._renderCategoriesFromCollection, this));
@@ -41,9 +42,7 @@ var CategoriesView = Backbone.View.extend({
     },
 
     render: function() {
-        this.$el = $(this.template());
         this.$el.modal('show');
-        this._attachEvents();
         return this;
     }
 });
