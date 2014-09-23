@@ -8,7 +8,7 @@ var CalendarView = Backbone.View.extend ({
      */
     selectors: {
         weekButton:            '.fc-agendaWeek-button',
-        removeSubjectCheckbox: '#drop-remove'
+        removeSubjectCheckbox: '#drop-remove' //remove
     },
 
     initialize: function(options){
@@ -26,7 +26,7 @@ var CalendarView = Backbone.View.extend ({
 
     _convertHexColorToRGB: function(color) {
         return "rgba(" + parseInt(color.substring(1,3),16) + ","
-            + parseInt(color.substring(3,5),16) + "," + parseInt(color.substring(5,7),16) + ", .5)";
+            + parseInt(color.substring(3,5),16) + "," + parseInt(color.substring(5,7),16) + ", .5)"; //use constant
     },
 
      /**
@@ -50,9 +50,9 @@ var CalendarView = Backbone.View.extend ({
     * @param {Object} eventObject
     * Create Event View for updating and deleting event model.
     */
-    _showEventModal: function(eventObject) {
+    _showEventModal: function(eventObject) { //rename name method _showCalendarEventModel, same parametr
         var eventModel = this.eventsCollection.findWhere({title: eventObject.title});
-        eventModel.trigger('click');
+        eventModel.trigger('click'); //rename cclick to showCalendarEvwntModal
         new EventView({
             model: eventModel,
             eventObject: eventObject
@@ -60,7 +60,7 @@ var CalendarView = Backbone.View.extend ({
     },
 
     _showPopover: _.debounce(function(eventObject, jsEvent, ui) {
-        var eventModel = this.eventsCollection.findWhere({title: eventObject.title}).toJSON();
+        var eventModel = this.eventsCollection.findWhere({title: eventObject.title}).toJSON(); ///rename calendarEventModal
         $(jsEvent.target).ownpopover({
             showEvent: 'mouseover',
             hideEvent: 'mouseout',
@@ -70,7 +70,7 @@ var CalendarView = Backbone.View.extend ({
             })
         });
         $('.own-popover').remove();
-    }, 150, false),
+    }, 150, false), //150, false in constants
 
     /**
      * Connect fullCalendar widget.

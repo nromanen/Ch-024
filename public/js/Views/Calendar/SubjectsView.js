@@ -5,13 +5,13 @@ var SubjectsView = Backbone.View.extend({
         cancelButton:        '.cancelBtn',
         createSubjectButton: '.saveBtn',
         subjectTitleInput:   '.subjectTitle',
-        subjectBackground:   '.subjectBackground',
+        subjectBackground:   '.subjectBackground', //do we use this?
         colorPickerInput:    '.pick-a-color',
         categoryTitleInput:  '.categoryTitle',
         subjectContainer:    '.tab-content #'
     },
 
-    template: _.template($('#createSubjectModalWindowTemplate').html()),
+    template: _.template($('#createSubjectModalWindowTemplate').html()), 
     templateOptionForSelectCategory: _.template($('#optionForSelect').html()),
 
     initialize: function(options) {
@@ -34,14 +34,14 @@ var SubjectsView = Backbone.View.extend({
     /**
      * Add new subject in collection
      */
-    _addNewSubjectInCollection: function() {
+    _addNewSubjectInCollection: function() { //rename _addNewSubject
         var subjectTitle = this.$(this.selectors.subjectTitleInput).val();
-        var idCategory =  this.$(this.selectors.categoryTitleInput).val();
+        var idCategory =  this.$(this.selectors.categoryTitleInput).val(); // categoryId
         var categoryModel = this.collectionCategory.findModelById(idCategory);
         var subjectModel = new SubjectModel;
 
         if (subjectTitle) {
-            subjectModel.set({
+            subjectModel.set({ //сетери
                 title: subjectTitle,
                 color: "#" + this.$(this.selectors.colorPickerInput).val(),
                 category: categoryModel
@@ -50,9 +50,9 @@ var SubjectsView = Backbone.View.extend({
         }
     },
 
-    _renderSubjectsFromCollection: function(model) {
+    _renderSubjectsFromCollection: function(model) { //renderSubjects
         $(this.selectors.subjectContainer +
-            model.getCategoryAttribute().getIdAttribute()).append(
+            model.getCategoryAttribute().getIdAttribute()).append( // delete attribute from name
                 new SubjectView({
                     model: model
                 }).render().el);

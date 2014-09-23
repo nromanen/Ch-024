@@ -1,7 +1,7 @@
-var EventView = Backbone.View.extend({
+var EventView = Backbone.View.extend({ //CalenderEvantView
 
     selectors: {
-        saveEventChangesButton: '.saveBtn',
+        saveEventChangesButton: '.saveBtn', //rename saveEventButton
         deleteEventButton:      '.deleteBtn',
         cancelButton:           '.cancelBtn',
         classroomForExamInput:  '.classForExam',
@@ -25,7 +25,7 @@ var EventView = Backbone.View.extend({
      * Also update some attributes of eventObject because we need to update fullCalendar later
      */
     _updateCalendarEvent: function() {
-        this.model.set({
+        this.model.set({ //розьити на сетери
             amountOfStudents: parseInt(this.$(this.selectors.amountOfStudentsInput).val()),
             classroom: this.$(this.selectors.classroomForExamInput).val(),
             editable: false,
@@ -41,7 +41,7 @@ var EventView = Backbone.View.extend({
     /**
      * Update fullCalendar
      */
-    _saveEventChanges: function() {
+    _saveEventChanges: function() { //rename _saveEvent
         this._updateCalendarEvent();
         $("#calendar").fullCalendar('updateEvent', this.eventObject);
      },

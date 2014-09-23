@@ -23,7 +23,7 @@ var CategoriesView = Backbone.View.extend({
         $(this.selectors.addCategoryButton).off().on('click', $.proxy(this.render, this));
     },
 
-    _renderCategoriesFromCollection: function (model) {
+    _renderCategoriesFromCollection: function (model) { //rename to _renderCategory
         new CategoryView({
             model: model
         }).render();
@@ -31,7 +31,7 @@ var CategoriesView = Backbone.View.extend({
         $(this.selectors.navTabPaneContainer + " div:first").addClass('active');
     },
 
-    _addNewCategoryFormModal: function() {
+    _addNewCategoryFormModal: function() { //rename _addNewCategory
         var CategoryTitle = this.$(this.selectors.categoryTitleInput).val();
 
         if (CategoryTitle) {
