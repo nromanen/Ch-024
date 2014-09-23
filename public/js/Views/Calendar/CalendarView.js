@@ -54,12 +54,12 @@ define('CalendarView', ['jquery', 'underscore', 'backbone', 'moment', 'jqueryui'
     * @param {Object} eventObject
     * Create Event View for updating and deleting event model.
     */
-    _showCalendarEventModal: function(eventObject) {
-        var eventModel = this.eventsCollection.findWhere({title: eventObject.title});
-        eventModel.trigger('click');
+    _showCalendarEventModal: function(calendarEventObject) {
+        var calendarEventModel = this.calendarEventsCollection.findWhere({title: calendarEventObject.title});
+        calendarEventModel.trigger('showCalendarEventModal');
         new CalendarEventView({
-            model: eventModel,
-            eventObject: eventObject
+            model: calendarEventModel,
+            calendarEventObject: calendarEventObject
         });
     },
 
