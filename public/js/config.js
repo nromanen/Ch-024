@@ -36,7 +36,7 @@ var require = {
         // Views
         'CalendarView': 'Views/Calendar/CalendarView',
         'SubjectView': 'Views/Calendar/SubjectView',
-        'EventView': 'Views/Calendar/EventView',
+        'CalendarEventView': 'Views/Calendar/CalendarEventView',
         'SubjectsView': 'Views/Calendar/SubjectsView',
         'TemplateView': 'Views/TemplateView',
         'SettingsUserView': 'Views/LoginAndRegistration/SettingsUserView',

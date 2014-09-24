@@ -39,15 +39,22 @@ require([
                 new TemplateView.HomeTemplateView().render();
                 this.eventsCollection = new EventsCollection();
                 this.subjectsCollection = new SubjectsCollection();
+                this.categoriesCollection = new CategoriesCollection();
                 new CalendarView({
                     collection: this.eventsCollection
                 }).render();
                 new SubjectsView({
-                    collectionSubject: this.subjectsCollection
+                    collectionSubject: this.subjectsCollection,
+                    collectionCategory: this.categoriesCollection
                 });
                 new CategoriesView({
-                    collection: new CategoriesCollection
+                    collection: this.categoriesCollection
                 });
+
+                this.categoriesCollection.add([
+                     {title: "IT and Configuration Management"},
+                    {title: "Quality Control"},
+                    {title: "Software Development"}]);
                 //this.selectMenuItem('home-menu');
             });
 

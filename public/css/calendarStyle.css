@@ -50,7 +50,6 @@ body {
 .removeCategory {
     visibility: hidden;
     float: right;
-    position: absolute;
 }
 .containerCalendar {
     background-color: #eff4f7;

@@ -1,5 +1,5 @@
 define('navTabPaneCategoryView', ['jquery', 'underscore', 'backbone', 'tinycolor', 'pickacolor'],
-    function($, _, Backbone, tinycolor, pickacolor, ) {
+    function($, _, Backbone, tinycolor, pickacolor) {
 
         var navTabPaneCategoryView = Backbone.View.extend({
 
