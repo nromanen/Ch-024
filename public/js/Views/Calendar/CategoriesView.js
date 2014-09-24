@@ -32,6 +32,7 @@ define('CategoriesView', ['jquery', 'underscore', 'backbone', 'CategoryModel', '
         }).render();
         $(this.selectors.navTabContainer + " li:first").addClass('active');
         $(this.selectors.navTabPaneContainer + " div:first").addClass('active');
+
     },
 
     _addNewCategory: function() {
@@ -45,7 +46,9 @@ define('CategoriesView', ['jquery', 'underscore', 'backbone', 'CategoryModel', '
     },
 
     render: function() {
+        this.$el = $(this.template());
         this.$el.modal('show');
+        this._attachEvents();
         return this;
     }
 });

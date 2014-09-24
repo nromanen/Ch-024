@@ -1,6 +1,6 @@
-define('SubjectsView', ['jquery', 'underscore', 'backbone', 'tinycolor', 'pickacolor', 'SubjectModel',
+define('SubjectsView', ['jquery', 'underscore', 'backbone', 'tinycolor', 'pickacolor', 'SubjectModel','CategoryModel',
     'SubjectView', 'text!../js/Templates/createSubjectModalWindowTemplate.html', 'text!../js/Templates/optionForSelect.html'],
-    function($, _, Backbone, tinycolor, pickacolor, SubjectModel, SubjectView, createSubjectModalWindowTemplate, optionForSelect) {
+    function($, _, Backbone, tinycolor, pickacolor, SubjectModel, CategoryModel, SubjectView, createSubjectModalWindowTemplate, optionForSelect) {
     window.tinycolor = tinycolor;
 
     var SubjectsView = Backbone.View.extend({
@@ -18,10 +18,7 @@ define('SubjectsView', ['jquery', 'underscore', 'backbone', 'tinycolor', 'pickac
     templateOptionForSelectCategory: _.template(optionForSelect),
 
     initialize: function(options) {
-        this.$el = $(this.template());
-        this.$(this.selectors.colorPickerInput).pickAColor();
-        this._attachEvents();
-
+        $(this.selectors.addSubjectButton).on('click', $.proxy(this.render, this));
         this.collectionSubject = options.collectionSubject;
         this.collectionCategory = options.collectionCategory;
         this.collectionSubject.on('add', $.proxy(this._renderSubject, this));
@@ -31,7 +28,7 @@ define('SubjectsView', ['jquery', 'underscore', 'backbone', 'tinycolor', 'pickac
 
     _attachEvents: function() {
         this.$(this.selectors.createSubjectButton).on('click', $.proxy(this._addNewSubject, this));
-        $(this.selectors.addSubjectButton).on('click', $.proxy(this.render, this));
+        this.$(this.selectors.cancelButton).on('click', $.proxy(this._cancelModalWindow, this))
     },
 
     /**
@@ -57,6 +54,7 @@ define('SubjectsView', ['jquery', 'underscore', 'backbone', 'tinycolor', 'pickac
                 new SubjectView({
                     model: model
                 }).render().el);
+        this._cancelModalWindow();
     },
 
     _clearFieldsInModal: function() {
@@ -74,12 +72,19 @@ define('SubjectsView', ['jquery', 'underscore', 'backbone', 'tinycolor', 'pickac
             this.$(this.selectors.categoryTitleInput).append(this.templateOptionForSelectCategory(model.toJSON()));
         }, this);
     },
-
+     _cancelModalWindow: function() {
+            this.remove();
+         //this.$el.modal('hide');
+            $('.modal-backdrop').hide();
+        },
     /* PUBLIC METHODS */
 
     render: function() {
+        this.$el = $(this.template());
+        this.$(this.selectors.colorPickerInput).pickAColor();
         this.$el.modal('show');
         this._fillCategoryList();
+        this._attachEvents();
         return this;
     }
 });

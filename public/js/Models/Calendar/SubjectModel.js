@@ -1,10 +1,10 @@
-define('SubjectModel', ['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
+define('SubjectModel', ['jquery', 'underscore', 'backbone', 'CategoryModel'], function($, _, Backbone, CategoryModel) {
     var SubjectModel = Backbone.Model.extend({
 
     defaults:function() {
         return {
             //subjectId - model id will be changed
-            category: new CategoryModel,
+            category: CategoryModel,
             title: '',
             color: ''
         }
