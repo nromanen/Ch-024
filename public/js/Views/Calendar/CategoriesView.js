@@ -1,6 +1,6 @@
 define('CategoriesView', ['jquery', 'underscore', 'backbone', 'CategoryModel', 'CategoryView',
-    'text!../js/Templates/createCategoryModalWindowTemplate.html', 'text!../js/Templates/navTabPaneCategoryTemplate.html'],
-    function($, _, Backbone, CategoryModel, CategoryView, createCategoryModalWindowTemplate, navTabPaneCategoryTemplate) {
+    'text!../js/Templates/createCategoryModalWindowTemplate.html'],
+    function($, _, Backbone, CategoryModel, CategoryView, createCategoryModalWindowTemplate) {
     var CategoriesView = Backbone.View.extend({
 
     selectors: {
@@ -12,7 +12,7 @@ define('CategoriesView', ['jquery', 'underscore', 'backbone', 'CategoryModel', '
         categoryTitleInput: '.categoryTitle'
     },
 
-    template: _.template($('#createCategoryModalWindowTemplate').html()),
+    template: _.template(createCategoryModalWindowTemplate),
 
     initialize: function(options) {
         this.$el = $(this.template());

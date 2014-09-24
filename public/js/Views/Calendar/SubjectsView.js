@@ -1,6 +1,6 @@
 define('SubjectsView', ['jquery', 'underscore', 'backbone', 'tinycolor', 'pickacolor', 'SubjectModel',
-    'SubjectView', 'text!../js/Templates/createSubjectModalWindowTemplate.html'],
-    function($, _, Backbone, tinycolor, pickacolor, SubjectModel, SubjectView, createSubjectModalWindowTemplate) {
+    'SubjectView', 'text!../js/Templates/createSubjectModalWindowTemplate.html', 'text!../js/Templates/optionForSelect.html'],
+    function($, _, Backbone, tinycolor, pickacolor, SubjectModel, SubjectView, createSubjectModalWindowTemplate, optionForSelect) {
     window.tinycolor = tinycolor;
 
     var SubjectsView = Backbone.View.extend({
@@ -14,8 +14,8 @@ define('SubjectsView', ['jquery', 'underscore', 'backbone', 'tinycolor', 'pickac
         subjectContainer:    '.tab-content #'
     },
 
-    template: _.template($('#createSubjectModalWindowTemplate').html()), 
-    templateOptionForSelectCategory: _.template($('#optionForSelect').html()),
+    template: _.template(createSubjectModalWindowTemplate), 
+    templateOptionForSelectCategory: _.template(optionForSelect),
 
     initialize: function(options) {
         this.$el = $(this.template());

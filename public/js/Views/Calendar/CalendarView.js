@@ -1,6 +1,6 @@
 define('CalendarView', ['jquery', 'underscore', 'backbone', 'moment', 'jqueryui',
     'fullcalendar', 'CalendarEventModel', 'ownpopover', 'CalendarEventView', 'text!../js/Templates/ownPopoverTemplate.html'],
-    function($, _, Backbone, moment, jqueryui, fullcalendar, EventModel, ownpopover, EventView, ownPopoverTemplate) {
+    function($, _, Backbone, moment, jqueryui, fullcalendar, EventModel, ownpopover, calendarEventModel, ownPopoverTemplate) {
 
     var CalendarView = Backbone.View.extend({
 
@@ -68,7 +68,7 @@ define('CalendarView', ['jquery', 'underscore', 'backbone', 'moment', 'jqueryui'
         $(jsEvent.target).ownpopover({
             showEvent: 'mouseover',
             hideEvent: 'mouseout',
-            html: _.template($('#ownPopoverTemplate').html()),
+            html: _.template(ownPopoverTemplate),
             content: _.extend(calendarEventModel, {
             start: calendarEventModel.start.format('YYYY-MM-DD HH:mm')
             })

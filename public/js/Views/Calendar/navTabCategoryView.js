@@ -1,12 +1,11 @@
-define('SubjectsView', ['jquery', 'underscore', 'backbone', 'tinycolor', 'pickacolor', 'SubjectModel',
-    'SubjectView', 'text!../js/Templates/createSubjectModalWindowTemplate.html'],
-    function($, _, Backbone, tinycolor, pickacolor, SubjectModel, SubjectView, createSubjectModalWindowTemplate) {
+define('navTabCategoryView', ['jquery', 'underscore', 'backbone', 'tinycolor', 'pickacolor', 'text!../js/Templates/navTabCategoryTemplate.html'],
+    function($, _, Backbone, tinycolor, pickacolor, navTabCategoryTemplate) {
 
         var navTabCategoryView = Backbone.View.extend({
 
         tagName: 'li',
 
-        template: _.template($('#navTabCategoryTemplate').html()),
+        template: _.template(navTabCategoryTemplate),
 
         selectors: {
             removeCategoryButton: ".removeCategory"

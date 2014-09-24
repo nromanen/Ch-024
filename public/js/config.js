@@ -44,6 +44,8 @@ var require = {
         'RegistrationUserView': 'Views/LoginAndRegistration/RegistrationUserView',
         'CategoryView': 'Views/Calendar/CategoryView',
         'CategoriesView': 'Views/Calendar/CategoriesView',
+        'navTabPaneCategoryView': 'Views/Calendar/navTabPaneCategoryView',
+        'navTabCategoryView': 'Views/Calendar/navTabCategoryView',
 
         // Template
         'TemplateView': 'Views/TemplateView'

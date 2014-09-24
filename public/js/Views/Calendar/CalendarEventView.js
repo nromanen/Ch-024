@@ -56,10 +56,10 @@ define('CalendarEventView', ['jquery', 'underscore', 'backbone', 'text!../js/Tem
          */
         _setTemplate: function() {
             if(this.model.getEditable() === true){
-                this.template = _.template($('#saveEventModalWindowTemplate').html());
+                this.template = _.template(saveEventModalWindowTemplate);
                 return;
             }
-            this.template = _.template($('#deleteEventModalWindowTemplate').html());
+            this.template = _.template(deleteEventModalWindowTemplate);
         },
 
         /* PUBLIC METHODS */
