@@ -20,7 +20,7 @@ require([
     var Router = Backbone.Router.extend({
 
         routes: {
-            "": "homePage",
+            "": "loginPage",
             "home": "homePage",
             "help": "helpPage",
             "about": "aboutPage",

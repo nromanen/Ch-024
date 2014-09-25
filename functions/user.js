@@ -20,7 +20,7 @@ exports.logIn = function (req, res) {
 
 
     function goNext(pass, username, role) {
-        if (req.body.hash == pass) {
+        if (req.body.password == pass) {
 
             req.session.email = req.body.email;
             req.session.username = username;

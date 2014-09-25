@@ -1,11 +1,12 @@
-define('LoginUserView', ['jquery', 'underscore', 'backbone', 'LoginUserModel', 'RegistrationUserModel',
+define('LoginUserView', ['jquery', 'underscore', 'backbone','jqueryjson', 'LoginUserModel', 'RegistrationUserModel',
     'text!../js/Templates/loginTemplate.html'],
-    function($, _, Backbone, LoginUserModel, RegistrationUserModel, loginTemplate) {
+    function($, _, Backbone, jqJSON,LoginUserModel, RegistrationUserModel, loginTemplate) {
     var LoginUserView = Backbone.View.extend({
 
         selectors: {
             userLoginButton: '#submitButton',
-            userRegisterButton: '#registerButton'
+            userRegisterButton: '#registerButton',
+            loginForm: '.b_loginForm'
         },
 
         loginFormContainer: $('body'),
@@ -21,9 +22,10 @@ define('LoginUserView', ['jquery', 'underscore', 'backbone', 'LoginUserModel', '
 
     _loginUser: function () {
         /*You can write here everything you need for login*/
-        var data = $('form', this.loginFormContainer).serializeJSON();
-        var loginModel = new LoginUserModel();
-        loginModel.fetch({data:data,type: 'POST'});
+          var formData = ($(this.selectors.loginForm).serializeJSON());
+        console.log(formData);
+       var loginModel = new LoginUserModel();
+        loginModel.fetch({data:formData,type: 'POST'});
         return false;
     },
 

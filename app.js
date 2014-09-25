@@ -42,9 +42,7 @@ app.post('/signup', user.signUp);
 app.post('/logout', user.logOut);
 
 app.post('/subject/:cat', subject.create);
-
 app.get('/subject/:cat', subject.get);
-
 app.get('/subject', subject.get);
 
 
