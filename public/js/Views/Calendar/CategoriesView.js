@@ -41,6 +41,8 @@ define('CategoriesView', ['jquery', 'underscore', 'backbone', 'CategoryModel', '
         if (CategoryTitle) {
             var categoryModel = new CategoryModel;
             categoryModel.setTitle(CategoryTitle);
+            categoryModel.isNew(true);
+            categoryModel.save(null,{type:'POST'});
             this.collection.add(categoryModel);
         }
     },

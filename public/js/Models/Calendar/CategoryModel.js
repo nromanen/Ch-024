@@ -5,7 +5,7 @@ define('CategoryModel', ['jquery', 'underscore', 'backbone'], function($, _, Bac
 
         defaults: function() {
             return {
-                id: this.cid,
+                id: '',
                 title: ''
             }
         },

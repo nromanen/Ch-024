@@ -1,5 +1,5 @@
 var db = require('../lib/mongoose'),
-    crypto = require('crypto'),
+    cryptor = require('cryptor'),
     nodemailer = require('nodemailer');
 
 exports.logOut = function (req, res) {
@@ -8,42 +8,49 @@ exports.logOut = function (req, res) {
     res.end;
 };
 
+exports.isAuth = function (req, res) {
+    if (req.session.username) {
+        return ({role: req.session.role, username: req.session.username});
+    }
+};
+
 exports.logIn = function (req, res) {
 
-    var query = db.userModel.findOne({ 'email': req.body.email });
-    query.select('password username email role');
-    query.exec(function (err, qRes) {
+    var logInQuery = db.userModel.findOne({ 'email': req.body.email });
+
+    logInQuery.select('password username email role');
+    logInQuery.exec(function (err, queryResult) {
         if (err) return handleError(err);
 
-        goNext(qRes.password, qRes.username, qRes.role);
-    });
+        if (queryResult) {
+
+            if (cryptor.compare(cryptor.md5(req.body.password), queryResult.password)) {
+                req.session.email = req.body.email;
+                req.session.username = queryResult.username;
+                req.session.role = queryResult.role;
+                //  res.cookie('login', 'true', { maxAge: 900000 });
+                var data = {
+                    action: 'logined',
+                    role: queryResult.role,
+                    email: req.body.email,
+                    username: queryResult.username
+                };
+
+                res.send(JSON.stringify(data));
 
 
-    function goNext(pass, username, role) {
-        if (req.body.password == pass) {
+            } else {
+                //incorect login/pass
+                res.send(JSON.stringify({action: 'incorrect'}));
 
-            req.session.email = req.body.email;
-            req.session.username = username;
-            req.session.role = role;
-            //  res.cookie('login', 'true', { maxAge: 900000 });
-            var data = {
-                action: 'logined',
-                role: role,
-                email: req.body.email,
-                username: username
-            };
-
-            res.send(JSON.stringify(data));
-            console.log(req.session);
-            res.end;
-
+            }
         } else {
-            //incorect login/pass
             res.send(JSON.stringify({action: 'incorrect'}));
 
         }
         res.end;
-    }
+    });
+
 
     // В середині модуля не бачить Монгус моделі userModel
     /*
@@ -60,14 +67,16 @@ exports.signUp = function (req, res) {
         surname: req.body.surname,
         email: req.body.email,
         phone: req.body.phone,
-        password: req.body.password
+        password: cryptor.md5(req.body.password)
     });
+
 
     data.save(function (err) {
         if (!err) {
             res.send({action: "registered"});
             res.end;
         } else {
+
             res.send({action: "failRegister"});
             console.log(err);
             res.end;
@@ -77,43 +86,4 @@ exports.signUp = function (req, res) {
     res.end;
 };
 
-exports.sendMail = function (req, res) {
 
-
-// create reusable transporter object using SMTP transport
-    var transporter = nodemailer.createTransport({
-        service: 'Gmail',
-        auth: {
-            user: 'ticapac@gmail.com',
-            pass: 'charming273008'
-        }
-    });
-    var mailData= {
-        to: 'ticapac@gmail.com',
-        subject: 'Great victory',
-        plainText: 'any plain text',
-        htmlBody: 'ANY HTML'
-
-
-    };
-// NB! No need to recreate the transporter object. You can use
-// the same transporter object for all e-mails
-
-// setup e-mail data with unicode symbols
-    var mailOptions = {
-        from: 'Fred Foo ✔ <ticapac@gmail.com>', // sender address
-        to: mailData.to, // list of receivers
-        subject: mailData.subject, // Subject line
-        text: mailData.plainText, // plaintext body
-        html: mailData.htmlBody // html body
-    };
-
-// send mail with defined transport object
-    transporter.sendMail(mailOptions, function (error, info) {
-        if (error) {
-            console.log(error);
-        } else {
-            console.log('Message sent: ' + info.response);
-        }
-    });
-};

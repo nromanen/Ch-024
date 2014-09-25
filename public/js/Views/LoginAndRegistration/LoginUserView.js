@@ -23,7 +23,7 @@ define('LoginUserView', ['jquery', 'underscore', 'backbone','jqueryjson', 'Login
     _loginUser: function () {
         /*You can write here everything you need for login*/
           var formData = ($(this.selectors.loginForm).serializeJSON());
-        console.log(formData);
+
        var loginModel = new LoginUserModel();
         loginModel.fetch({data:formData,type: 'POST'});
         return false;

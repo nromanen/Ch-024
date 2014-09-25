@@ -7,6 +7,7 @@ var express = require('express'),
     log = require('./lib/log.js')(module),
     user = require('./functions/user.js');
     subject = require('./functions/subject.js'),
+    category = require('./functions/category.js'),
     cryptor = require('cryptor');
 
 
@@ -36,18 +37,23 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', routes.index);
 
 // app.get('/calendar', routes.app);
-
+//login api
 app.post('/signin', user.logIn);
 app.post('/signup', user.signUp);
 app.post('/logout', user.logOut);
 
+//subjects api
 app.post('/subject/:cat', subject.create);
 app.get('/subject/:cat', subject.get);
 app.get('/subject', subject.get);
 
+//categories api
+app.get('/category',category.get);
+app.post('/category',category.create);
 
 
-app.get('/mail', user.sendMail);
+
+
 
 
 
