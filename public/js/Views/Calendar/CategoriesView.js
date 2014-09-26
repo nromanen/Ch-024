@@ -24,6 +24,7 @@ define('CategoriesView', ['jquery', 'underscore', 'backbone', 'CategoryModel', '
     _attachEvents: function() {
         this.$(this.selectors.createCategoryButton).off().on('click', $.proxy(this._addNewCategory, this));
         $(this.selectors.addCategoryButton).off().on('click', $.proxy(this.render, this));
+        $(this.selectors.cancelButton).off().on('click', $.proxy(this._cancelModalWindow, this));
     },
 
     _renderCategory: function (model) {
@@ -45,6 +46,13 @@ define('CategoriesView', ['jquery', 'underscore', 'backbone', 'CategoryModel', '
             categoryModel.save(null,{type:'POST'});
             this.collection.add(categoryModel);
         }
+        this._cancelModalWindow();
+    },
+
+    _cancelModalWindow: function() {
+            this.remove();
+         //this.$el.modal('hide');
+            $('.modal-backdrop').hide();
     },
 
     render: function() {
