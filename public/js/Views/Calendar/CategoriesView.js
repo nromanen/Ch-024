@@ -58,7 +58,6 @@ define('CategoriesView', ['jquery', 'underscore', 'backbone', 'CategoryModel', '
     },
 
     render: function() {
-        console.log(this.collection.toJSON());
         this.$el = $(this.template());
         this.$el.modal('show');
         this._attachEvents();
