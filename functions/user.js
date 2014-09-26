@@ -1,5 +1,5 @@
 var db = require('../lib/mongoose'),
-    cryptor = require('cryptor'),
+    crypto = require('crypto'),
     nodemailer = require('nodemailer');
 
 exports.logOut = function (req, res) {

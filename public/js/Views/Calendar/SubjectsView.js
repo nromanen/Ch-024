@@ -50,7 +50,7 @@ define('SubjectsView', ['jquery', 'underscore', 'backbone', 'tinycolor', 'pickac
 
     _renderSubject: function(model) {
         $(this.selectors.subjectContainer +
-            model.getCategory().getId()).append(
+            model.getCategory().getCid()).append(
                 new SubjectView({
                     model: model
                 }).render().el);

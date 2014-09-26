@@ -51,10 +51,10 @@ require([
                     collection: this.categoriesCollection
                 });
 
-                this.categoriesCollection.add([
-                     {title: "IT and Configuration Management"},
-                    {title: "Quality Control"},
-                    {title: "Software Development"}]);
+                // this.categoriesCollection.add([
+                //      {title: "IT and Configuration Management"},
+                //     {title: "Quality Control"},
+                //     {title: "Software Development"}]);
                 //this.selectMenuItem('home-menu');
             });
 

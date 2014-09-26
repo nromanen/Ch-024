@@ -6,7 +6,7 @@ define('navTabPaneCategoryView', ['jquery', 'underscore', 'backbone', 'tinycolor
         className: 'tab-pane',
 
         id : function() {
-            return this.model.cid;
+            return this.model.getCid();
         },
 
         initialize: function() {
