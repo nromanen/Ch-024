@@ -1,3 +1,6 @@
+#npm
+node_modules
+db
 #Idea
 .idea
 # Logs
@@ -23,7 +26,6 @@ build/Release
 
 # Dependency directory
 # Commenting this out is preferred by some people, see
-
 
 # Users Environment Variables
 .lock-wscript
