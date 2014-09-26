@@ -1,6 +1,6 @@
 define('LoginUserView', ['jquery', 'underscore', 'backbone','jqueryjson', 'LoginUserModel', 'RegistrationUserModel',
-    'text!../js/Templates/loginTemplate.html'],
-    function($, _, Backbone, jqJSON,LoginUserModel, RegistrationUserModel, loginTemplate) {
+    'RegistrationUserView', 'text!../js/Templates/loginTemplate.html'],
+    function($, _, Backbone, jqJSON,LoginUserModel, RegistrationUserModel, RegistrationUserView, loginTemplate) {
     var LoginUserView = Backbone.View.extend({
 
         selectors: {

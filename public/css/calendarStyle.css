@@ -84,22 +84,49 @@ body {
 .own-popover {
     position: absolute;
     min-width: 200px;
-    border: 1px solid rgb(150, 139, 139);
-    border-radius: 5px;
-    z-index: 1000;
-    background: #fff;
+    border: 1px inset rgb(150, 139, 139);
+    border-radius: 2px;
+    background-color: black;
     box-shadow: 4px 4px 4px #7B7B74;
+    font-family: 'Open Sans', sans-serif;
+    line-height: 1.4em;
+    color: white;
+    filter: alpha(opacity=70);
+    opacity: 0.7;
+    z-index: 10;
 }
 .own-popover .remove-popover {
     float: right;
     margin: 3px 5px 0 0px;
     cursor: pointer;
 }
+.popover-header {
+    color: black;
+    background-color: white;
+    border: inset 2px gray;
+}
 .own-popover .popover-header .header-content {
-    padding-left: 10px;
+    padding-left: 5em;
+    font-weight: bolder;
 }
 .own-popover .removePopover:after {
     clear: both;
+}
+.own-popover .footer-content {
+    text-align: center;
+}
+.own-popover .footer-content input {
+    background-color: black;
+    outline: none;
+    border: inset 2px white;
+    font-weight: bolder;
+    margin: 3px;
+}
+.own-popover .footer-content input:active {
+    background-color: #687175;
+    outline: none;
+    border: inset 2px white;
+    font-weight: bolder;
 }
 @font-face {
     font-family: 'socicon';
