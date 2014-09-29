@@ -1,5 +1,5 @@
 define('SubjectView', ['jquery', 'underscore', 'backbone', 'jqueryui', 'fullcalendar',
-    'text!../js/Templates/newSubjectTemplate.html'], function($, _, Backbone, jqueryui, fullcalendar, newSubjectTemplate) {
+    'text!newSubjectTemplate'], function($, _, Backbone, jqueryui, fullcalendar, newSubjectTemplate) {
     var SubjectView = Backbone.View.extend({
 
         selectors: {

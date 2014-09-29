@@ -1,5 +1,5 @@
 define('SubjectsView', ['jquery', 'underscore', 'backbone', 'tinycolor', 'pickacolor', 'SubjectModel','CategoryModel',
-    'SubjectView', 'text!../js/Templates/createSubjectModalWindowTemplate.html', 'text!../js/Templates/optionForSelect.html'],
+    'SubjectView', 'text!createSubjectModalWindowTemplate', 'text!optionForSelect'],
     function($, _, Backbone, tinycolor, pickacolor, SubjectModel, CategoryModel, SubjectView, createSubjectModalWindowTemplate, optionForSelect) {
     window.tinycolor = tinycolor;
 

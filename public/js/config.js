@@ -48,7 +48,23 @@ var require = {
         'navTabCategoryView': 'Views/Calendar/navTabCategoryView',
 
         // Template
-        'TemplateView': 'Views/TemplateView'
+        'TemplateView': 'Views/TemplateView',
+        'aboutTemplate': '../js/Templates/aboutTemplate.html',
+        'navBarTemplate': '../js/Templates/navBarTemplate.html',
+        'footerTemplate': '../js/Templates/footerTemplate.html',
+        'homeTemplate': '../js/Templates/homeTemplate.html',
+        'helpTemplate': '../js/Templates/helpTemplate.html',
+        'settingsTemplate': '../js/Templates/settingsTemplate.html',
+        'saveEventModalWindowTemplate': '../js/Templates/saveEventModalWindowTemplate.html',
+        'deleteEventModalWindowTemplate': '../js/Templates/deleteEventModalWindowTemplate.html',
+        'ownPopoverTemplate': '../js/Templates/ownPopoverTemplate.html',
+        'createCategoryModalWindowTemplate': '../js/Templates/createCategoryModalWindowTemplate.html',
+        'navTabCategoryTemplate': '../js/Templates/navTabCategoryTemplate.html',
+        'createSubjectModalWindowTemplate': '../js/Templates/createSubjectModalWindowTemplate.html',
+        'optionForSelect': '../js/Templates/optionForSelect.html',
+        'newSubjectTemplate': '../js/Templates/newSubjectTemplate.html',
+        'loginTemplate': '../js/Templates/loginTemplate.html',
+        'registrationTemplate': '../js/Templates/registrationTemplate.html'
     },
 
     shim: {

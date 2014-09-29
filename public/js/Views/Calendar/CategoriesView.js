@@ -1,5 +1,5 @@
 define('CategoriesView', ['jquery', 'underscore', 'backbone', 'CategoryModel', 'CategoryView',
-    'text!../js/Templates/createCategoryModalWindowTemplate.html'],
+    'text!createCategoryModalWindowTemplate'],
     function($, _, Backbone, CategoryModel, CategoryView, createCategoryModalWindowTemplate) {
     var CategoriesView = Backbone.View.extend({
 

@@ -1,4 +1,4 @@
-define('navTabCategoryView', ['jquery', 'underscore', 'backbone', 'tinycolor', 'pickacolor', 'text!../js/Templates/navTabCategoryTemplate.html'],
+define('navTabCategoryView', ['jquery', 'underscore', 'backbone', 'tinycolor', 'pickacolor', 'text!navTabCategoryTemplate'],
     function($, _, Backbone, tinycolor, pickacolor, navTabCategoryTemplate) {
 
         var navTabCategoryView = Backbone.View.extend({

@@ -1,6 +1,6 @@
-define('TemplateView', ['jquery', 'underscore', 'backbone', 'text', 'text!../js/Templates/aboutTemplate.html',
-        'text!../js/Templates/navBarTemplate.html', 'text!../js/Templates/footerTemplate.html', 'text!../js/Templates/homeTemplate.html',
-        'text!../js/Templates/helpTemplate.html', 'text!../js/Templates/settingsTemplate.html'],
+define('TemplateView', ['jquery', 'underscore', 'backbone', 'text', 'text!aboutTemplate',
+        'text!navBarTemplate', 'text!footerTemplate', 'text!homeTemplate',
+        'text!helpTemplate', 'text!settingsTemplate'],
 
     function($, _, Backbone, text, aboutTemplate, navBarTemplate, footerTemplate, homeTemplate,
         helpTemplate, settingsTemplate) {

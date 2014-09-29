@@ -1,4 +1,4 @@
-define('RegistrationUserView', ['jquery', 'underscore', 'backbone', 'RegistrationUserModel', 'text!../js/Templates/registrationTemplate.html'],
+define('RegistrationUserView', ['jquery', 'underscore', 'backbone', 'RegistrationUserModel', 'text!registrationTemplate'],
     function($, _, Backbone, RegistrationUserModel, registrationTemplate) {
     var RegistrationUserView = Backbone.View.extend({
         selectors: {
