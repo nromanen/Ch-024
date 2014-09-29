@@ -1,9 +1,12 @@
 define('TemplateView', ['jquery', 'underscore', 'backbone', 'text', 'text!aboutTemplate',
         'text!navBarTemplate', 'text!footerTemplate', 'text!homeTemplate',
-        'text!helpTemplate', 'text!settingsTemplate'],
+        'text!helpTemplate', 'text!settingsTemplate'
+    ],
 
     function($, _, Backbone, text, aboutTemplate, navBarTemplate, footerTemplate, homeTemplate,
         helpTemplate, settingsTemplate) {
+
+        var TemplateView = [];
 
         var NavBarTemplateView = Backbone.View.extend({
 
@@ -15,6 +18,7 @@ define('TemplateView', ['jquery', 'underscore', 'backbone', 'text', 'text!aboutT
 
             render: function() {
                 $(this.selectors.headerTeg).html(this.template());
+
                 return this;
             }
         });
@@ -33,68 +37,74 @@ define('TemplateView', ['jquery', 'underscore', 'backbone', 'text', 'text!aboutT
             }
         });
 
-        var HomeTemplateView = Backbone.View.extend({
 
-            template: _.template(homeTemplate),
 
-            selectors: {
-                mainTag: 'main'
-            },
+        for (var i = 6; i < arguments.length; i++) {
+            TemplateView[i - 6] = Backbone.View.extend({
 
-            render: function() {
-                $(this.selectors.mainTag).html(this.template());
-                return this;
-            }
-        });
+                template: _.template(arguments[i]),
 
-        var AboutTemplateView = Backbone.View.extend({
+                selectors: {
+                    mainTag: 'main'
+                },
 
-            template: _.template(aboutTemplate),
+                render: function() {
+                    $(this.selectors.mainTag).html(this.template());
+                    return this;
+                }
+            });
+        };
 
-            selectors: {
-                mainTag: 'main'
-            },
 
-            render: function() {
-                $(this.selectors.mainTag).html(this.template());
-                return this;
-            }
-        });
 
-        var HelpTemplateView = Backbone.View.extend({
+        // var AboutTemplateView = Backbone.View.extend({
 
-            template: _.template(helpTemplate),
+        //     template: _.template(aboutTemplate),
 
-            selectors: {
-                mainTag: 'main'
-            },
+        //     selectors: {
+        //         mainTag: 'main'
+        //     },
 
-            render: function() {
-                $(this.selectors.mainTag).html(this.template());
-                return this;
-            }
-        });
+        //     render: function() {
+        //         $(this.selectors.mainTag).html(this.template());
+        //         return this;
+        //     }
+        // });
 
-        var SettingsTemplateView = Backbone.View.extend({
+        // var HelpTemplateView = Backbone.View.extend({
 
-            template: _.template(settingsTemplate),
+        //     template: _.template(helpTemplate),
 
-            selectors: {
-                mainTag: 'main'
-            },
+        //     selectors: {
+        //         mainTag: 'main'
+        //     },
 
-            render: function() {
-                $(this.selectors.mainTag).html(this.template());
-                return this;
-            }
-        });
+        //     render: function() {
+        //         $(this.selectors.mainTag).html(this.template());
+        //         return this;
+        //     }
+        // });
+
+        // var SettingsTemplateView = Backbone.View.extend({
+
+        //     template: _.template(settingsTemplate),
+
+        //     selectors: {
+        //         mainTag: 'main'
+        //     },
+
+        //     render: function() {
+        //         $(this.selectors.mainTag).html(this.template());
+        //         return this;
+        //     }
+        // });
 
         return {
             NavBarTemplateView: NavBarTemplateView,
             FooterTemplateView: FooterTemplateView,
-            HomeTemplateView: HomeTemplateView,
-            AboutTemplateView: AboutTemplateView,
-            HelpTemplateView: HelpTemplateView,
-            SettingsTemplateView: SettingsTemplateView
+            AboutTemplateView: TemplateView[0],
+            HomeTemplateView: TemplateView[1],
+            HelpTemplateView: TemplateView[2],
+            SettingsTemplateView: TemplateView[3]
         };
     });

@@ -5,7 +5,8 @@ define('CategoryModel', ['jquery', 'underscore', 'backbone'], function($, _, Bac
 
         defaults: function() {
             return {
-                id: '',
+                _id: '',
+                cid: this.cid,
                 title: ''
             }
         },
@@ -23,8 +24,13 @@ define('CategoryModel', ['jquery', 'underscore', 'backbone'], function($, _, Bac
         },
 
         getId: function() {
-            return this.get('id');
+            return this.get('_id');
+        },
+        //this cid for bind TabNav and TabNavPane
+        getCid: function() {
+            return this.get('cid');
         }
+
     });
     return CategoryModel;
 });
