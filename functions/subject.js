@@ -12,14 +12,18 @@ exports.create = function (req, res) {
     var data = new db.subjectModel({
         title: req.body.title,
         color: req.body.color,
-        catId: req.params.cat
+        catId: req.body.category._id
     });
 
     data.save(function (err) {
         if (!err) {
+            res.send({action: "saved"});
             res.end;
         } else {
-            res.end(err);
+
+            res.send({action: "failSave"});
+            console.log(err);
+            res.end;
         }
     });
 
