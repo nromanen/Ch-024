@@ -43,12 +43,12 @@ require([
                 new CalendarView({
                     collection: this.eventsCollection
                 }).render();
+                new CategoriesView({
+                    collection: this.categoriesCollection
+                });
                 new SubjectsView({
                     collectionSubject: this.subjectsCollection,
                     collectionCategory: this.categoriesCollection
-                });
-                new CategoriesView({
-                    collection: this.categoriesCollection
                 });
 
                 // this.categoriesCollection.add([

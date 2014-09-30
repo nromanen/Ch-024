@@ -21,7 +21,10 @@ define('SubjectsView', ['jquery', 'underscore', 'backbone', 'tinycolor', 'pickac
         $(this.selectors.addSubjectButton).on('click', $.proxy(this.render, this));
         this.collectionSubject = options.collectionSubject;
         this.collectionCategory = options.collectionCategory;
+
         this.collectionSubject.on('add', $.proxy(this._renderSubject, this));
+
+        this.collectionSubject.fetch();
     },
 
     /* PRIVATE METHODS */
@@ -44,13 +47,11 @@ define('SubjectsView', ['jquery', 'underscore', 'backbone', 'tinycolor', 'pickac
             subjectModel.setTitle(subjectTitle);
             subjectModel.setColor("#" + this.$(this.selectors.colorPickerInput).val());
             subjectModel.setCategory(categoryModel);
-
-            // this.collectionSubject.add(subjectModel);
+            this._cancelModalWindow();
 
             subjectModel.isNew();
             subjectModel.save();
 
-            this.collectionSubject.fetch();
         }
 
 
@@ -59,7 +60,7 @@ define('SubjectsView', ['jquery', 'underscore', 'backbone', 'tinycolor', 'pickac
     _renderSubject: function(model) {
         console.log(this.collectionSubject);
         $(this.selectors.subjectContainer +
-            model.getCategory().getCid()).append(
+            this.collectionCategory.findWhere({_id: model.getCategory()}).get('cid')).append(
                 new SubjectView({
                     model: model
                 }).render().el);

@@ -27,6 +27,8 @@ define('CategoriesView', ['jquery', 'underscore', 'backbone', 'CategoryModel', '
         this.$(this.selectors.createCategoryButton).off().on('click', $.proxy(this._addNewCategory, this));
         this.$(this.selectors.cancelButton).off().on('click', $.proxy(this._cancelModalWindow, this));
         $(this.selectors.addCategoryButton).off().on('click', $.proxy(this.render, this));
+
+
     },
 
     _renderCategory: function (model) {
@@ -44,17 +46,18 @@ define('CategoriesView', ['jquery', 'underscore', 'backbone', 'CategoryModel', '
         if (CategoryTitle) {
             var categoryModel = new CategoryModel;
             categoryModel.setTitle(CategoryTitle);
+            this._cancelModalWindow();
             categoryModel.isNew(true);
             categoryModel.save();
             this.collection.add(categoryModel);
         }
-        this._cancelModalWindow();
     },
 
     _cancelModalWindow: function() {
             this.remove();
          //this.$el.modal('hide');
-            $('.modal-backdrop').hide();
+            $('.modal-backdrop').remove();
+
     },
 
     render: function() {

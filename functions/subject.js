@@ -3,17 +3,18 @@
  */
 var db = require('../lib/mongoose');
 
-var getSubjects = function (){
+var getSubjects = function () {
 
 };
 
 exports.create = function (req, res) {
-
     var data = new db.subjectModel({
         title: req.body.title,
         color: req.body.color,
-        catId: req.body.category._id
+        categoryId: req.body.category._id
     });
+
+    console.log(data);
 
     data.save(function (err) {
         if (!err) {
@@ -28,14 +29,37 @@ exports.create = function (req, res) {
     });
 
 
+    /*    var query = db.categoryModel.find({_id: req.body.category._id});
+     query.select('title');
+     query.exec(function (err, queryRes) {
+     if (err) {
+     return handleError(err)
+     } else {
 
+     var data = new db.subjectModel({
+     title: req.body.title,
+     color: req.body.color,
+     catId: queryRes
+     });
+     data.save(function (err) {
+     if (!err) {
+     res.send({action: "saved"});
+     res.end;
+     } else {
 
+     res.send({action: "failSave"});
+     console.log(err);
+     res.end;
+     }
+     })
+     }*/
 };
+
 
 exports.get = function (req, res) {
 
-    var query = db.subjectModel.find({catId:req.body._id});
-    query.select('title');
+    var query = db.subjectModel.find({});
+    query.select('title categoryId color');
     query.exec(function (err, queryRes) {
         if (err) {
             return handleError(err)
@@ -44,5 +68,6 @@ exports.get = function (req, res) {
             res.end;
         }
     });
+
 
 };
