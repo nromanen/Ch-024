@@ -5,6 +5,7 @@ define('SubjectModel', ['jquery', 'underscore', 'backbone', 'CategoryModel'], fu
 
         defaults: function() {
             return {
+                _id: '',
                 category: CategoryModel,
                 title: '',
                 color: ''
