@@ -44,11 +44,20 @@ define('SubjectsView', ['jquery', 'underscore', 'backbone', 'tinycolor', 'pickac
             subjectModel.setTitle(subjectTitle);
             subjectModel.setColor("#" + this.$(this.selectors.colorPickerInput).val());
             subjectModel.setCategory(categoryModel);
-            this.collectionSubject.add(subjectModel);
+
+            // this.collectionSubject.add(subjectModel);
+
+            subjectModel.isNew();
+            subjectModel.save();
+
+            this.collectionSubject.fetch();
         }
+
+
     },
 
     _renderSubject: function(model) {
+        console.log(this.collectionSubject);
         $(this.selectors.subjectContainer +
             model.getCategory().getCid()).append(
                 new SubjectView({
@@ -72,7 +81,7 @@ define('SubjectsView', ['jquery', 'underscore', 'backbone', 'tinycolor', 'pickac
             this.$(this.selectors.categoryTitleInput).append(this.templateOptionForSelectCategory(model.toJSON()));
         }, this);
     },
-     _cancelModalWindow: function() {
+    _cancelModalWindow: function() {
             this.remove();
          //this.$el.modal('hide');
             $('.modal-backdrop').hide();
