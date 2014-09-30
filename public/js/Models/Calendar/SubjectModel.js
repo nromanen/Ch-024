@@ -5,9 +5,7 @@ define('SubjectModel', ['jquery', 'underscore', 'backbone', 'CategoryModel'], fu
 
         defaults: function() {
             return {
-                id: this.cid,
                 category: CategoryModel,
-                catId: '',
                 title: '',
                 color: ''
             }
@@ -39,14 +37,6 @@ define('SubjectModel', ['jquery', 'underscore', 'backbone', 'CategoryModel'], fu
 
         getCategory: function() {
             return this.get('category');
-        },
-
-        setCategoryId: function(value) {
-            this.set('catId', value);
-        },
-
-        getCategoryId: function() {
-            return this.get('catId');
         }
 
     });
