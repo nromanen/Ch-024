@@ -8,7 +8,7 @@ var express = require('express'),
     user = require('./functions/user.js');
     subject = require('./functions/subject.js'),
     category = require('./functions/category.js'),
-    crypto = require('crypto');
+    cryptor = require('cryptor');
 
 
 app.set('port', process.env.PORT || 3000);

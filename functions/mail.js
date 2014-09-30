@@ -18,6 +18,8 @@ exports.sendMail = function (req, res, mailData) {
 // the same transporter object for all e-mails
 
 // setup e-mail data with unicode symbols
+
+
     var mailOptions = {
         from: 'Fred Foo ✔ <ticapac@gmail.com>', // sender address
         to: mailData.to, // list of receivers
