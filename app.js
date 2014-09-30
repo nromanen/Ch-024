@@ -11,7 +11,7 @@ var express = require('express'),
     cryptor = require('cryptor');
 
 
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || config.get('port'));
 
 /*
  * Express@3 USE's section

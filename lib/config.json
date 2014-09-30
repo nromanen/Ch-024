@@ -1,6 +1,6 @@
 {
     "port" : 1337,
     "mongoose": {
-        "uri": "mongodb://localhost/wds"
+        "url": "mongodb://localhost/softserve"
     }
 }

@@ -34,7 +34,7 @@ exports.create = function (req, res) {
 
 exports.get = function (req, res) {
 
-    var query = db.categoryModel.find({_id:req.body._id});
+    var query = db.subjectModel.find({catId:req.body._id});
     query.select('title');
     query.exec(function (err, queryRes) {
         if (err) {
@@ -43,9 +43,6 @@ exports.get = function (req, res) {
             res.send(JSON.stringify(queryRes));
             res.end;
         }
-
-
-
     });
 
 };
