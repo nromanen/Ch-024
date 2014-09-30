@@ -18,7 +18,7 @@ define('CategoriesView', ['jquery', 'underscore', 'backbone', 'CategoryModel', '
         this.$el = $(this.template());
         this._attachEvents();
         this.collection = options.collection;
-        this.collection.fetch();;
+        this.collection.fetch();
 
         this.collection.on('add', $.proxy(this._renderCategory, this));
     },
@@ -45,7 +45,7 @@ define('CategoriesView', ['jquery', 'underscore', 'backbone', 'CategoryModel', '
             var categoryModel = new CategoryModel;
             categoryModel.setTitle(CategoryTitle);
             categoryModel.isNew(true);
-            categoryModel.save(null,{type:'POST'});
+            categoryModel.save();
             this.collection.add(categoryModel);
         }
         this._cancelModalWindow();

@@ -44,8 +44,16 @@ define('SubjectsView', ['jquery', 'underscore', 'backbone', 'tinycolor', 'pickac
             subjectModel.setTitle(subjectTitle);
             subjectModel.setColor("#" + this.$(this.selectors.colorPickerInput).val());
             subjectModel.setCategory(categoryModel);
+            subjectModel.setCategoryId(categoryModel.getId());
+
             this.collectionSubject.add(subjectModel);
+
+            console.log(subjectModel);
+
+
         }
+
+
     },
 
     _renderSubject: function(model) {
