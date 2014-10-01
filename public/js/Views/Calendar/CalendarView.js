@@ -98,6 +98,8 @@ define('CalendarView', ['jquery', 'underscore', 'backbone', 'moment', 'jqueryui'
             eventClick: _.bind(this._showCalendarEventModal, this),
             eventMouseover: _.bind(this._showPopover, this)
         });
+
+        this.calendarEventsCollection.fetch();
     },
 
     /* PUBLIC METHODS */

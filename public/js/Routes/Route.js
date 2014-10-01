@@ -38,8 +38,8 @@ require([
                 this._headerFooterContainersRender();
                 new TemplateView.HomeTemplateView().render();
                 this.eventsCollection = new EventsCollection();
-                this.subjectsCollection = new SubjectsCollection();
                 this.categoriesCollection = new CategoriesCollection();
+                this.subjectsCollection = new SubjectsCollection();
                 new CalendarView({
                     collection: this.eventsCollection
                 }).render();

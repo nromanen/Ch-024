@@ -7,7 +7,7 @@ define('CategoriesCollection', ['jquery', 'underscore', 'backbone', 'CategoryMod
 
     findModelById: function(id) {
     	return this.findWhere({cid: id});
-    },
+    }
 
     });
 

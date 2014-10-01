@@ -1,12 +1,13 @@
 define('CalendarEventModel', ['jquery', 'underscore', 'backbone', 'SubjectModel'], function($, _, Backbone, SubjectModel) {
     var CalendarEventModel = Backbone.Model.extend({
 
+        urlRoot: '/events',
+
         defaults:function() {
             return {
-                //eventId - change model id with id from db
+                _id : '',
                 //  user: UserModel,
                 subject: SubjectModel,
-                subjectId: '',
                 title: '',
                 start: null,
                 end: null,
@@ -14,7 +15,8 @@ define('CalendarEventModel', ['jquery', 'underscore', 'backbone', 'SubjectModel'
                 color: '',
                 textColor: 'red',
                 classroom : '',
-                amountOfStudents: 0
+                amountOfStudents: 0,
+                currentCount: 0
             }
         },
 

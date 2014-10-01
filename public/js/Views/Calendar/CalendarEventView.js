@@ -43,6 +43,8 @@ define('CalendarEventView', ['jquery', 'underscore', 'backbone', 'text!saveEvent
          * Update fullCalendar
          */
         _saveEvent: function() {
+            this.model.isNew(true);
+            this.model.save();
             this._updateCalendarEvent();
             $("#calendar").fullCalendar('updateEvent', this.calendarEventObject);
         },
