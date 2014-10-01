@@ -9,7 +9,7 @@ exports.create = function (req, res) {
         subject: req.body.subject,
         start: req.body.start,
         end: req.body.end,
-        editable: req.body.editable,
+        editable: false,
         color: req.body.color,
         textColor: req.body.textColor,
         classroom : req.body.classroom,
@@ -43,6 +43,7 @@ exports.getAll = function (req, res) {
         if (err) {
             return handleError(err)
         } else {
+            console.log(queryRes);
             res.send(JSON.stringify(queryRes));
             res.end;
         }
