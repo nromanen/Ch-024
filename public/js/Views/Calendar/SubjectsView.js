@@ -44,12 +44,12 @@ define('SubjectsView', ['jquery', 'underscore', 'backbone', 'tinycolor', 'pickac
         var subjectModel = new SubjectModel;
 
         if (subjectTitle) {
-            subjectModel.setTitle(subjectTitle);
+            subjectModel.setTitle(subjectTitle, {validate:true});
             subjectModel.setColor("#" + this.$(this.selectors.colorPickerInput).val());
             subjectModel.setCategory(categoryModel);
-            this._cancelModalWindow();
+         //   this._cancelModalWindow();
 
-            subjectModel.isNew();
+            subjectModel.isNew(true);
             subjectModel.save();
 
         }

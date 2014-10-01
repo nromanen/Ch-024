@@ -48,6 +48,17 @@ define('SubjectModel', ['jquery', 'underscore', 'backbone', 'CategoryModel'], fu
 
         getApproved: function() {
             return this.get('approved');
+        },
+
+        validate: function (attrs) {
+            var errors = [];
+            if ( attrs.password !== attrs.repeatPassword ) {
+                errors.push({
+                    field: 'subjectTitle',
+                    message: 'Title must be longer then 1 sign!'});
+            }
+
+            return errors.length ? errors : false;
         }
 
 
