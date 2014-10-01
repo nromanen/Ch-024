@@ -7,6 +7,12 @@ define('LoginUserModel', ['jquery', 'underscore', 'backbone'], function($, _, Ba
             return {
                 // action: ""
             }
+        },
+
+        _redirectToHome: function(loginModel) {
+            if (loginModel.get('action') === 'logined') {
+                this.router.redirectToHome();
+            }
         }
     });
 
