@@ -6,6 +6,7 @@ define('CalendarEventModel', ['jquery', 'underscore', 'backbone', 'SubjectModel'
                 //eventId - change model id with id from db
                 //  user: UserModel,
                 subject: SubjectModel,
+                subjectId: '',
                 title: '',
                 start: null,
                 end: null,

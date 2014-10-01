@@ -15,7 +15,10 @@
     "nconf": "*",
     "nodemailer": "^1.3.0",
     "winston": "*",
-    "cryptor": "*"
+    "mocha": "*",
+    "cryptor": "*",
+    "should": "*",
+    "supertest": "*"
   },
   "devDependencies": {
     "grunt": "^0.4.5"
