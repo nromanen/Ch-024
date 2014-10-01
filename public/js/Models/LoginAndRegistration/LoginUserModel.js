@@ -5,7 +5,13 @@ define('LoginUserModel', ['jquery', 'underscore', 'backbone'], function($, _, Ba
 
         defaults: function() {
             return {
-                action: ""
+                // action: ""
+            }
+        },
+
+        _redirectToHome: function(loginModel) {
+            if (loginModel.get('action') === 'logined') {
+                this.router.redirectToHome();
             }
         }
     });

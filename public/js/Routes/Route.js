@@ -50,7 +50,7 @@ require([
                     collectionSubject: this.subjectsCollection,
                     collectionCategory: this.categoriesCollection
                 });
-
+                
                 // this.categoriesCollection.add([
                 //      {title: "IT and Configuration Management"},
                 //     {title: "Quality Control"},
