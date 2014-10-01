@@ -5,9 +5,10 @@ var express = require('express'),
     app = express(),
     config = require('./lib/config.js'),
     log = require('./lib/log.js')(module),
-    user = require('./functions/user.js');
+    user = require('./functions/user.js'),
     subject = require('./functions/subject.js'),
     category = require('./functions/category.js'),
+    events = require('./functions/events.js'),
     cryptor = require('cryptor');
 
 
@@ -51,7 +52,9 @@ app.get('/subject', subject.get);
 app.get('/category',category.get);
 app.post('/category',category.create);
 
-
+//events api
+app.get('/events', events.getAll);
+app.post('/events',events.create);
 
 
 

@@ -76,7 +76,7 @@ define('CalendarView', ['jquery', 'underscore', 'backbone', 'moment', 'jqueryui'
             hideEvent: 'mouseout',
             html: _.template(ownPopoverTemplate),
             content: _.extend(calendarEventModel, {
-            start: calendarEventModel.start.format('YYYY-MM-DD HH:mm')
+            start: moment(calendarEventModel.start).format('YYYY-MM-DD HH:mm')
             })
         });
         $('.own-popover').remove();
