@@ -16,7 +16,8 @@ define('CalendarEventModel', ['jquery', 'underscore', 'backbone', 'SubjectModel'
                 color: '',
                 textColor: 'red',
                 classroom : '',
-                amountOfStudents: 0
+                amountOfStudents: 0,
+                currentCount: null
             }
         },
 
