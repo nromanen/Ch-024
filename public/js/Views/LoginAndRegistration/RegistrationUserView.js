@@ -44,8 +44,7 @@ define('RegistrationUserView', ['jquery', 'underscore', 'backbone', 'Registratio
      */
     _checkForm:function(jsEvent){
         var data = this.$el.serializeJSON();
-        this.model.set(data, {validate:true});
-        this.model.save();
+        this.model.save(data);
     },
 
         /**

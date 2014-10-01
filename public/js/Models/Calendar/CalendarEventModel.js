@@ -5,10 +5,9 @@ define('CalendarEventModel', ['jquery', 'underscore', 'backbone', 'SubjectModel'
 
         defaults:function() {
             return {
-                //eventId - change model id with id from db
+                _id : '',
                 //  user: UserModel,
                 subject: SubjectModel,
-                subjectId: '',
                 title: '',
                 start: null,
                 end: null,
@@ -17,7 +16,7 @@ define('CalendarEventModel', ['jquery', 'underscore', 'backbone', 'SubjectModel'
                 textColor: 'red',
                 classroom : '',
                 amountOfStudents: 0,
-                currentCount: null
+                currentCount: 0
             }
         },
 

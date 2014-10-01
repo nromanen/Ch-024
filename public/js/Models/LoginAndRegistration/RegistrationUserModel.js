@@ -15,7 +15,6 @@ define('RegistrationUserModel', ['jquery', 'underscore', 'backbone'], function (
             PATTERN_SURNAME: /^[A-Z][a-z]+[-]?[A-Za-z]*$/,
             PATTERN_MAIL: /^\w+[-_\.]*\w+@\w+-?\w+\.[a-z]{2,4}$/,
             PATTERN_PHONE: /^[+](380)-\d{2}-\d{3}-\d{2}-\d{2}$/,
-            SEARCH_ERR: -1,
             NAME_LENGTH: 1,
             PASS_LENGTH: 6
         },
@@ -23,41 +22,41 @@ define('RegistrationUserModel', ['jquery', 'underscore', 'backbone'], function (
         validate: function (attrs) {
 
             var errors = [];
-            if (attrs.name.search(this.constants.PATTERN_NAME) === this.constants.SEARCH_ERR ||
-                attrs.name.length <= this.constants.NAME_LENGTH) {
+            if ( attrs.name.search(this.constants.PATTERN_NAME) === -1 ||
+                attrs.name.length <= this.constants.NAME_LENGTH ) {
                 errors.push({
                     field: 'name',
                     message: 'Name is not correct!'
                 });
             }
 
-            if (attrs.surname.search(this.constants.PATTERN_SURNAME) === this.constants.SEARCH_ERR ||
-                attrs.surname.length <= this.constants.NAME_LENGTH) {
+            if ( attrs.surname.search(this.constants.PATTERN_SURNAME) === -1 ||
+                attrs.surname.length <= this.constants.NAME_LENGTH ) {
                 errors.push({
                     field: 'surname',
                     message: 'Surname is not correct!'
                 });
             }
 
-            if (attrs.email.search(this.constants.PATTERN_MAIL) === this.constants.SEARCH_ERR) {
+            if ( attrs.email.search(this.constants.PATTERN_MAIL ) === -1 ) {
                 errors.push({
                     field: 'email',
                     message: 'Mail is not correct!'
                 });
             }
 
-            if (attrs.password.length <= this.constants.PASS_LENGTH) {
+            if ( attrs.password.length <= this.constants.PASS_LENGTH ) {
                 errors.push({
                     field: 'password',
                     message: 'Password is short!'});
             }
 
-            if (attrs.password !== attrs.repeatPassword) {
+            if ( attrs.password !== attrs.repeatPassword ) {
                 errors.push({field: 'repeatPassword',
                     message: 'Password adn repeat password do not similar!'});
             }
 
-            if (attrs.phone.search(this.constants.PATTERN_PHONE) === this.constants.SEARCH_ERR) {
+            if ( attrs.phone.search(this.constants.PATTERN_PHONE) === -1 ) {
                 errors.push({field: 'phone',
                     message: 'Phone is not correct!'});
             }
