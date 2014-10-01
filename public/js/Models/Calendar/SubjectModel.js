@@ -9,7 +9,8 @@ define('SubjectModel', ['jquery', 'underscore', 'backbone', 'CategoryModel'], fu
                 category: CategoryModel,
                 categoryId: "",
                 title: '',
-                color: ''
+                color: '',
+                approved: false
             }
         },
 
@@ -37,9 +38,20 @@ define('SubjectModel', ['jquery', 'underscore', 'backbone', 'CategoryModel'], fu
             this.set('category', value);
         },
 
-        getCategory: function() {
+        getCategoryId: function() {
             return this.get('categoryId');
+        },
+
+        setApproved: function(value) {
+            this.set('approved', value);
+        },
+
+        getApproved: function() {
+            return this.get('approved');
         }
+
+
+
 
     });
 
