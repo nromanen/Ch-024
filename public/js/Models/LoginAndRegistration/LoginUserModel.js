@@ -5,7 +5,7 @@ define('LoginUserModel', ['jquery', 'underscore', 'backbone'], function($, _, Ba
 
         defaults: function() {
             return {
-                action: ""
+                // action: ""
             }
         }
     });
