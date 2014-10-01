@@ -1,6 +1,8 @@
 define('CalendarEventModel', ['jquery', 'underscore', 'backbone', 'SubjectModel'], function($, _, Backbone, SubjectModel) {
     var CalendarEventModel = Backbone.Model.extend({
 
+        urlRoot: '/events',
+
         defaults:function() {
             return {
                 //eventId - change model id with id from db
