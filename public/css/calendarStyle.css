@@ -51,7 +51,7 @@ body {
     visibility: hidden;
     float: right;
 }
-.containerCalendar {
+.calendarContainer {
     background-color: #eff4f7;
     margin-top: 50px;
     margin-bottom: 50px;

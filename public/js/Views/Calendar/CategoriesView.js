@@ -49,7 +49,6 @@ define('CategoriesView', ['jquery', 'underscore', 'backbone', 'CategoryModel', '
             this._cancelModalWindow();
             categoryModel.isNew(true);
             categoryModel.save();
-            this.collection.add(categoryModel);
         }
     },
 
