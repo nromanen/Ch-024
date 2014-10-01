@@ -59,7 +59,7 @@ define('SubjectsView', ['jquery', 'underscore', 'backbone', 'tinycolor', 'pickac
 
     _renderSubject: function(model) {
         $(this.selectors.subjectContainer +
-            this.collectionCategory.findWhere({_id: model.getCategory()}).get('cid')).append(
+            this.collectionCategory.findWhere({_id: model.getCategoryId()}).get('cid')).append(
                 new SubjectView({
                     model: model
                 }).render().el);
