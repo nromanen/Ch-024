@@ -1,9 +1,9 @@
-define('TemplateView', ['jquery', 'underscore', 'backbone', 'text', 'text!aboutTemplate',
-        'text!navBarTemplate', 'text!footerTemplate', 'text!homeTemplate',
+define('TemplateView', ['jquery', 'underscore', 'backbone', 'text',
+        'text!navBarTemplate', 'text!footerTemplate', 'text!containerCalendarTemplate', 'text!aboutTemplate', 'text!homeTemplate',
         'text!helpTemplate', 'text!settingsTemplate'
     ],
 
-    function($, _, Backbone, text, aboutTemplate, navBarTemplate, footerTemplate, homeTemplate,
+    function($, _, Backbone, text, navBarTemplate, footerTemplate, containerCalendarTemplate, aboutTemplate, homeTemplate,
         helpTemplate, settingsTemplate) {
 
         var TemplateView = [];
@@ -37,10 +37,24 @@ define('TemplateView', ['jquery', 'underscore', 'backbone', 'text', 'text!aboutT
             }
         });
 
+        var ContainerCalendarView = Backbone.View.extend({
+
+            template: _.template(containerCalendarTemplate),
+
+            selectors: {
+                bodyTag: 'body'
+            },
+
+            render: function() {
+                $(this.selectors.bodyTag).html(this.template());
+                return this;
+            }
+        });
 
 
-        for (var i = 6; i < arguments.length; i++) {
-            TemplateView[i - 6] = Backbone.View.extend({
+
+        for (var i = 7; i < arguments.length; i++) {
+            TemplateView[i - 7] = Backbone.View.extend({
 
                 template: _.template(arguments[i]),
 
@@ -102,9 +116,11 @@ define('TemplateView', ['jquery', 'underscore', 'backbone', 'text', 'text!aboutT
         return {
             NavBarTemplateView: NavBarTemplateView,
             FooterTemplateView: FooterTemplateView,
+            ContainerCalendarView: ContainerCalendarView,
             AboutTemplateView: TemplateView[0],
             HomeTemplateView: TemplateView[1],
             HelpTemplateView: TemplateView[2],
             SettingsTemplateView: TemplateView[3]
+            
         };
     });

@@ -64,7 +64,8 @@ var require = {
         'optionForSelect': '../js/Templates/optionForSelect.html',
         'newSubjectTemplate': '../js/Templates/newSubjectTemplate.html',
         'loginTemplate': '../js/Templates/loginTemplate.html',
-        'registrationTemplate': '../js/Templates/registrationTemplate.html'
+        'registrationTemplate': '../js/Templates/registrationTemplate.html',
+        'containerCalendarTemplate': '../js/Templates/containerCalendarTemplate.html'
     },
 
     shim: {

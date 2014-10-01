@@ -29,13 +29,13 @@ require([
         },
 
         initialize: function() {
-            this._headerContainer();
-            this._footerContainer();
             this._initializeEvents();
         },
 
         _initializeEvents: function() {
             this.on('route:homePage', function() {
+                new TemplateView.ContainerCalendarView().render();
+                this._headerFooterContainersRender();
                 new TemplateView.HomeTemplateView().render();
                 this.eventsCollection = new EventsCollection();
                 this.subjectsCollection = new SubjectsCollection();
@@ -75,18 +75,22 @@ require([
             });
             this.on('route:loginPage', function() {
                 new LoginUserView({
-                    model: new LoginUserModel
+                    model: new LoginUserModel,
+                    router: this
                 }).render();
+
             });
         },
 
-        _headerContainer: function() {
+        _headerFooterContainersRender: function() {
             new TemplateView.NavBarTemplateView().render();
+            new TemplateView.FooterTemplateView().render();
         },
 
-        _footerContainer: function() {
-            new TemplateView.FooterTemplateView().render();
+        redirectToHome: function() {
+            this.navigate('#home', {trigger: true});
         }
+
         /*  selectMenuItem: function(menuItem) {
         $('.navbar .nav li').removeClass('active');
         if (menuItem) {
