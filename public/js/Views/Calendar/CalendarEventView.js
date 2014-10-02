@@ -32,10 +32,10 @@ define('CalendarEventView', ['jquery', 'underscore', 'backbone', 'text!saveEvent
             this.model.setClassroom(this.$(this.selectors.classroomForExamInput).val());
             this.model.setEditable(false);
             this.model.setTextColor('black');
-            this.model.setColor(this.calendarEventObject.color.substr(0,this.calendarEventObject.color.length - 3) + '1)');
+            this.model.setColor(this.calendarEventObject.color.substr(0,this.calendarEventObject.color.length - 4) + '1)');
             this.calendarEventObject.editable = false;
             this.calendarEventObject.textColor = 'black';
-            this.calendarEventObject.color = this.calendarEventObject.color.substr(0,this.calendarEventObject.color.length - 3) + '1)';
+            this.calendarEventObject.color = this.calendarEventObject.color.substr(0,this.calendarEventObject.color.length - 4) + '1)';
 
         },
 
@@ -43,9 +43,9 @@ define('CalendarEventView', ['jquery', 'underscore', 'backbone', 'text!saveEvent
          * Update fullCalendar
          */
         _saveEvent: function() {
+            this._updateCalendarEvent();
             this.model.isNew(true);
             this.model.save();
-            this._updateCalendarEvent();
             $("#calendar").fullCalendar('updateEvent', this.calendarEventObject);
         },
 
