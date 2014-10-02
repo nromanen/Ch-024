@@ -52,7 +52,7 @@ define('SubjectModel', ['jquery', 'underscore', 'backbone', 'CategoryModel'], fu
 
         validate: function (attrs) {
             var errors = [];
-            if ( attrs.password !== attrs.repeatPassword ) {
+            if ( attrs.title <= 1 ) {
                 errors.push({
                     field: 'subjectTitle',
                     message: 'Title must be longer then 1 sign!'});

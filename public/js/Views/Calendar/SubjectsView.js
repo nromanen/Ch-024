@@ -31,8 +31,16 @@ define('SubjectsView', ['jquery', 'underscore', 'backbone', 'tinycolor', 'pickac
 
     _attachEvents: function() {
         this.$(this.selectors.createSubjectButton).on('click', $.proxy(this._addNewSubject, this));
-        this.$(this.selectors.cancelButton).on('click', $.proxy(this._cancelModalWindow, this))
+        this.$(this.selectors.cancelButton).on('click', $.proxy(this._cancelModalWindow, this));
     },
+
+    /*_defineValidationError:function(model, errors){
+        this.$('.errors').html('');
+        _.each(errors, function(error){
+            this.$('.form-group #'+ error.field + ' + .errors').append('<span>' + error.message + '</span>');
+            this.$('#' + error.field).addClass('borderRed');
+        }, this);
+    },*/
 
     /**
      * Add new subject in collection
@@ -47,7 +55,8 @@ define('SubjectsView', ['jquery', 'underscore', 'backbone', 'tinycolor', 'pickac
             subjectModel.setTitle(subjectTitle, {validate:true});
             subjectModel.setColor("#" + this.$(this.selectors.colorPickerInput).val());
             subjectModel.setCategory(categoryModel);
-         //   this._cancelModalWindow();
+          //  this._defineValidateError();
+            this._cancelModalWindow();
 
             subjectModel.isNew(true);
             subjectModel.save();
