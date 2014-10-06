@@ -10,12 +10,13 @@ require([
     'SubjectModel',
     'SubjectsCollection',
     'SubjectsView',
+    'CategoryModel',
     'CategoriesView',
     'CategoriesCollection',
     'SettingsUserView',
     'SettingsUserModel'
 ], function($, _, Backbone, TemplateView, LoginUserModel, LoginUserView, EventsCollection,
-            CalendarView, SubjectModel, SubjectsCollection, SubjectsView,
+            CalendarView, SubjectModel, SubjectsCollection, SubjectsView, CategoryModel,
             CategoriesView, CategoriesCollection, SettingsUserView, SettingsUserModel) {
 
     var Router = Backbone.Router.extend({
@@ -45,7 +46,8 @@ require([
                     collection: this.eventsCollection
                 }).render();
                 new CategoriesView({
-                    collection: this.categoriesCollection
+                    collection: this.categoriesCollection,
+                    model : new CategoryModel
                 });
                 new SubjectsView({
                     collectionSubject: this.subjectsCollection,
