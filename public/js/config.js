@@ -24,9 +24,9 @@ var require = {
         'CalendarEventModel': 'Models/Calendar/CalendarEventModel',
         'SubjectModel': 'Models/Calendar/SubjectModel',
         'SettingsUserModel': 'Models/LoginAndRegistration/SettingsUserModel',
-        'LoginUserModel': 'Models/LoginAndRegistration/LoginUserModel',
         'RegistrationUserModel': 'Models/LoginAndRegistration/RegistrationUserModel',
         'CategoryModel': 'Models/Calendar/CategoryModel',
+        'SessionModel' : 'Models/LoginAndRegistration/SessionModel',
 
         // Collections
         'CalendarEventsCollection': 'Collections/CalendarEventsCollection',

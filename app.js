@@ -21,7 +21,7 @@ app.set('port', process.env.PORT || config.get('port'));
 /*SESSION initialize*/
 app.use(express.cookieParser('S3CRE7'));
 app.use(express.cookieSession());
-
+app.use(express.session());
 //BodyParser - parse client requests
 app.use(express.bodyParser());
 // favicon =)
@@ -30,18 +30,22 @@ app.use(express.favicon());
 app.use(express.logger('dev'));
 // Enable express router, module help us to route queries
 app.use(app.router);
+/*Uses cookies */
+
 //Static path (defoult page)
 app.use(express.static(path.join(__dirname, 'public')));
-/*Uses cookies */
 
 // response to home root get req
 app.get('/', routes.index);
 
 // app.get('/calendar', routes.app);
 //login api
-app.post('/signin', user.logIn);
+app.post('/session/login', user.logIn);
+app.del('/session/logout', user.logOut);
+//get session
+app.get("/session", user.isAuth);
 app.post('/signup', user.signUp);
-app.post('/logout', user.logOut);
+
 
 //subjects api
 app.post('/subject', subject.create);
@@ -49,36 +53,36 @@ app.get('/subject/:cat', subject.get);
 app.get('/subject', subject.get);
 
 //categories api
-app.get('/category',category.get);
-app.post('/category',category.create);
+app.get('/category', category.get);
+app.post('/category', category.create);
 
 //events api
 app.get('/events', events.getAll);
-app.post('/events',events.create);
+app.post('/events', events.create);
 
 
-
-
-
-
-app.use(function (req, res, next) {
+app.use(function(req, res, next) {
     res.status(404);
     log.error('Not found URL: %s', req.url);
-    res.send({ error: 'Not found' });
+    res.send({
+        error: 'Not found'
+    });
     return;
 });
 
-app.use(function (err, req, res, next) {
+app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     log.error('Internal error(%d): %s', res.statusCode, err.message);
-    res.send({ error: err.message });
+    res.send({
+        error: err.message
+    });
     return;
 });
 
-app.get('/ErrorExample', function (req, res, next) {
+app.get('/ErrorExample', function(req, res, next) {
     next(new Error('Internal error!'));
 });
 
-http.createServer(app).listen(app.get('port'), function () {
+http.createServer(app).listen(app.get('port'), function() {
     console.log('Express server listening on port ' + app.get('port'));
 });

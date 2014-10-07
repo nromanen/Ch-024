@@ -2,8 +2,8 @@ require([
     'jquery',
     'underscore',
     'backbone',
+    'SessionModel',
     'TemplateView',
-    'LoginUserModel',
     'LoginUserView',
     'CalendarEventsCollection',
     'CalendarView',
@@ -13,7 +13,7 @@ require([
     'CategoriesCollection',
     'SettingsUserView',
     'SettingsUserModel'
-], function($, _, Backbone, TemplateView, LoginUserModel, LoginUserView, EventsCollection,
+], function($, _, Backbone, Session, TemplateView, LoginUserView, EventsCollection,
             CalendarView, SubjectsCollection, SubjectsView,
             CategoriesView, CategoriesCollection, SettingsUserView, SettingsUserModel) {
 
@@ -30,6 +30,19 @@ require([
 
         initialize: function() {
             this._initializeEvents();
+        },
+
+        _checkAuth: function() {
+            var isAuth = Session.get('authenticated');
+            var path = Backbone.history.location.hash;
+            console.log(path);
+            if(!isAuth) {
+                Backbone.history.navigate('/', {trigger: true});
+            } else if(path === '') {
+                Backbone.history.navigate('#home', {trigger: true});
+            } else {
+                Backbone.history.navigate(path, {trigger: true});
+            }
         },
 
         _initializeEvents: function() {
@@ -50,6 +63,7 @@ require([
                     collectionSubject: this.subjectsCollection,
                     collectionCategory: this.categoriesCollection
                 });
+                this._checkAuth();
                 
                 // this.categoriesCollection.add([
                 //      {title: "IT and Configuration Management"},
@@ -60,10 +74,12 @@ require([
 
             this.on('route:helpPage', function() {
                 new TemplateView.HelpTemplateView().render();
+                this._checkAuth();
                 // this.selectMenuItem('help-menu');
             });
             this.on('route:aboutPage', function() {
                 new TemplateView.AboutTemplateView().render();
+                this._checkAuth();
                 // this.selectMenuItem('about-menu');
             });
             this.on('route:settingsPage', function() {
@@ -71,13 +87,12 @@ require([
                 new SettingsUserView({
                     model: new SettingsUserModel
                 }).render();
+                this._checkAuth();
                 //this.selectMenuItem('');
             });
             this.on('route:loginPage', function() {
-                new LoginUserView({
-                    model: new LoginUserModel,
-                    router: this
-                }).render();
+                new LoginUserView().render();
+                this._checkAuth();
 
             });
         },
@@ -85,10 +100,6 @@ require([
         _headerFooterContainersRender: function() {
             new TemplateView.NavBarTemplateView().render();
             new TemplateView.FooterTemplateView().render();
-        },
-
-        redirectToHome: function() {
-            this.navigate('#home', {trigger: true});
         }
 
         /*  selectMenuItem: function(menuItem) {
