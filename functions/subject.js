@@ -59,7 +59,7 @@ exports.create = function (req, res) {
 exports.get = function (req, res) {
 
     var query = db.subjectModel.find({});
-    query.select('title categoryId color');
+    query.select('title categoryId color textColor');
     query.exec(function (err, queryRes) {
         if (err) {
             return handleError(err)
