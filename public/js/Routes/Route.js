@@ -8,14 +8,16 @@ require([
     'CalendarEventsCollection',
     'CalendarView',
     'SubjectsCollection',
+    'SubjectModel',
     'SubjectsView',
+    'CategoryModel',
     'CategoriesView',
     'CategoriesCollection',
     'SettingsUserView',
     'SettingsUserModel'
 ], function($, _, Backbone, Session, TemplateView, LoginUserView, EventsCollection,
-            CalendarView, SubjectsCollection, SubjectsView,
-            CategoriesView, CategoriesCollection, SettingsUserView, SettingsUserModel) {
+    CalendarView, SubjectsCollection, SubjectModel, SubjectsView, CategoryModel,
+    CategoriesView, CategoriesCollection, SettingsUserView, SettingsUserModel) {
 
     var Router = Backbone.Router.extend({
 
@@ -35,13 +37,18 @@ require([
         _checkAuth: function() {
             var isAuth = Session.get('authenticated');
             var path = Backbone.history.location.hash;
-            console.log(path);
-            if(!isAuth) {
-                Backbone.history.navigate('/', {trigger: true});
-            } else if(path === '') {
-                Backbone.history.navigate('#home', {trigger: true});
+            if (!isAuth) {
+                Backbone.history.navigate('/', {
+                    trigger: true
+                });
+            } else if (path === '') {
+                Backbone.history.navigate('#home', {
+                    trigger: true
+                });
             } else {
-                Backbone.history.navigate(path, {trigger: true});
+                Backbone.history.navigate(path, {
+                    trigger: true
+                });
             }
         },
 
@@ -58,7 +65,7 @@ require([
                 }).render();
                 new CategoriesView({
                     collection: this.categoriesCollection,
-                    model : new CategoryModel
+                    model: new CategoryModel
                 });
                 new SubjectsView({
                     collectionSubject: this.subjectsCollection,
@@ -66,7 +73,7 @@ require([
                     model: new SubjectModel
                 });
                 this._checkAuth();
-                
+
                 // this.categoriesCollection.add([
                 //      {title: "IT and Configuration Management"},
                 //     {title: "Quality Control"},

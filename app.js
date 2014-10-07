@@ -40,8 +40,8 @@ app.get('/', routes.index);
 
 // app.get('/calendar', routes.app);
 //login api
-app.post('/session/login', user.logIn);
-app.del('/session/logout', user.logOut);
+app.post('/login', user.logIn);
+app.del('/logout', user.logOut);
 //get session
 app.get("/session", user.isAuth);
 app.post('/signup', user.signUp);

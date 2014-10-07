@@ -42,7 +42,7 @@ define([
         login: function(credentials) {
             var that = this;
             var login = $.ajax({
-                url: this.url + '/login',
+                url: '/login',
                 data: credentials,
                 type: 'POST'
             });
@@ -65,7 +65,7 @@ define([
         logout: function() {
             var that = this;
             $.ajax({
-                url: this.url + '/logout',
+                url: '/logout',
                 type: 'DELETE'
             }).done(function(response) {
                 that.clear();

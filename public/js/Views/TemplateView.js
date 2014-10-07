@@ -29,7 +29,6 @@ define('TemplateView', ['jquery', 'underscore', 'backbone','SessionModel', 'text
 
             _logout: function() {
                 Session.logout();
-                console.log("logout");
             },
 
             render: function() {
