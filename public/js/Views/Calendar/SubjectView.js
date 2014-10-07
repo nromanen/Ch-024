@@ -22,6 +22,7 @@ define('SubjectView', ['jquery', 'underscore', 'backbone', 'jqueryui', 'fullcale
             this.$(this.selectors.removeSubjectButton).on('click', $.proxy(this._removeSubject, this));
         },
 
+
         /**
          * Remove subject object.
          * deleteSubject() is the SubjectModel function for removing models

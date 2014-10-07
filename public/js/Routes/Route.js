@@ -57,11 +57,13 @@ require([
                     collection: this.eventsCollection
                 }).render();
                 new CategoriesView({
-                    collection: this.categoriesCollection
+                    collection: this.categoriesCollection,
+                    model : new CategoryModel
                 });
                 new SubjectsView({
                     collectionSubject: this.subjectsCollection,
-                    collectionCategory: this.categoriesCollection
+                    collectionCategory: this.categoriesCollection,
+                    model: new SubjectModel
                 });
                 this._checkAuth();
                 
