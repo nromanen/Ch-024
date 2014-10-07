@@ -35,21 +35,23 @@ require([
         },
 
         _checkAuth: function() {
-            var isAuth = Session.get('authenticated');
-            var path = Backbone.history.location.hash;
-            if (!isAuth) {
-                Backbone.history.navigate('/', {
-                    trigger: true
-                });
-            } else if (path === '') {
-                Backbone.history.navigate('#home', {
-                    trigger: true
-                });
-            } else {
-                Backbone.history.navigate(path, {
-                    trigger: true
-                });
-            }
+            Session.getAuth(function() {
+                var isAuth = Session.get('authenticated');
+                var path = Backbone.history.location.hash;
+                if (!isAuth) {
+                    Backbone.history.navigate('/', {
+                        trigger: true
+                    });
+                } else if (path === '') {
+                    Backbone.history.navigate('#home', {
+                        trigger: true
+                    });
+                } else {
+                    Backbone.history.navigate(path, {
+                        trigger: true
+                    });
+                }
+            });
         },
 
         _initializeEvents: function() {

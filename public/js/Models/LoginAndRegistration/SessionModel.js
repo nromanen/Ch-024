@@ -78,7 +78,7 @@ define([
         },
 
 
-        getAuth: function() {
+        getAuth: function(callback) {
             var that = this;
             var Session = this.fetch();
 
@@ -92,6 +92,7 @@ define([
                 that.clear();
                 that.initialize();
             });
+            Session.always(callback);
         }
     });
 
