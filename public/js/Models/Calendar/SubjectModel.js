@@ -9,7 +9,8 @@ define('SubjectModel', ['jquery', 'underscore', 'backbone', 'CategoryModel'], fu
                 category: CategoryModel,
                 categoryId: "",
                 title: '',
-                color: '',
+                textColor: 'red',
+                color: 'red',
                 approved: false
             }
         },
@@ -48,6 +49,14 @@ define('SubjectModel', ['jquery', 'underscore', 'backbone', 'CategoryModel'], fu
 
         getApproved: function() {
             return this.get('approved');
+        },
+
+        setTextColor: function(value) {
+            this.set('textColor', value);
+        },
+
+        getTextColor: function() {
+            return this.get('textColor');
         },
 
         validate: function (attrs) {
