@@ -9,8 +9,8 @@ define('SubjectModel', ['jquery', 'underscore', 'backbone', 'CategoryModel'], fu
                 category: CategoryModel,
                 categoryId: "",
                 title: '',
-                textColor: '',
-                color: '',
+                textColor: 'red',
+                color: 'red',
                 approved: false
             }
         },
