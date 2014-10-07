@@ -9,7 +9,8 @@ define('SubjectsView', ['jquery', 'underscore', 'backbone', 'tinycolor', 'pickac
         cancelButton:        '.cancelBtn',
         createSubjectButton: '.saveBtn',
         subjectTitleInput:   '.subjectTitle',
-        colorPickerInput:    '.pick-a-color',
+        bgColorPickerInput:    '#pickBgColor',
+        textColorPickerInput:  '#pickTextColor',
         categoryTitleInput:  '.categoryTitle',
         subjectContainer:    '.tab-content #'
     },
@@ -50,7 +51,8 @@ define('SubjectsView', ['jquery', 'underscore', 'backbone', 'tinycolor', 'pickac
         var categoryModel = this.collectionCategory.findModelById(categoryId);
 
             this.model.setTitle(subjectTitle);
-            this.model.setColor("#" + this.$(this.selectors.colorPickerInput).val());
+            this.model.setColor("#" + this.$(this.selectors.bgColorPickerInput).val());
+            this.model.setTextColor("#" + this.$(this.selectors.textColorPickerInput).val());
             this.model.setCategory(categoryModel);
             this.model.isNew(true);
             if(this.model.save()){
@@ -91,7 +93,8 @@ define('SubjectsView', ['jquery', 'underscore', 'backbone', 'tinycolor', 'pickac
 
     render: function() {
         this.$el = $(this.template());
-        this.$(this.selectors.colorPickerInput).pickAColor();
+        this.$(this.selectors.bgColorPickerInput).pickAColor();
+        this.$(this.selectors.textColorPickerInput).pickAColor();
         this.$el.modal('show');
         this._fillCategoryList();
         this._attachEvents();
