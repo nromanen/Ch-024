@@ -2,50 +2,58 @@ var db = require('../lib/mongoose'),
     cryptor = require('cryptor'),
     nodemailer = require('nodemailer');
 
-exports.logOut = function (req, res) {
+exports.logOut = function(req, res) {
     req.session = null;
-    res.send(JSON.stringify({action: 'logout'}));
+    res.send(200, {
+        logout: true
+    });
     res.end;
 };
 
-exports.isAuth = function (req, res) {
-    if (req.session.username) {
-        return ({role: req.session.role, username: req.session.username});
+exports.isAuth = function(req, res) {
+    if(req.session.email){
+        res.send(200, {
+            email : req.session.email,
+            role: req.session.role
+        });
+    }else{
+        res.send(401);
     }
 };
 
-exports.logIn = function (req, res) {
 
-    var logInQuery = db.userModel.findOne({ 'email': req.body.email });
+
+exports.logIn = function(req, res) {
+
+    var logInQuery = db.userModel.findOne({
+        'email': req.body.email
+    });
 
     logInQuery.select('password username email role');
-    logInQuery.exec(function (err, queryResult) {
+    logInQuery.exec(function(err, queryResult) {
         if (err) return handleError(err);
 
         if (queryResult) {
 
             if (cryptor.compare(cryptor.md5(req.body.password), queryResult.password)) {
                 req.session.email = req.body.email;
-                req.session.username = queryResult.username;
                 req.session.role = queryResult.role;
                 //  res.cookie('login', 'true', { maxAge: 900000 });
                 var data = {
-                    action: 'logined',
-                    role: queryResult.role,
                     email: req.body.email,
-                    username: queryResult.username
+                    role: queryResult.role
                 };
 
-                res.send(JSON.stringify(data));
+                res.send(200, data);
 
 
             } else {
                 //incorect login/pass
-                res.send(JSON.stringify({action: 'incorrect'}));
+                res.send(401);
 
             }
         } else {
-            res.send(JSON.stringify({action: 'incorrect'}));
+            res.send(401);
 
         }
         res.end;
@@ -59,7 +67,7 @@ exports.logIn = function (req, res) {
 
 };
 
-exports.signUp = function (req, res) {
+exports.signUp = function(req, res) {
 
     var data = new db.userModel({
 
@@ -71,13 +79,17 @@ exports.signUp = function (req, res) {
     });
 
 
-    data.save(function (err) {
+    data.save(function(err) {
         if (!err) {
-            res.send({action: "registered"});
+            res.send({
+                action: "registered"
+            });
             res.end;
         } else {
 
-            res.send({action: "failRegister"});
+            res.send({
+                action: "failRegister"
+            });
             console.log(err);
             res.end;
         }
@@ -85,5 +97,3 @@ exports.signUp = function (req, res) {
 
     res.end;
 };
-
-
