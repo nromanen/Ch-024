@@ -54,7 +54,7 @@ define('CategoriesView', ['jquery', 'underscore', 'backbone', 'CategoryModel', '
 
                 this.model.setTitle(CategoryTitle);
                 this.model.isNew(true);
-                if(this.model.save()){
+                if(this.model.save(null, {type: 'POST'})){
                     this._cancelModalWindow();
                 }
 

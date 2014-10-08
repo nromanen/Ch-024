@@ -3,11 +3,11 @@
  */
 var db = require('../lib/mongoose');
 
-var getSubjects = function () {
+var getSubjects = function() {
 
 };
 
-exports.create = function (req, res) {
+exports.create = function(req, res) {
     var data = new db.subjectModel({
         title: req.body.title,
         color: req.body.color,
@@ -16,13 +16,17 @@ exports.create = function (req, res) {
 
     console.log(data);
 
-    data.save(function (err) {
+    data.save(function(err) {
         if (!err) {
-            res.send({action: "saved"});
+            res.send({
+                action: "saved"
+            });
             res.end;
         } else {
 
-            res.send({action: "failSave"});
+            res.send({
+                action: "failSave"
+            });
             console.log(err);
             res.end;
         }
@@ -55,12 +59,22 @@ exports.create = function (req, res) {
      }*/
 };
 
+exports.delete = function(req, res) {
+    var query = db.subjectModel.find({'_id': req.params.id});
+    query.remove(function(err) {
+        if(err) {
+            return handleError(err);
+        } else {
+            res.send("Delete Subject ID: " + req.params.id);
+        }
+    });
+};
 
-exports.get = function (req, res) {
+exports.get = function(req, res) {
 
     var query = db.subjectModel.find({});
     query.select('title categoryId color textColor');
-    query.exec(function (err, queryRes) {
+    query.exec(function(err, queryRes) {
         if (err) {
             return handleError(err)
         } else {

@@ -49,12 +49,14 @@ app.post('/signup', user.signUp);
 
 //subjects api
 app.post('/subject', subject.create);
-app.get('/subject/:cat', subject.get);
+//app.get('/subject/:cat', subject.get);
 app.get('/subject', subject.get);
+app.del('/subject/:id', subject.delete);
 
 //categories api
 app.get('/category', category.get);
 app.post('/category', category.create);
+app.del('/category/:id', category.delete);
 
 //events api
 app.get('/events', events.getAll);

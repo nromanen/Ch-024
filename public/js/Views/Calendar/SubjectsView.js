@@ -52,8 +52,8 @@ define('SubjectsView', ['jquery', 'underscore', 'backbone', 'tinycolor', 'pickac
             this.model.setTitle(subjectTitle);
             this.model.setColor("#" + this.$(this.selectors.colorPickerInput).val());
             this.model.setCategory(categoryModel);
-            this.model.isNew(true);
-            if(this.model.save()){
+            // this.model.isNew(true);
+            if(this.model.save(null, {type: 'POST'})){
                 this._cancelModalWindow();
             }
     },

@@ -18,6 +18,21 @@ exports.create = function (req, res) {
 
 };
 
+exports.delete = function(req, res) {
+    var queryCategory = db.categoryModel.find({'_id': req.params.id});
+    var querySubject = db.subjectModel.find({'categoryId': req.params.id});
+    queryCategory.remove(function(err) {
+        if(err) {
+            return handleError(err);
+        } else {
+            querySubject.remove(function(err) {
+                if(err) return handleError(err);
+            });
+            res.send("Delete Category ID: " + req.params.id);
+        }
+    });
+};
+
 exports.get = function (req, res) {
     var query = db.categoryModel.find();
     query.select('title');
