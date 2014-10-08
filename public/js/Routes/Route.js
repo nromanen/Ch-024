@@ -106,6 +106,10 @@ require([
                 this._checkAuth();
 
             });
+            this.on('route:AdminPage', function() {
+                new TemplateView.AdminTemplateView().render();
+                this._checkAuth();
+            });
         },
 
         _headerFooterContainersRender: function() {

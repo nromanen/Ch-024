@@ -1,4 +1,4 @@
-define('RegistrationUserModel', ['jquery', 'underscore', 'backbone'], function ($, _, Backbone) {
+define('RegistrationUserModel', ['jquery', 'underscore', 'backbone', 'maskedinput'], function ($, _, Backbone) {
     var RegistrationUserModel = Backbone.Model.extend({
         defaults: {
             //id - model id will be replaced with id from db

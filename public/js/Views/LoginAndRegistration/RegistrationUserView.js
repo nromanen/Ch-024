@@ -10,7 +10,7 @@ define('RegistrationUserView', ['jquery', 'underscore', 'backbone', 'Registratio
             passwordInput: '#password',
             repeatPasswordInput: '#repeatPassword',
             phoneInput: '#phone',
-            regForm: '#regForm'
+            regForm: '#regForm',
 
         },
         template: _.template(registrationTemplate),

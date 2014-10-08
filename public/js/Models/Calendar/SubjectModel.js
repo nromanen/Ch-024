@@ -11,7 +11,9 @@ define('SubjectModel', ['jquery', 'underscore', 'backbone', 'CategoryModel'], fu
                 title: '',
                 textColor: 'red',
                 color: 'red',
-                approved: false
+                approved: false,
+                confirmed: false,
+                teacherID: ''
             }
         },
 

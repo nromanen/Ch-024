@@ -1,6 +1,6 @@
 define('TemplateView', ['jquery', 'underscore', 'backbone','SessionModel', 'text',
         'text!navBarTemplate', 'text!footerTemplate', 'text!containerCalendarTemplate', 'text!aboutTemplate', 'text!homeTemplate',
-        'text!helpTemplate', 'text!settingsTemplate'
+        'text!helpTemplate', 'text!settingsTemplate', //'text!adminTemplate'
     ],
 
     function($, _, Backbone, Session, text, navBarTemplate, footerTemplate, containerCalendarTemplate, aboutTemplate, homeTemplate,
@@ -136,7 +136,8 @@ define('TemplateView', ['jquery', 'underscore', 'backbone','SessionModel', 'text
             AboutTemplateView: TemplateView[0],
             HomeTemplateView: TemplateView[1],
             HelpTemplateView: TemplateView[2],
-            SettingsTemplateView: TemplateView[3]
+            SettingsTemplateView: TemplateView[3],
+           // AdminTemplateView: TemplateView[4]
             
         };
     });

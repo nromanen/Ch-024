@@ -7,7 +7,9 @@ define('CategoryModel', ['jquery', 'underscore', 'backbone'], function($, _, Bac
             return {
                 _id: '',
                 cid: this.cid,
-                title: ''
+                title: '',
+                confirmed: false,
+                teacherID: ''
             }
         },
 

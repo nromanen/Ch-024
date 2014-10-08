@@ -15,6 +15,7 @@ var require = {
         'tooltip': 'Vendor/tooltip',
         'jqueryjson': 'Vendor/jqueryJSON',
         'text': 'Vendor/text',
+        'maskedinput': 'Vendor/jquery.maskedinput',
 
         /*
         Our models, collections, views, etc
@@ -89,6 +90,9 @@ var require = {
             deps: ['bootstrap', 'jquery']
         },
         'ownpopover': {
+            deps: ['jquery']
+        },
+        'maskedinput': {
             deps: ['jquery']
         }
     },
