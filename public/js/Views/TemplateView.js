@@ -1,10 +1,10 @@
 define('TemplateView', ['jquery', 'underscore', 'backbone','SessionModel', 'text',
         'text!navBarTemplate', 'text!footerTemplate', 'text!containerCalendarTemplate', 'text!aboutTemplate', 'text!homeTemplate',
-        'text!helpTemplate', 'text!settingsTemplate', //'text!adminTemplate'
+        'text!helpTemplate', 'text!settingsTemplate', 'text!adminTemplate'
     ],
 
     function($, _, Backbone, Session, text, navBarTemplate, footerTemplate, containerCalendarTemplate, aboutTemplate, homeTemplate,
-        helpTemplate, settingsTemplate) {
+        helpTemplate, settingsTemplate, adminTemplate) {
 
         var TemplateView = [];
 
@@ -68,7 +68,6 @@ define('TemplateView', ['jquery', 'underscore', 'backbone','SessionModel', 'text
         });
 
 
-
         for (var i = 8; i < arguments.length; i++) {
             TemplateView[i - 8] = Backbone.View.extend({
 
@@ -84,8 +83,6 @@ define('TemplateView', ['jquery', 'underscore', 'backbone','SessionModel', 'text
                 }
             });
         };
-
-
 
         // var AboutTemplateView = Backbone.View.extend({
 
@@ -137,7 +134,7 @@ define('TemplateView', ['jquery', 'underscore', 'backbone','SessionModel', 'text
             HomeTemplateView: TemplateView[1],
             HelpTemplateView: TemplateView[2],
             SettingsTemplateView: TemplateView[3],
-           // AdminTemplateView: TemplateView[4]
+            AdminTemplateView: TemplateView[4]
             
         };
     });

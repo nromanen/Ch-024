@@ -33,13 +33,31 @@ exports.create = function (req, res) {
 };
 
 exports.getAll = function (req, res) {
-
+	// var query = db.teacherModel.find({});
+ //    query.select('name surname email phone');
+ //    query.exec(function (err, queryRes) {
+ //        if (err) {
+ //            return handleError(err)
+ //        } else {
+ //            res.send(JSON.stringify(queryRes));
+ //            res.end;
+ //        }
+ //    });
 
 };
 
 
 exports.getNotApproved = function (req, res) {
-
+	// var query = db.teacherModel.find({confirmed: { $eq: false } );
+ //    query.select('name surname email phone');
+ //    query.exec(function (err, queryRes) {
+ //        if (err) {
+ //            return handleError(err)
+ //        } else {
+ //            res.send(JSON.stringify(queryRes));
+ //            res.end;
+ //        }
+ //    });
 
 };
 

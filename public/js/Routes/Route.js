@@ -27,7 +27,8 @@ require([
             "help": "helpPage",
             "about": "aboutPage",
             "settings": "settingsPage",
-            "login": "loginPage"
+            "login": "loginPage",
+            "admin": "adminPage"
         },
 
         initialize: function() {
@@ -106,7 +107,7 @@ require([
                 this._checkAuth();
 
             });
-            this.on('route:AdminPage', function() {
+            this.on('route:adminPage', function() {
                 new TemplateView.AdminTemplateView().render();
                 this._checkAuth();
             });

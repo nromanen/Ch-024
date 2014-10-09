@@ -31,7 +31,7 @@ define('RegistrationUserView', ['jquery', 'underscore', 'backbone', 'Registratio
      * @param {Object} errors
      *Display errors if they happen
      */
-    _defineError:function(model, errors){
+    _defineError: function(model, errors){
         this.$('.errors').html('');
         _.each(errors, function(error){
             this.$('.form-group #'+ error.field + ' + .errors').append('<span>' + error.message + '</span>');
@@ -42,11 +42,15 @@ define('RegistrationUserView', ['jquery', 'underscore', 'backbone', 'Registratio
     /**
      *Validate user registration form
      */
-    _checkForm:function(jsEvent){
+    _checkForm: function(jsEvent){
         var data = this.$el.serializeJSON();
        if( this.model.save(data)){
            this._shutdownModalWindow();
        }
+    },
+
+    _addPhoneMask: function () {
+      this.$("#phone").mask("+(380)-99-999-99-99",{placeholder:"_"});  
     },
 
         /**
@@ -61,6 +65,7 @@ define('RegistrationUserView', ['jquery', 'underscore', 'backbone', 'Registratio
             this.$el = $(this.template());
             this.$el.modal('show');
             this._attachEvents();
+            this._addPhoneMask();
             return this;
         }
     });

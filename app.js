@@ -60,6 +60,8 @@ app.post('/category', category.create);
 app.get('/events', events.getAll);
 app.post('/events', events.create);
 
+//teachers api
+//app.get('/teachers/notapproved', teachers.getNotApproved);
 
 app.use(function(req, res, next) {
     res.status(404);
