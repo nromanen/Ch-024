@@ -14,10 +14,14 @@ require([
     'CategoriesView',
     'CategoriesCollection',
     'SettingsUserView',
-    'SettingsUserModel'
+    'SettingsUserModel',
+    'AdminActionBarGroup',
+    'AdminTeachersCollection',
+    'UserModel'
 ], function($, _, Backbone, Session, TemplateView, LoginUserView, EventsCollection,
     CalendarView, SubjectsCollection, SubjectModel, SubjectsView, CategoryModel,
-    CategoriesView, CategoriesCollection, SettingsUserView, SettingsUserModel) {
+    CategoriesView, CategoriesCollection, SettingsUserView, SettingsUserModel, 
+    AdminActionBarGroup, AdminTeachersCollection, UserModel) {
 
     var Router = Backbone.Router.extend({
 
@@ -109,6 +113,11 @@ require([
             });
             this.on('route:adminPage', function() {
                 new TemplateView.AdminTemplateView().render();
+                new AdminActionBarGroup({
+                collection: new AdminTeachersCollection(),
+                templateID: '#teacherInfoTemplate',
+                groupClass: '.teachersInfo'
+                });
                 this._checkAuth();
             });
         },
