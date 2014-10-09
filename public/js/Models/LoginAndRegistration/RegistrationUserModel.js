@@ -60,8 +60,8 @@ define('RegistrationUserModel', ['jquery', 'underscore', 'backbone'], function (
                 errors.push({field: 'phone',
                     message: 'Phone is not correct!'});
             }
-            return errors.length ? errors : false;
-            //  return false;
+            //return errors.length ? errors : false;
+            return false;
         },
 
 

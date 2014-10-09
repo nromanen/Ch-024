@@ -2,5 +2,71 @@
     "port" : 1337,
     "mongoose": {
         "url": "mongodb://localhost/softserve"
+    },
+    //tmp it shout be in db
+    "rights": {
+        "user": {
+            "events": {
+                "create": false,
+                "update": false,
+                "watch": true,
+                "subscribe": true,
+                "delete": false
+            },
+            "category": {
+                "create": false,
+                "update": false,
+                "watch": false,
+                "delete": false
+            },
+            "subject": {
+                "create": false,
+                "update": false,
+                "watch": false,
+                "delete": false
+            }
+        },
+        "teacher": {
+            "events": {
+                "create": true,
+                "update": true,
+                "subscribe": false,
+                "watch": true,
+                "delete": true
+            },
+            "category": {
+                "create": true,
+                "update": false,
+                "watch": true,
+                "delete": false
+            },
+            "subject": {
+                "create": true,
+                "update": false,
+                "watch": true,
+                "delete": false
+            }
+        },
+        "admin": {
+            "events": {
+                "create": true,
+                "update": true,
+                "subscribe": true,
+                "watch": true,
+                "delete": true
+            },
+            "category": {
+                "create": true,
+                "update": true,
+                "watch": true,
+                "delete": true
+            },
+            "subject": {
+                "create": true,
+                "update": true,
+                "watch": true,
+                "delete": true
+            }
+        }
     }
 }

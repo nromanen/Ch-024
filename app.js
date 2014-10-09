@@ -1,84 +1,61 @@
 var express = require('express'),
+    passport = require('passport'),
+    LocalStrategy = require('passport-local').Strategy,
+    ConnectRoles = require('connect-roles'),
     routes = require('./routes'),
     http = require('http'),
     path = require('path'),
+    flash = require('connect-flash'),
     app = express(),
     config = require('./lib/config.js'),
     log = require('./lib/log.js')(module),
-    user = require('./functions/user.js'),
-    subject = require('./functions/subject.js'),
-    category = require('./functions/category.js'),
-    events = require('./functions/events.js'),
-    cryptor = require('cryptor');
-
-
-app.set('port', process.env.PORT || config.get('port'));
-
+    db = require('./lib/mongoose'),
+    userRoles = require('./lib/authorization').Auth(),
+    Urls = require('./urls').Urls;
 /*
  * Express@3 USE's section
  *
  * */
 /*SESSION initialize*/
-app.use(express.cookieParser('S3CRE7'));
-app.use(express.cookieSession());
-
+app.configure(function() {
+    app.use(express.cookieParser('S3CRE7'));
+    app.use(express.cookieSession());
+    app.set('view engine', 'ejs');
 //BodyParser - parse client requests
-app.use(express.bodyParser());
+    app.use(express.bodyParser());
 // favicon =)
-app.use(express.favicon());
+    app.use(express.favicon());
 //Enable logger (Express native), this module logged many [not] interest info
-app.use(express.logger('dev'));
+    app.use(express.logger('dev'));
+    app.use(express.session({ secret: 'keyboard cat' }));
+//init passport
+    app.use(passport.initialize());
+    app.use(passport.session());
+    app.use(userRoles.middleware());
 // Enable express router, module help us to route queries
-app.use(app.router);
+    app.use(app.router);
 //Static path (defoult page)
-app.use(express.static(path.join(__dirname, 'public')));
-/*Uses cookies */
+    app.use(express.static(path.join(__dirname, 'public')));
 
-// response to home root get req
-app.get('/', routes.index);
+    app.use(function (req, res, next) {
+        res.status(404);
+        log.error('Not found URL: %s', req.url);
+        res.send({ error: 'Not found' });
+        return;
+    });
 
-// app.get('/calendar', routes.app);
-//login api
-app.post('/signin', user.logIn);
-app.post('/signup', user.signUp);
-app.post('/logout', user.logOut);
+    app.use(function (err, req, res, next) {
+        res.status(err.status || 500);
+        log.error('Internal error(%d): %s', res.statusCode, err.message);
+        res.send({ error: err.message });
+        return;
+    });
 
-//subjects api
-app.post('/subject', subject.create);
-app.get('/subject/:cat', subject.get);
-app.get('/subject', subject.get);
-
-//categories api
-app.get('/category',category.get);
-app.post('/category',category.create);
-
-//events api
-app.get('/events', events.getAll);
-app.post('/events',events.create);
-
-
-
-
-
-
-app.use(function (req, res, next) {
-    res.status(404);
-    log.error('Not found URL: %s', req.url);
-    res.send({ error: 'Not found' });
-    return;
 });
 
-app.use(function (err, req, res, next) {
-    res.status(err.status || 500);
-    log.error('Internal error(%d): %s', res.statusCode, err.message);
-    res.send({ error: err.message });
-    return;
-});
+Urls(app, userRoles);
 
-app.get('/ErrorExample', function (req, res, next) {
-    next(new Error('Internal error!'));
-});
-
+app.set('port', process.env.PORT || config.get('port'));
 http.createServer(app).listen(app.get('port'), function () {
     console.log('Express server listening on port ' + app.get('port'));
 });

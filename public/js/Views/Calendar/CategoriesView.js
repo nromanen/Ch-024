@@ -41,14 +41,16 @@ define('CategoriesView', ['jquery', 'underscore', 'backbone', 'CategoryModel', '
     },
 
     _addNewCategory: function() {
-        var CategoryTitle = this.$(this.selectors.categoryTitleInput).val();
+        var categoryTitle = this.$(this.selectors.categoryTitleInput).val();
 
-        if (CategoryTitle) {
+        if (categoryTitle) {
             var categoryModel = new CategoryModel;
-            categoryModel.setTitle(CategoryTitle);
+            categoryModel.setTitle(categoryTitle);
             this._cancelModalWindow();
             categoryModel.isNew(true);
-            categoryModel.save();
+            categoryModel.save({
+                success: $.proxy(this._cancelModalWindow, this)
+            });
         }
     },
 

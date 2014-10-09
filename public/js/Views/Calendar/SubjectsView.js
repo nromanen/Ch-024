@@ -50,7 +50,9 @@ define('SubjectsView', ['jquery', 'underscore', 'backbone', 'tinycolor', 'pickac
          //   this._cancelModalWindow();
 
             subjectModel.isNew(true);
-            subjectModel.save();
+            subjectModel.save({
+                success: $.proxy(this._cancelModalWindow, this)
+            });
 
         }
 
