@@ -2,6 +2,7 @@ define('CategoryModel', ['jquery', 'underscore', 'backbone'], function($, _, Bac
     var CategoryModel = Backbone.Model.extend({
 
         urlRoot: '/category',
+        idAttribute: "_id",
 
         defaults: function() {
             return {

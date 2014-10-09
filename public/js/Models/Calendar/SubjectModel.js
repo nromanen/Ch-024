@@ -2,6 +2,7 @@ define('SubjectModel', ['jquery', 'underscore', 'backbone', 'CategoryModel'], fu
     var SubjectModel = Backbone.Model.extend({
 
         urlRoot: '/subject',
+        idAttribute: "_id",
 
         defaults: function() {
             return {
