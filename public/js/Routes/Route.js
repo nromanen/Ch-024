@@ -14,14 +14,10 @@ require([
     'CategoriesView',
     'CategoriesCollection',
     'SettingsUserView',
-    'SettingsUserModel',
-    'AdminActionBarGroup',
-    'AdminTeachersCollection',
-    'UserModel'
+    'SettingsUserModel'
 ], function($, _, Backbone, Session, TemplateView, LoginUserView, EventsCollection,
     CalendarView, SubjectsCollection, SubjectModel, SubjectsView, CategoryModel,
-    CategoriesView, CategoriesCollection, SettingsUserView, SettingsUserModel,
-    AdminActionBarGroup, AdminTeachersCollection, UserModel) {
+    CategoriesView, CategoriesCollection, SettingsUserView, SettingsUserModel) {
 
     var Router = Backbone.Router.extend({
 
@@ -106,7 +102,6 @@ require([
             this.on('route:aboutPage', function() {
                 that._headerFooterContainersRender();
                 this._checkAuth(function() {
-                    console.log('dssd');
                     new TemplateView.AboutTemplateView().render();
                 });
                 // this.selectMenuItem('about-menu');
@@ -125,17 +120,6 @@ require([
                 that._headerFooterContainersRender();
                 this._checkAuth(function() {
                     new LoginUserView().render();
-                });
-            });
-            this.on('route:adminPage', function() {
-                that._headerFooterContainersRender();
-                this._checkAuth(function() {
-                    new TemplateView.AdminTemplateView().render();
-                    new AdminActionBarGroup({
-                        collection: new AdminTeachersCollection(),
-                        templateID: '#teacherInfoTemplate',
-                        groupClass: '.teachersInfo'
-                    });
                 });
             });
         },

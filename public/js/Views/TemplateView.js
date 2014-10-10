@@ -1,6 +1,6 @@
 define('TemplateView', ['jquery', 'underscore', 'backbone','SessionModel', 'text',
         'text!navBarTemplate', 'text!footerTemplate', 'text!containerCalendarTemplate', 'text!aboutTemplate', 'text!homeTemplate',
-        'text!helpTemplate', 'text!settingsTemplate', //'text!adminTemplate'
+        'text!helpTemplate', 'text!settingsTemplate'
     ],
 
     function($, _, Backbone, Session, text, navBarTemplate, footerTemplate, containerCalendarTemplate, aboutTemplate, homeTemplate,
