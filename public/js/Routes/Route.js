@@ -2,8 +2,14 @@ require([
     'jquery',
     'underscore',
     'backbone',
+    'NavBarTemplateView',
+    'FooterTemplateView',
+    'ContainerCalendarTemplateView',
+    'AboutTemplateView',
+    'HomeTemplateView',
+    'HelpTemplateView',
+    'SettingsTemplateView',
     'SessionModel',
-    'TemplateView',
     'LoginUserView',
     'CalendarEventsCollection',
     'CalendarView',
@@ -15,9 +21,29 @@ require([
     'CategoriesCollection',
     'SettingsUserView',
     'SettingsUserModel'
-], function($, _, Backbone, Session, TemplateView, LoginUserView, EventsCollection,
-    CalendarView, SubjectsCollection, SubjectModel, SubjectsView, CategoryModel,
-    CategoriesView, CategoriesCollection, SettingsUserView, SettingsUserModel) {
+], function(
+    $,
+    _,
+    Backbone,
+    NavBarTemplateView,
+    FooterTemplateView,
+    ContainerCalendarTemplateView,
+    AboutTemplateView,
+    HomeTemplateView,
+    HelpTemplateView,
+    SettingsTemplateView,
+    Session,
+    LoginUserView,
+    EventsCollection,
+    CalendarView,
+    SubjectsCollection,
+    SubjectModel,
+    SubjectsView,
+    CategoryModel,
+    CategoriesView,
+    CategoriesCollection,
+    SettingsUserView,
+    SettingsUserModel) {
 
     var Router = Backbone.Router.extend({
 
@@ -61,7 +87,7 @@ require([
             this.on('route:homePage', function() {
                 this._checkAuth(function() {
                     that._headerFooterContainersRender();
-                    new TemplateView.HomeTemplateView().render();
+                    new HomeTemplateView().render();
                     this.eventsCollection = new EventsCollection();
                     this.categoriesCollection = new CategoriesCollection();
                     this.subjectsCollection = new SubjectsCollection();
@@ -88,7 +114,7 @@ require([
             this.on('route:helpPage', function() {
                 that._headerFooterContainersRender();
                 this._checkAuth(function() {
-                    new TemplateView.HelpTemplateView().render();
+                    new HelpTemplateView().render();
                 });
                 // var template;
                 // if (!template) { 
@@ -102,14 +128,14 @@ require([
             this.on('route:aboutPage', function() {
                 that._headerFooterContainersRender();
                 this._checkAuth(function() {
-                    new TemplateView.AboutTemplateView().render();
+                    new AboutTemplateView().render();
                 });
                 // this.selectMenuItem('about-menu');
             });
             this.on('route:settingsPage', function() {
                 that._headerFooterContainersRender();
                 this._checkAuth(function() {
-                    new TemplateView.SettingsTemplateView().render();
+                    new SettingsTemplateView().render();
                     new SettingsUserView({
                         model: new SettingsUserModel
                     }).render();
@@ -125,9 +151,9 @@ require([
         },
 
         _headerFooterContainersRender: function() {
-            new TemplateView.ContainerCalendarView().render();
-            new TemplateView.NavBarTemplateView().render();
-            new TemplateView.FooterTemplateView().render();
+            new ContainerCalendarTemplateView().render();
+            new NavBarTemplateView().render();
+            new FooterTemplateView().render();
         }
 
         /*  selectMenuItem: function(menuItem) {
