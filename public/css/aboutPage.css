@@ -49,10 +49,8 @@
     background: #afafaf;
     padding: 2px 5px;
     margin-right: 10px;
-
     width: 70px;
     display: inline-block;
     *zoom: 1;
-    *display: inline;
     color: #fff;
 }

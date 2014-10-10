@@ -72,7 +72,23 @@ exports.delete = function(req, res) {
 
 exports.get = function(req, res) {
 
-    var query = db.subjectModel.find({});
+    var query = db.subjectModel.find({/*approved: true*/});
+    query.select('title categoryId color textColor');
+    query.exec(function(err, queryRes) {
+        if (err) {
+            return handleError(err)
+        } else {
+            res.send(JSON.stringify(queryRes));
+            res.end;
+        }
+    });
+
+
+};
+
+exports.getNotApproved = function(req, res) {
+
+    var query = db.subjectModel.find({approved: false});
     query.select('title categoryId color textColor');
     query.exec(function(err, queryRes) {
         if (err) {

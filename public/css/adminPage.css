@@ -1,0 +1,80 @@
+.mainContainer{
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.categoryHeader{
+  position: absolute;
+  padding-left: 40%;
+  font-weight: bold;
+}
+
+.headerImage{
+  height: 50px;
+  display: block;
+  float: left;
+}
+
+.tableStyle, td{
+  border: solid 1px;
+  text-align: center;
+  table-layout: fixed;
+  width: 100%;
+  padding: 10px;
+}
+
+.nameColumn{
+  width: 15%;
+}
+.sournameColumn{
+  width: 20%;
+}
+.emailColumn{
+  width: 30%;
+}
+.phoneColumn{
+  width: 15%;
+}
+.buttonsColumn{
+  width: 10%;
+}
+.titleColumn{
+  width: 45%;
+}
+.authorColumn{
+  width: 40%;
+}
+.subjectColumn{
+  width: 15%;
+}
+.categoryColumn{
+  width: 30%;
+}
+.tableStyle table tr:nth-child(even) {
+    background-color: #eee;
+}
+.tableStyle table tr:nth-child(odd) {
+   background-color:#fff;
+}
+.tableHeader{
+  font-weight: bold;
+}
+.categoryButton{
+  width: 100%;
+}
+.barGroup{
+  margin-bottom: 2%;
+}
+.refuseButton{
+  background: url(../images/refuse.jpg) no-repeat;
+  background-size: 30px 30px;
+  width: 34px;
+  height: 34px;
+  border-radius: 27px;
+}
+.confirmButton{
+  background: url(../images/confirm.jpg) no-repeat;
+  background-size: 30px 30px;
+  width: 34px;
+  height: 34px;
+  border-radius: 17px;
+}
