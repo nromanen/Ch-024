@@ -1,63 +1,96 @@
 .wideBlock {
-  width: 100%;
+    width: 100%;
 }
+
 header {
-  padding: 20px;
-  margin-bottom: -10px;
+    padding: 20px;
+    margin-bottom: -10px;
 }
+
 header .logo {
-  font-size: 26px;
-  color: #464646;
-  margin-top: 30px;
-  float: left;
+    font-size: 26px;
+    color: #464646;
+    margin-top: 30px;
+    float: left;
 }
+
 header .it_a {
-  float: right;
-  margin-top: 10px;
+    float: right;
+    margin-top: 10px;
 }
+
 header .it_a img {
-  height: 64px;
+    height: 64px;
 }
+
 .b_regForm {
-  background: #f7f7f7;
-  padding: 10px;
-  margin-top: 15px;
-  border-radius: 5px;
+    background: #f7f7f7;
+    padding: 10px;
+    margin-top: 15px;
+
 }
+
 .b_regForm .form-control {
-  margin-bottom: 10px;
+    margin-bottom: 10px;
 }
+
 .b_reg {
-  display: none;
+    display: none;
 }
+
+.b_login h3 {
+    margin: 0;
+    padding: 5px 0 15px 0;
+}
+
 .cover {
-  min-height: 400px;
-  padding-bottom: 15px;
-  overflow: hidden;
-  background: #353535 url("../images/octicons-bg.png") center repeat;
-  margin-top: 70px;
+    min-height: 400px;
+    padding-bottom: 15px;
+    overflow: hidden;
+    /* background: #353535 url("../images/octicons-bg.png") center repeat;*/
+    background: url("../images/hd-wide-wallpapers_15987_1920x1200.jpg") center;
+    margin-top: 70px;
 }
+
 .cover .promo {
-  float: left;
+    float: left;
+    margin-top: 10px;
+    background: rgba(224, 64, 0, 0.75);
+    padding: 8px 15px;
 }
+
 .cover .promo h1,
 .cover .promo h2,
 .cover .promo h3,
 .cover .promo h4 {
-  color: #fff;
+    color: #fff;
+    margin: 0;
 }
+
 .cover .cover_img {
-  width: 42%;
-  margin-top: 15px;
+    width: 42%;
+    margin-top: 15px;
 }
+
 footer {
-  padding-top: 20px;
+    padding-top: 20px;
 }
+
 footer nav li {
-  display: inline;
-  margin: 0px 10px;
+    display: inline;
+    margin: 0px 10px;
 }
 
 .borderRed {
     border: 1px solid red;
+}
+
+
+.incorrectLogin{
+    clear: both;
+    display: none;
+    padding: 0px 0 10px 3px;
+    color: rgba(120, 0, 0, 0.84);
+    font-size: 14px;
+    font-weight: normal;
 }
