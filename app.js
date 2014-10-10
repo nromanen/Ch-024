@@ -9,9 +9,7 @@ var express = require('express'),
     subject = require('./functions/subject.js'),
     category = require('./functions/category.js'),
     events = require('./functions/events.js'),
-    teachers = require('./functions/teachers.js'),
     cryptor = require('cryptor');
-
 
 
 app.set('port', process.env.PORT || config.get('port'));

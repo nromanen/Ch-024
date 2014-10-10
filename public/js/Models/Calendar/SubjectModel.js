@@ -73,6 +73,9 @@ define('SubjectModel', ['jquery', 'underscore', 'backbone', 'CategoryModel'], fu
             return errors.length ? errors : false;
         }
 
+
+
+
     });
 
     return SubjectModel;
