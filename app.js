@@ -63,8 +63,6 @@ app.get('/events', events.getAll);
 app.post('/events', events.create);
 app.del('/events/:id', events.delete);
 
-//teachers api
-//app.get('/teachers/notapproved', teachers.getNotApproved);
 
 app.use(function(req, res, next) {
     res.status(404);
