@@ -9,9 +9,7 @@ var express = require('express'),
     subject = require('./functions/subject.js'),
     category = require('./functions/category.js'),
     events = require('./functions/events.js'),
-    teachers = require('./functions/teachers.js'),
     cryptor = require('cryptor');
-
 
 
 app.set('port', process.env.PORT || config.get('port'));
@@ -63,9 +61,8 @@ app.del('/category/:id', category.delete);
 //events api
 app.get('/events', events.getAll);
 app.post('/events', events.create);
+app.del('/events/:id', events.delete);
 
-//teachers api
-//app.get('/teachers/notapproved', teachers.getNotApproved);
 
 app.use(function(req, res, next) {
     res.status(404);

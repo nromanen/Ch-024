@@ -28,15 +28,11 @@ var require = {
         'RegistrationUserModel': 'Models/LoginAndRegistration/RegistrationUserModel',
         'CategoryModel': 'Models/Calendar/CategoryModel',
         'SessionModel' : 'Models/LoginAndRegistration/SessionModel',
-        'UserModel' : 'Models/Admin/UserModel',
 
         // Collections
         'CalendarEventsCollection': 'Collections/CalendarEventsCollection',
         'SubjectsCollection': 'Collections/SubjectsCollection',
         'CategoriesCollection': 'Collections/CategoriesCollection',
-        'AdminCategoriesCollection': 'Collections/Admin/AdminCategoriesCollection',
-        'AdminSubjectsCollection': 'Collections/Admin/AdminSubjectsCollection',
-        'AdminTeachersCollection': 'Collections/Admin/AdminTeachersCollection',
 
         // Views
         'CalendarView': 'Views/Calendar/CalendarView',
@@ -51,8 +47,6 @@ var require = {
         'CategoriesView': 'Views/Calendar/CategoriesView',
         'navTabPaneCategoryView': 'Views/Calendar/navTabPaneCategoryView',
         'navTabCategoryView': 'Views/Calendar/navTabCategoryView',
-        'AdminActionBar': 'Views/Admin/AdminActionBar',
-        'AdminActionBarGroup': 'Views/Admin/AdminActionBarGroup',
 
         // Template
         'TemplateView': 'Views/TemplateView',
@@ -72,11 +66,7 @@ var require = {
         'newSubjectTemplate': '../js/Templates/newSubjectTemplate.html',
         'loginTemplate': '../js/Templates/loginTemplate.html',
         'registrationTemplate': '../js/Templates/registrationTemplate.html',
-        'containerCalendarTemplate': '../js/Templates/containerCalendarTemplate.html',
-        'adminTemplate': '../js/Templates/adminTemplate.html',
-        'categoryInfoTemplate': '../js/Templates/categoryInfoTemplate.html',
-        'subjectInfoTemplate': '../js/Templates/subjectInfoTemplate.html',
-        'teacherInfoTemplate': '../js/Templates/teacherInfoTemplate.html'
+        'containerCalendarTemplate': '../js/Templates/containerCalendarTemplate.html'
     },
 
     shim: {
