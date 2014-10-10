@@ -20,7 +20,7 @@ require([
     'UserModel'
 ], function($, _, Backbone, Session, TemplateView, LoginUserView, EventsCollection,
     CalendarView, SubjectsCollection, SubjectModel, SubjectsView, CategoryModel,
-    CategoriesView, CategoriesCollection, SettingsUserView, SettingsUserModel,
+    CategoriesView, CategoriesCollection, SettingsUserView, SettingsUserModel, 
     AdminActionBarGroup, AdminTeachersCollection, UserModel) {
 
     var Router = Backbone.Router.extend({
@@ -39,7 +39,7 @@ require([
             this._initializeEvents();
         },
 
-        _checkAuth: function(callback) {
+        _checkAuth: function() {
             Session.getAuth(function() {
                 var isAuth = Session.get('authenticated');
                 var path = Backbone.history.location.hash;
@@ -57,31 +57,30 @@ require([
                     });
                 }
             });
-            callback();
         },
 
         _initializeEvents: function() {
-            var that = this;
             this.on('route:homePage', function() {
-                this._checkAuth(function() {
-                    that._headerFooterContainersRender();
-                    new TemplateView.HomeTemplateView().render();
-                    this.eventsCollection = new EventsCollection();
-                    this.categoriesCollection = new CategoriesCollection();
-                    this.subjectsCollection = new SubjectsCollection();
-                    new CalendarView({
-                        collection: this.eventsCollection
-                    }).render();
-                    new CategoriesView({
-                        collection: this.categoriesCollection,
-                        model: new CategoryModel
-                    });
-                    new SubjectsView({
-                        collectionSubject: this.subjectsCollection,
-                        collectionCategory: this.categoriesCollection,
-                        model: new SubjectModel
-                    });
+                new TemplateView.ContainerCalendarView().render();
+                this._headerFooterContainersRender();
+                new TemplateView.HomeTemplateView().render();
+                this.eventsCollection = new EventsCollection();
+                this.categoriesCollection = new CategoriesCollection();
+                this.subjectsCollection = new SubjectsCollection();
+                new CalendarView({
+                    collection: this.eventsCollection
+                }).render();
+                new CategoriesView({
+                    collection: this.categoriesCollection,
+                    model: new CategoryModel
                 });
+                new SubjectsView({
+                    collectionSubject: this.subjectsCollection,
+                    collectionCategory: this.categoriesCollection,
+                    model: new SubjectModel
+                });
+                this._checkAuth();
+
                 // this.categoriesCollection.add([
                 //      {title: "IT and Configuration Management"},
                 //     {title: "Quality Control"},
@@ -90,58 +89,40 @@ require([
             });
 
             this.on('route:helpPage', function() {
-                that._headerFooterContainersRender();
-                this._checkAuth(function() {
-                    new TemplateView.HelpTemplateView().render();
-                });
-                // var template;
-                // if (!template) { 
-                //     template = new TemplateView.HelpTemplateView().render();
-                // } else {
-                //     template.render();
-                // }
-
+                new TemplateView.HelpTemplateView().render();
+                this._checkAuth();
                 // this.selectMenuItem('help-menu');
             });
             this.on('route:aboutPage', function() {
-                that._headerFooterContainersRender();
-                this._checkAuth(function() {
-                    console.log('dssd');
-                    new TemplateView.AboutTemplateView().render();
-                });
+                new TemplateView.AboutTemplateView().render();
+                this._checkAuth();
                 // this.selectMenuItem('about-menu');
             });
             this.on('route:settingsPage', function() {
-                that._headerFooterContainersRender();
-                this._checkAuth(function() {
-                    new TemplateView.SettingsTemplateView().render();
-                    new SettingsUserView({
-                        model: new SettingsUserModel
-                    }).render();
-                });
+                new TemplateView.SettingsTemplateView().render();
+                new SettingsUserView({
+                    model: new SettingsUserModel
+                }).render();
+                this._checkAuth();
                 //this.selectMenuItem('');
             });
             this.on('route:loginPage', function() {
-                that._headerFooterContainersRender();
-                this._checkAuth(function() {
-                    new LoginUserView().render();
-                });
+                new LoginUserView().render();
+                this._checkAuth();
+
             });
             this.on('route:adminPage', function() {
-                that._headerFooterContainersRender();
-                this._checkAuth(function() {
-                    new TemplateView.AdminTemplateView().render();
-                    new AdminActionBarGroup({
-                        collection: new AdminTeachersCollection(),
-                        templateID: '#teacherInfoTemplate',
-                        groupClass: '.teachersInfo'
-                    });
+                new TemplateView.AdminTemplateView().render();
+                new AdminActionBarGroup({
+                collection: new AdminTeachersCollection(),
+                templateID: '#teacherInfoTemplate',
+                groupClass: '.teachersInfo'
                 });
+                this._checkAuth();
             });
         },
 
         _headerFooterContainersRender: function() {
-            new TemplateView.ContainerCalendarView().render();
             new TemplateView.NavBarTemplateView().render();
             new TemplateView.FooterTemplateView().render();
         }
