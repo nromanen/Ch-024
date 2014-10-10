@@ -63,6 +63,7 @@ app.del('/category/:id', category.delete);
 //events api
 app.get('/events', events.getAll);
 app.post('/events', events.create);
+app.del('/events/:id', events.delete);
 
 //teachers api
 //app.get('/teachers/notapproved', teachers.getNotApproved);
