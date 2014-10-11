@@ -21,9 +21,7 @@ define('SubjectsView', ['jquery', 'underscore', 'backbone', 'tinycolor', 'pickac
         $(this.selectors.addSubjectButton).on('click', $.proxy(this.render, this));
         this.collectionSubject = options.collectionSubject;
         this.collectionCategory = options.collectionCategory;
-
         this.collectionSubject.on('add', $.proxy(this._renderSubject, this));
-
         this.collectionSubject.fetch();
     },
 
@@ -31,7 +29,16 @@ define('SubjectsView', ['jquery', 'underscore', 'backbone', 'tinycolor', 'pickac
 
     _attachEvents: function() {
         this.$(this.selectors.createSubjectButton).on('click', $.proxy(this._addNewSubject, this));
-        this.$(this.selectors.cancelButton).on('click', $.proxy(this._cancelModalWindow, this))
+        this.$(this.selectors.cancelButton).on('click', $.proxy(this._cancelModalWindow, this));
+        this.model.on("invalid", $.proxy(this._defineValidationError, this));
+    },
+
+    _defineValidationError:function(model, errors){
+        this.$('.errors').html('');
+        _.each(errors, function(error){
+            this.$('.form-group #'+ error.field + ' + .errors').append('<span>' + error.message + '</span>');
+            this.$('#' + error.field).addClass('borderRed');
+        }, this);
     },
 
     /**
@@ -41,22 +48,14 @@ define('SubjectsView', ['jquery', 'underscore', 'backbone', 'tinycolor', 'pickac
         var subjectTitle = this.$(this.selectors.subjectTitleInput).val();
         var categoryId =  this.$(this.selectors.categoryTitleInput).val();
         var categoryModel = this.collectionCategory.findModelById(categoryId);
-        var subjectModel = new SubjectModel;
 
-        if (subjectTitle) {
-            subjectModel.setTitle(subjectTitle, {validate:true});
-            subjectModel.setColor("#" + this.$(this.selectors.colorPickerInput).val());
-            subjectModel.setCategory(categoryModel);
-         //   this._cancelModalWindow();
-
-            subjectModel.isNew(true);
-            subjectModel.save({
-                success: $.proxy(this._cancelModalWindow, this)
-            });
-
-        }
-
-
+            this.model.setTitle(subjectTitle);
+            this.model.setColor("#" + this.$(this.selectors.colorPickerInput).val());
+            this.model.setCategory(categoryModel);
+            // this.model.isNew(true);
+            if(this.model.save(null, {type: 'POST'})){
+                this._cancelModalWindow();
+            }
     },
 
     _renderSubject: function(model) {

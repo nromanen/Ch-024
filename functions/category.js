@@ -11,15 +11,30 @@ exports.create = function (req, res) {
         if (!err) {
             res.end;
         } else {
-            res.end(err);
+            res.end(err.message);
         }
     });
 
 
 };
 
+exports.delete = function(req, res) {
+    var queryCategory = db.categoryModel.find({'_id': req.params.id});
+    var querySubject = db.subjectModel.find({'categoryId': req.params.id});
+    queryCategory.remove(function(err) {
+        if(err) {
+            return handleError(err);
+        } else {
+            querySubject.remove(function(err) {
+                if(err) return handleError(err);
+            });
+            res.send("Delete Category ID: " + req.params.id);
+        }
+    });
+};
+
 exports.get = function (req, res) {
-    var query = db.categoryModel.find();
+    var query = db.categoryModel.find({approved: true});
     query.select('title');
     query.exec(function (err, queryRes) {
         if (err) {
@@ -28,12 +43,7 @@ exports.get = function (req, res) {
             res.send(JSON.stringify(queryRes));
             res.end;
         }
-
-
-
     });
-
-
     /*
      var query = db.userModel.findOne({ 'email': req.body.email });
      query.select('password username email role');
@@ -45,5 +55,15 @@ exports.get = function (req, res) {
 
      goNext(qRes.password, qRes.username, qRes.role);
      });*/
-
+};
+exports.getNotApproved = function (req, res) {
+    var query = db.categoryModel.find({approved: false});
+    query.select('title');
+    query.exec(function (err, queryRes) {
+        if (err) {
+            return handleError(err)
+        } else {
+            res.json(queryRes);
+        }
+    });
 };

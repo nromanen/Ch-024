@@ -2,12 +2,15 @@ define('CategoryModel', ['jquery', 'underscore', 'backbone'], function($, _, Bac
     var CategoryModel = Backbone.Model.extend({
 
         urlRoot: '/category',
+        idAttribute: "_id",
 
         defaults: function() {
             return {
                 _id: '',
                 cid: this.cid,
-                title: ''
+                title: '',
+                confirmed: false,
+                teacherID: ''
             }
         },
 
@@ -32,15 +35,16 @@ define('CategoryModel', ['jquery', 'underscore', 'backbone'], function($, _, Bac
         },
 
         validate: function (attrs) {
-             var errors = [];
-                        if ( attrs.title <= 1 ) {
-                                errors.push({
-                                        field: 'categoryTitle',
-                                        message: 'Title must be longer then 1 sign!'});
-                        }
+            var errors = [];
+            if ( attrs.title <= 1 ) {
+                errors.push({
+                    field: 'categoryTitle',
+                    message: 'Title must be longer then 1 sign!'});
+            }
 
-                        return errors.length ? errors : false;
-}
+            return errors.length ? errors : false;
+        }
+
 
     });
     return CategoryModel;

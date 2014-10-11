@@ -15,7 +15,6 @@ define('CalendarView', ['jquery', 'underscore', 'backbone', 'moment', 'jqueryui'
 
     initialize: function(options){
         this.calendarEventsCollection = options.collection;
-
         this.calendarEventsCollection.on('add', $.proxy(this._renderCalendarEvent, this));
     },
 
@@ -52,6 +51,8 @@ define('CalendarView', ['jquery', 'underscore', 'backbone', 'moment', 'jqueryui'
             color:  this._convertHexColorToRGB(originalSubjectModel.getColor()) ,
             start: date
         });
+
+         calendarEventModel.setCid(calendarEventModel.cid);
         this.calendarEventsCollection.add(calendarEventModel);
         //this.$el.fullCalendar('renderEvent', calendarEventModel.toJSON(), true);
     },
@@ -61,7 +62,7 @@ define('CalendarView', ['jquery', 'underscore', 'backbone', 'moment', 'jqueryui'
     * Create Event View for updating and deleting event model.
     */
     _showCalendarEventModal: function(calendarEventObject) {
-        var calendarEventModel = this.calendarEventsCollection.findWhere({title: calendarEventObject.title});
+        var calendarEventModel = this.calendarEventsCollection.findWhere({cid: calendarEventObject.cid});
         calendarEventModel.trigger('showCalendarEventModal');
         new CalendarEventView({
             model: calendarEventModel,
@@ -70,7 +71,11 @@ define('CalendarView', ['jquery', 'underscore', 'backbone', 'moment', 'jqueryui'
     },
 
     _showPopover: _.debounce(function(calendarEventObject, jsEvent, ui) {
-        var calendarEventModel = this.calendarEventsCollection.findWhere({title: calendarEventObject.title}).toJSON();
+        var calendarEventModel = this.calendarEventsCollection.findWhere({_id: calendarEventObject._id});
+        if (!calendarEventModel) {
+            return;
+        }
+        calendarEventModel = calendarEventModel.toJSON();
         $(jsEvent.target).ownpopover({
             showEvent: 'mouseover',
             hideEvent: 'mouseout',

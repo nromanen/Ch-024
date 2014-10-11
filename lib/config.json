@@ -3,7 +3,6 @@
     "mongoose": {
         "url": "mongodb://localhost/softserve"
     },
-    //tmp it shout be in db
     "rights": {
         "user": {
             "events": {

@@ -51,6 +51,12 @@ app.configure(function() {
         return;
     });
 
+    app.use(function (req, res, next) {
+        res.status(404);
+        log.error('Not found URL: %s', req.url);
+        res.send({ error: 'Not found' });
+        return;
+    });
 });
 
 Urls(app, userRoles);

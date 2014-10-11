@@ -1,7 +1,7 @@
-define('LoginUserView', ['jquery', 'underscore', 'backbone', 'jqueryjson', 'LoginUserModel', 'RegistrationUserModel',
-        'RegistrationUserView', 'text!loginTemplate'
+define('LoginUserView', ['jquery', 'underscore', 'backbone', 'jqueryjson', 'RegistrationUserModel',
+        'RegistrationUserView', 'SessionModel', 'text!loginTemplate'
     ],
-    function($, _, Backbone, jqJSON, LoginUserModel, RegistrationUserModel, RegistrationUserView, loginTemplate) {
+    function($, _, Backbone, jqJSON, RegistrationUserModel, RegistrationUserView, Session, loginTemplate) {
         var LoginUserView = Backbone.View.extend({
 
             selectors: {
@@ -14,10 +14,6 @@ define('LoginUserView', ['jquery', 'underscore', 'backbone', 'jqueryjson', 'Logi
 
             template: _.template(loginTemplate),
 
-            initialize: function(options) {
-                this.router = options.router;
-            },
-
             /* PRIVATE METHODS */
 
             _attachEvents: function() {
@@ -28,11 +24,8 @@ define('LoginUserView', ['jquery', 'underscore', 'backbone', 'jqueryjson', 'Logi
             _loginUser: function() {
                 /*You can write here everything you need for login*/
                 var formData = ($(this.selectors.loginForm).serializeJSON());
+                Session.login(formData);
 
-                this.model.set(formData);
-                this.model.save(null, {
-                    success: _.bind(this.model._redirectToHome, this)
-                });
             },
 
             /*

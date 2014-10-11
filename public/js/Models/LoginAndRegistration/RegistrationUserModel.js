@@ -1,4 +1,4 @@
-define('RegistrationUserModel', ['jquery', 'underscore', 'backbone'], function ($, _, Backbone) {
+define('RegistrationUserModel', ['jquery', 'underscore', 'backbone', 'maskedinput'], function ($, _, Backbone) {
     var RegistrationUserModel = Backbone.Model.extend({
         defaults: {
             //id - model id will be replaced with id from db
@@ -7,14 +7,15 @@ define('RegistrationUserModel', ['jquery', 'underscore', 'backbone'], function (
             email: '',
             password: '',
             repeatPassword: '',
-            phone: ''
+            phone: '',
+            role: ''
         },
 
         constants: {
             PATTERN_NAME: /^[A-Z][a-z]+[-]?[A-Za-z]*$/,
             PATTERN_SURNAME: /^[A-Z][a-z]+[-]?[A-Za-z]*$/,
             PATTERN_MAIL: /^\w+[-_\.]*\w+@\w+-?\w+\.[a-z]{2,4}$/,
-            PATTERN_PHONE: /^[+](380)-\d{2}-\d{3}-\d{2}-\d{2}$/,
+            PATTERN_PHONE: /^\+\(380\)-\d{2}-\d{3}-\d{2}-\d{2}$/,
             NAME_LENGTH: 1,
             PASS_LENGTH: 6
         },
@@ -60,8 +61,8 @@ define('RegistrationUserModel', ['jquery', 'underscore', 'backbone'], function (
                 errors.push({field: 'phone',
                     message: 'Phone is not correct!'});
             }
-            //return errors.length ? errors : false;
-            return false;
+            return errors.length ? errors : false;
+           // return false;
         },
 
 

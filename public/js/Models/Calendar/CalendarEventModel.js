@@ -16,8 +16,13 @@ define('CalendarEventModel', ['jquery', 'underscore', 'backbone', 'SubjectModel'
                 textColor: 'red',
                 classroom : '',
                 amountOfStudents: 0,
-                currentCount: 0
+                currentCount: 0,
+                cid: 0
             }
+        },
+
+        getId: function() {
+            return this.get('_id');
         },
 
         setSubject: function(value) {
@@ -90,6 +95,14 @@ define('CalendarEventModel', ['jquery', 'underscore', 'backbone', 'SubjectModel'
 
         getAmountOfStudents: function() {
             return this.get('amountOfStudents');
+        },
+
+        getCid: function() {
+            return this.get('cid');
+        },
+
+        setCid: function(value) {
+            return this.set('cid', value);
         }
 
     });

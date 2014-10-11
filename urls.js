@@ -3,6 +3,7 @@ var user = require('./functions/user.js'),
     subject = require('./functions/subject.js'),
     category = require('./functions/category.js'),
     events = require('./functions/events.js'),
+    teachers = require('./functions/teachers.js'),
     passport = require('passport');
 
 function Urls(app, userRoles){
@@ -11,18 +12,22 @@ function Urls(app, userRoles){
 
     // app.get('/calendar', routes.app);
     //login api
-    app.post('/signin', passport.authenticate('local'), user.logIn);
+    app.post('/login', passport.authenticate('local'), user.logIn);
     app.post('/signup', user.signUp);
-    app.get('/logout', userRoles.can('user'), user.logOut);
+    app.post('/logout', userRoles.can('user'), user.logOut);
 
     //subjects api
     app.post('/subject', userRoles.can('teacher'), subject.create);
-    app.get('/subject/:cat', userRoles.can('teacher'), subject.get);
+    //app.get('/subject/:cat', userRoles.can('user'), subject.get);
     app.get('/subject', userRoles.can('teacher'), subject.get);
+    app.get('/subjects/notapproved', userRoles.can('admin'), subject.getNotApproved);
+    app.del('/subject/:id', userRoles.can('admin'), subject.delete);
 
     //categories api
     app.get('/category', userRoles.can('teacher'), category.get);
     app.post('/category', userRoles.can('teacher'), category.create);
+    app.get('/category/notapproved',userRoles.can('admin'), category.getNotApproved);
+    app.del('/category/:id', userRoles.can('admin'), category.delete);
 
     //events api
     app.get('/events', userRoles.can('user'), events.getAll);

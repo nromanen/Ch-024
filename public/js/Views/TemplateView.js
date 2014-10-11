@@ -1,10 +1,10 @@
-define('TemplateView', ['jquery', 'underscore', 'backbone', 'text',
+define('TemplateView', ['jquery', 'underscore', 'backbone','SessionModel', 'text',
         'text!navBarTemplate', 'text!footerTemplate', 'text!containerCalendarTemplate', 'text!aboutTemplate', 'text!homeTemplate',
-        'text!helpTemplate', 'text!settingsTemplate'
+        'text!helpTemplate', 'text!settingsTemplate', 'text!adminTemplate'
     ],
 
-    function($, _, Backbone, text, navBarTemplate, footerTemplate, containerCalendarTemplate, aboutTemplate, homeTemplate,
-        helpTemplate, settingsTemplate) {
+    function($, _, Backbone, Session, text, navBarTemplate, footerTemplate, containerCalendarTemplate, aboutTemplate, homeTemplate,
+        helpTemplate, settingsTemplate, adminTemplate) {
 
         var TemplateView = [];
 
@@ -13,11 +13,27 @@ define('TemplateView', ['jquery', 'underscore', 'backbone', 'text',
             template: _.template(navBarTemplate),
 
             selectors: {
-                headerTeg: 'header'
+                headerTeg: 'header',
+                logOutButton: '#logout'
+            },
+
+            initialize: function() {
+                this.$el.html(this.template());
+                this._attachEvents();
+
+            },
+
+            _attachEvents: function() {
+                this.$(this.selectors.logOutButton).on("click", $.proxy(this._logout, this));
+            },
+
+            _logout: function() {
+                Session.logout();
             },
 
             render: function() {
-                $(this.selectors.headerTeg).html(this.template());
+                
+                $(this.selectors.headerTeg).html(this.$el);
 
                 return this;
             }
@@ -52,9 +68,8 @@ define('TemplateView', ['jquery', 'underscore', 'backbone', 'text',
         });
 
 
-
-        for (var i = 7; i < arguments.length; i++) {
-            TemplateView[i - 7] = Backbone.View.extend({
+        for (var i = 8; i < arguments.length; i++) {
+            TemplateView[i - 8] = Backbone.View.extend({
 
                 template: _.template(arguments[i]),
 
@@ -68,8 +83,6 @@ define('TemplateView', ['jquery', 'underscore', 'backbone', 'text',
                 }
             });
         };
-
-
 
         // var AboutTemplateView = Backbone.View.extend({
 
@@ -120,7 +133,8 @@ define('TemplateView', ['jquery', 'underscore', 'backbone', 'text',
             AboutTemplateView: TemplateView[0],
             HomeTemplateView: TemplateView[1],
             HelpTemplateView: TemplateView[2],
-            SettingsTemplateView: TemplateView[3]
+            SettingsTemplateView: TemplateView[3],
+            AdminTemplateView: TemplateView[4]
             
         };
     });

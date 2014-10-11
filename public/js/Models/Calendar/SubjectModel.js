@@ -2,6 +2,7 @@ define('SubjectModel', ['jquery', 'underscore', 'backbone', 'CategoryModel'], fu
     var SubjectModel = Backbone.Model.extend({
 
         urlRoot: '/subject',
+        idAttribute: "_id",
 
         defaults: function() {
             return {
@@ -9,8 +10,11 @@ define('SubjectModel', ['jquery', 'underscore', 'backbone', 'CategoryModel'], fu
                 category: CategoryModel,
                 categoryId: "",
                 title: '',
-                color: '',
-                approved: false
+                textColor: 'red',
+                color: 'red',
+                approved: false,
+                confirmed: false,
+                teacherID: ''
             }
         },
 
@@ -50,9 +54,17 @@ define('SubjectModel', ['jquery', 'underscore', 'backbone', 'CategoryModel'], fu
             return this.get('approved');
         },
 
+        setTextColor: function(value) {
+            this.set('textColor', value);
+        },
+
+        getTextColor: function() {
+            return this.get('textColor');
+        },
+
         validate: function (attrs) {
             var errors = [];
-            if ( attrs.password !== attrs.repeatPassword ) {
+            if ( attrs.title <= 1 ) {
                 errors.push({
                     field: 'subjectTitle',
                     message: 'Title must be longer then 1 sign!'});

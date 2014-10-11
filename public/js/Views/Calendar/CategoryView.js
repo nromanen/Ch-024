@@ -25,9 +25,10 @@ define('CategoryView', ['jquery', 'underscore', 'backbone', 'navTabPaneCategoryV
 
 
         render: function () {
-            //this.$el = $('#subjectContainer');
-            $('main #subjectContainer #navTabContainer').append(this._createNavTab());
-            $('main #subjectContainer #navTabPaneContainer').append(this._createNavTabPane());
+            if (Calendar.Controller.session.hasPermission('category', 'watch')) {
+                $('main #subjectContainer #navTabContainer').append(this._createNavTab());
+                $('main #subjectContainer #navTabPaneContainer').append(this._createNavTabPane());
+            }
             return this;
         }
 });

@@ -1,5 +1,6 @@
 var db = require('../lib/mongoose'),
     cryptor = require('cryptor'),
+    config = require('../lib/config.js'),
     nodemailer = require('nodemailer');
 
 exports.logOut = function (req, res) {
@@ -8,7 +9,11 @@ exports.logOut = function (req, res) {
 };
 
 exports.logIn = function (req, res) {
-    res.redirect("/");
+    var userData = {
+        username: req.user.username,
+        rights: config.get("rights")[req.user.role]
+    };
+    res.json(userData);
 };
 
 // В середині модуля не бачить Монгус моделі userModel
@@ -16,25 +21,29 @@ exports.logIn = function (req, res) {
  auth.verify(req.body.email,req.body.hash);
  */
 
-exports.signUp = function (req, res) {
+exports.signUp = function(req, res) {
 
     var data = new db.userModel({
-
         username: req.body.name,
         surname: req.body.surname,
         email: req.body.email,
         phone: req.body.phone,
-        password: cryptor.md5(req.body.password)
+        password: cryptor.md5(req.body.password),
+        approved: !req.body.isTeacher ? true : false
     });
 
 
-    data.save(function (err) {
+    data.save(function(err) {
         if (!err) {
-            res.send({action: "registered"});
+            res.send({
+                action: "registered"
+            });
             res.end;
         } else {
 
-            res.send({action: "failRegister"});
+            res.send({
+                action: "failRegister"
+            });
             console.log(err);
             res.end;
         }
@@ -42,5 +51,3 @@ exports.signUp = function (req, res) {
 
     res.end;
 };
-
-
