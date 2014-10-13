@@ -2,8 +2,15 @@ require([
     'jquery',
     'underscore',
     'backbone',
+    'NavBarTemplateView',
+    'FooterTemplateView',
+    'ContainerCalendarTemplateView',
+    'AboutTemplateView',
+    'HomeTemplateView',
+    'HelpTemplateView',
+    'SettingsTemplateView',
+    'AdminTemplateView',
     'SessionModel',
-    'TemplateView',
     'LoginUserView',
     'CalendarEventsCollection',
     'CalendarView',
@@ -19,10 +26,34 @@ require([
     'AdminTeachersCollection',
     'AdminSubjectsCollection',
     'AdminCategoriesCollection'
-], function($, _, Backbone, Session, TemplateView, LoginUserView, EventsCollection,
-            CalendarView, SubjectsCollection, SubjectModel, SubjectsView, CategoryModel,
-            CategoriesView, CategoriesCollection, SettingsUserView, SettingsUserModel,
-            AdminActionBarGroup, AdminTeachersCollection, AdminSubjectsCollection, AdminCategoriesCollection) {
+], function(
+    $,
+    _,
+    Backbone,
+    NavBarTemplateView,
+    FooterTemplateView,
+    ContainerCalendarTemplateView,
+    AboutTemplateView,
+    HomeTemplateView,
+    HelpTemplateView,
+    SettingsTemplateView,
+    AdminTemplateView,
+    Session,
+    LoginUserView,
+    EventsCollection,
+    CalendarView,
+    SubjectsCollection,
+    SubjectModel,
+    SubjectsView,
+    CategoryModel,
+    CategoriesView,
+    CategoriesCollection,
+    SettingsUserView,
+    SettingsUserModel,
+    AdminActionBarGroup,
+    AdminTeachersCollection,
+    AdminSubjectsCollection,
+    AdminCategoriesCollection) {
 
     window.Calendar = {};
 
@@ -45,28 +76,29 @@ require([
         },
 
         _checkAuth: function() {
-             var path = Backbone.history.location.hash;
-             if (!Session.get('authenticated')) {
-                 Backbone.history.navigate('/', {
+            var path = Backbone.history.location.hash;
+            if (!this.session.get('authenticated')) {
+                Backbone.history.navigate('/', {
                     trigger: true
-                 });
-             } else if (path === '') {
+                });
+            } else if (path === '') {
                 Backbone.history.navigate('#home', {
                     trigger: true
                 });
-             } else {
+            } else {
                 Backbone.history.navigate(path, {
                     trigger: true
                 });
-             }
+            }
 
         },
 
         _initializeEvents: function() {
+
             this.on('route:homePage', function() {
-                new TemplateView.ContainerCalendarView().render();
+                new ContainerCalendarTemplateView().render();
                 this._headerFooterContainersRender();
-                new TemplateView.HomeTemplateView().render();
+                new HomeTemplateView().render();
                 this.eventsCollection = new EventsCollection();
                 this.categoriesCollection = new CategoriesCollection();
                 this.subjectsCollection = new SubjectsCollection();
@@ -85,38 +117,52 @@ require([
                 this._checkAuth();
 
                 // this.categoriesCollection.add([
-                //      {title: "IT and Configuration Management"},
+                //     {title: "IT and Configuration Management"},
                 //     {title: "Quality Control"},
                 //     {title: "Software Development"}]);
-                //this.selectMenuItem('home-menu');
+                // this.selectMenuItem('home-menu');
             });
 
             this.on('route:helpPage', function() {
-                new TemplateView.HelpTemplateView().render();
+
+                new ContainerCalendarTemplateView().render();
+                this._headerFooterContainersRender();
+                new HelpTemplateView().render();
                 this._checkAuth();
                 // this.selectMenuItem('help-menu');
+
             });
+
             this.on('route:aboutPage', function() {
-                new TemplateView.AboutTemplateView().render();
-                this._checkAuth();
+                new ContainerCalendarTemplateView().render();
+                this._headerFooterContainersRender();
+                new AboutTemplateView().render();
                 // this.selectMenuItem('about-menu');
+                this._checkAuth();
             });
+
             this.on('route:settingsPage', function() {
-                new TemplateView.SettingsTemplateView().render();
+                new ContainerCalendarTemplateView().render();
+                this._headerFooterContainersRender();
+                new SettingsTemplateView().render();
                 new SettingsUserView({
                     model: new SettingsUserModel
                 }).render();
                 this._checkAuth();
                 //this.selectMenuItem('');
-            });
-            this.on('route:loginPage', function() {
-                new LoginUserView().render();
-                this._checkAuth();
 
             });
+            this.on('route:loginPage', function() {
+
+                new LoginUserView().render();
+                this._checkAuth();
+            });
+
             this.on('route:adminPage', function() {
-                new TemplateView.AdminTemplateView().render();
-                this.notapprovedTeachersCollection =  new AdminTeachersCollection();
+                new ContainerCalendarTemplateView().render();
+                this._headerFooterContainersRender();
+                new AdminTemplateView().render();
+                this.notapprovedTeachersCollection = new AdminTeachersCollection();
                 this.notapprovedSubjectsCollection = new AdminSubjectsCollection();
                 this.notapprovedCategoriesCollection = new AdminCategoriesCollection();
                 new AdminActionBarGroup({
@@ -125,15 +171,16 @@ require([
                     notapprovedCategoriesCollection: this.notapprovedCategoriesCollection
 
                     //templateID: '#teacherInfoTemplate',
-                   // groupClass: '.teachersInfo'
+                    // groupClass: '.teachersInfo'
                 });
                 this._checkAuth();
             });
         },
 
         _headerFooterContainersRender: function() {
-            new TemplateView.NavBarTemplateView().render();
-            new TemplateView.FooterTemplateView().render();
+            new ContainerCalendarTemplateView().render();
+            new NavBarTemplateView().render();
+            new FooterTemplateView().render();
         }
 
         /*  selectMenuItem: function(menuItem) {
@@ -146,16 +193,16 @@ require([
     });
 
     Calendar.Controller = new Router;
-    $.ajaxSetup({
+    $.ajax({
         statusCode: {
             401: function() {
-                alert('You are not authorized');
-                window.location.replace('/');
-            }
-            /*403: function() {
-                alert('Access denied');
-                window.location.replace('/');
-            }*/
+                    alert('You are not authorized');
+                    window.location.replace('/');
+                }
+                /*403: function() {
+                    alert('Access denied');
+                    window.location.replace('/');
+                }*/
         }
     });
     Backbone.history.start();
