@@ -13,8 +13,10 @@ define('SubjectModel', ['jquery', 'underscore', 'backbone', 'CategoryModel'], fu
                 textColor: 'red',
                 color: 'red',
                 approved: false,
-                confirmed: false,
-                teacherID: ''
+                authorName: '',
+                authorSurname: ''
+            //    confirmed: false,
+            //    teacherID: ''
             }
         },
 
@@ -60,6 +62,22 @@ define('SubjectModel', ['jquery', 'underscore', 'backbone', 'CategoryModel'], fu
 
         getTextColor: function() {
             return this.get('textColor');
+        },
+
+        setAuthorName: function(value) {
+            this.set('authorName', value);
+        },
+
+        getAuthorName: function() {
+            return this.get('authorName');
+        },
+
+        setAuthorSurname: function(value) {
+            this.set('authorSurname', value);
+        },
+
+        getAuthorSurname: function() {
+            return this.get('authorSurname');
         },
 
         validate: function (attrs) {

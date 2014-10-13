@@ -9,8 +9,10 @@ define('CategoryModel', ['jquery', 'underscore', 'backbone'], function($, _, Bac
                 _id: '',
                 cid: this.cid,
                 title: '',
-                confirmed: false,
-                teacherID: ''
+                authorName: '',
+                authorSurname: ''
+               // confirmed: false,
+                //teacherID: ''
             }
         },
 
@@ -24,6 +26,22 @@ define('CategoryModel', ['jquery', 'underscore', 'backbone'], function($, _, Bac
 
         getTitle: function() {
             return this.get('title');
+        },
+
+        setAuthorName: function(value) {
+            this.set('authorName', value);
+        },
+
+        getAuthorName: function() {
+            return this.get('authorName');
+        },
+
+        setAuthorSurname: function(value) {
+            this.set('authorSurname', value);
+        },
+
+        getAuthorSurname: function() {
+            return this.get('authorSurname');
         },
 
         getId: function() {

@@ -13,34 +13,32 @@ var AdminActionBar = Backbone.View.extend({
 	initialize: function(options) {
 		AdminActionBar.options = options || {};
 		this.template = _.template(this.templates[options.templateID]);
-		this.model.bind('destroy', this.deleteModel, this);
+		this.model.bind('destroy', this._deleteView, this);
 	},
 
 	_attachEvents:function() {
      //this.$('.hideButton').on('click', $.proxy(this.hideView, this));
-     this.$('.confirmButton').on('click', $.proxy(this.confirmView, this));
-     this.$('.refuseButton').on('click', $.proxy(this.refuseView, this));
+     this.$('.confirmButton').on('click', $.proxy(this._confirmView, this));
+     this.$('.refuseButton').on('click', $.proxy(this._refuseView, this));
 	},
 
-	deleteModel: function() {
+	_deleteView: function() {
 		this.remove();
 	},
 
-	hideView: function() {
+	_hideView: function() {
 		var thisView = this;
-		this.$el.fadeOut('200', function(){ //fadeOut for slow element hiding
-			thisView.model.deleteThis();
-		});
+		this.$el.fadeOut('200');
 	},	
 
-	confirmView: function() {
-		//this.model.fetch({data:{id: this.id, confirmed: true},type:'POST' });
-		this.hideView();
+	_confirmView: function() {
+        this.model.save();
+		this._deleteView();
 	},
 
-	refuseView: function() {
-		//this.model.fetch({data:{id: this.id, confirmed: false},type:'POST' });
-		this.hideView();
+	_refuseView: function() {
+		this.model.destroy();
+		this._hideView();
 	},
 
 	render: function() {
