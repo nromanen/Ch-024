@@ -26,6 +26,14 @@ define('RegistrationUserView', ['jquery', 'underscore', 'backbone', 'Registratio
         this.model.on("invalid", $.proxy(this._defineError, this));
     },
 
+    _keyPressEvent: function() {
+            $('html').keypress(jQuery.proxy(function(event){
+                if(event.keyCode === 13){
+                    $("#register").click();
+                }
+            }));
+    },
+
     /**
      * @param {Backbone Model} model
      * @param {Object} errors
@@ -66,6 +74,7 @@ define('RegistrationUserView', ['jquery', 'underscore', 'backbone', 'Registratio
             this.$el.modal('show');
             this._attachEvents();
             this._addPhoneMask();
+            this._keyPressEvent();
             return this;
         }
     });

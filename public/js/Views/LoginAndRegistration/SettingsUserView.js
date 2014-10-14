@@ -14,6 +14,13 @@ define('SettingsUserView', ['jquery', 'underscore', 'backbone'], function($, _, 
             this.model.on("invalid", $.proxy(this._defineError, this));
         },
 
+        _keyPressEvent: function() {
+            $('html').keypress(jQuery.proxy(function(event){
+                if(event.keyCode === 13){
+                    $("#saveProfileButton").click();
+                }
+            }));
+        },
         /**
          * @param {Backbone Model} model
          * @param {Object} errors
@@ -48,6 +55,7 @@ define('SettingsUserView', ['jquery', 'underscore', 'backbone'], function($, _, 
 
         render: function() {
             this._attachEvents();
+            this._keyPressEvent();
             return this;
         }
     });
