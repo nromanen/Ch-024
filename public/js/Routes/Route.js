@@ -77,7 +77,9 @@ require([
 
         _checkAuth: function() {
             var path = Backbone.history.location.hash;
-            if (!this.session.get('authenticated')) {
+            // var user = JSON.parse(sessionStorage.getItem('user'));
+            // console.log(user);
+            if (!(this.session.get('user')['session']['user'])) {
                 Backbone.history.navigate('/', {
                     trigger: true
                 });
