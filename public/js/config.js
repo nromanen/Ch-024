@@ -70,10 +70,6 @@ var require = {
 
 
         // Template
-<<<<<<< HEAD
-=======
-
->>>>>>> b787ac029d513919e2640b1172be47451dacb698
         'aboutTemplate': '../templates/aboutTemplate.html',
         'navBarTemplate': '../templates/navBarTemplate.html',
         'footerTemplate': '../templates/footerTemplate.html',
@@ -91,18 +87,11 @@ var require = {
         'loginTemplate': '../templates/loginTemplate.html',
         'registrationTemplate': '../templates/registrationTemplate.html',
         'containerCalendarTemplate': '../templates/containerCalendarTemplate.html',
-<<<<<<< HEAD
-        'categoryInfoTemplate': '../templates/categoryInfoTemplate.html',
-        'subjectInfoTemplate': '../templates/subjectInfoTemplate.html',
-        'teacherInfoTemplate': '../templates/teacherInfoTemplate.html',
-        'adminTemplate': '../templates/adminTemplate.html'
 
-=======
         'adminTemplate': '../templates/adminTemplate.html',
         'categoryInfoTemplate': '../templates/categoryInfoTemplate.html',
         'subjectInfoTemplate': '../templates/subjectInfoTemplate.html',
         'teacherInfoTemplate': '../templates/teacherInfoTemplate.html'
->>>>>>> b787ac029d513919e2640b1172be47451dacb698
     },
 
     shim: {
