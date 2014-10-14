@@ -1,5 +1,10 @@
+<<<<<<< HEAD
+define('NavBarTemplateView', ['jquery', 'underscore', 'backbone', 'SessionModel', 'text', 'text!navBarTemplate'],
+	function($, _, Backbone, Session, text, navBarTemplate) {
+=======
 define('NavBarTemplateView', ['jquery', 'underscore', 'backbone', 'text', 'SessionModel', 'text!navBarTemplate'],
 	function($, _, Backbone, text, Session, navBarTemplate) {
+>>>>>>> b787ac029d513919e2640b1172be47451dacb698
 
     var NavBarTemplateView = Backbone.View.extend({
 

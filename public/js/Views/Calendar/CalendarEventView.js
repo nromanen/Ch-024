@@ -14,6 +14,7 @@ define('CalendarEventView', ['jquery', 'underscore', 'backbone', 'text!saveEvent
         initialize: function(options) {
             this.calendarEventObject = options.calendarEventObject;
             this.model.off().on('showCalendarEventModal', this.render, this);
+            this.model.bind('destroy', this.remove, this);
         },
 
         /* PRIVATE METHODS */
@@ -45,11 +46,12 @@ define('CalendarEventView', ['jquery', 'underscore', 'backbone', 'text!saveEvent
         _saveEvent: function() {
             this._updateCalendarEvent();
             this.model.isNew(true);
-            this.model.save();
+            this.model.save(null, {type: 'POST'});
             $("#calendar").fullCalendar('updateEvent', this.calendarEventObject);
         },
 
         _deleteEvent: function() {
+            this.model.deleteEvent();
 
         },
 
