@@ -2,6 +2,7 @@ define('CalendarEventModel', ['jquery', 'underscore', 'backbone', 'SubjectModel'
     var CalendarEventModel = Backbone.Model.extend({
 
         urlRoot: '/events',
+        idAttribute: '_id',
 
         defaults:function() {
             return {
@@ -19,6 +20,10 @@ define('CalendarEventModel', ['jquery', 'underscore', 'backbone', 'SubjectModel'
                 currentCount: 0,
                 cid: 0
             }
+        },
+
+        deleteEvent: function() {
+            this.destroy();
         },
 
         getId: function() {

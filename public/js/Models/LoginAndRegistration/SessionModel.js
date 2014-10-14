@@ -59,6 +59,8 @@ define([
                 Backbone.history.navigate('/', {
                     trigger: true
                 });
+
+                return false;
             });
         },
 

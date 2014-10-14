@@ -24,7 +24,11 @@ define('LoginUserView', ['jquery', 'underscore', 'backbone', 'jqueryjson', 'Regi
             _loginUser: function() {
                 /*You can write here everything you need for login*/
                 var formData = ($(this.selectors.loginForm).serializeJSON());
-                Session.login(formData);
+               if (!Session.login(formData)) {
+                   $('.incorrectLogin').fadeIn(200);
+               }
+
+                return false;
 
             },
 

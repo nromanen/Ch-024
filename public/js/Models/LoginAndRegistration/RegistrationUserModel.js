@@ -15,7 +15,7 @@ define('RegistrationUserModel', ['jquery', 'underscore', 'backbone', 'maskedinpu
             PATTERN_NAME: /^[A-Z][a-z]+[-]?[A-Za-z]*$/,
             PATTERN_SURNAME: /^[A-Z][a-z]+[-]?[A-Za-z]*$/,
             PATTERN_MAIL: /^\w+[-_\.]*\w+@\w+-?\w+\.[a-z]{2,4}$/,
-            PATTERN_PHONE: /^\+\(380\)-\d{2}-\d{3}-\d{2}-\d{2}$/,
+            PATTERN_PHONE: /^[+](380)-\d{2}-\d{3}-\d{2}-\d{2}$/,
             NAME_LENGTH: 1,
             PASS_LENGTH: 6
         },

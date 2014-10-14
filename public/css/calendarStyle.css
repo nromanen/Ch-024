@@ -1,7 +1,5 @@
-@import url(http://fonts.googleapis.com/css?family=Open+Sans);
 body {
     overflow: auto;
-    font-family: Open Sans;
     background: #fff;
 }
 .row {
@@ -52,12 +50,12 @@ body {
     float: right;
 }
 .calendarContainer {
-    background-color: #eff4f7;
+    background-color: #f8f8f8;
     margin-top: 50px;
     margin-bottom: 50px;
-    padding: 0 20px 20px 20px;
+
     position: relative;
-    box-shadow: 10px 10px 5px #999999;
+
 }
 #clip {
     position: relative;
@@ -88,7 +86,6 @@ body {
     border-radius: 2px;
     background-color: black;
     box-shadow: 4px 4px 4px #7B7B74;
-    font-family: 'Open Sans', sans-serif;
     line-height: 1.4em;
     color: white;
     filter: alpha(opacity=70);

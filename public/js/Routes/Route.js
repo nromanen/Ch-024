@@ -2,8 +2,15 @@ require([
     'jquery',
     'underscore',
     'backbone',
+    'NavBarTemplateView',
+    'FooterTemplateView',
+    'ContainerCalendarTemplateView',
+    'AboutTemplateView',
+    'HomeTemplateView',
+    'HelpTemplateView',
+    'SettingsTemplateView',
+    'AdminTemplateView',
     'SessionModel',
-    'TemplateView',
     'LoginUserView',
     'CalendarEventsCollection',
     'CalendarView',
@@ -19,7 +26,15 @@ require([
     'AdminTeachersCollection',
     'AdminSubjectsCollection',
     'AdminCategoriesCollection'
-], function($, _, Backbone, Session, TemplateView, LoginUserView, EventsCollection,
+], function($, _, Backbone,    NavBarTemplateView,
+            FooterTemplateView,
+            ContainerCalendarTemplateView,
+            AboutTemplateView,
+            HomeTemplateView,
+            HelpTemplateView,
+            SettingsTemplateView,
+            AdminTemplateView,
+            Session, LoginUserView, EventsCollection,
             CalendarView, SubjectsCollection, SubjectModel, SubjectsView, CategoryModel,
             CategoriesView, CategoriesCollection, SettingsUserView, SettingsUserModel,
             AdminActionBarGroup, AdminTeachersCollection, AdminSubjectsCollection, AdminCategoriesCollection) {
@@ -63,27 +78,27 @@ require([
         },
 
         _initializeEvents: function() {
+            var that = this;
             this.on('route:homePage', function() {
-                new TemplateView.ContainerCalendarView().render();
-                this._headerFooterContainersRender();
-                new TemplateView.HomeTemplateView().render();
-                this.eventsCollection = new EventsCollection();
-                this.categoriesCollection = new CategoriesCollection();
-                this.subjectsCollection = new SubjectsCollection();
-                new CalendarView({
-                    collection: this.eventsCollection
-                }).render();
-                new CategoriesView({
-                    collection: this.categoriesCollection,
-                    model: new CategoryModel
+                this._checkAuth(function() {
+                    that._headerFooterContainersRender();
+                    new HomeTemplateView().render();
+                    this.eventsCollection = new EventsCollection();
+                    this.categoriesCollection = new CategoriesCollection();
+                    this.subjectsCollection = new SubjectsCollection();
+                    new CalendarView({
+                        collection: this.eventsCollection
+                    }).render();
+                    new CategoriesView({
+                        collection: this.categoriesCollection,
+                        model: new CategoryModel
+                    });
+                    new SubjectsView({
+                        collectionSubject: this.subjectsCollection,
+                        collectionCategory: this.categoriesCollection,
+                        model: new SubjectModel
+                    });
                 });
-                new SubjectsView({
-                    collectionSubject: this.subjectsCollection,
-                    collectionCategory: this.categoriesCollection,
-                    model: new SubjectModel
-                });
-                this._checkAuth();
-
                 // this.categoriesCollection.add([
                 //      {title: "IT and Configuration Management"},
                 //     {title: "Quality Control"},
@@ -92,30 +107,44 @@ require([
             });
 
             this.on('route:helpPage', function() {
-                new TemplateView.HelpTemplateView().render();
-                this._checkAuth();
+                that._headerFooterContainersRender();
+                this._checkAuth(function() {
+                    new HelpTemplateView().render();
+                });
+                // var template;
+                // if (!template) { 
+                //     template = new TemplateView.HelpTemplateView().render();
+                // } else {
+                //     template.render();
+                // }
+
                 // this.selectMenuItem('help-menu');
             });
             this.on('route:aboutPage', function() {
-                new TemplateView.AboutTemplateView().render();
-                this._checkAuth();
+                that._headerFooterContainersRender();
+                this._checkAuth(function() {
+                    new AboutTemplateView().render();
+                });
                 // this.selectMenuItem('about-menu');
             });
             this.on('route:settingsPage', function() {
-                new TemplateView.SettingsTemplateView().render();
-                new SettingsUserView({
-                    model: new SettingsUserModel
-                }).render();
-                this._checkAuth();
+                that._headerFooterContainersRender();
+                this._checkAuth(function() {
+                    new SettingsTemplateView().render();
+                    new SettingsUserView({
+                        model: new SettingsUserModel
+                    }).render();
+                });
                 //this.selectMenuItem('');
             });
             this.on('route:loginPage', function() {
-                new LoginUserView().render();
-                this._checkAuth();
-
+                that._headerFooterContainersRender();
+               // this._checkAuth(function() {
+                    new LoginUserView().render();
+               // });
             });
             this.on('route:adminPage', function() {
-                new TemplateView.AdminTemplateView().render();
+                new AdminTemplateView().render();
                 this.notapprovedTeachersCollection =  new AdminTeachersCollection();
                 this.notapprovedSubjectsCollection = new AdminSubjectsCollection();
                 this.notapprovedCategoriesCollection = new AdminCategoriesCollection();
@@ -132,8 +161,9 @@ require([
         },
 
         _headerFooterContainersRender: function() {
-            new TemplateView.NavBarTemplateView().render();
-            new TemplateView.FooterTemplateView().render();
+            new ContainerCalendarTemplateView().render();
+            new NavBarTemplateView().render();
+            new FooterTemplateView().render();
         }
 
         /*  selectMenuItem: function(menuItem) {

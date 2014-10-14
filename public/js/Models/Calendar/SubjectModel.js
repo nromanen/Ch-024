@@ -87,8 +87,10 @@ define('SubjectModel', ['jquery', 'underscore', 'backbone', 'CategoryModel'], fu
                     field: 'subjectTitle',
                     message: 'Title must be longer then 1 sign!'});
             }
+
             return errors.length ? errors : false;
         }
+
     });
 
     return SubjectModel;
