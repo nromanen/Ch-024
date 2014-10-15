@@ -59,6 +59,17 @@ exports.create = function(req, res) {
      }*/
 };
 
+exports.confirm = function(req, res) {
+    var query = db.subjectModel.find({'_id': req.params.id});
+    query.update({approved: true}, function(err) {
+        if(err) {
+            return handleError(err);
+        } else {
+            res.send("Confirm Subject ID: " + req.params.id);
+        }
+    });
+};
+
 exports.delete = function(req, res) {
     var query = db.subjectModel.find({'_id': req.params.id});
     query.remove(function(err) {

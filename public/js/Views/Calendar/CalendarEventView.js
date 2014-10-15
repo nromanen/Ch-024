@@ -45,14 +45,13 @@ define('CalendarEventView', ['jquery', 'underscore', 'backbone', 'text!saveEvent
          */
         _saveEvent: function() {
             this._updateCalendarEvent();
-            this.model.isNew(true);
             this.model.save(null, {type: 'POST'});
             $("#calendar").fullCalendar('updateEvent', this.calendarEventObject);
         },
 
         _deleteEvent: function() {
+            $("#calendar").fullCalendar('removeEvents', this.calendarEventObject.id);
             this.model.deleteEvent();
-
         },
 
         /**

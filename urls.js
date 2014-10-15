@@ -22,16 +22,19 @@ function Urls(app, userRoles){
     app.get('/subject', userRoles.can('teacher'), subject.get);
     app.get('/subjects/notapproved', userRoles.can('admin'), subject.getNotApproved);
     app.del('/subject/:id', userRoles.can('admin'), subject.delete);
+    app.put('/subject/:id', userRoles.can('admin'), subject.confirm);
 
     //categories api
     app.get('/category', userRoles.can('teacher'), category.get);
     app.post('/category', userRoles.can('teacher'), category.create);
-    app.get('/category/notapproved',userRoles.can('admin'), category.getNotApproved);
+    app.get('/categories/notapproved',userRoles.can('admin'), category.getNotApproved);
     app.del('/category/:id', userRoles.can('admin'), category.delete);
+    app.put('/category/:id', userRoles.can('admin'), category.confirm);
 
     //events api
     app.get('/events', userRoles.can('user'), events.getAll);
     app.post('/events', userRoles.can('teacher'), events.create);
+    app.del('/events/:id', userRoles.can('admin'), events.delete);
 }
 
 exports.Urls = Urls;

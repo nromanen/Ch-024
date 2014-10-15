@@ -111,6 +111,10 @@ require([
                     collection: this.categoriesCollection,
                     model: new CategoryModel
                 });
+                new SubjectsView({
+                    collectionSubject: this.subjectsCollection,
+                    collectionCategory: this.categoriesCollection
+                });
                 this._checkAuth();
                 // this.categoriesCollection.add([
                 //     {title: "IT and Configuration Management"},
