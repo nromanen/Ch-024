@@ -147,3 +147,7 @@ body {
 .rightAlign{
     text-align: right;
 }
+#navTabs, #buttonCreate, .admin-menu{
+    display: none;
+    visibility: hidden;
+}

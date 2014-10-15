@@ -1,5 +1,5 @@
-define('NavBarTemplateView', ['jquery', 'underscore', 'backbone', 'text', 'SessionModel', 'text!navBarTemplate'],
-	function($, _, Backbone, text, Session, navBarTemplate) {
+define('NavBarTemplateView', ['jquery', 'underscore', 'backbone','ControllerView', 'text', 'SessionModel', 'text!navBarTemplate'],
+	function($, _, Backbone, ControllerView, text, Session, navBarTemplate) {
 
     var NavBarTemplateView = Backbone.View.extend({
 
@@ -7,7 +7,8 @@ define('NavBarTemplateView', ['jquery', 'underscore', 'backbone', 'text', 'Sessi
 
         selectors: {
             headerTeg: 'header',
-            logOutButton: '#logout'
+            logOutButton: '#logout',
+            adminMenu: '.admin-menu'
         },
 
         initialize: function() {
@@ -26,6 +27,7 @@ define('NavBarTemplateView', ['jquery', 'underscore', 'backbone', 'text', 'Sessi
 
         render: function() {
             $(this.selectors.headerTeg).html(this.$el);
+            ControllerView.showElements(this.selectors.adminMenu);
             return this;
         }
     });

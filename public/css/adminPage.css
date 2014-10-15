@@ -6,6 +6,7 @@
   position: absolute;
   padding-left: 40%;
   font-weight: bold;
+  font-family: 'Open Sans' !important;
 }
 
 .headerImage{
@@ -14,11 +15,14 @@
   float: left;
 }
 
-.tableStyle, td{
+.adminTableStyle {
+  width: 100%;
+}
+
+.adminTableStyle td{
   border: solid 1px;
   text-align: center;
   table-layout: fixed;
-  width: 100%;
   padding: 10px;
 }
 
@@ -49,13 +53,13 @@
 .categoryColumn{
   width: 30%;
 }
-.tableStyle table tr:nth-child(even) {
+.adminTableStyle tr:nth-child(even) {
     background-color: #eee;
 }
-.tableStyle table tr:nth-child(odd) {
+.adminTableStyle tr:nth-child(odd) {
    background-color:#fff;
 }
-.tableHeader{
+.adminTableHeader{
   font-weight: bold;
 }
 .categoryButton{

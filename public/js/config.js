@@ -67,6 +67,7 @@ var require = {
         'SettingsTemplateView': 'Views/Templates/SettingsTemplateView',
         'HelpTemplateView': 'Views/Templates/HelpTemplateView',
         'AdminTemplateView': 'Views/Templates/AdminTemplateView',
+        'ControllerView': 'Views/ControllerView',
 
 
         // Template
