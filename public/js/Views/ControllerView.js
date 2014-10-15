@@ -14,6 +14,10 @@ define('ControllerView', ['jquery', 'underscore', 'backbone'],
             }
         },
 
+        showWrongLogin: function() {
+            $('.incorrectLogin').fadeIn(200);
+        },
+
         selectMenuItem: function(menuItem) {
             $('.navbar .nav li').removeClass('active');
             if (menuItem) {

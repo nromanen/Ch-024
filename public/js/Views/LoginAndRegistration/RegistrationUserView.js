@@ -43,6 +43,7 @@ define('RegistrationUserView', ['jquery', 'underscore', 'backbone', 'Registratio
      *Validate user registration form
      */
     _checkForm:function(jsEvent){
+        jsEvent.preventDefault();
         var data = this.$el.serializeJSON();
        if( this.model.save(data)){
            this._shutdownModalWindow();

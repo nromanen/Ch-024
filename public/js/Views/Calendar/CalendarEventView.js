@@ -20,9 +20,16 @@ define('CalendarEventView', ['jquery', 'underscore', 'backbone', 'text!saveEvent
         /* PRIVATE METHODS */
 
         _attachEvents: function() {
+            this.$el.on('keydown', $.proxy(this._keydownEnterEvent, this));
             this.$(this.selectors.saveEventButton).on('click', $.proxy(this._saveEvent,this));
             this.$(this.selectors.deleteEventButton).on('click', $.proxy(this._deleteEvent,this));
+            //this.$el.on('keydown', $.proxy(this._keydownEnterEvent, this));
         },
+
+        _keydownEnterEvent: function(event) {
+            if(event.keyCode == 13) {$.proxy(this._saveEvent(), this)}; 
+        },
+
 
         /**
          * Update the attributes of model.
@@ -47,6 +54,7 @@ define('CalendarEventView', ['jquery', 'underscore', 'backbone', 'text!saveEvent
             this._updateCalendarEvent();
             this.model.save(null, {type: 'POST'});
             $("#calendar").fullCalendar('updateEvent', this.calendarEventObject);
+            this._cancelModalWindow();
         },
 
         _deleteEvent: function() {
@@ -58,11 +66,16 @@ define('CalendarEventView', ['jquery', 'underscore', 'backbone', 'text!saveEvent
          * Set correct template
          */
         _setTemplate: function() {
-            if(this.model.getEditable() === true){
+            if(this.model.getEditable() === true) {
                 this.template = _.template(saveEventModalWindowTemplate);
                 return;
             }
             this.template = _.template(deleteEventModalWindowTemplate);
+        },
+
+        _cancelModalWindow: function() {
+            this.remove();
+            $('.modal-backdrop').hide();
         },
 
         /* PUBLIC METHODS */

@@ -1,7 +1,8 @@
 define([
     'jquery',
-    'backbone'
-], function($, Backbone) {
+    'backbone',
+    'ControllerView'
+], function($, Backbone, ControllerView) {
 
     var SessionModel = Backbone.Model.extend({
 
@@ -57,10 +58,10 @@ define([
 
             });
             login.fail(function() {
+                ControllerView.showWrongLogin();
                 Backbone.history.navigate('/', {
                     trigger: true
                 });
-
                 return false;
             });
         },
