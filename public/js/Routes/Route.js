@@ -113,7 +113,8 @@ require([
                 });
                 new SubjectsView({
                     collectionSubject: this.subjectsCollection,
-                    collectionCategory: this.categoriesCollection
+                    collectionCategory: this.categoriesCollection,
+                    model: new SubjectModel
                 });
                 this._checkAuth();
                 // this.categoriesCollection.add([
