@@ -44,7 +44,6 @@ exports.getAll = function(req, res) {
         if (err) {
             return handleError(err)
         } else {
-            console.log(queryRes);
             res.send(JSON.stringify(queryRes));
             res.end;
         }

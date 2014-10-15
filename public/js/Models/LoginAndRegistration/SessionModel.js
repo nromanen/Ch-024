@@ -83,7 +83,12 @@ define([
 
         hasPermission: function(feature, action) {
             var user = this.get("user");
-            return user.rights[feature][action];
+            if(!(user===null)){
+                return user.rights[feature][action];
+            } else {
+                return false;
+            }
+            
         },
 
         getAuth: function(callback) {
