@@ -21,8 +21,9 @@ body {
 }
 .divSubject {
     font-size: 14px;
-    padding: 3px;
+    padding: 7px;
     width: 150px;
+    cursor: pointer;
     text-align: center;
     border: none;
     overflow: hidden;
@@ -34,11 +35,26 @@ body {
     visibility: visible;
 }
 .removeSubject {
-    visibility: hidden;
-    float: right;
+    /* visibility: hidden;*/
     position: absolute;
-    left: 132px;
-    top: 5px;
+    left: 128px;
+    text-align: left;
+    top: 9px;
+
+
+}
+
+span.divSubject {
+    text-align: left;
+}
+
+.removeSubject:hover {
+    /* visibility: hidden;*/
+    -webkit-transform: scale(1.4);
+    -moz-transform: scale(1.4);
+    -ms-transform: scale(1.4);
+    -o-transform: scale(1.4);
+    transform: scale(1.4);;
 }
 
 #navTabContainer li:hover .removeCategory {
@@ -48,12 +64,22 @@ body {
 .removeCategory {
     visibility: hidden;
     float: right;
+    padding: 2px 12px;
 }
+
+
+.removeCategory:hover {
+    -webkit-transform: scale(1.4);
+    -moz-transform: scale(1.4);
+    -ms-transform: scale(1.4);
+    -o-transform: scale(1.4);
+    transform: scale(1.4);;
+}
+
 .calendarContainer {
     background-color: #f8f8f8;
     margin-top: 50px;
     margin-bottom: 50px;
-
     position: relative;
 
 }
@@ -65,6 +91,10 @@ body {
 }
 .nav .navbar-nav .active {
     background-color: #428bca;
+}
+
+nav li:hover {
+    background-color: #4B8BAF;
 }
 .titleTextDecoration {
     font-size: 18pt;
@@ -130,9 +160,9 @@ body {
     font-family: 'socicon';
     src: url('fonts/socicon-webfont.eot');
     src: url('fonts/socicon-webfont.eot?#iefix') format('embedded-opentype'),
-         url('fonts/socicon-webfont.woff') format('woff'),
-         url('fonts/socicon-webfont.ttf') format('truetype'),
-         url('fonts/socicon-webfont.svg#sociconregular') format('svg');
+    url('fonts/socicon-webfont.woff') format('woff'),
+    url('fonts/socicon-webfont.ttf') format('truetype'),
+    url('fonts/socicon-webfont.svg#sociconregular') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -147,7 +177,27 @@ body {
 .rightAlign{
     text-align: right;
 }
-#navTabs, #buttonCreate, .admin-menu{
-    display: none;
-    visibility: hidden;
+
+#subjectContainer {
+    margin: 10px 0;
+}
+
+#external-events {
+
+}
+#external-events input {
+    min-width: 110px;
+    text-align: left;
+    margin-bottom: 2px;
+    padding-left: 20px;
+}
+
+#buttonCreate {
+    margin-top: 41px;
+    padding-left: 0;
+}
+
+
+.dropdown a>span {
+    margin: 0 8px;
 }

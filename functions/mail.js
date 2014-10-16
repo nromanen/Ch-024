@@ -1,6 +1,6 @@
 var transporter = require('../lib/mailTransport');
 
-exports.sendMail = function (req, res, mailData) {
+exports.sendMail = function (mailData) {
 
 
 // create reusable transporter object using SMTP transport
@@ -21,7 +21,7 @@ exports.sendMail = function (req, res, mailData) {
 
 
     var mailOptions = {
-        from: 'Fred Foo ✔ <ticapac@gmail.com>', // sender address
+        from: 'SoftServe EXAM ✔ <ticapac@gmail.com>', // sender address
         to: mailData.to, // list of receivers
         subject: mailData.subject, // Subject line
         text: mailData.plainText, // plaintext body

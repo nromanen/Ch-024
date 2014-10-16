@@ -54,3 +54,15 @@ header ul.nav>li>a {
 
 }
 
+.navbar-default .navbar-brand {
+    color: #fff;
+}
+
+.navbar-default .navbar-brand:hover {
+    color: #fff;
+}
+
+
+.nav.navbar-nav {
+
+}
