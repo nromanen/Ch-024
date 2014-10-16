@@ -201,3 +201,8 @@ nav li:hover {
 .dropdown a>span {
     margin: 0 8px;
 }
+
+#navTabs, #buttonCreate, .admin-menu{
+    display: none;
+    visibility: hidden;
+}
