@@ -1,72 +1,72 @@
-define('UserModel', ['jquery', 'underscore', 'backbone'], 
+define('UserModel', ['jquery', 'underscore', 'backbone'],
     function($, _, Backbone) {
-    var UserModel = Backbone.Model.extend({
+        var UserModel = Backbone.Model.extend({
 
-        //url: '/teachers'
+            //url: '/teachers'
 
-    	defaults: function() {
-           return{
-            id:'', //- model id will be replaced with id from db
-    		name:'',
-            surname:'',
-            email:'',
-            phone:'',
-            role: '',
-            confirmed: false
-        }
-    	},
-    
-    	deleteThis: function() {
-            this.destroy();
-        },
+            defaults: function() {
+                return {
+                    id: '', //- model id will be replaced with id from db
+                    name: '',
+                    surname: '',
+                    email: '',
+                    phone: '',
+                    role: '',
+                    confirmed: false
+                }
+            },
 
-        setName: function(value) {
-            this.set('name', value);
-        },
+            deleteThis: function() {
+                this.destroy();
+            },
 
-        getName: function() {
-            return this.get('name');
-        },
+            setName: function(value) {
+                this.set('name', value);
+            },
 
-        setSourname: function(value) {
-            this.set('sourname', value);
-        },
+            getName: function() {
+                return this.get('name');
+            },
 
-        getSourname: function() {
-            return this.get('sourname');
-        },
+            setSourname: function(value) {
+                this.set('sourname', value);
+            },
 
-        setEmail: function(value) {
-            this.set('email', value);
-        },
+            getSourname: function() {
+                return this.get('sourname');
+            },
 
-        getEmail: function() {
-            return this.get('email');
-        },
+            setEmail: function(value) {
+                this.set('email', value);
+            },
 
-        setPhone: function(value) {
-            this.set('phone', value);
-        },
+            getEmail: function() {
+                return this.get('email');
+            },
 
-        getPhone: function() {
-            return this.get('phone');
-        },
+            setPhone: function(value) {
+                this.set('phone', value);
+            },
 
-        setRole: function(value) {
-            this.set('role', value);
-        },
+            getPhone: function() {
+                return this.get('phone');
+            },
 
-        getRole: function() {
-            return this.get('role');
-        },
+            setRole: function(value) {
+                this.set('role', value);
+            },
 
-        setConfirmed: function(value) {
-            this.set('confirmed', value);
-        },
+            getRole: function() {
+                return this.get('role');
+            },
 
-        getConfirmed: function() {
-            return this.get('confirmed');
-        },
+            setConfirmed: function(value) {
+                this.set('confirmed', value);
+            },
+
+            getConfirmed: function() {
+                return this.get('confirmed');
+            },
+        });
+        return UserModel;
     });
-    return UserModel;
-});

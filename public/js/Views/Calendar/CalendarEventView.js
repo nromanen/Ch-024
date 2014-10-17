@@ -14,14 +14,22 @@ define('CalendarEventView', ['jquery', 'underscore', 'backbone', 'text!saveEvent
         initialize: function(options) {
             this.calendarEventObject = options.calendarEventObject;
             this.model.off().on('showCalendarEventModal', this.render, this);
+            this.model.bind('destroy', this.remove, this);
         },
 
         /* PRIVATE METHODS */
 
         _attachEvents: function() {
+            this.$el.on('keydown', $.proxy(this._keydownEnterEvent, this));
             this.$(this.selectors.saveEventButton).on('click', $.proxy(this._saveEvent,this));
             this.$(this.selectors.deleteEventButton).on('click', $.proxy(this._deleteEvent,this));
+            //this.$el.on('keydown', $.proxy(this._keydownEnterEvent, this));
         },
+
+        _keydownEnterEvent: function(event) {
+            if(event.keyCode == 13) {$.proxy(this._saveEvent(), this)}; 
+        },
+
 
         /**
          * Update the attributes of model.
@@ -44,24 +52,30 @@ define('CalendarEventView', ['jquery', 'underscore', 'backbone', 'text!saveEvent
          */
         _saveEvent: function() {
             this._updateCalendarEvent();
-            this.model.isNew(true);
-            this.model.save();
+            this.model.save(null, {type: 'POST'});
             $("#calendar").fullCalendar('updateEvent', this.calendarEventObject);
+            this._cancelModalWindow();
         },
 
         _deleteEvent: function() {
-
+            $("#calendar").fullCalendar('removeEvents', this.calendarEventObject.id);
+            this.model.deleteEvent();
         },
 
         /**
          * Set correct template
          */
         _setTemplate: function() {
-            if(this.model.getEditable() === true){
+            if(this.model.getEditable() === true) {
                 this.template = _.template(saveEventModalWindowTemplate);
                 return;
             }
             this.template = _.template(deleteEventModalWindowTemplate);
+        },
+
+        _cancelModalWindow: function() {
+            this.remove();
+            $('.modal-backdrop').hide();
         },
 
         /* PUBLIC METHODS */

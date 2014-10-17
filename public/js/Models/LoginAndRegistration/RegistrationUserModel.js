@@ -1,5 +1,8 @@
 define('RegistrationUserModel', ['jquery', 'underscore', 'backbone', 'maskedinput'], function ($, _, Backbone) {
     var RegistrationUserModel = Backbone.Model.extend({
+        
+        urlRoot: '/signup',
+
         defaults: {
             //id - model id will be replaced with id from db
             name: '',
@@ -14,8 +17,8 @@ define('RegistrationUserModel', ['jquery', 'underscore', 'backbone', 'maskedinpu
         constants: {
             PATTERN_NAME: /^[A-Z][a-z]+[-]?[A-Za-z]*$/,
             PATTERN_SURNAME: /^[A-Z][a-z]+[-]?[A-Za-z]*$/,
-            PATTERN_MAIL: /^\w+[-_\.]*\w+@\w+-?\w+\.[a-z]{2,4}$/,
-            PATTERN_PHONE: /^\+\(380\)-\d{2}-\d{3}-\d{2}-\d{2}$/,
+            PATTERN_MAIL: /^\w+[-_\.]*\w+@[\w+-]?\w+\.[a-z]{2,4}$/,
+            PATTERN_PHONE: /^[+]\d{2}[(]\d{3}[)]\d{3}-\d{2}-\d{2}$/,
             NAME_LENGTH: 1,
             PASS_LENGTH: 6
         },
@@ -63,6 +66,7 @@ define('RegistrationUserModel', ['jquery', 'underscore', 'backbone', 'maskedinpu
             }
             return errors.length ? errors : false;
            // return false;
+
         },
 
         preValidate: function (fieldName, value, password){
@@ -85,9 +89,8 @@ define('RegistrationUserModel', ['jquery', 'underscore', 'backbone', 'maskedinpu
                 case '#phone': return ( this.value.search(this.constants.PATTERN_PHONE) === -1) ? false : true;
                                 
             };
-        },
+        }
 
-        urlRoot: '/signup'
     });
     return RegistrationUserModel;
 });

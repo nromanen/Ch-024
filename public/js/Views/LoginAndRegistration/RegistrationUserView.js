@@ -10,18 +10,18 @@ define('RegistrationUserView', ['jquery', 'underscore', 'backbone', 'Registratio
             passwordInput: '#password',
             repeatPasswordInput: '#repeatPassword',
             phoneInput: '#phone',
-            regForm: '#regForm',
-
+            regForm: '#regForm'
         },
 
         examples: {
             nameInput: 'Oleksij',
             surnameInput: 'Ivasiuk',
             emailInput: 'tverezo@gmail.com',
-            passwordInput: '365_Days!',
+            passwordInput: "365_Days!\n(at least 7 characters)",
             repeatPasswordInput: 'passwords should be the same',
             phoneInput: '+380963282780',
         },
+
 
         template: _.template(registrationTemplate),
 
@@ -29,6 +29,7 @@ define('RegistrationUserView', ['jquery', 'underscore', 'backbone', 'Registratio
             return true;
 
         },
+
 
     _attachEvents: function () {
         this.$(this.selectors.registerButton).on('click', $.proxy(this._checkForm,this));
@@ -64,15 +65,14 @@ define('RegistrationUserView', ['jquery', 'underscore', 'backbone', 'Registratio
         }, this);
     },
 
-    /**
-     *Validate user registration form
-     */
-    _checkForm: function(jsEvent){
+    _checkForm:function(jsEvent){
+        jsEvent.preventDefault();
         var data = this.$el.serializeJSON();
        if( this.model.save(data)){
            this._shutdownModalWindow();
        }
     },
+
 
     _checkField: function(fieldName){
         this.fieldName = fieldName;
@@ -102,13 +102,12 @@ define('RegistrationUserView', ['jquery', 'underscore', 'backbone', 'Registratio
         };
     },
 
-    _addPhoneMask: function () {
-      this.$("#phone").mask("+(380)-99-999-99-99",{placeholder:"_"});  
+
+    _addPhoneMask: function() {
+        this.$("#phone").mask("+99(999)999-99-99",{placeholder:"_"});
     },
 
-        /**
-         *Shutdown modal window
-         */
+
         _shutdownModalWindow: function() {
             this.remove();
             $('.modal-backdrop').remove();
@@ -117,12 +116,12 @@ define('RegistrationUserView', ['jquery', 'underscore', 'backbone', 'Registratio
         render: function() {
             this.$el = $(this.template());
             this.$el.modal('show');
-            this._attachEvents();
             this._addPhoneMask();
             this._keyPressEvent();
+            this._attachEvents();
             return this;
         }
     });
-    
+
     return RegistrationUserView;
 });

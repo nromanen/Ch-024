@@ -1,16 +1,20 @@
-define('HomeTemplateView', ['jquery', 'underscore', 'backbone', 'text', 'text!homeTemplate'],
-    function($, _, Backbone, text, homeTemplate) {
+define('HomeTemplateView', ['jquery', 'underscore', 'backbone', 'ControllerView', 'text', 'text!homeTemplate'],
+    function($, _, Backbone, ControllerView, text, homeTemplate) {
 
     var HomeTemplateView = Backbone.View.extend({
-        
+
         template: _.template(homeTemplate),
 
         selectors: {
-            mainTag: 'main'
+            mainTag: 'main',
+            navTabs: '#navTabs',
+            buttonCreate: '#buttonCreate'
         },
 
         render: function() {
-            $(this.selectors.mainTag).html(this.template());
+            this.$el.html(this.template());
+            $(this.selectors.mainTag).html(this.$el);
+            ControllerView.showElements(this.selectors.navTabs, this.selectors.buttonCreate);
             return this;
         }
     });

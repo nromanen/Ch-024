@@ -1,6 +1,6 @@
 define('SubjectsView', ['jquery', 'underscore', 'backbone', 'tinycolor', 'pickacolor', 'SubjectModel','CategoryModel',
     'SubjectView', 'text!createSubjectModalWindowTemplate', 'text!optionForSelect'],
-    function($, _, Backbone, tinycolor, pickacolor, SubjectModel, CategoryModel, SubjectView, createSubjectModalWindowTemplate, optionForSelect) {
+function($, _, Backbone, tinycolor, pickacolor, SubjectModel, CategoryModel, SubjectView, createSubjectModalWindowTemplate, optionForSelect) {
     window.tinycolor = tinycolor;
 
     var SubjectsView = Backbone.View.extend({
@@ -29,8 +29,13 @@ define('SubjectsView', ['jquery', 'underscore', 'backbone', 'tinycolor', 'pickac
 
     _attachEvents: function() {
         this.$(this.selectors.createSubjectButton).on('click', $.proxy(this._addNewSubject, this));
+        this.$el.on('keydown', $.proxy(this._keydownEnterEvent, this));
         this.$(this.selectors.cancelButton).on('click', $.proxy(this._cancelModalWindow, this));
         this.model.on("invalid", $.proxy(this._defineValidationError, this));
+    },
+
+    _keydownEnterEvent: function(event) {
+        if(event.keyCode == 13) {$.proxy(this._addNewSubject(), this)}; 
     },
 
     _defineValidationError:function(model, errors){

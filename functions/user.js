@@ -1,7 +1,7 @@
 var db = require('../lib/mongoose'),
-    cryptor = require('cryptor'),
     config = require('../lib/config.js'),
-    nodemailer = require('nodemailer');
+    cryptor = require('cryptor'),
+    nodemailer = require('./mail');
 
 exports.logOut = function (req, res) {
     req.logout();
@@ -21,7 +21,7 @@ exports.logIn = function (req, res) {
  auth.verify(req.body.email,req.body.hash);
  */
 
-exports.signUp = function(req, res) {
+exports.signUp = function (req, res) {
 
     var data = new db.userModel({
         username: req.body.name,
@@ -33,11 +33,9 @@ exports.signUp = function(req, res) {
     });
 
 
-    data.save(function(err) {
+    data.save(function (err) {
         if (!err) {
-            res.send({
-                action: "registered"
-            });
+            res.send(201);
             res.end;
         } else {
 

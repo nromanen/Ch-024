@@ -21,11 +21,11 @@ define('LoginUserView', ['jquery', 'underscore', 'backbone', 'jqueryjson', 'Regi
                 $(this.selectors.userRegisterButton).on('click', $.proxy(this._registerUser, this));
             },
 
-            _loginUser: function() {
+            _loginUser: function(jsEvent) {
                 /*You can write here everything you need for login*/
+                jsEvent.preventDefault();
                 var formData = ($(this.selectors.loginForm).serializeJSON());
-                Session.login(formData);
-
+               Session.login(formData);
             },
 
             /*
@@ -36,7 +36,6 @@ define('LoginUserView', ['jquery', 'underscore', 'backbone', 'jqueryjson', 'Regi
                     model: new RegistrationUserModel
                 }).render();
             },
-
             /*PUBLIC METHODS*/
 
             render: function() {

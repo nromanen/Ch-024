@@ -25,7 +25,8 @@ require([
     'AdminActionBarGroup',
     'AdminTeachersCollection',
     'AdminSubjectsCollection',
-    'AdminCategoriesCollection'
+    'AdminCategoriesCollection',
+    'ControllerView'
 ], function(
     $,
     _,
@@ -53,12 +54,15 @@ require([
     AdminActionBarGroup,
     AdminTeachersCollection,
     AdminSubjectsCollection,
-    AdminCategoriesCollection) {
+    AdminCategoriesCollection,
+    ControllerView) {
 
     window.Calendar = {};
 
     var Router = Backbone.Router.extend({
         session: null,
+
+        
 
         routes: {
             "": "loginPage",
@@ -77,7 +81,9 @@ require([
 
         _checkAuth: function() {
             var path = Backbone.history.location.hash;
-            if (!this.session.get('authenticated')) {
+            // var user = JSON.parse(sessionStorage.getItem('user'));
+            // console.log(user);
+            if (!this.session.get('user')) {
                 Backbone.history.navigate('/', {
                     trigger: true
                 });
@@ -115,12 +121,7 @@ require([
                     model: new SubjectModel
                 });
                 this._checkAuth();
-
-                // this.categoriesCollection.add([
-                //     {title: "IT and Configuration Management"},
-                //     {title: "Quality Control"},
-                //     {title: "Software Development"}]);
-                // this.selectMenuItem('home-menu');
+                ControllerView.selectMenuItem('home-menu');
             });
 
             this.on('route:helpPage', function() {
@@ -129,7 +130,7 @@ require([
                 this._headerFooterContainersRender();
                 new HelpTemplateView().render();
                 this._checkAuth();
-                // this.selectMenuItem('help-menu');
+                ControllerView.selectMenuItem('help-menu');
 
             });
 
@@ -137,8 +138,8 @@ require([
                 new ContainerCalendarTemplateView().render();
                 this._headerFooterContainersRender();
                 new AboutTemplateView().render();
-                // this.selectMenuItem('about-menu');
                 this._checkAuth();
+                ControllerView.selectMenuItem('about-menu');
             });
 
             this.on('route:settingsPage', function() {
@@ -149,11 +150,10 @@ require([
                     model: new SettingsUserModel
                 }).render();
                 this._checkAuth();
-                //this.selectMenuItem('');
+                ControllerView.selectMenuItem('');
 
             });
             this.on('route:loginPage', function() {
-
                 new LoginUserView().render();
                 this._checkAuth();
             });
@@ -174,6 +174,7 @@ require([
                     // groupClass: '.teachersInfo'
                 });
                 this._checkAuth();
+                ControllerView.selectMenuItem('admin-menu');
             });
         },
 
@@ -182,13 +183,6 @@ require([
             new NavBarTemplateView().render();
             new FooterTemplateView().render();
         }
-
-        /*  selectMenuItem: function(menuItem) {
-         $('.navbar .nav li').removeClass('active');
-         if (menuItem) {
-         $('.' + menuItem).addClass('active');
-         }
-         }*/
 
     });
 

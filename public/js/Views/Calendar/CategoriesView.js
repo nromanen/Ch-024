@@ -24,12 +24,17 @@ define('CategoriesView', ['jquery', 'underscore', 'backbone', 'CategoryModel', '
         },
 
         _attachEvents: function() {
-            this.$(this.selectors.createCategoryButton).off().on('click', $.proxy(this._addNewCategory, this));
-            this.$(this.selectors.cancelButton).off().on('click', $.proxy(this._cancelModalWindow, this));
             $(this.selectors.addCategoryButton).off().on('click', $.proxy(this.render, this));
+            this.$(this.selectors.createCategoryButton).off().on('click', $.proxy(this._addNewCategory, this));
+            this.$el.on('keydown', $.proxy(this._keydownEnterEvent, this));
+            this.$(this.selectors.cancelButton).off().on('click', $.proxy(this._cancelModalWindow, this));
             this.model.on("invalid", $.proxy(this._defineValidationError, this));
 
 
+        },
+
+        _keydownEnterEvent: function(event) {
+            if(event.keyCode == 13) {$.proxy(this._addNewCategory(), this)}; 
         },
 
         _defineValidationError:function(model, errors){
@@ -50,8 +55,8 @@ define('CategoriesView', ['jquery', 'underscore', 'backbone', 'CategoryModel', '
         },
 
         _addNewCategory: function() {
-            var CategoryTitle = this.$(this.selectors.categoryTitleInput).val();
 
+            var CategoryTitle = this.$(this.selectors.categoryTitleInput).val();
                 this.model.setTitle(CategoryTitle);
                 this.model.isNew(true);
                 if(this.model.save(null, {type: 'POST'})){
@@ -61,9 +66,8 @@ define('CategoriesView', ['jquery', 'underscore', 'backbone', 'CategoryModel', '
         },
 
         _cancelModalWindow: function() {
-                this.remove();
-                $('.modal-backdrop').remove();
-
+            this.remove();
+            $('.modal-backdrop').remove();
         },
 
         render: function() {

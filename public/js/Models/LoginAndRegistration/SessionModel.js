@@ -1,7 +1,8 @@
 define([
     'jquery',
-    'backbone'
-], function($, Backbone) {
+    'backbone',
+    'ControllerView'
+], function($, Backbone, ControllerView) {
 
     var SessionModel = Backbone.Model.extend({
 
@@ -25,7 +26,6 @@ define([
             }
         },
 
-
         set: function(key, value) {
             if (this.supportStorage) {
                 sessionStorage.setItem(key, value);
@@ -47,8 +47,10 @@ define([
                 type: 'POST'
             });
             login.done(function(response) {
-                that.set('authenticated', true);
-                that.set('user', response);
+                // that.set('authenticated', true);
+                var res = JSON.stringify(response);
+                that.set('user', res);
+                // console.log(that.get('user')['session']['user']);
 
                 Backbone.history.navigate("#home", {
                     trigger: true
@@ -56,9 +58,11 @@ define([
 
             });
             login.fail(function() {
+                ControllerView.showWrongLogin();
                 Backbone.history.navigate('/', {
                     trigger: true
                 });
+                return false;
             });
         },
 
@@ -79,12 +83,16 @@ define([
 
         hasPermission: function(feature, action) {
             var user = this.get("user");
-
-            return user.rights[feature][action];
+            if(!(user===null)){
+                return user.rights[feature][action];
+            } else {
+                return false;
+            }
+            
         },
 
         getAuth: function(callback) {
-            return this.get('authenticated');
+            return this.get('user.session');
         }
     });
 
