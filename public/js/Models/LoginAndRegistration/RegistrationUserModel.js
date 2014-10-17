@@ -65,6 +65,27 @@ define('RegistrationUserModel', ['jquery', 'underscore', 'backbone', 'maskedinpu
            // return false;
         },
 
+        preValidate: function (fieldName, value, password){
+            this.password = password;
+            this.fieldName = fieldName;
+            this.value = value;
+            switch (this.fieldName){
+                case '#name': return  (  this.value.search(this.constants.PATTERN_NAME) === -1 ||
+                                        this.value.length <= this.constants.NAME_LENGTH ) ? false : true; 
+
+                case '#surname': return ( this.value.search(this.constants.PATTERN_SURNAME) === -1 ||
+                                         this.value.length <= this.constants.NAME_LENGTH ) ? false : true; 
+
+                case '#email': return ( this.value.search(this.constants.PATTERN_MAIL) === -1) ? false : true;  
+
+                case '#password': return ( this.value.length <= this.constants.PASS_LENGTH ) ? false : true; 
+                               
+                case '#repeatPassword': return ( this.value !== this.password ) ? false : true;
+                                
+                case '#phone': return ( this.value.search(this.constants.PATTERN_PHONE) === -1) ? false : true;
+                                
+            };
+        },
 
         urlRoot: '/signup'
     });

@@ -13,6 +13,16 @@ define('RegistrationUserView', ['jquery', 'underscore', 'backbone', 'Registratio
             regForm: '#regForm',
 
         },
+
+        examples: {
+            nameInput: 'Oleksij',
+            surnameInput: 'Ivasiuk',
+            emailInput: 'tverezo@gmail.com',
+            passwordInput: '365_Days!',
+            repeatPasswordInput: 'passwords should be the same',
+            phoneInput: '+380963282780',
+        },
+
         template: _.template(registrationTemplate),
 
         initialize: function() {
@@ -22,7 +32,14 @@ define('RegistrationUserView', ['jquery', 'underscore', 'backbone', 'Registratio
 
     _attachEvents: function () {
         this.$(this.selectors.registerButton).on('click', $.proxy(this._checkForm,this));
-        this.$(this.selectors.cancelButton).on('click', $.proxy(this._shutdownModalWindow,this));
+        this.$(this.selectors.cancelButton).on('click', $.proxy(this._shutdownModalWindow, this));
+        
+        this.$(this.selectors.nameInput).on('blur', $.proxy(this._checkField, this, "nameInput"));
+        this.$(this.selectors.surnameInput).on('blur', $.proxy(this._checkField, this, "surnameInput"));
+        this.$(this.selectors.emailInput).on('blur', $.proxy(this._checkField, this, "emailInput"));
+        this.$(this.selectors.passwordInput).on('blur', $.proxy(this._checkField, this, "passwordInput"));
+        this.$(this.selectors.repeatPasswordInput).on('blur', $.proxy(this._checkRepeatPassword, this, "repeatPasswordInput"));
+
         this.model.on("invalid", $.proxy(this._defineError, this));
     },
 
@@ -42,7 +59,7 @@ define('RegistrationUserView', ['jquery', 'underscore', 'backbone', 'Registratio
     _defineError: function(model, errors){
         this.$('.errors').html('');
         _.each(errors, function(error){
-            this.$('.form-group #'+ error.field + ' + .errors').append('<span>' + error.message + '</span>');
+            // this.$('.form-group #'+ error.field + ' + .errors').append('<span>' + error.message + '</span>');
             this.$('#' + error.field).addClass('borderRed');
         }, this);
     },
@@ -55,6 +72,34 @@ define('RegistrationUserView', ['jquery', 'underscore', 'backbone', 'Registratio
        if( this.model.save(data)){
            this._shutdownModalWindow();
        }
+    },
+
+    _checkField: function(fieldName){
+        this.fieldName = fieldName;
+        var currentInput = this.$(this.selectors[this.fieldName]);
+        if(!this.model.preValidate(this.selectors[this.fieldName], currentInput.val())){
+            currentInput.popover({content: "example: " + this.examples[this.fieldName] , placement: "left"});
+            currentInput.popover('show');
+            currentInput.addClass('borderRed');
+        }
+        else{
+            currentInput.popover('hide');
+            currentInput.removeClass('borderRed');
+        };
+    },
+
+    _checkRepeatPassword: function(fieldName){
+        this.fieldName = fieldName;
+        var currentInput = this.$(this.selectors[this.fieldName]);
+        if(!this.model.preValidate('repeatPassword', currentInput.val(), this.$(this.selectors.passwordInput).val())){
+            currentInput.popover({content: this.examples.repeatPasswordInput , placement: "left"});
+            currentInput.popover('show');
+            currentInput.addClass('borderRed');
+        }
+        else{
+            currentInput.popover('hide');
+            currentInput.removeClass('borderRed');
+        };
     },
 
     _addPhoneMask: function () {
