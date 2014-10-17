@@ -1,7 +1,7 @@
 define('AdminActionBar', ['jquery', 'underscore', 'backbone', 'text!teacherInfoTemplate',
     'text!subjectInfoTemplate','text!categoryInfoTemplate'],
     function($, _, Backbone, teacherInfoTemplate, subjectInfoTemplate, categoryInfoTemplate) {
-var AdminActionBar = Backbone.View.extend({
+	var AdminActionBar = Backbone.View.extend({
 
 	templates: {
         teacherInfoTemplate: teacherInfoTemplate,
@@ -11,13 +11,12 @@ var AdminActionBar = Backbone.View.extend({
 	tagName: 'tr',
 
 	initialize: function(options) {
-		AdminActionBar.options = options || {};
+		AdminActionBar.options = options;
 		this.template = _.template(this.templates[options.templateID]);
 		this.model.bind('destroy', this._deleteView, this);
 	},
 
 	_attachEvents:function() {
-     //this.$('.hideButton').on('click', $.proxy(this.hideView, this));
      this.$('.confirmButton').on('click', $.proxy(this._confirmView, this));
      this.$('.refuseButton').on('click', $.proxy(this._refuseView, this));
 	},
@@ -26,19 +25,19 @@ var AdminActionBar = Backbone.View.extend({
 		this.remove();
 	},
 
-	_hideView: function() {
-		var thisView = this;
-		this.$el.fadeOut('200');
-	},	
-
 	_confirmView: function() {
+		var thisView = this;
         this.model.save();
-		this._deleteView();
+        this.$el.fadeOut('200', function(){ 
+			thisView._deleteView();
+		});
 	},
 
 	_refuseView: function() {
-		this.model.destroy();
-		this._hideView();
+		var thisView = this;
+		this.$el.fadeOut('200', function(){ //fadeOut for slow element hiding
+			thisView.model.destroy();
+		});
 	},
 
 	render: function() {
