@@ -2,7 +2,7 @@ define('CalendarEventModel', ['jquery', 'underscore', 'backbone', 'SubjectModel'
     var CalendarEventModel = Backbone.Model.extend({
 
         urlRoot: '/events',
-        idAttribute: '_id',
+        // idAttribute: '_id',
 
         defaults:function() {
             return {

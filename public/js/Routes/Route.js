@@ -101,6 +101,10 @@ require([
 
         _initializeEvents: function() {
 
+            this.on('route', function() {
+                this._checkAuth();
+            })
+
             this.on('route:homePage', function() {
                 new ContainerCalendarTemplateView().render();
                 this._headerFooterContainersRender();
@@ -120,7 +124,6 @@ require([
                     collectionCategory: this.categoriesCollection,
                     model: new SubjectModel
                 });
-                this._checkAuth();
                 ControllerView.selectMenuItem('home-menu');
             });
 
@@ -129,7 +132,6 @@ require([
                 new ContainerCalendarTemplateView().render();
                 this._headerFooterContainersRender();
                 new HelpTemplateView().render();
-                this._checkAuth();
                 ControllerView.selectMenuItem('help-menu');
 
             });
@@ -138,7 +140,6 @@ require([
                 new ContainerCalendarTemplateView().render();
                 this._headerFooterContainersRender();
                 new AboutTemplateView().render();
-                this._checkAuth();
                 ControllerView.selectMenuItem('about-menu');
             });
 
@@ -149,13 +150,11 @@ require([
                 new SettingsUserView({
                     model: new SettingsUserModel
                 }).render();
-                this._checkAuth();
                 ControllerView.selectMenuItem('');
 
             });
             this.on('route:loginPage', function() {
                 new LoginUserView().render();
-                this._checkAuth();
             });
 
             this.on('route:adminPage', function() {
@@ -173,7 +172,6 @@ require([
                     //templateID: '#teacherInfoTemplate',
                     // groupClass: '.teachersInfo'
                 });
-                this._checkAuth();
                 ControllerView.selectMenuItem('admin-menu');
             });
         },

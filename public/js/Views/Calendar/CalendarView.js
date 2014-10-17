@@ -15,7 +15,7 @@ define('CalendarView', ['jquery', 'underscore', 'backbone', 'moment', 'jqueryui'
 
     initialize: function(options){
         this.calendarEventsCollection = options.collection;
-        this.calendarEventsCollection.on('add', $.proxy(this._renderCalendarEvent, this));
+        this.calendarEventsCollection.on('add', this._renderCalendarEvent, this);
     },
 
     /* PRIVATE METHODS */
@@ -52,7 +52,7 @@ define('CalendarView', ['jquery', 'underscore', 'backbone', 'moment', 'jqueryui'
             start: date
         });
 
-         calendarEventModel.setCid(calendarEventModel.cid);
+        calendarEventModel.setCid(calendarEventModel.cid);
         this.calendarEventsCollection.add(calendarEventModel);
         //this.$el.fullCalendar('renderEvent', calendarEventModel.toJSON(), true);
     },
