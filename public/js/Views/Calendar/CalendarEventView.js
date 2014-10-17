@@ -23,11 +23,13 @@ define('CalendarEventView', ['jquery', 'underscore', 'backbone', 'text!saveEvent
             this.$el.on('keydown', $.proxy(this._keydownEnterEvent, this));
             this.$(this.selectors.saveEventButton).on('click', $.proxy(this._saveEvent,this));
             this.$(this.selectors.deleteEventButton).on('click', $.proxy(this._deleteEvent,this));
-            //this.$el.on('keydown', $.proxy(this._keydownEnterEvent, this));
         },
 
         _keydownEnterEvent: function(event) {
-            if(event.keyCode == 13) {$.proxy(this._saveEvent(), this)}; 
+            if(event.keyCode == 13) {
+                this.$(this.selectors.saveEventButton).trigger('click');
+                this.$(this.selectors.deleteEventButton).trigger('click');
+            }
         },
 
 
@@ -44,7 +46,6 @@ define('CalendarEventView', ['jquery', 'underscore', 'backbone', 'text!saveEvent
             this.calendarEventObject.editable = false;
             this.calendarEventObject.textColor = 'black';
             this.calendarEventObject.color = this.calendarEventObject.color.substr(0,this.calendarEventObject.color.length - 4) + '1)';
-
         },
 
         /**
@@ -58,8 +59,16 @@ define('CalendarEventView', ['jquery', 'underscore', 'backbone', 'text!saveEvent
         },
 
         _deleteEvent: function() {
-            $("#calendar").fullCalendar('removeEvents', this.calendarEventObject.id);
-            this.model.deleteEvent();
+        var that = this;
+        // console.log(that.model.toJSON());
+            $.ajax({
+                url: '/events/' + that.calendarEventObject._id,
+                type: 'DELETE',
+                data: that.model.toJSON()
+            })
+            .done(function() {
+                $("#calendar").fullCalendar('removeEvents', that.calendarEventObject._id);
+            });
         },
 
         /**
