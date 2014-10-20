@@ -1,20 +1,32 @@
-$.fn.ownpopover = function(params) {
-    var timer = null;
+$.fn.ownpopover = function(action, params) {
+    var $this = $(this);
 
-    function showPopover(el, content, evt) {
+    function hideAllPopovers() {
         $('body').find('.own-popover').remove();
+    }
+
+    function show(content) {
+        var top = $this.offset().top - 20 + 'px';
+        var left = $this.offset().left + 150 + 'px';
+
+        hideAllPopovers();
         $('body').append(content);
-        $('body').find('.own-popover').css('top', evt.clientY + 'px').css('left', evt.clientX + 'px');
+        $('body').find('.own-popover').css('top', top).css('left', left);
         $('body').find('.remove-popover').off('click').on('click', function(){
             $(this).closest('.own-popover').remove();
         });
+        $('.fc-button').off('click', hideAllPopovers).on('click', hideAllPopovers);
     }
 
-    $(this).off(params.showEvent).on(params.showEvent, function(evt) {
-        var html = $.parseHTML(params.html(params.content));
-        timer = setTimeout(_.bind(showPopover, this, $(this), html, evt), 500);
-    });
-    $(this).off(params.hideEvent).on(params.hideEvent, function() {
-        clearTimeout(timer);
-    });
+    function showPopover() {
+        var html;
+        html = $.parseHTML(params.html(params.content));
+        show(html);
+    }
+
+    switch (action) {
+        case 'show': {
+            showPopover();
+        }
+    }
 };

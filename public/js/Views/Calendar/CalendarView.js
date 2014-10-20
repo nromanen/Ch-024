@@ -35,7 +35,7 @@ define('CalendarView', ['jquery', 'underscore', 'backbone', 'moment', 'jqueryui'
     },
 
     _renderCalendarEvent: function(model) {
-        this.$el.fullCalendar('renderEvent', model.toJSON(), true);
+        this.$el.fullCalendar('renderEvent', _.extend(model.toJSON(), {className: 'calendar-event'}), true);
     },
 
      /**
@@ -76,16 +76,23 @@ define('CalendarView', ['jquery', 'underscore', 'backbone', 'moment', 'jqueryui'
             return;
         }
         calendarEventModel = calendarEventModel.toJSON();
-        $(jsEvent.target).ownpopover({
-            showEvent: 'mouseover',
-            hideEvent: 'mouseout',
+        $(jsEvent.target).ownpopover('show', {
             html: _.template(ownPopoverTemplate),
             content: _.extend(calendarEventModel, {
-            start: moment(calendarEventModel.start).format('YYYY-MM-DD HH:mm')
+            start: moment(calendarEventModel.start).format('YYYY-MM-DD HH:mm'),
+            end: moment(calendarEventModel.end).format('YYYY-MM-DD HH:mm')
             })
         });
-        $('.own-popover').remove();
-    }, 150, false),
+        jsEvent.stopPropagation();
+    }, 100, false),
+
+    _resizeEvent: function(calendarEventObject) {
+        var calendarEventModel = this.calendarEventsCollection.findWhere({cid: calendarEventObject.cid});
+        if (!calendarEventModel) {
+            return;
+        }
+        calendarEventModel.setEnd(calendarEventObject.end);
+    },
 
     /**
      * Connect fullCalendar widget.
@@ -107,7 +114,8 @@ define('CalendarView', ['jquery', 'underscore', 'backbone', 'moment', 'jqueryui'
             lang: "uk",
             drop: _.bind(this._addEvent, this),
             eventClick: _.bind(this._showCalendarEventModal, this),
-            eventMouseover: _.bind(this._showPopover, this)
+            eventMouseover: _.bind(this._showPopover, this),
+            eventResize: _.bind(this._resizeEvent, this)
         });
 
         this.calendarEventsCollection.fetch();
