@@ -10,7 +10,8 @@ define('CalendarView', ['jquery', 'underscore', 'backbone', 'moment', 'jqueryui'
      * Describes all the selectors we need.
      */
     selectors: {
-        weekButton: '.fc-agendaWeek-button'
+        weekButton: '.fc-agendaWeek-button',
+        scroll: '.fc-scroller'
     },
 
     initialize: function(options){
@@ -117,7 +118,9 @@ define('CalendarView', ['jquery', 'underscore', 'backbone', 'moment', 'jqueryui'
             eventMouseover: _.bind(this._showPopover, this),
             eventResize: _.bind(this._resizeEvent, this)
         });
-
+        $(this.selectors.scroll, this.$el).on('scroll', function() {
+            $('.own-popover').remove();
+        });
         this.calendarEventsCollection.fetch();
     },
 
