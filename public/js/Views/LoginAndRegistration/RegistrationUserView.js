@@ -19,7 +19,7 @@ define('RegistrationUserView', ['jquery', 'underscore', 'backbone', 'Registratio
             emailInput: 'tverezo@gmail.com',
             passwordInput: "365_Days!\n(at least 7 characters)",
             repeatPasswordInput: 'passwords should be the same',
-            phoneInput: '+380963282780',
+            phoneInput: '+380963282780'
         },
 
 
