@@ -11,7 +11,8 @@ define('CalendarView', ['jquery', 'underscore', 'backbone', 'moment', 'jqueryui'
      */
     selectors: {
         weekButton: '.fc-agendaWeek-button',
-        scroll: '.fc-scroller'
+        scroll: '.fc-scroller',
+        agendaViewButtons: '.fc-button'
     },
 
     initialize: function(options){
@@ -119,6 +120,13 @@ define('CalendarView', ['jquery', 'underscore', 'backbone', 'moment', 'jqueryui'
      * Connect fullCalendar widget.
      */
     _initCalendarWidget: function() {
+
+        var attachScrollHandler = (function() {
+            $(this.selectors.scroll, this.$el).on('scroll', _.debounce(function() {
+                $('.own-popover').remove();
+            }, 100));
+        }).bind(this);
+
         this.$el.fullCalendar({
             header: {
                 left: 'prev,next today',
@@ -137,10 +145,12 @@ define('CalendarView', ['jquery', 'underscore', 'backbone', 'moment', 'jqueryui'
             eventClick: _.bind(this._showCalendarEventModal, this),
             eventMouseover: _.bind(this._showPopover, this),
             eventResize: _.bind(this._resizeEvent, this)
+           // eventDragStop: _.bind(this._resizeEvent, this)
         });
-        $(this.selectors.scroll, this.$el).on('scroll', function() {
-            $('.own-popover').remove();
-        });
+        $(this.selectors.agendaViewButtons, this.$el).on('click', $.proxy(function() {
+            attachScrollHandler();
+        }, this));
+        attachScrollHandler();
         this.calendarEventsCollection.fetch();
     },
 

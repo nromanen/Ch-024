@@ -2,7 +2,7 @@ define('UserModel', ['jquery', 'underscore', 'backbone'],
     function($, _, Backbone) {
         var UserModel = Backbone.Model.extend({
 
-            //url: '/teachers'
+            url: '/user',
 
             defaults: function() {
                 return {
@@ -66,7 +66,7 @@ define('UserModel', ['jquery', 'underscore', 'backbone'],
 
             getConfirmed: function() {
                 return this.get('confirmed');
-            },
+            }
         });
         return UserModel;
     });

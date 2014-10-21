@@ -16,7 +16,8 @@ function Urls(app, userRoles){
     app.post('/signup', user.signUp);
     app.post('/logout', userRoles.can('user'), user.logOut);
    // app.get('/user/:id', user.get);
-    app.get('/user/notapproved', user.getNotApproved);
+    app.get('/user/notapproved',userRoles.can('admin'), user.getNotApproved);
+    //app.put('/user/:email', userRoles.can('admin'), user.confirm);
 
     //subjects api
     app.post('/subject', userRoles.can('teacher'), subject.create);
