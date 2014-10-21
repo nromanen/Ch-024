@@ -17,8 +17,6 @@ exports.create = function(req, res) {
         amountOfStudents: req.body.amountOfStudents
     });
 
-    console.log(data);
-
     data.save(function(err) {
         if (!err) {
             res.send({

@@ -29,7 +29,7 @@ var require = {
         'CategoryModel': 'Models/Calendar/CategoryModel',
         'SessionModel': 'Models/LoginAndRegistration/SessionModel',
         'UserModel': 'Models/Admin/UserModel',
-        'SubscribeModel': 'Models/Calendar/SubscribeModel',
+        'SubsсribeModel': 'Models/Calendar/SubsсribeModel',
 
         // Collections
         'CalendarEventsCollection': 'Collections/CalendarEventsCollection',
@@ -38,7 +38,7 @@ var require = {
         'AdminCategoriesCollection': 'Collections/Admin/AdminCategoriesCollection',
         'AdminSubjectsCollection': 'Collections/Admin/AdminSubjectsCollection',
         'AdminTeachersCollection': 'Collections/Admin/AdminTeachersCollection',
-        'SubscribeCollection': 'Collections/Calendar/SubscribeCollection',
+        'SubscribeCollection': 'Collections/SubscribeCollection',
 
         // Views
         'CalendarView': 'Views/Calendar/CalendarView',
@@ -71,7 +71,7 @@ var require = {
         'HelpTemplateView': 'Views/Templates/HelpTemplateView',
         'AdminTemplateView': 'Views/Templates/AdminTemplateView',
         'ControllerView': 'Views/ControllerView',
-        'SubscribeView': 'Views/SubscribeView',
+        'SubscribeView': 'Views/Calendar/SubscribeView',
 
         // Template
         'aboutTemplate': '../templates/aboutTemplate.html',
@@ -95,7 +95,9 @@ var require = {
         'adminTemplate': '../templates/adminTemplate.html',
         'categoryInfoTemplate': '../templates/categoryInfoTemplate.html',
         'subjectInfoTemplate': '../templates/subjectInfoTemplate.html',
-        'teacherInfoTemplate': '../templates/teacherInfoTemplate.html'
+        'teacherInfoTemplate': '../templates/teacherInfoTemplate.html',
+        'alertError': '../templates/alertError.html',
+        'alertSuccess': '../templates/alertSuccess.html'
     },
 
     shim: {

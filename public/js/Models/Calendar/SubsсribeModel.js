@@ -1,5 +1,10 @@
-define('SubscribeModel', ['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
-    var SubscribeModel = Backbone.Model.extend({
+define('SubsсribeModel', ['jquery',
+    'underscore',
+    'backbone'
+], function($,
+    _,
+    Backbone) {
+    var SubsсribeModel = Backbone.Model.extend({
 
         urlRoot: '/subscribe',
 
@@ -29,5 +34,5 @@ define('SubscribeModel', ['jquery', 'underscore', 'backbone'], function($, _, Ba
 
     });
 
-    return SubscribeModel;
+    return SubsсribeModel;
 });

@@ -4,6 +4,7 @@ var user = require('./functions/user.js'),
     category = require('./functions/category.js'),
     events = require('./functions/events.js'),
     teachers = require('./functions/teachers.js'),
+    subscribe = require('./functions/subscribe.js'),
     passport = require('passport');
 
 function Urls(app, userRoles){
@@ -15,7 +16,7 @@ function Urls(app, userRoles){
     app.post('/login', passport.authenticate('local'), user.logIn);
     app.post('/signup', user.signUp);
     app.post('/logout', userRoles.can('user'), user.logOut);
-   // app.get('/user/:id', user.get);
+    app.get('/user/:id', user.getById);
     app.get('/user/notapproved', user.getNotApproved);
 
     //subjects api
@@ -37,6 +38,9 @@ function Urls(app, userRoles){
     app.get('/events', userRoles.can('user'), events.getAll);
     app.post('/events', userRoles.can('teacher'), events.create);
     app.del('/events/:id', userRoles.can('admin'), events.delete);
+
+    //subscribe api
+    app.post('/subscribe', userRoles.can('user'), subscribe.create);
 }
 
 exports.Urls = Urls;

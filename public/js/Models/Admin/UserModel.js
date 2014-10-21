@@ -2,11 +2,12 @@ define('UserModel', ['jquery', 'underscore', 'backbone'],
     function($, _, Backbone) {
         var UserModel = Backbone.Model.extend({
 
-            //url: '/teachers'
+            urlRoot: '/user',
+            idAttribute: "_id",
 
             defaults: function() {
                 return {
-                    id: '', //- model id will be replaced with id from db
+                    _id: '', //- model id will be replaced with id from db
                     username: '',
                     surname: '',
                     email: '',
