@@ -7,12 +7,12 @@ define('UserModel', ['jquery', 'underscore', 'backbone'],
             defaults: function() {
                 return {
                     id: '', //- model id will be replaced with id from db
-                    name: '',
+                    username: '',
                     surname: '',
                     email: '',
                     phone: '',
                     role: '',
-                    confirmed: false
+                    approved: false
                 }
             },
 

@@ -50,6 +50,7 @@ define([
                 // that.set('authenticated', true);
                 var res = JSON.stringify(response);
                 that.set('user', res);
+                that.set('userId', res.userId);
                 // console.log(that.get('user')['session']['user']);
 
                 Backbone.history.navigate("#home", {

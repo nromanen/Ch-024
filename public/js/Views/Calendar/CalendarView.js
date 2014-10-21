@@ -1,6 +1,6 @@
 define('CalendarView', ['jquery', 'underscore', 'backbone', 'moment', 'jqueryui',
-    'fullcalendar', 'CalendarEventModel', 'ownpopover', 'CalendarEventView', 'text!ownPopoverTemplate'],
-    function($, _, Backbone, moment, jqueryui, fullcalendar, CalendarEventModel, ownpopover, CalendarEventView, ownPopoverTemplate) {
+    'fullcalendar', 'CalendarEventModel', 'ownpopover', 'CalendarEventView', 'UserModel', 'text!ownPopoverTemplate'],
+    function($, _, Backbone, moment, jqueryui, fullcalendar, CalendarEventModel, ownpopover, CalendarEventView, UserModel, ownPopoverTemplate) {
 
     var CalendarView = Backbone.View.extend({
 
@@ -17,6 +17,7 @@ define('CalendarView', ['jquery', 'underscore', 'backbone', 'moment', 'jqueryui'
     initialize: function(options){
         this.calendarEventsCollection = options.collection;
         this.calendarEventsCollection.on('add', this._renderCalendarEvent, this);
+        this.userModel = new UserModel();
     },
 
     /* PRIVATE METHODS */
@@ -91,7 +92,18 @@ define('CalendarView', ['jquery', 'underscore', 'backbone', 'moment', 'jqueryui'
         here we must take UserModel from server 
         and create instance of SubscribeView where we inform inside userModel and calendarEventModel =)))
         */
-
+        var that = this;
+        $.ajax({
+            url: '/user/' + Calendar.Controller.session.get('userId'),
+            type: 'GET'
+            // data: that.userModel.toJSON()
+        })
+        .done(function(query) {
+            console.log(that.userModel.set(query));
+        })
+        .fail(function() {
+            console.log("error");
+        });
         jsEvent.stopPropagation();
     }, 100, false),
 
