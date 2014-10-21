@@ -29,6 +29,7 @@ var require = {
         'CategoryModel': 'Models/Calendar/CategoryModel',
         'SessionModel': 'Models/LoginAndRegistration/SessionModel',
         'UserModel': 'Models/Admin/UserModel',
+        'SubscribeModel': 'Models/Calendar/SubscribeModel',
 
         // Collections
         'CalendarEventsCollection': 'Collections/CalendarEventsCollection',
@@ -37,6 +38,8 @@ var require = {
         'AdminCategoriesCollection': 'Collections/Admin/AdminCategoriesCollection',
         'AdminSubjectsCollection': 'Collections/Admin/AdminSubjectsCollection',
         'AdminTeachersCollection': 'Collections/Admin/AdminTeachersCollection',
+        'SubscribeCollection': 'Collections/Calendar/SubscribeCollection',
+
         // Views
         'CalendarView': 'Views/Calendar/CalendarView',
         'SubjectView': 'Views/Calendar/SubjectView',
@@ -68,7 +71,7 @@ var require = {
         'HelpTemplateView': 'Views/Templates/HelpTemplateView',
         'AdminTemplateView': 'Views/Templates/AdminTemplateView',
         'ControllerView': 'Views/ControllerView',
-
+        'SubscribeView': 'Views/SubscribeView',
 
         // Template
         'aboutTemplate': '../templates/aboutTemplate.html',
