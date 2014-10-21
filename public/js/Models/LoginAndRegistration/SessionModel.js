@@ -50,7 +50,7 @@ define([
                 // that.set('authenticated', true);
                 var res = JSON.stringify(response);
                 that.set('user', res);
-                that.set('userId', res.userId);
+                //that.set('userId', res.userId);
                 // console.log(that.get('user')['session']['user']);
 
                 Backbone.history.navigate("#home", {
@@ -84,12 +84,19 @@ define([
 
         hasPermission: function(feature, action) {
             var user = this.get("user");
-            if(!(user===null)){
-                return user.rights[feature][action];
-            } else {
+            if(user === null) {
                 return false;
             }
+            return user.rights[feature][action];
             
+        },
+
+        getUserId: function() {
+            var user = this.get("user");
+            if(user === null) {
+                return false;
+            }
+            return user.userId;
         },
 
         getAuth: function(callback) {

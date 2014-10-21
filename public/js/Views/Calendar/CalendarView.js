@@ -94,7 +94,7 @@ define('CalendarView', ['jquery', 'underscore', 'backbone', 'moment', 'jqueryui'
         */
         var that = this;
         $.ajax({
-            url: '/user/' + Calendar.Controller.session.get('userId'),
+            url: '/user/' + Calendar.Controller.session.getUserId(),
             type: 'GET'
             // data: that.userModel.toJSON()
         })
