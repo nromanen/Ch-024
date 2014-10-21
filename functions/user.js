@@ -15,10 +15,10 @@ exports.logIn = function (req, res) {
     };
     res.json(userData);
 };
-
+/*
 exports.get = function(req, res) {
     var query = db.userModel.find({'_id': req.params.id});
-    query.select('username surname email phone role approved');
+    query.select('username surname phone');
     query.exec(function(err, queryRes) {
         if (err) {
             return handleError(err)
@@ -26,7 +26,7 @@ exports.get = function(req, res) {
             res.json(queryRes);
         }
     });
-};
+};*/
 // В середині модуля не бачить Монгус моделі userModel
 /*
  auth.verify(req.body.email,req.body.hash);
@@ -59,4 +59,16 @@ exports.signUp = function (req, res) {
     });
 
     res.end;
+};
+
+exports.getNotApproved = function(req, res) {
+    var query = db.userModel.find({approved: false});
+    query.select('username surname email phone');
+    query.exec(function(err, queryRes) {
+        if (err) {
+            return handleError(err)
+        } else {
+            res.json(queryRes);
+        }
+    });
 };

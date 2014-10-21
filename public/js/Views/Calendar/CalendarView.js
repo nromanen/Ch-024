@@ -92,7 +92,7 @@ define('CalendarView', ['jquery', 'underscore', 'backbone', 'moment', 'jqueryui'
         here we must take UserModel from server 
         and create instance of SubscribeView where we inform inside userModel and calendarEventModel =)))
         */
-        var that = this;
+   /*     var that = this;
         $.ajax({
             url: '/user/' + Calendar.Controller.session.getUserId(),
             type: 'GET'
@@ -103,7 +103,7 @@ define('CalendarView', ['jquery', 'underscore', 'backbone', 'moment', 'jqueryui'
         })
         .fail(function() {
             console.log("error");
-        });
+        });*/
         jsEvent.stopPropagation();
     }, 100, false),
 

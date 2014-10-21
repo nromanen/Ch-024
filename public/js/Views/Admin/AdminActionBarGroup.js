@@ -7,15 +7,15 @@ define('AdminActionBarGroup', ['jquery', 'underscore', 'backbone', 'AdminActionB
         this.notapprovedSubjectsCollection = options.notapprovedSubjectsCollection;
         this.notapprovedCategoriesCollection = options.notapprovedCategoriesCollection;
 
-        // this.notapprovedTeachersCollection.bind('add', this._renderTeacher, this);
+        this.notapprovedTeachersCollection.bind('add', this._renderTeacher, this);
         this.notapprovedSubjectsCollection.bind('add', this._renderSubject, this);
         this.notapprovedCategoriesCollection.bind('add', this._renderCategory, this);
-        // this.notapprovedTeachersCollection.fetch();
+        this.notapprovedTeachersCollection.fetch();
         this.notapprovedSubjectsCollection.fetch();
         this.notapprovedCategoriesCollection.fetch();
 	},
 
- /*   _renderTeacher: function(model) {
+    _renderTeacher: function(model) {
         $('.teachersInfo').append(
             new AdminActionBar({
                 model: model,
@@ -23,7 +23,7 @@ define('AdminActionBarGroup', ['jquery', 'underscore', 'backbone', 'AdminActionB
         }).render()
         );
     },
-  */
+
     _renderSubject: function(model) {
         $('.subjectsInfo').append(
             new AdminActionBar({
