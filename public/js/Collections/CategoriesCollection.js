@@ -1,13 +1,13 @@
 define('CategoriesCollection', ['jquery', 'underscore', 'backbone', 'CategoryModel'], function($, _, Backbone, CategoryModel) {
     var CategoriesCollection = Backbone.Collection.extend({
 
-  	url: '/category',
+	  	url: '/category',
 
-    model: CategoryModel,
+	    model: CategoryModel,
 
-    findModelById: function(id) {
-    	return this.findWhere({cid: id});
-    }
+	    findModelById: function(id) {
+	    	return this.findWhere({cid: id});
+	    }
 
     });
 

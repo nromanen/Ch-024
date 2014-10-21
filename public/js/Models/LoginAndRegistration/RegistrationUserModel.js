@@ -70,7 +70,7 @@ define('RegistrationUserModel', ['jquery', 'underscore', 'backbone', 'maskedinpu
         },
 
         preValidate: function (fieldName, value, password){
-            this.password = password;
+            if(typeof password != 'undefined') { this.password = password};
             this.fieldName = fieldName;
             this.value = value;
             switch (this.fieldName){

@@ -40,6 +40,7 @@ define('RegistrationUserView', ['jquery', 'underscore', 'backbone', 'Registratio
         this.$(this.selectors.emailInput).on('blur', $.proxy(this._checkField, this, "emailInput"));
         this.$(this.selectors.passwordInput).on('blur', $.proxy(this._checkField, this, "passwordInput"));
         this.$(this.selectors.repeatPasswordInput).on('blur', $.proxy(this._checkRepeatPassword, this, "repeatPasswordInput"));
+        this.$(this.selectors.phoneInput).on('blur', $.proxy(this._checkField, this, "phoneInput"));
 
         this.model.on("invalid", $.proxy(this._defineError, this));
     },
@@ -91,8 +92,7 @@ define('RegistrationUserView', ['jquery', 'underscore', 'backbone', 'Registratio
     _checkRepeatPassword: function(fieldName){
         this.fieldName = fieldName;
         var currentInput = this.$(this.selectors[this.fieldName]);
-        if(!this.model.preValidate('repeatPassword', currentInput.val(), this.$(this.selectors.passwordInput).val())){
-            currentInput.popover({content: this.examples.repeatPasswordInput , placement: "left"});
+        if(!this.model.preValidate('#repeatPassword', currentInput.val(), this.$(this.selectors.passwordInput).val())){
             currentInput.popover('show');
             currentInput.addClass('borderRed');
         }

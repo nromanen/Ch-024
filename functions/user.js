@@ -10,12 +10,23 @@ exports.logOut = function (req, res) {
 
 exports.logIn = function (req, res) {
     var userData = {
-        username: req.user.username,
+        userId: req.user.id,
         rights: config.get("rights")[req.user.role]
     };
     res.json(userData);
 };
 
+exports.get = function(req, res) {
+    var query = db.userModel.find({'_id': req.params.id});
+    query.select('username surname email phone role approved');
+    query.exec(function(err, queryRes) {
+        if (err) {
+            return handleError(err)
+        } else {
+            res.json(queryRes);
+        }
+    });
+};
 // В середині модуля не бачить Монгус моделі userModel
 /*
  auth.verify(req.body.email,req.body.hash);
