@@ -74,3 +74,14 @@ exports.getNotApproved = function(req, res) {
         }
     });
 };
+
+/*exports.confirm = function(req, res) {
+    var query = db.userModel.find({'email': req.params.email});
+    query.update({approved: true, role: 'teacher'}, function(err) {
+        if(err) {
+            return handleError(err);
+        } else {
+            res.send("Confirm Subject ID: " + req.params.id);
+        }
+    });
+};*/

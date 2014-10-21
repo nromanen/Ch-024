@@ -67,7 +67,8 @@ define('UserModel', ['jquery', 'underscore', 'backbone'],
 
             getConfirmed: function() {
                 return this.get('confirmed');
-            },
+            }
+            
         });
         return UserModel;
     });
