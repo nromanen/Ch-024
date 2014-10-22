@@ -29,11 +29,19 @@ define('ControllerView', ['jquery', 'underscore', 'backbone', 'text!alertError',
         },
 
         showAlertSuccess: function(message) {
-            $('.forAlert').html(this.templateAlertSuccess(message));
+            $('.forAlert').append(this.templateAlertSuccess(message))
+            .children()
+            .last()
+            .delay(5000)
+            .fadeOut(1000);
         },
 
         showAlertError: function(message) {
-            $('.forAlert').html(this.templateAlertError(message));
+            $('.forAlert').append(this.templateAlertError(message))
+            .children()
+            .last()
+            .delay(5000)
+            .fadeOut(1000);
         }
 
     });

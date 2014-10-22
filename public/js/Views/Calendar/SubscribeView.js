@@ -43,6 +43,7 @@ define('SubscribeView', ['jquery',
                 })
                 .done(function() {
                     ControllerView.showAlertSuccess(that.messages.success);
+                    
                 })
                 .fail(function() {
                     ControllerView.showAlertError(that.messages.error);
