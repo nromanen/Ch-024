@@ -1,7 +1,10 @@
-define('ControllerView', ['jquery', 'underscore', 'backbone'], 
-    function($, _, Backbone) {
+define('ControllerView', ['jquery', 'underscore', 'backbone', 'text!alertError', 'text!alertSuccess'], 
+    function($, _, Backbone, alertError, alertSuccess) {
 
     var ControllerView = Backbone.View.extend({
+
+        templateAlertError: _.template(alertError),
+        templateAlertSuccess: _.template(alertSuccess),
 
         showElements: function() {
             if (Calendar.Controller.session.hasPermission('category', 'watch')) {
@@ -23,6 +26,14 @@ define('ControllerView', ['jquery', 'underscore', 'backbone'],
             if (menuItem) {
                 $('.' + menuItem).addClass('active');
             }
+        },
+
+        showAlertSuccess: function(message) {
+            $('.forAlert').html(this.templateAlertSuccess(message));
+        },
+
+        showAlertError: function(message) {
+            $('.forAlert').html(this.templateAlertError(message));
         }
 
     });

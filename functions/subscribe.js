@@ -22,7 +22,6 @@ exports.create = function(req, res) {
                     res.end();
                 } else {
                     res.send(500);
-                    console.log(err);
                     res.end();
                 }
             });

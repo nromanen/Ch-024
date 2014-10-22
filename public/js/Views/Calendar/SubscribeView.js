@@ -2,14 +2,12 @@ define('SubscribeView', ['jquery',
     'underscore',
     'backbone',
     'SubsсribeModel',
-    'text!alertError',
-    'text!alertSuccess'
+    'ControllerView'
 ], function($,
     _,
     Backbone,
     SubsсribeModel,
-    alertError,
-    alertSuccess) {
+    ControllerView) {
     var SubscribeView = Backbone.View.extend({
 
         selectors: {
@@ -17,7 +15,7 @@ define('SubscribeView', ['jquery',
         },
 
         messages: {
-            succses: {
+            success: {
                 message: 'You are assign to this subject'
             },
             error: {
@@ -25,13 +23,9 @@ define('SubscribeView', ['jquery',
             }
         },
 
-        templateAlertError: _.template(alertError),
-        templateAlertSuccess: _.template(alertSuccess),
-
         initialize: function(options) {
             this.userModel = options.userModel;
             this.calendarEventModel = options.calendarEventModel;
-
             $(this.selectors.assignButton).on('click', $.proxy(this._assignToSubject, this));
         },
 
@@ -40,7 +34,7 @@ define('SubscribeView', ['jquery',
             subscribeModel.setUserId(this.userModel.id);
             subscribeModel.setEventId(this.calendarEventModel.getId());
 
-            that = this;
+            var that = this;
 
             $.ajax({
                     url: '/subscribe',
@@ -48,10 +42,10 @@ define('SubscribeView', ['jquery',
                     data: subscribeModel.toJSON(),
                 })
                 .done(function() {
-                    $('.forAlert').html(that.templateAlertSuccess(that.messages.succses));
+                    ControllerView.showAlertSuccess(that.messages.success);
                 })
                 .fail(function() {
-                    $('.forAlert').html(that.templateAlertError(that.messages.error));
+                    ControllerView.showAlertError(that.messages.error);
                 });
         }
 
