@@ -75,8 +75,8 @@ exports.getNotApproved = function(req, res) {
     });
 };
 
-/*exports.confirm = function(req, res) {
-    var query = db.userModel.find({'email': req.params.email});
+exports.confirm = function(req, res) {
+    var query = db.userModel.find({'_id': req.params.id});
     query.update({approved: true, role: 'teacher'}, function(err) {
         if(err) {
             return handleError(err);
@@ -84,4 +84,4 @@ exports.getNotApproved = function(req, res) {
             res.send("Confirm Subject ID: " + req.params.id);
         }
     });
-};*/
+};
