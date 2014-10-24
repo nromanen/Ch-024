@@ -31,10 +31,12 @@ define('SubscribeView', ['jquery',
 
         _assignToSubject: function() {
             subscribeModel = new SubsсribeModel;
-            subscribeModel.setUserId(this.userModel.id);
-            subscribeModel.setEventId(this.calendarEventModel.getId());
+            subscribeModel.setUser(this.userModel.toJSON());
+            subscribeModel.setEvent(this.calendarEventModel.toJSON());
 
             var that = this;
+
+            console.log(subscribeModel.toJSON());
 
             $.ajax({
                     url: '/subscribe',

@@ -4,17 +4,17 @@ exports.create = function(req, res) {
     var totalCount = 0;
 
     var data = new db.subscribeModel({
-        eventId: req.body.eventId,
-        userId: req.body.userId,
+        event: req.body.event,
+        user: req.body.user,
     });
 
     var querySubscribe = db.subscribeModel.findOne({
-        'eventId': req.body.eventId,
-        'userId': req.body.userId
+        'event._id': req.body.event._id,
+        'user._id': req.body.user._id
     });
 
     var queryEvent = db.eventModel.findOne({
-        '_id': req.body.eventId
+        '_id': req.body.event._id
     });
 
     queryEvent.exec(function(err, queryRes) {

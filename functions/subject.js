@@ -13,9 +13,7 @@ exports.create = function(req, res) {
         color: req.body.color,
         categoryId: req.body.category._id
     });
-
-    console.log(data);
-
+    
     data.save(function(err) {
         if (!err) {
             res.send({

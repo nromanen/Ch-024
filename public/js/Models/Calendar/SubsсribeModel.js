@@ -1,35 +1,39 @@
 define('SubsсribeModel', ['jquery',
     'underscore',
-    'backbone'
+    'backbone',
+    'UserModel',
+    'CalendarEventModel'
 ], function($,
     _,
-    Backbone) {
+    Backbone,
+    UserModel,
+    CalendarEventModel) {
     var SubsсribeModel = Backbone.Model.extend({
 
-        urlRoot: '/subscribe',
+        url: '/subscribe',
 
         defaults: function() {
             return {
                 _id: '',
-                userId: '',
-                eventId: ''
+                user: UserModel,
+                event: CalendarEventModel
             }
         },
 
-        setUserId: function(value) {
-            this.set('userId', value);
+        setUser: function(value) {
+            this.set('user', value);
         },
 
-        getUserId: function() {
-            return this.get('userId');
+        getUser: function() {
+            return this.get('user');
         },
 
-        setEventId: function(value) {
-            this.set('eventId', value);
+        setEvent: function(value) {
+            this.set('event', value);
         },
 
-        getEventId: function() {
-            return this.get('eventId');
+        getEvent: function() {
+            return this.get('event');
         }
 
     });
