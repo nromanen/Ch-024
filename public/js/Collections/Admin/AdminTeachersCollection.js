@@ -1,6 +1,6 @@
 define('AdminTeachersCollection', ['jquery', 'underscore', 'backbone', 'UserModel'], function($, _, Backbone, UserModel) {	
 	var AdminTeachersCollection = Backbone.Collection.extend({
-		url: '/user/notapproved',
+		url: '/users/notapproved',
 	    model: UserModel
 	});
 
