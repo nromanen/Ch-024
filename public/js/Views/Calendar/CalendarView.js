@@ -117,7 +117,7 @@ define('CalendarView', ['jquery',
 
             calendarEventModelObject = calendarEventModel.toJSON();
             var display = '';
-            if(calendarEventModelObject.amountOfStudents === calendarEventModelObject.currentCount){
+            if(calendarEventModelObject.amountOfStudents <= calendarEventModelObject.currentCount){
                 display = "none";
             } else {
                 display = "block";
