@@ -54,7 +54,7 @@ exports.getAll = function(req, res) {
         if (err) {
             return handleError(err);
         } else {
-            res.send(JSON.stringify(queryRes));
+            res.send(queryRes);
             res.end;
         }
     });

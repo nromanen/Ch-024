@@ -29,8 +29,11 @@ define('SubscribeView', ['jquery',
             this.calendarEventsCollection = options.calendarEventsCollection;
             this.calendarEventModel = options.calendarEventModel;
             $(this.selectors.assignButton).on('click', $.proxy(this._assignToSubject, this));
-            
-            console.log(this.subscribeCollection);
+            this.calendarEventModel.on('change', this._updateCalendarEventCollection, this);
+        },
+
+        _updateCalendarEventCollection: function(model) {
+            // console.log(model);
         },
 
         _assignToSubject: function() {
@@ -40,8 +43,6 @@ define('SubscribeView', ['jquery',
 
             var that = this;
 
-            console.log(subscribeModel.toJSON());
-
             $.ajax({
                     url: '/subscribe',
                     type: 'POST',
@@ -50,7 +51,20 @@ define('SubscribeView', ['jquery',
                 .done(function() {
                     ControllerView.showAlertSuccess(that.messages.success);
                     that.subscribeCollection.fetch();
-                    that.calendarEventsCollection.fetch();
+                    // that.calendarEventsCollection.fetch();
+
+                    $.ajax({
+                        url: '/event/' + that.calendarEventModel.getId(),
+                        type: 'GET'
+                    })
+                    .done(function(model) {
+                        that.calendarEventModel.set(JSON.parse(model));
+                        
+                    })
+                    .fail(function() {
+                        console.log("error");
+                    });
+
                 })
                 .fail(function() {
                     ControllerView.showAlertError(that.messages.error);

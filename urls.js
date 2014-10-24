@@ -38,6 +38,7 @@ function Urls(app, userRoles){
     app.get('/events', userRoles.can('user'), events.getAll);
     app.post('/events', userRoles.can('teacher'), events.create);
     app.del('/events/:id', userRoles.can('admin'), events.delete);
+    app.get('/event/:id', userRoles.can('user'), events.getOne);
 
     //subscribe api
     app.post('/subscribe', userRoles.can('user'), subscribe.create);

@@ -48,6 +48,20 @@ exports.getAll = function(req, res) {
     });
 };
 
+exports.getOne = function(req, res) {
+
+    var query = db.eventModel.findOne({'_id': req.params.id});
+    // query.select('subjectId');
+    query.exec(function(err, queryRes) {
+        if (err) {
+            return handleError(err)
+        } else {
+            res.send(JSON.stringify(queryRes));
+            res.end;
+        }
+    });
+};
+
 exports.delete = function(req, res) {
     var query = db.eventModel.find({'_id': req.params.id});
     query.remove(function(err) {
