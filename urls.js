@@ -43,6 +43,7 @@ function Urls(app, userRoles){
 
     //subscribe api
     app.post('/subscribe', userRoles.can('user'), subscribe.create);
+    app.get('/subscribe', userRoles.can('user'), subscribe.getAll);
 }
 
 exports.Urls = Urls;
