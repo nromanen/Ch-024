@@ -24,9 +24,13 @@ define('SubscribeView', ['jquery',
         },
 
         initialize: function(options) {
+            this.subscribeCollection = options.subscribeCollection
             this.userModel = options.userModel;
+            this.calendarEventsCollection = options.calendarEventsCollection;
             this.calendarEventModel = options.calendarEventModel;
             $(this.selectors.assignButton).on('click', $.proxy(this._assignToSubject, this));
+            
+            console.log(this.subscribeCollection);
         },
 
         _assignToSubject: function() {
@@ -45,7 +49,8 @@ define('SubscribeView', ['jquery',
                 })
                 .done(function() {
                     ControllerView.showAlertSuccess(that.messages.success);
-                    
+                    that.subscribeCollection.fetch();
+                    that.calendarEventsCollection.fetch();
                 })
                 .fail(function() {
                     ControllerView.showAlertError(that.messages.error);

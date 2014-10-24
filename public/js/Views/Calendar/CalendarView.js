@@ -40,9 +40,12 @@ define('CalendarView', ['jquery',
         initialize: function(options) {
             this.calendarEventsCollection = options.collection;
             this.calendarEventsCollection.on('add', this._renderCalendarEvent, this);
+            this.calendarEventsCollection.on('request', this._clearCalendarEvents, this);
             this.userModel = new UserModel;
             this.subscribeCollection = new SubscribeCollection;
+            this.subscribeCollection.fetch();
             this._fetchUserModel();
+            window.lala = this.calendarEventsCollection;
         },
 
         /* PRIVATE METHODS */
@@ -58,6 +61,10 @@ define('CalendarView', ['jquery',
             var OPACITY = .5;
             return "rgba(" + parseInt(color.substring(1, 3), 16) + "," + parseInt(color.substring(3, 5), 16) + "," + parseInt(color.substring(5, 7), 16) + "," +
                 OPACITY + ")";
+        },
+
+        _clearCalendarEvents: function() {
+            this.$el.fullCalendar( 'removeEvents');
         },
 
         _renderCalendarEvent: function(model) {
@@ -118,14 +125,16 @@ define('CalendarView', ['jquery',
                 html: _.template(ownPopoverTemplate),
                 content: _.extend(calendarEventModelObject, {
                     start: moment(calendarEventModelObject.start).format('YYYY-MM-DD HH:mm'),
-                    end: moment(calendarEventModelObject.end).format('YYYY-MM-DD HH:mm')
+                    end: moment(calendarEventModelObject.end).format('YYYY-MM-DD HH:mm'),
+                    amountFreePlace: (calendarEventModelObject.amountOfStudents - calendarEventModelObject.currentCount)
                 })
             });
 
             new SubscribeView({
                 subscribeCollection: this.subscribeCollection,
                 userModel: this.userModel,
-                calendarEventModel: calendarEventModel
+                calendarEventModel: calendarEventModel,
+                calendarEventsCollection: this.calendarEventsCollection
             });
 
             jsEvent.stopPropagation();
@@ -167,6 +176,9 @@ define('CalendarView', ['jquery',
             $(this.selectors.scroll, this.$el).on('scroll', function() {
                 $('.own-popover').remove();
             });
+
+
+
             this.calendarEventsCollection.fetch();
         },
 

@@ -18,7 +18,7 @@ exports.create = function(req, res) {
     });
 
     queryEvent.exec(function(err, queryRes) {
-        if(err) return handleError(err);
+        if (err) return handleError(err);
         totalCount = queryRes.currentCount;
     });
 
@@ -27,8 +27,12 @@ exports.create = function(req, res) {
         if (!queryRes) {
             data.save(function(err) {
                 if (!err) {
-                    queryEvent.update({currentCount: ++totalCount}, function(err) {
-                        if(err) {return handleError(err)}
+                    queryEvent.update({
+                        currentCount: ++totalCount
+                    }, function(err) {
+                        if (err) {
+                            return handleError(err)
+                        }
                     });
                     res.send(201);
                     res.end();
@@ -41,4 +45,18 @@ exports.create = function(req, res) {
             res.send(409);
         }
     });
+};
+
+exports.getAll = function(req, res) {
+    var querySubscribe = db.subscribeModel.find({});
+
+    querySubscribe.exec(function(err, queryRes) {
+        if (err) {
+            return handleError(err);
+        } else {
+            res.send(JSON.stringify(queryRes));
+            res.end;
+        }
+    });
+
 };
