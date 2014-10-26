@@ -1,6 +1,6 @@
-var require = {
-    'baseUrl': 'js/',
-    "paths": {
+require.config({
+    baseUrl: 'js/',
+    paths: {
         'moment': 'Vendor/jquery/moment.min',
         'jquery': 'Vendor/jquery/jquery.min',
         'jqueryui': 'Vendor/jquery/jquery-ui.min',
@@ -29,7 +29,7 @@ var require = {
         'CategoryModel': 'Models/Calendar/CategoryModel',
         'SessionModel': 'Models/LoginAndRegistration/SessionModel',
         'UserModel': 'Models/Admin/UserModel',
-        'SubsсribeModel': 'Models/Calendar/SubsсribeModel',
+        'SubscribeModel': 'Models/Calendar/SubscribeModel',
 
         // Collections
         'CalendarEventsCollection': 'Collections/CalendarEventsCollection',
@@ -58,17 +58,9 @@ var require = {
         'AboutTemplateView': 'Views/Templates/AboutTemplateView',
         'HomeTemplateView': 'Views/Templates/HomeTemplateView',
         'SettingsTemplateView': 'Views/Templates/SettingsTemplateView',
-        'AdminTemplateView': 'Views/Templates/AdminTemplateView',
         'HelpTemplateView': 'Views/Templates/HelpTemplateView',
         'AdminActionBar': 'Views/Admin/AdminActionBar',
         'AdminActionBarGroup': 'Views/Admin/AdminActionBarGroup',
-        'NavBarTemplateView': 'Views/Templates/NavBarTemplateView',
-        'FooterTemplateView': 'Views/Templates/FooterTemplateView',
-        'ContainerCalendarTemplateView': 'Views/Templates/ContainerCalendarTemplateView',
-        'AboutTemplateView': 'Views/Templates/AboutTemplateView',
-        'HomeTemplateView': 'Views/Templates/HomeTemplateView',
-        'SettingsTemplateView': 'Views/Templates/SettingsTemplateView',
-        'HelpTemplateView': 'Views/Templates/HelpTemplateView',
         'AdminTemplateView': 'Views/Templates/AdminTemplateView',
         'ControllerView': 'Views/ControllerView',
         'SubscribeView': 'Views/Calendar/SubscribeView',
@@ -135,4 +127,4 @@ var require = {
             }
         }
     }
-};
+});

@@ -1,12 +1,12 @@
 define('SubscribeView', ['jquery',
     'underscore',
     'backbone',
-    'SubsсribeModel',
+    'SubscribeModel',
     'ControllerView'
 ], function($,
     _,
     Backbone,
-    SubsсribeModel,
+    SubscribeModel,
     ControllerView) {
     var SubscribeView = Backbone.View.extend({
 
@@ -37,7 +37,7 @@ define('SubscribeView', ['jquery',
         },
 
         _assignToSubject: function() {
-            subscribeModel = new SubsсribeModel;
+            subscribeModel = new SubscribeModel;
             subscribeModel.setUser(this.userModel.toJSON());
             subscribeModel.setEvent(this.calendarEventModel.toJSON());
 
