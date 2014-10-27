@@ -1,16 +1,16 @@
 define('SubscribeCollection', ['jquery',
     'underscore',
     'backbone',
-    'SubsсribeModel'
+    'SubscribeModel'
 ], function($,
     _,
     Backbone,
-    SubsсribeModel) {
+    SubscribeModel) {
     var SubscribeCollection = Backbone.Collection.extend({
 
         url: '/subscribe',
 
-        model: SubsсribeModel
+        model: SubscribeModel
 
     });
 

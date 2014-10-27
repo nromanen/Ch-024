@@ -1,4 +1,4 @@
-define('SubsсribeModel', ['jquery',
+define('SubscribeModel', ['jquery',
     'underscore',
     'backbone',
     'UserModel',
@@ -8,7 +8,7 @@ define('SubsсribeModel', ['jquery',
     Backbone,
     UserModel,
     CalendarEventModel) {
-    var SubsсribeModel = Backbone.Model.extend({
+    var SubscribeModel = Backbone.Model.extend({
 
         url: '/subscribe',
 
@@ -38,5 +38,5 @@ define('SubsсribeModel', ['jquery',
 
     });
 
-    return SubsсribeModel;
+    return SubscribeModel;
 });
