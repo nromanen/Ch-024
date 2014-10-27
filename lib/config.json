@@ -23,9 +23,6 @@
                 "update": false,
                 "watch": false,
                 "delete": false
-            },
-            "navBar": {
-                "adminPage": false
             }
         },
         "teacher": {
@@ -47,9 +44,6 @@
                 "update": false,
                 "watch": true,
                 "delete": false
-            },
-            "navBar": {
-                "adminPage": false
             }
         },
         "admin": {
@@ -71,9 +65,6 @@
                 "update": true,
                 "watch": true,
                 "delete": true
-            },
-            "navBar": {
-                "adminPage": true
             }
         }
     }
