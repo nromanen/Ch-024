@@ -27,7 +27,7 @@ define('NavBarTemplateView', ['jquery', 'underscore', 'backbone','ControllerView
 
         render: function() {
             $(this.selectors.headerTeg).html(this.$el);
-            ControllerView.showElements(this.selectors.adminMenu);
+            ControllerView.showElements('navBar', 'adminPage', [this.selectors.adminMenu]);
             return this;
         }
     });

@@ -1,4 +1,4 @@
-define('ControllerView', ['jquery', 'underscore', 'backbone', 'text!alertError', 'text!alertSuccess'], 
+define('ControllerView', ['jquery', 'underscore', 'backbone', 'text!alertError', 'text!alertSuccess'],
     function($, _, Backbone, alertError, alertSuccess) {
 
     var ControllerView = Backbone.View.extend({
@@ -6,10 +6,10 @@ define('ControllerView', ['jquery', 'underscore', 'backbone', 'text!alertError',
         templateAlertError: _.template(alertError),
         templateAlertSuccess: _.template(alertSuccess),
 
-        showElements: function() {
-            if (Calendar.Controller.session.hasPermission('category', 'watch')) {
-                for (var i in arguments) {
-                    $(arguments[i]).css({
+        showElements: function(feature, action, selectors) {
+            if (Calendar.Controller.session.hasPermission(feature, action)) {
+                for (var i in selectors) {
+                    $(selectors[i]).css({
                         display: 'block',
                         visibility: 'visible'
                     });

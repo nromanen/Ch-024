@@ -1,7 +1,31 @@
 var db = require('../lib/mongoose');
 
 exports.create = function(req, res) {
-    var totalCount = 0;
+
+    var currentCountOfSubscribe = 0,
+        amountOfStudents = 0;
+
+
+    var updateQueryEvent = function(err) {
+        if (!err) {
+            if (currentCountOfSubscribe <= amountOfStudents) {
+
+                queryEvent.update({
+                    currentCount: currentCountOfSubscribe
+                }, function(err) {
+                    if (err) return handleError(err);
+                });
+
+                data.save();
+
+                res.send(201);
+            } else {
+                res.send(507);
+            }
+        } else {
+            res.send(500);
+        }
+    };
 
     var data = new db.subscribeModel({
         event: req.body.event,
@@ -14,33 +38,20 @@ exports.create = function(req, res) {
     });
 
     var queryEvent = db.eventModel.findOne({
-        '_id': req.body.event._id
+        _id: req.body.event._id
     });
 
-    queryEvent.exec(function(err, queryRes) {
+    queryEvent.exec(function(err, queryResEvent) {
         if (err) return handleError(err);
-        totalCount = queryRes.currentCount;
+        currentCountOfSubscribe = queryResEvent.currentCount;
+        amountOfStudents = queryResEvent.amountOfStudents;
+        ++currentCountOfSubscribe;
     });
 
-    querySubscribe.exec(function(err, queryRes) {
+    querySubscribe.exec(function(err, queryResSubscribe) {
         if (err) return handleError(err);
-        if (!queryRes) {
-            data.save(function(err) {
-                if (!err) {
-                    queryEvent.update({
-                        currentCount: ++totalCount
-                    }, function(err) {
-                        if (err) {
-                            return handleError(err)
-                        }
-                    });
-                    res.send(201);
-                    res.end();
-                } else {
-                    res.send(500);
-                    res.end();
-                }
-            });
+        if (!queryResSubscribe) {
+            updateQueryEvent();
         } else {
             res.send(409);
         }
@@ -55,7 +66,6 @@ exports.getAll = function(req, res) {
             return handleError(err);
         } else {
             res.send(queryRes);
-            res.end;
         }
     });
 

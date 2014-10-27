@@ -13,6 +13,7 @@ exports.logIn = function (req, res) {
         userId: req.user.id,
         rights: config.get("rights")[req.user.role]
     };
+    console.log(userData);
     res.json(userData);
 };
 

@@ -83,7 +83,7 @@ require([
             var path = Backbone.history.location.hash;
             // var user = JSON.parse(sessionStorage.getItem('user'));
             // console.log(user);
-            if (!this.session.get('user')) {
+            if (!this.session.get('userSession')) {
                 Backbone.history.navigate('/', {
                     trigger: true
                 });

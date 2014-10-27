@@ -6,8 +6,6 @@ define([
 
     var SessionModel = Backbone.Model.extend({
 
-        url: '/session',
-
         initialize: function() {
             //Check for sessionStorage support
             if (Storage && sessionStorage) {
@@ -49,7 +47,7 @@ define([
             login.done(function(response) {
                 // that.set('authenticated', true);
                 var res = JSON.stringify(response);
-                that.set('user', res);
+                that.set('userSession', res);
                 //that.set('userId', res.userId);
                 // console.log(that.get('user')['session']['user']);
 
@@ -83,7 +81,7 @@ define([
         },
 
         hasPermission: function(feature, action) {
-            var user = this.get("user");
+            var user = this.get("userSession");
             if(user === null) {
                 return false;
             }
@@ -92,15 +90,11 @@ define([
         },
 
         getUserId: function() {
-            var user = this.get("user");
+            var user = this.get("userSession");
             if(user === null) {
                 return false;
             }
             return user.userId;
-        },
-
-        getAuth: function(callback) {
-            return this.get('user.session');
         }
     });
 
