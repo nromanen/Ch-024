@@ -11,9 +11,9 @@ exports.logOut = function (req, res) {
 exports.logIn = function (req, res) {
     var userData = {
         userId: req.user.id,
+        role: req.user.role,
         rights: config.get("rights")[req.user.role]
     };
-    console.log(userData);
     res.json(userData);
 };
 

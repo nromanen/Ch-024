@@ -89,7 +89,10 @@ require.config({
         'subjectInfoTemplate': '../templates/subjectInfoTemplate.html',
         'teacherInfoTemplate': '../templates/teacherInfoTemplate.html',
         'alertError': '../templates/alertError.html',
+        'adminMenuTemplate': '../templates/adminMenuTemplate.html',
+        'teacherMenuTemplate': '../templates/teacherMenuTemplate.html',
         'alertSuccess': '../templates/alertSuccess.html'
+
     },
 
     shim: {

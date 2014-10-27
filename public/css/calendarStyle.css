@@ -181,7 +181,7 @@ nav li:hover {
     margin: 0 8px;
 }
 
-#navTabs, #buttonCreate, .admin-menu{
+#navTabs, #buttonCreate{
     display: none;
     visibility: hidden;
 }
