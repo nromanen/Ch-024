@@ -62,7 +62,8 @@ module.exports = function(grunt) {
         cssmin: {
             compilecss: {
                 options: {
-                banner: '/* <%= pkg.name %> */'
+                banner: '/* <%= pkg.name %> */',
+                keepSpecialComments: 0
             },
                 files: {
                     'public/build/<%= pkg.name %>.min.css': ['public/**/*.css']
