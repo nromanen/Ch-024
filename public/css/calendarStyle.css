@@ -156,27 +156,6 @@ nav li:hover {
     border: inset 2px white;
     font-weight: bolder;
 }
-@font-face {
-    font-family: 'socicon';
-    src: url('fonts/socicon-webfont.eot');
-    src: url('fonts/socicon-webfont.eot?#iefix') format('embedded-opentype'),
-    url('fonts/socicon-webfont.woff') format('woff'),
-    url('fonts/socicon-webfont.ttf') format('truetype'),
-    url('fonts/socicon-webfont.svg#sociconregular') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
-.socialMedia{
-    font-family: socicon;
-    font-size: 40px;
-}
-.blueText{
-    color: #2a6496;
-    margin-top: 20px;
-}
-.rightAlign{
-    text-align: right;
-}
 
 #subjectContainer {
     margin: 10px 0;
