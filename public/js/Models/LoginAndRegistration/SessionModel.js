@@ -7,7 +7,7 @@ define([
     var SessionModel = Backbone.Model.extend({
 
         initialize: function() {
-            if (Storage && sessionStorage) {
+            if (Storage && localStorage) {
                 this.supportStorage = true;
             }
 
@@ -30,7 +30,7 @@ define([
 
         getSession: function(key) {
             if (this.supportStorage) {
-                var data = sessionStorage.getItem(key);
+                var data = localStorage.getItem(key);
                 if (data && data[0] === '{') {
                     return JSON.parse(data);
                 } else {
@@ -41,14 +41,14 @@ define([
 
         setSession: function(key, value) {
             if (this.supportStorage) {
-                sessionStorage.setItem(key, value);
+                localStorage.setItem(key, value);
             }
             return this;
         },
 
         clearSession: function() {
             if (this.supportStorage) {
-                sessionStorage.clear();
+                localStorage.clear();
             }
         },
 
@@ -61,7 +61,7 @@ define([
             });
             login.done(function(response) {
                 var res = JSON.stringify(response);
-                that.setSession('userSession', response.userId);
+                that.setSession('userSession', response.user._id);
                 that.set(response);
 
                 Backbone.history.navigate("#home", {
@@ -92,34 +92,33 @@ define([
             });
         },
 
-        // hasPermission: function(feature, action) {
-        //     var rights = this.get("rights");
-        //     if (rights === null) {
-        //         return false;
-        //     }
-        //     return rights[feature][action];
-        // },
-
         getRole: function() {
-            var role = this.get("role");
-            if (role === null) {
+            var user = this.get("user");
+            if ((user === null) || (user === undefined)) {
                 return false;
             }
-            return role;
+            return user.role;
         },
-
 
         getGravatarLink: function() {
             var gravatar = this.get("gravatar");
-            if (gravatar === null) {
+            if ((gravatar === null) || (gravatar === undefined)) {
                 return false;
             }
             return gravatar;
         },
 
+        getFullName: function() {
+            var user = this.get("user");
+            if ((user === null) || (user === undefined)) {
+                return false;
+            }
+            return user.username + ' ' + user.surname;
+        },
+
         getUserId: function() {
             var userId = this.getSession("userSession");
-            if (userId === null) {
+            if ((userId === null) || (userId === undefined)) {
                 return false;
             }
             return userId;

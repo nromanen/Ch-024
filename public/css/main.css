@@ -17,7 +17,7 @@ body {
 }
 .userDropdown {
   background: #27383f;
-  width: 180px;
+  width: auto;
 }
 .userDropdown .userPic {
   width: 34px;

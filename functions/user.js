@@ -5,26 +5,24 @@ var db = require('../lib/mongoose'),
     nodemailer = require('./mail');
 
 
-exports.logOut = function (req, res) {
+exports.logOut = function(req, res) {
     req.logout();
     res.redirect('/');
 };
 
-exports.logIn = function (req, res) {
+exports.logIn = function(req, res) {
     var userData = {
-        userId: req.user.id,
-        role: req.user.role,
+        user: req.user,
         gravatar: gravatar.getGravatar(req.session.email),
         rights: config.get("rights")[req.user.role]
     };
     res.json(userData);
 };
 
-exports.getRights = function (req, res) {
+exports.getRights = function(req, res) {
     if (req.params.sessionId === req._passport.session.user) {
         var userData = {
-            userId: req.user.id,
-            role: req.user.role,
+            user: req.user,
             gravatar: gravatar.getGravatar(req.session.email),
             rights: config.get("rights")[req.user.role]
         };
@@ -35,12 +33,12 @@ exports.getRights = function (req, res) {
 };
 
 
-exports.getById = function (req, res) {
+exports.getById = function(req, res) {
     var query = db.userModel.findOne({
         '_id': req.params.id
     });
     query.select('username surname phone');
-    query.exec(function (err, queryRes) {
+    query.exec(function(err, queryRes) {
         if (err) {
             return handleError(err)
         } else {
@@ -54,7 +52,7 @@ exports.getById = function (req, res) {
  auth.verify(req.body.email,req.body.hash);
  */
 
-exports.signUp = function (req, res) {
+exports.signUp = function(req, res) {
 
     var data = new db.userModel({
         username: req.body.name,
@@ -66,7 +64,7 @@ exports.signUp = function (req, res) {
     });
 
 
-    data.save(function (err) {
+    data.save(function(err) {
         if (!err) {
             res.send(201);
             res.end;
@@ -83,12 +81,12 @@ exports.signUp = function (req, res) {
     res.end;
 };
 
-exports.getNotApproved = function (req, res) {
+exports.getNotApproved = function(req, res) {
     var query = db.userModel.find({
         approved: false
     });
     query.select('username surname email phone');
-    query.exec(function (err, queryRes) {
+    query.exec(function(err, queryRes) {
         if (err) {
             return handleError(err)
         } else {
@@ -97,14 +95,14 @@ exports.getNotApproved = function (req, res) {
     });
 };
 
-exports.confirm = function (req, res) {
+exports.confirm = function(req, res) {
     var query = db.userModel.find({
         '_id': req.params.id
     });
     query.update({
         approved: true,
         role: 'teacher'
-    }, function (err) {
+    }, function(err) {
         if (err) {
             return handleError(err);
         } else {

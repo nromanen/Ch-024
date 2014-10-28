@@ -4,7 +4,6 @@ exports.create = function (req, res) {
 
     var data = new db.categoryModel({
         title: req.body.title
-
     });
 
     data.save(function (err) {
@@ -14,8 +13,6 @@ exports.create = function (req, res) {
             res.end(err.message);
         }
     });
-
-
 };
 
 exports.confirm = function(req, res) {
@@ -55,18 +52,8 @@ exports.get = function (req, res) {
             res.end;
         }
     });
-    /*
-     var query = db.userModel.findOne({ 'email': req.body.email });
-     query.select('password username email role');
-     query.exec(function (err, qRes) {
-     if (err) return handleError(err);
-
-     console.log(req.body.email);
-     console.log(qRes.password);
-
-     goNext(qRes.password, qRes.username, qRes.role);
-     });*/
 };
+
 exports.getNotApproved = function (req, res) {
     var query = db.categoryModel.find({approved: false});
     query.select('title');

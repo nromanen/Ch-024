@@ -28,7 +28,6 @@ exports.create = function(req, res) {
             res.send({
                 action: "failSave"
             });
-            console.log(err);
             res.end;
         }
     });
