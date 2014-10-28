@@ -27,8 +27,7 @@ require([
     'AdminSubjectsCollection',
     'AdminCategoriesCollection',
     'ControllerView'
-], function(
-    $,
+], function($,
     _,
     Backbone,
     NavBarTemplateView,
@@ -62,8 +61,6 @@ require([
     var Router = Backbone.Router.extend({
         session: null,
 
-        
-
         routes: {
             "": "loginPage",
             "home": "homePage",
@@ -77,12 +74,11 @@ require([
         initialize: function() {
             this.session = Session;
             this._initializeEvents();
+            this.role = this.session.getRole();
         },
 
         _checkAuth: function() {
             var path = Backbone.history.location.hash;
-            // var user = JSON.parse(sessionStorage.getItem('user'));
-            // console.log(user);
             if (!this.session.getSession('userSession')) {
                 Backbone.history.navigate('/', {
                     trigger: true
@@ -109,16 +105,19 @@ require([
                 new ContainerCalendarTemplateView().render();
                 this._headerFooterContainersRender();
                 new HomeTemplateView().render();
+
                 this.eventsCollection = new EventsCollection();
-                this.categoriesCollection = new CategoriesCollection();
-                this.subjectsCollection = new SubjectsCollection();
                 new CalendarView({
                     collection: this.eventsCollection
                 }).render();
+
+                this.categoriesCollection = new CategoriesCollection();
                 new CategoriesView({
                     collection: this.categoriesCollection,
                     model: new CategoryModel
                 });
+
+                this.subjectsCollection = new SubjectsCollection();
                 new SubjectsView({
                     collectionSubject: this.subjectsCollection,
                     collectionCategory: this.categoriesCollection,
@@ -168,9 +167,6 @@ require([
                     notapprovedTeachersCollection: this.notapprovedTeachersCollection,
                     notapprovedSubjectsCollection: this.notapprovedSubjectsCollection,
                     notapprovedCategoriesCollection: this.notapprovedCategoriesCollection
-
-                    //templateID: '#teacherInfoTemplate',
-                    // groupClass: '.teachersInfo'
                 });
                 ControllerView.selectMenuItem('admin-menu');
             });

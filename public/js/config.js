@@ -91,6 +91,8 @@ require.config({
         'alertError': '../templates/alertError.html',
         'adminMenuTemplate': '../templates/adminMenuTemplate.html',
         'teacherMenuTemplate': '../templates/teacherMenuTemplate.html',
+        'subjectContainerTemplate': '../templates/subjectContainerTemplate.html',
+        'buttonAssignTemplate': '../templates/buttonAssignTemplate.html',
         'alertSuccess': '../templates/alertSuccess.html'
 
     },

@@ -30,7 +30,6 @@ define('NavBarTemplateView', ['jquery',
         },
 
         initialize: function() {
-            this.role = Session.getRole();
             this._choseTemplateMenu();
             this.$el.html(this.template({liMenu: this.menuTemplate}));
             this._attachEvents();
@@ -45,9 +44,10 @@ define('NavBarTemplateView', ['jquery',
         },
 
         _choseTemplateMenu: function() {
-            if(this.role === 'admin') this.menuTemplate = this.adminMenuTemplate();
-            if(this.role === 'teacher') this.menuTemplate = this.teacherMenuTemplate();
-            if(this.role === 'user')  this.menuTemplate = ' ';
+            var role = Session.getRole();
+            if(role === 'admin') this.menuTemplate = this.adminMenuTemplate();
+            if(role === 'teacher') this.menuTemplate = this.teacherMenuTemplate();
+            if(role === 'user')  this.menuTemplate = ' ';
         },
 
         render: function() {

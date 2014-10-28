@@ -6,16 +6,16 @@ define('ControllerView', ['jquery', 'underscore', 'backbone', 'text!alertError',
         templateAlertError: _.template(alertError),
         templateAlertSuccess: _.template(alertSuccess),
 
-        showElements: function(feature, action, selectors) {
-            if (Calendar.Controller.session.hasPermission(feature, action)) {
-                for (var i in selectors) {
-                    $(selectors[i]).css({
-                        display: 'block',
-                        visibility: 'visible'
-                    });
-                }
-            }
-        },
+        // showElements: function(feature, action, selectors) {
+        //     if (Calendar.Controller.session.hasPermission(feature, action)) {
+        //         for (var i in selectors) {
+        //             $(selectors[i]).css({
+        //                 display: 'block',
+        //                 visibility: 'visible'
+        //             });
+        //         }
+        //     }
+        // },
 
         showWrongLogin: function() {
             $('.incorrectLogin').fadeIn(200);

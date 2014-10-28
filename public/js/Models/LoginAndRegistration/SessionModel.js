@@ -92,14 +92,13 @@ define([
             });
         },
 
-        hasPermission: function(feature, action) {
-            var rights = this.get("rights");
-            if (rights === null) {
-                return false;
-            }
-            return rights[feature][action];
-
-        },
+        // hasPermission: function(feature, action) {
+        //     var rights = this.get("rights");
+        //     if (rights === null) {
+        //         return false;
+        //     }
+        //     return rights[feature][action];
+        // },
 
         getRole: function() {
             var role = this.get("role");
