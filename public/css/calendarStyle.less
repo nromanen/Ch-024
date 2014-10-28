@@ -1,0 +1,199 @@
+@containerColor: #EDF1F2;
+
+.calendarWrap {
+  padding : 12px;
+
+}
+.row {
+    margin: 5px;
+}
+
+
+.tab-content {
+    margin-bottom: 10px;
+    border: 1px solid #dddddd;
+    border-top: none;
+    display: block;
+
+  .active {
+	height : 73px;
+  }
+}
+
+
+
+.tab-pane {
+    padding: 10px;
+    background: white;
+}
+
+.ui-draggable {
+    display: inline-block;
+    margin: 10px;
+}
+.divSubject {
+    font-size: 14px;
+    padding: 7px;
+    width: 150px;
+    cursor: pointer;
+    text-align: center;
+    border: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.divSubject:hover .removeSubject {
+    cursor: pointer;
+    visibility: visible;
+}
+.removeSubject {
+    /* visibility: hidden;*/
+    position: absolute;
+    left: 128px;
+    text-align: left;
+    top: 9px;
+
+
+}
+
+span.divSubject {
+    text-align: left;
+}
+
+.removeSubject:hover {
+    /* visibility: hidden;*/
+    -webkit-transform: scale(1.4);
+    -moz-transform: scale(1.4);
+    -ms-transform: scale(1.4);
+    -o-transform: scale(1.4);
+    transform: scale(1.4);;
+}
+
+#navTabContainer li:hover .removeCategory {
+    cursor: pointer;
+    visibility: visible;
+}
+.removeCategory {
+    visibility: hidden;
+    float: right;
+    padding: 2px 12px;
+}
+
+
+.removeCategory:hover {
+    -webkit-transform: scale(1.4);
+    -moz-transform: scale(1.4);
+    -ms-transform: scale(1.4);
+    -o-transform: scale(1.4);
+    transform: scale(1.4);;
+}
+
+.calendarContainer {
+    background: @containerColor;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    position: relative;
+
+}
+#clip {
+    position: relative;
+    top: -20px;
+    background: url('../images/paperClipStart.png') repeat-x;
+    height: 60px;
+}
+.nav .navbar-nav .active {
+    background-color: #428bca;
+}
+
+nav li:hover {
+    background-color: #4B8BAF;
+}
+.titleTextDecoration {
+    font-size: 18pt;
+    color: darkslategray;
+}
+.textDelete {
+    font-size: 16pt;
+}
+.create {
+    margin-top: 5px;
+}
+
+/*popover*/
+
+.own-popover {
+    position: absolute;
+    min-width: 200px;
+    border: 1px inset rgb(150, 139, 139);
+    border-radius: 2px;
+    background-color: black;
+    box-shadow: 4px 4px 4px #7B7B74;
+    line-height: 1.4em;
+    color: white;
+    filter: alpha(opacity=70);
+    opacity: 0.7;
+    z-index: 10;
+    padding: 3px;
+}
+.own-popover .remove-popover {
+    float: right;
+    margin: 3px 5px 0 0px;
+    cursor: pointer;
+}
+.popover-header {
+    color: black;
+    background-color: white;
+    border: inset 2px gray;
+}
+.own-popover .popover-header .header-content {
+    padding-left: 5em;
+    font-weight: bolder;
+}
+.own-popover .removePopover:after {
+    clear: both;
+}
+.own-popover .footer-content {
+    text-align: center;
+}
+.own-popover .footer-content input {
+    background-color: black;
+    outline: none;
+    border: inset 2px white;
+    font-weight: bolder;
+    margin: 3px;
+}
+.own-popover .footer-content input:active {
+    background-color: #687175;
+    outline: none;
+    border: inset 2px white;
+    font-weight: bolder;
+}
+
+#subjectContainer {
+    margin: 10px 0;
+}
+
+#external-events {
+
+}
+#external-events input {
+    min-width: 110px;
+    text-align: left;
+    margin-bottom: 2px;
+    padding-left: 20px;
+}
+
+#buttonCreate {
+    margin-top: 41px;
+    padding-left: 0;
+}
+
+
+.dropdown a>span {
+    margin: 0 8px;
+}
+
+#navTabs, #buttonCreate, .admin-menu{
+    display: none;
+    visibility: hidden;
+}

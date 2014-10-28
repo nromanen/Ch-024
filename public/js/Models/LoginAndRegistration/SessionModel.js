@@ -108,6 +108,15 @@ define([
             return role;
         },
 
+
+        getGravatarLink: function() {
+            var gravatar = this.get("gravatar");
+            if (gravatar === null) {
+                return false;
+            }
+            return gravatar;
+        },
+
         getUserId: function() {
             var userId = this.getSession("userSession");
             if (userId === null) {

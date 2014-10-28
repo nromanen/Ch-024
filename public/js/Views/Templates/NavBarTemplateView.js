@@ -4,6 +4,7 @@ define('NavBarTemplateView', ['jquery',
     'ControllerView',
     'text',
     'SessionModel',
+    'UserModel',
     'text!navBarTemplate',
     'text!adminMenuTemplate',
     'text!teacherMenuTemplate'
@@ -13,6 +14,7 @@ define('NavBarTemplateView', ['jquery',
     ControllerView,
     text,
     Session,
+    UserModel,
     navBarTemplate,
     adminMenuTemplate,
     teacherMenuTemplate) {
@@ -30,9 +32,15 @@ define('NavBarTemplateView', ['jquery',
         },
 
         initialize: function() {
+            this.userModel = new UserModel;
+            this._fetchUserModel();
+
             this._choseTemplateMenu();
             this.$el.html(this.template({liMenu: this.menuTemplate}));
             this._attachEvents();
+
+
+
         },
 
         _attachEvents: function() {
@@ -43,6 +51,7 @@ define('NavBarTemplateView', ['jquery',
             Session.logout();
         },
 
+
         _choseTemplateMenu: function() {
             var role = Session.getRole();
             if(role === 'admin') this.menuTemplate = this.adminMenuTemplate();
@@ -50,7 +59,21 @@ define('NavBarTemplateView', ['jquery',
             if(role === 'user')  this.menuTemplate = ' ';
         },
 
+        _fetchUserModel: function() {
+            var that = this;
+            this.userModel.set('_id', Calendar.Controller.session.getUserId());
+            this.userModel.fetch({
+                success: function() {
+                    that.$el.find('.username').html(that.userModel.getName());
+                }
+            });
+        },
+
         render: function() {
+            this.$el.find('.userPic').attr('src',Session.getGravatarLink());
+
+            console.log(this.username)
+            console.log(Session.getGravatarLink());
             $(this.selectors.headerTeg).html(this.$el);
             return this;
         }
