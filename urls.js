@@ -15,6 +15,7 @@ function Urls(app, userRoles){
     //login api
     app.post('/login', passport.authenticate('local'), user.logIn);
     app.post('/signup', user.signUp);
+    app.get('/rights/:sessionId', user.getRights);
     app.post('/logout', userRoles.can('user'), user.logOut);
     app.get('/user/:id', userRoles.can('user'), user.getById);
     app.get('/users/notapproved',userRoles.can('admin'), user.getNotApproved);

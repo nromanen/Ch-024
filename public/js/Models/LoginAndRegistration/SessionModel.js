@@ -10,9 +10,25 @@ define([
             if (Storage && sessionStorage) {
                 this.supportStorage = true;
             }
+
+            var that = this;
+
+            if (!(this.getSession('userSession') === null)) {
+                $.ajax({
+                        url: '/rights/' + this.getSession('userSession'),
+                        dataType: 'json',
+                        type: 'GET'
+                    })
+                    .done(function(response) {
+                        that.set(response);
+                    })
+                    .fail(function() {
+                        console.log("error");
+                    });
+            }
         },
 
-        get: function(key) {
+        getSession: function(key) {
             if (this.supportStorage) {
                 var data = sessionStorage.getItem(key);
                 if (data && data[0] === '{') {
@@ -23,14 +39,14 @@ define([
             }
         },
 
-        set: function(key, value) {
+        setSession: function(key, value) {
             if (this.supportStorage) {
                 sessionStorage.setItem(key, value);
             }
             return this;
         },
 
-        clear: function() {
+        clearSession: function() {
             if (this.supportStorage) {
                 sessionStorage.clear();
             }
@@ -45,8 +61,9 @@ define([
             });
             login.done(function(response) {
                 var res = JSON.stringify(response);
-                that.set('userSession', res);
-                
+                that.setSession('userSession', response.userId);
+                that.set(response);
+
                 Backbone.history.navigate("#home", {
                     trigger: true
                 });
@@ -67,8 +84,7 @@ define([
                 url: '/logout',
                 type: 'POST'
             }).done(function(response) {
-                that.clear();
-                that.initialize();
+                that.clearSession();
 
                 Backbone.history.navigate('/', {
                     trigger: true
@@ -77,28 +93,28 @@ define([
         },
 
         hasPermission: function(feature, action) {
-            var user = this.get("userSession");
-            if (user === null) {
+            var rights = this.get("rights");
+            if (rights === null) {
                 return false;
             }
-            return user.rights[feature][action];
+            return rights[feature][action];
 
         },
 
         getRole: function() {
-            var user = this.get("userSession");
-            if (user === null) {
+            var role = this.get("role");
+            if (role === null) {
                 return false;
             }
-            return user.role
+            return role;
         },
 
         getUserId: function() {
-            var user = this.get("userSession");
-            if (user === null) {
+            var userId = this.getSession("userSession");
+            if (userId === null) {
                 return false;
             }
-            return user.userId;
+            return userId;
         }
     });
 
