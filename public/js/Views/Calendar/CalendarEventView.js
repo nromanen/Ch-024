@@ -54,7 +54,7 @@ define('CalendarEventView', ['jquery',
          * Also update some attributes of eventObject because we need to update fullCalendar later
          */
         _updateCalendarEvent: function() {
-            this.model.setAmountOfStudents(parseInt(this.$(this.selectors.amountOfStudentsInput).val()));
+            this.model.setAmountOfStudents(this.$(this.selectors.amountOfStudentsInput).val());
             this.model.setClassroom(this.$(this.selectors.classroomForExamInput).val());
             this.model.setEditable(false);
             this.model.setTextColor('black');

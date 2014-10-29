@@ -117,14 +117,13 @@ define('CalendarEventModel', ['jquery', 'underscore', 'backbone', 'SubjectModel'
                 });
             }
             console.log(attrs.amountOfStud);
-            if (isNaN(attrs.amountOfStudents)) {
+            if (isNaN(+(attrs.amountOfStudents))) {
                 errors.push({
                     field: 'amountOfStud',
                     message: 'The amount of students is required and must be number!!'
                 });
             }
-            console.log(errors)
-
+            
             return errors.length ? errors : false;
         }
 
