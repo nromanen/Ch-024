@@ -95,10 +95,13 @@ define('CalendarView', ['jquery',
          * Create Event View for updating and deleting event model.
          */
         _showCalendarEventModal: function(calendarEventObject) {
+            var role = Session.getRole();
             var calendarEventModel = this.calendarEventsCollection.findWhere({
                 cid: calendarEventObject.cid
             });
-            calendarEventModel.trigger('showCalendarEventModal');
+            if(!(role === 'user')) {
+                calendarEventModel.trigger('showCalendarEventModal');
+            }
             new CalendarEventView({
                 model: calendarEventModel,
                 calendarEventObject: calendarEventObject
