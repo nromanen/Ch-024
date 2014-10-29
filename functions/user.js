@@ -13,9 +13,14 @@ exports.logOut = function(req, res) {
 exports.logIn = function(req, res) {
     var userData = {
         user: req.user,
-        gravatar: gravatar.getGravatar(req.session.email),
+        // gravatar: gravatar.getGravatar(req.session.email),
         rights: config.get("rights")[req.user.role]
     };
+    req.login(req.user, function(err) {
+        if (err) {
+            return next(err);
+        };
+    });
     res.json(userData);
 };
 
@@ -23,7 +28,7 @@ exports.getRights = function(req, res) {
     if (req.params.sessionId === req._passport.session.user) {
         var userData = {
             user: req.user,
-            gravatar: gravatar.getGravatar(req.session.email),
+            // gravatar: gravatar.getGravatar(req.session.email),
             rights: config.get("rights")[req.user.role]
         };
         res.json(userData);

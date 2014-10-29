@@ -23,7 +23,7 @@ define([
                         that.set(response);
                     })
                     .fail(function() {
-                        console.log("error");
+                        that.clearSession();
                     });
             }
         },
