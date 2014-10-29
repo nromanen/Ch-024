@@ -30,6 +30,7 @@ define('NavBarTemplateView', ['jquery',
         },
 
         initialize: function() {
+            this.session = Session;
             this._choseTemplateMenu();
             this.$el.html(this.template({liMenu: this.menuTemplate}));
             this._attachEvents();
@@ -52,8 +53,8 @@ define('NavBarTemplateView', ['jquery',
         },
 
         render: function() {
-            this.$el.find('.userPic').attr('src',Session.getGravatarLink());
-            this.$el.find('.username').html(Session.getFullName());
+            // this.$el.find('.userPic').attr('src',this.session.getGravatarLink());
+            this.$el.find('.username').html(this.session.getFullName());
             $(this.selectors.headerTeg).html(this.$el);
             return this;
         }
