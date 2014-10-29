@@ -26,7 +26,8 @@ require([
     'AdminTeachersCollection',
     'AdminSubjectsCollection',
     'AdminCategoriesCollection',
-    'ControllerView'
+    'ControllerView',
+    'TeacherCabinetTemplateView'
 ], function($,
     _,
     Backbone,
@@ -54,7 +55,8 @@ require([
     AdminTeachersCollection,
     AdminSubjectsCollection,
     AdminCategoriesCollection,
-    ControllerView) {
+    ControllerView,
+    TeacherCabinetTemplateView) {
 
     window.Calendar = {};
 
@@ -67,7 +69,7 @@ require([
             "help": "helpPage",
             "about": "aboutPage",
             "settings": "settingsPage",
-            "login": "loginPage",
+            "cabinet": "cabinetPage",
             "admin": "adminPage"
         },
 
@@ -169,6 +171,12 @@ require([
                     notapprovedCategoriesCollection: this.notapprovedCategoriesCollection
                 });
                 ControllerView.selectMenuItem('admin-menu');
+            });
+
+            this.on('route:cabinetPage', function() {
+                new ContainerCalendarTemplateView().render();
+                this._headerFooterContainersRender();
+                new TeacherCabinetTemplateView().render();
             });
         },
 

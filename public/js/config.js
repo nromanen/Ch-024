@@ -64,6 +64,7 @@ require.config({
         'AdminTemplateView': 'Views/Templates/AdminTemplateView',
         'ControllerView': 'Views/ControllerView',
         'SubscribeView': 'Views/Calendar/SubscribeView',
+        'TeacherCabinetTemplateView': 'Views/Templates/TeacherCabinetTemplateView',
 
         // Template
         'aboutTemplate': '../templates/aboutTemplate.html',
@@ -83,6 +84,7 @@ require.config({
         'loginTemplate': '../templates/loginTemplate.html',
         'registrationTemplate': '../templates/registrationTemplate.html',
         'containerCalendarTemplate': '../templates/containerCalendarTemplate.html',
+        'teacherCabinetTemplate': '../templates/teacherCabinetTemplate.html',
 
         'adminTemplate': '../templates/adminTemplate.html',
         'categoryInfoTemplate': '../templates/categoryInfoTemplate.html',
