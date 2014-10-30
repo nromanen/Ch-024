@@ -7,14 +7,30 @@ define([
     var SessionModel = Backbone.Model.extend({
 
         initialize: function() {
-            if (Storage && sessionStorage) {
+            if (Storage && localStorage) {
                 this.supportStorage = true;
+            }
+
+            var that = this;
+
+            if (!(this.getSession('userSession') === null)) {
+                $.ajax({
+                        url: '/rights/' + this.getSession('userSession'),
+                        dataType: 'json',
+                        type: 'GET'
+                    })
+                    .done(function(response) {
+                        that.set(response);
+                    })
+                    .fail(function() {
+                        that.clearSession();
+                    });
             }
         },
 
-        get: function(key) {
+        getSession: function(key) {
             if (this.supportStorage) {
-                var data = sessionStorage.getItem(key);
+                var data = localStorage.getItem(key);
                 if (data && data[0] === '{') {
                     return JSON.parse(data);
                 } else {
@@ -23,16 +39,16 @@ define([
             }
         },
 
-        set: function(key, value) {
+        setSession: function(key, value) {
             if (this.supportStorage) {
-                sessionStorage.setItem(key, value);
+                localStorage.setItem(key, value);
             }
             return this;
         },
 
-        clear: function() {
+        clearSession: function() {
             if (this.supportStorage) {
-                sessionStorage.clear();
+                localStorage.clear();
             }
         },
 
@@ -45,8 +61,9 @@ define([
             });
             login.done(function(response) {
                 var res = JSON.stringify(response);
-                that.set('userSession', res);
-                
+                that.setSession('userSession', response.user._id);
+                that.set(response);
+
                 Backbone.history.navigate("#home", {
                     trigger: true
                 });
@@ -67,8 +84,7 @@ define([
                 url: '/logout',
                 type: 'POST'
             }).done(function(response) {
-                that.clear();
-                that.initialize();
+                that.clearSession();
 
                 Backbone.history.navigate('/', {
                     trigger: true
@@ -76,29 +92,36 @@ define([
             });
         },
 
-        hasPermission: function(feature, action) {
-            var user = this.get("userSession");
-            if (user === null) {
+        getRole: function() {
+            var user = this.get("user");
+            if ((user === null) || (user === undefined)) {
                 return false;
             }
-            return user.rights[feature][action];
-
+            return user.role;
         },
 
-        getRole: function() {
-            var user = this.get("userSession");
-            if (user === null) {
+        getGravatarLink: function() {
+            var gravatar = this.get("gravatar");
+            if ((gravatar === null) || (gravatar === undefined)) {
                 return false;
             }
-            return user.role
+            return gravatar;
+        },
+
+        getFullName: function() {
+            var user = this.get("user");
+            if ((user === null) || (user === undefined)) {
+                return false;
+            }
+            return user.username + ' ' + user.surname;
         },
 
         getUserId: function() {
-            var user = this.get("userSession");
-            if (user === null) {
+            var userId = this.getSession("userSession");
+            if ((userId === null) || (userId === undefined)) {
                 return false;
             }
-            return user.userId;
+            return userId;
         }
     });
 

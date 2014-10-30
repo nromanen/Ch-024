@@ -1,9 +1,24 @@
-define('HomeTemplateView', ['jquery', 'underscore', 'backbone', 'ControllerView', 'text', 'text!homeTemplate'],
-    function($, _, Backbone, ControllerView, text, homeTemplate) {
+define('HomeTemplateView', ['jquery',
+    'underscore',
+    'backbone',
+    'ControllerView',
+    'SessionModel',
+    'text',
+    'text!homeTemplate',
+    'text!subjectContainerTemplate'
+], function($,
+    _,
+    Backbone,
+    ControllerView,
+    Session,
+    text,
+    homeTemplate,
+    subjectContainerTemplate) {
 
     var HomeTemplateView = Backbone.View.extend({
 
         template: _.template(homeTemplate),
+        subjectTemplate: _.template(subjectContainerTemplate),
 
         selectors: {
             mainTag: 'main',
@@ -11,10 +26,20 @@ define('HomeTemplateView', ['jquery', 'underscore', 'backbone', 'ControllerView'
             buttonCreate: '#buttonCreate'
         },
 
+        _changeTemplate: function() {
+            this.role = Session.getRole();
+            if((this.role === 'admin')||(this.role === 'teacher')) {
+                this.subjectTemplate = _.template(subjectContainerTemplate)();
+            } else {
+                this.subjectTemplate = '';
+            }
+        },
+
         render: function() {
-            this.$el.html(this.template());
+            this._changeTemplate();
+            this.$el.html(this.template({subjectContainer: this.subjectTemplate}));
             $(this.selectors.mainTag).html(this.$el);
-            ControllerView.showElements('category', 'watch', [this.selectors.navTabs, this.selectors.buttonCreate]);
+
             return this;
         }
     });

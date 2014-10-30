@@ -10,7 +10,9 @@ define('CalendarView', ['jquery',
     'UserModel',
     'SubscribeCollection',
     'SubscribeView',
-    'text!ownPopoverTemplate'
+    'SessionModel',
+    'text!ownPopoverTemplate',
+    'text!buttonAssignTemplate'
 ], function($,
     _,
     Backbone,
@@ -23,7 +25,9 @@ define('CalendarView', ['jquery',
     UserModel,
     SubscribeCollection,
     SubscribeView,
-    ownPopoverTemplate) {
+    Session,
+    ownPopoverTemplate,
+    buttonAssignTemplate) {
 
     var CalendarView = Backbone.View.extend({
 
@@ -44,7 +48,6 @@ define('CalendarView', ['jquery',
             this.subscribeCollection = new SubscribeCollection;
             this.subscribeCollection.fetch();
             this._fetchUserModel();
-            window.lala = this.calendarEventsCollection;
         },
 
         /* PRIVATE METHODS */
@@ -92,10 +95,13 @@ define('CalendarView', ['jquery',
          * Create Event View for updating and deleting event model.
          */
         _showCalendarEventModal: function(calendarEventObject) {
+            var role = Session.getRole();
             var calendarEventModel = this.calendarEventsCollection.findWhere({
                 cid: calendarEventObject.cid
             });
-            calendarEventModel.trigger('showCalendarEventModal');
+            if(!(role === 'user')) {
+                calendarEventModel.trigger('showCalendarEventModal');
+            }
             new CalendarEventView({
                 model: calendarEventModel,
                 calendarEventObject: calendarEventObject
@@ -107,7 +113,20 @@ define('CalendarView', ['jquery',
             this.userModel.fetch();
         },
 
+        _showAssignButton: function(amountOfStudents, currentCount) {
+            var role = Session.getRole();
+            this.buttonAssign = null;
+            if (role === 'user') {
+                if (!(amountOfStudents === currentCount)) {
+                    this.buttonAssign = buttonAssignTemplate;
+                } else {
+                    this.buttonAssign = '<span class="glyphicon glyphicon-ok"></span>'
+                }
+            }
+        },
+
         _showPopover: _.debounce(function(calendarEventObject, jsEvent, ui) {
+
             var calendarEventModel = this.calendarEventsCollection.findWhere({
                 _id: calendarEventObject._id
             });
@@ -116,12 +135,7 @@ define('CalendarView', ['jquery',
             }
 
             calendarEventModelObject = calendarEventModel.toJSON();
-            var display = '';
-            if(calendarEventModelObject.amountOfStudents <= calendarEventModelObject.currentCount){
-                display = "none";
-            } else {
-                display = "block";
-            }
+            this._showAssignButton(calendarEventModelObject.amountOfStudents, calendarEventModelObject.currentCount);
 
             $(jsEvent.target).ownpopover('show', {
                 html: _.template(ownPopoverTemplate),
@@ -129,7 +143,7 @@ define('CalendarView', ['jquery',
                     start: moment(calendarEventModelObject.start).format('YYYY-MM-DD HH:mm'),
                     end: moment(calendarEventModelObject.end).format('YYYY-MM-DD HH:mm'),
                     amountFreePlace: (calendarEventModelObject.amountOfStudents - calendarEventModelObject.currentCount),
-                    display: display
+                    buttonAssign: this.buttonAssign
                 })
             });
 

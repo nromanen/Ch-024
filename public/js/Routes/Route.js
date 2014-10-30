@@ -26,9 +26,9 @@ require([
     'AdminTeachersCollection',
     'AdminSubjectsCollection',
     'AdminCategoriesCollection',
-    'ControllerView'
-], function(
-    $,
+    'ControllerView',
+    'TeacherCabinetTemplateView'
+], function($,
     _,
     Backbone,
     NavBarTemplateView,
@@ -55,14 +55,13 @@ require([
     AdminTeachersCollection,
     AdminSubjectsCollection,
     AdminCategoriesCollection,
-    ControllerView) {
+    ControllerView,
+    TeacherCabinetTemplateView) {
 
     window.Calendar = {};
 
     var Router = Backbone.Router.extend({
         session: null,
-
-        
 
         routes: {
             "": "loginPage",
@@ -70,20 +69,19 @@ require([
             "help": "helpPage",
             "about": "aboutPage",
             "settings": "settingsPage",
-            "login": "loginPage",
+            "cabinet": "cabinetPage",
             "admin": "adminPage"
         },
 
         initialize: function() {
             this.session = Session;
             this._initializeEvents();
+            this.role = this.session.getRole();
         },
 
         _checkAuth: function() {
             var path = Backbone.history.location.hash;
-            // var user = JSON.parse(sessionStorage.getItem('user'));
-            // console.log(user);
-            if (!this.session.get('userSession')) {
+            if (!this.session.getSession('userSession')) {
                 Backbone.history.navigate('/', {
                     trigger: true
                 });
@@ -109,16 +107,19 @@ require([
                 new ContainerCalendarTemplateView().render();
                 this._headerFooterContainersRender();
                 new HomeTemplateView().render();
+
                 this.eventsCollection = new EventsCollection();
-                this.categoriesCollection = new CategoriesCollection();
-                this.subjectsCollection = new SubjectsCollection();
                 new CalendarView({
                     collection: this.eventsCollection
                 }).render();
+
+                this.categoriesCollection = new CategoriesCollection();
                 new CategoriesView({
                     collection: this.categoriesCollection,
                     model: new CategoryModel
                 });
+
+                this.subjectsCollection = new SubjectsCollection();
                 new SubjectsView({
                     collectionSubject: this.subjectsCollection,
                     collectionCategory: this.categoriesCollection,
@@ -168,11 +169,14 @@ require([
                     notapprovedTeachersCollection: this.notapprovedTeachersCollection,
                     notapprovedSubjectsCollection: this.notapprovedSubjectsCollection,
                     notapprovedCategoriesCollection: this.notapprovedCategoriesCollection
-
-                    //templateID: '#teacherInfoTemplate',
-                    // groupClass: '.teachersInfo'
                 });
                 ControllerView.selectMenuItem('admin-menu');
+            });
+
+            this.on('route:cabinetPage', function() {
+                new ContainerCalendarTemplateView().render();
+                this._headerFooterContainersRender();
+                new TeacherCabinetTemplateView().render();
             });
         },
 

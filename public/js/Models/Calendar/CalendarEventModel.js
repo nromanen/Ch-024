@@ -2,12 +2,10 @@ define('CalendarEventModel', ['jquery', 'underscore', 'backbone', 'SubjectModel'
     var CalendarEventModel = Backbone.Model.extend({
 
         urlRoot: '/events',
-        // idAttribute: '_id',
 
-        defaults:function() {
+        defaults: function() {
             return {
-                _id : '',
-                //  user: UserModel,
+                _id: '',
                 subject: SubjectModel,
                 title: '',
                 start: null,
@@ -15,7 +13,7 @@ define('CalendarEventModel', ['jquery', 'underscore', 'backbone', 'SubjectModel'
                 editable: true,
                 color: '',
                 textColor: 'red',
-                classroom : '',
+                classroom: '',
                 amountOfStudents: 0,
                 currentCount: 0,
                 cid: 0
@@ -108,6 +106,25 @@ define('CalendarEventModel', ['jquery', 'underscore', 'backbone', 'SubjectModel'
 
         setCid: function(value) {
             return this.set('cid', value);
+        },
+
+        validate: function(attrs) {
+            var errors = [];
+            if (attrs.classroom <= 1) {
+                errors.push({
+                    field: 'classForExam',
+                    message: 'The number of classroom is required and must be number!'
+                });
+            }
+            console.log(attrs.amountOfStud);
+            if (isNaN(+(attrs.amountOfStudents))) {
+                errors.push({
+                    field: 'amountOfStud',
+                    message: 'The amount of students is required and must be number!!'
+                });
+            }
+            
+            return errors.length ? errors : false;
         }
 
     });

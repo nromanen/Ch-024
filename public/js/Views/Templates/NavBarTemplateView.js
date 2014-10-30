@@ -30,7 +30,7 @@ define('NavBarTemplateView', ['jquery',
         },
 
         initialize: function() {
-            this.role = Session.getRole();
+            this.session = Session;
             this._choseTemplateMenu();
             this.$el.html(this.template({liMenu: this.menuTemplate}));
             this._attachEvents();
@@ -44,13 +44,17 @@ define('NavBarTemplateView', ['jquery',
             Session.logout();
         },
 
+
         _choseTemplateMenu: function() {
-            if(this.role === 'admin') this.menuTemplate = this.adminMenuTemplate();
-            if(this.role === 'teacher') this.menuTemplate = this.teacherMenuTemplate();
-            if(this.role === 'user')  this.menuTemplate = ' ';
+            var role = Session.getRole();
+            if(role === 'admin') this.menuTemplate = this.adminMenuTemplate();
+            if(role === 'teacher') this.menuTemplate = this.teacherMenuTemplate();
+            if(role === 'user')  this.menuTemplate = ' ';
         },
 
         render: function() {
+            // this.$el.find('.userPic').attr('src',this.session.getGravatarLink());
+            this.$el.find('.username').html(this.session.getFullName());
             $(this.selectors.headerTeg).html(this.$el);
             return this;
         }

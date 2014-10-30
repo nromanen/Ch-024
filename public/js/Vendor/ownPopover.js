@@ -8,11 +8,14 @@ $.fn.ownpopover = function(action, params) {
     function show(content) {
         var top = $this.offset().top - 20 + 'px';
         var left = $this.offset().left + 150 + 'px';
+        if ($this.offset().left > ($(document).width() / 2)) {
+            left = $this.offset().left - 235 + 'px';
+        }
 
         hideAllPopovers();
         $('body').append(content);
         $('body').find('.own-popover').css('top', top).css('left', left);
-        $('body').find('.remove-popover').off('click').on('click', function(){
+        $('body').find('.remove-popover').off('click').on('click', function() {
             $(this).closest('.own-popover').remove();
         });
         $('.fc-button').off('click', hideAllPopovers).on('click', hideAllPopovers);
@@ -25,8 +28,9 @@ $.fn.ownpopover = function(action, params) {
     }
 
     switch (action) {
-        case 'show': {
-            showPopover();
-        }
+        case 'show':
+            {
+                showPopover();
+            }
     }
 };

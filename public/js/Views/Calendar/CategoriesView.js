@@ -1,6 +1,15 @@
-define('CategoriesView', ['jquery', 'underscore', 'backbone', 'CategoryModel', 'CategoryView',
-    'text!createCategoryModalWindowTemplate'],
-    function($, _, Backbone, CategoryModel, CategoryView, createCategoryModalWindowTemplate) {
+define('CategoriesView', ['jquery',
+    'underscore',
+    'backbone',
+    'CategoryModel',
+    'CategoryView',
+    'text!createCategoryModalWindowTemplate'
+], function($,
+    _,
+    Backbone,
+    CategoryModel,
+    CategoryView,
+    createCategoryModalWindowTemplate) {
     var CategoriesView = Backbone.View.extend({
 
         selectors: {
@@ -34,18 +43,20 @@ define('CategoriesView', ['jquery', 'underscore', 'backbone', 'CategoryModel', '
         },
 
         _keydownEnterEvent: function(event) {
-            if(event.keyCode == 13) {$.proxy(this._addNewCategory(), this)}; 
+            if (event.keyCode == 13) {
+                $.proxy(this._addNewCategory(), this)
+            };
         },
 
-        _defineValidationError:function(model, errors){
+        _defineValidationError: function(model, errors) {
             this.$('.errors').html('');
-            _.each(errors, function(error){
-                this.$('.form-group #'+ error.field + ' + .errors').append('<span>' + error.message + '</span>');
+            _.each(errors, function(error) {
+                this.$('.form-group #' + error.field + ' + .errors').append('<span>' + error.message + '</span>');
                 this.$('#' + error.field).addClass('borderRed');
             }, this);
         },
 
-        _renderCategory: function (model) {
+        _renderCategory: function(model) {
             new CategoryView({
                 model: model
             }).render();
@@ -57,12 +68,13 @@ define('CategoriesView', ['jquery', 'underscore', 'backbone', 'CategoryModel', '
         _addNewCategory: function() {
 
             var CategoryTitle = this.$(this.selectors.categoryTitleInput).val();
-                this.model.setTitle(CategoryTitle);
-                this.model.isNew(true);
-                if(this.model.save(null, {type: 'POST'})){
-                    this._cancelModalWindow();
-                }
-
+            this.model.setTitle(CategoryTitle);
+            this.model.isNew(true);
+            if (this.model.save(null, {
+                    type: 'POST'
+                })) {
+                this._cancelModalWindow();
+            }
         },
 
         _cancelModalWindow: function() {
@@ -76,6 +88,6 @@ define('CategoriesView', ['jquery', 'underscore', 'backbone', 'CategoryModel', '
             this._attachEvents();
             return this;
         }
-});
-        return CategoriesView;
     });
+    return CategoriesView;
+});

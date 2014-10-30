@@ -22,18 +22,18 @@ define('UserModel', ['jquery', 'underscore', 'backbone'],
             },
 
             setName: function(value) {
-                this.set('name', value);
+                this.set('username', value);
             },
 
             getName: function() {
-                return this.get('name');
+                return this.get('username');
             },
 
-            setSourname: function(value) {
+            setSurname: function(value) {
                 this.set('sourname', value);
             },
 
-            getSourname: function() {
+            getSurname: function() {
                 return this.get('sourname');
             },
 

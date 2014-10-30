@@ -1,55 +1,48 @@
-<div class="main mainContainer">
-<div class="barGroup">
-    <button type="button" class="btn btn-default categoryButton" data-toggle="collapse" data-target="#teachersCollapse">
-        <img class="headerImage" src="images/teacher.png" alt="teacherImage">
-        <h3 class="categoryHeader">Teachers</h3>
-    </button>
-
-    <div id="teachersCollapse" class="panel-collapse collapse in">
-    <table class="teachersInfo adminTableStyle">
-         <tr class="adminTableHeader adminTableStyle">
-             <td class="nameColumn">Name</td>
-             <td class="sournameColumn">Surname</td>
-             <td class="emailColumn">E-mail</td>
-             <td class="phoneColumn">Phone</td>
-             <td class="buttonsColumn">Actions</td>
-         </tr>
-    </table>
+<div class="admin-wrapper row">
+      <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">Categories</div>
+            <div class="panel-body">
+                <table class="table table-hover categoriesInfo">
+                    <thead>
+                    <th class="titleColumn">Title</th>
+                    <th class="authorColumn">Author</th>
+                    <th class="buttonsColumn">Actions</th>
+                    </thead>
+                </table>
+            </div>
+        </div>
     </div>
-</div>
-
-<div class="barGroup">
-    <button type="button" class="btn btn-default categoryButton" data-toggle="collapse" data-target="#categoriesData">
-        <img class="headerImage" src="images/categories.png" alt="categoriesImage">
-        <h3 class="categoryHeader">Categories</h3>
-    </button>
-
-    <div id="categoriesData" class="panel-collapse collapse in">
-    <table  class="categoriesInfo adminTableStyle">
-            <tr class="adminTableHeader adminTableStyle">
-                <td class="titleColumn">Title</td>
-                <td class="authorColumn">Author</td>
-                <td class="buttonsColumn">Actions</td>
-            </tr>
-    </table>
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">Subjects</div>
+            <div class="panel-body">
+                <table class="subjectsInfo table table-hover">
+                    <thead>
+                    <th class="subjectColumn">Subject</th>
+                    <th class="categoryColumn">Category</th>
+                    <th class="authorColumn">Author</th>
+                    <th class="buttonsColumn">Actions</th>
+                    </thead>
+                </table>
+            </div>
+        </div>
     </div>
-</div>
 
-<div class="barGroup">
-    <button type="button" class="btn btn-default categoryButton subjectsData" data-toggle="collapse" data-target="#subjectsData">
-    <img class="headerImage" src="images/subjects.png" alt="subjectsImage">
-        <h3 class="categoryHeader">Subjects</h3>
-    </button>
-
-    <div id="subjectsData" class="panel-collapse collapse in">
-    <table class="subjectsInfo adminTableStyle">
-        <tr class="adminTableHeader adminTableStyle">
-            <td class="subjectColumn">Subject</td>
-            <td class="categoryColumn">Category</td>
-            <td class="authorColumn">Author</td>
-            <td class="buttonsColumn">Actions</td>
-        </tr>
-    </table>
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">Teachers</div>
+            <div class="panel-body">
+                <table class="teachersInfo table table-hover">
+                    <thead>
+                    <th class="nameColumn">Name</th>
+                    <th class="sournameColumn">Surname</th>
+                    <th class="emailColumn">E-mail</th>
+                    <th class="phoneColumn">Phone</th>
+                    <th class="buttonsColumn">Actions</th>
+                    </thead>
+                </table>
+            </div>
+        </div>
     </div>
-</div>
 </div>
