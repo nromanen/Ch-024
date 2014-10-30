@@ -6,10 +6,7 @@ define([
 
     var SessionModel = Backbone.Model.extend({
 
-        url: '/session',
-
         initialize: function() {
-            //Check for sessionStorage support
             if (Storage && sessionStorage) {
                 this.supportStorage = true;
             }
@@ -39,20 +36,17 @@ define([
             }
         },
 
-        login: function(credentials) {
+        login: function(dataForm) {
             var that = this;
             var login = $.ajax({
                 url: '/login',
-                data: credentials,
+                data: dataForm,
                 type: 'POST'
             });
             login.done(function(response) {
-                // that.set('authenticated', true);
                 var res = JSON.stringify(response);
-                that.set('user', res);
-                //that.set('userId', res.userId);
-                // console.log(that.get('user')['session']['user']);
-
+                that.set('userSession', res);
+                
                 Backbone.history.navigate("#home", {
                     trigger: true
                 });
@@ -73,34 +67,38 @@ define([
                 url: '/logout',
                 type: 'POST'
             }).done(function(response) {
-                    that.clear();
-                    that.initialize();
+                that.clear();
+                that.initialize();
 
-                    Backbone.history.navigate('/', {
-                        trigger: true
-                    });
+                Backbone.history.navigate('/', {
+                    trigger: true
                 });
+            });
         },
 
         hasPermission: function(feature, action) {
-            var user = this.get("user");
-            if(user === null) {
+            var user = this.get("userSession");
+            if (user === null) {
                 return false;
             }
             return user.rights[feature][action];
-            
+
+        },
+
+        getRole: function() {
+            var user = this.get("userSession");
+            if (user === null) {
+                return false;
+            }
+            return user.role
         },
 
         getUserId: function() {
-            var user = this.get("user");
-            if(user === null) {
+            var user = this.get("userSession");
+            if (user === null) {
                 return false;
             }
             return user.userId;
-        },
-
-        getAuth: function(callback) {
-            return this.get('user.session');
         }
     });
 

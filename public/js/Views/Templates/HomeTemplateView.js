@@ -14,7 +14,7 @@ define('HomeTemplateView', ['jquery', 'underscore', 'backbone', 'ControllerView'
         render: function() {
             this.$el.html(this.template());
             $(this.selectors.mainTag).html(this.$el);
-            ControllerView.showElements(this.selectors.navTabs, this.selectors.buttonCreate);
+            ControllerView.showElements('category', 'watch', [this.selectors.navTabs, this.selectors.buttonCreate]);
             return this;
         }
     });

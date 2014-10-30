@@ -1,5 +1,5 @@
 {
-    "port" : 1337,
+    "port": 1337,
     "mongoose": {
         "url": "mongodb://localhost/softserve"
     },

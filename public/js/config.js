@@ -16,6 +16,7 @@ require.config({
         'jqueryjson': 'Vendor/jqueryJSON',
         'text': 'Vendor/text',
         'maskedinput': 'Vendor/jquery.maskedinput',
+        
 
         /*
         Our models, collections, views, etc
@@ -89,7 +90,10 @@ require.config({
         'subjectInfoTemplate': '../templates/subjectInfoTemplate.html',
         'teacherInfoTemplate': '../templates/teacherInfoTemplate.html',
         'alertError': '../templates/alertError.html',
+        'adminMenuTemplate': '../templates/adminMenuTemplate.html',
+        'teacherMenuTemplate': '../templates/teacherMenuTemplate.html',
         'alertSuccess': '../templates/alertSuccess.html'
+
     },
 
     shim: {
@@ -97,24 +101,31 @@ require.config({
             deps: ['underscore', 'jquery'],
             exports: 'Backbone'
         },
+
         'jqueryui': {
             deps: ['jquery']
         },
+
         'fullcalendar': {
             deps: ['moment', 'jquery', 'jqueryui']
         },
+
         'bootstrap': {
             deps: ['jquery']
         },
+
         'pickacolor': {
             deps: ['bootstrap', 'jquery', 'tinycolor']
         },
+
         'tinycolor': {
             deps: ['bootstrap', 'jquery']
         },
+
         'ownpopover': {
             deps: ['jquery']
         },
+
         'maskedinput': {
             deps: ['jquery']
         }
