@@ -1,9 +1,11 @@
 .admin-wrapper {
-    padding: 10px;
+  padding: 10px;
 }
 .buttonsColumn {
-    width: 25%;
+  width: 25%;
 }
-.confirmButton, .refuseButton {
-	width: 70px;
+.confirmButton,
+.refuseButton {
+  width: 70px;
+  margin: 5px;
 }

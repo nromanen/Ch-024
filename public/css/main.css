@@ -87,11 +87,3 @@ header ul.nav > li > a {
 .fc-event {
   border: none;
 }
-.alert-hint {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  padding: 14px;
-  text-align: center;
-}
