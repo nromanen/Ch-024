@@ -55,7 +55,6 @@ require.config({
         'NavBarTemplateView': 'Views/Templates/NavBarTemplateView',
         'FooterTemplateView': 'Views/Templates/FooterTemplateView',
         'ContainerCalendarTemplateView': 'Views/Templates/ContainerCalendarTemplateView',
-        'AboutTemplateView': 'Views/Templates/AboutTemplateView',
         'HomeTemplateView': 'Views/Templates/HomeTemplateView',
         'SettingsTemplateView': 'Views/Templates/SettingsTemplateView',
         'HelpTemplateView': 'Views/Templates/HelpTemplateView',
@@ -65,9 +64,9 @@ require.config({
         'ControllerView': 'Views/ControllerView',
         'SubscribeView': 'Views/Calendar/SubscribeView',
         'TeacherCabinetTemplateView': 'Views/Templates/TeacherCabinetTemplateView',
+        'ConfirmModalTemplateView': 'Views/Templates/ConfirmModalTemplateView',
 
         // Template
-        'aboutTemplate': '../templates/aboutTemplate.html',
         'navBarTemplate': '../templates/navBarTemplate.html',
         'footerTemplate': '../templates/footerTemplate.html',
         'homeTemplate': '../templates/homeTemplate.html',
@@ -85,6 +84,7 @@ require.config({
         'registrationTemplate': '../templates/registrationTemplate.html',
         'containerCalendarTemplate': '../templates/containerCalendarTemplate.html',
         'teacherCabinetTemplate': '../templates/teacherCabinetTemplate.html',
+        'confirmModalWindowTemplate': '../templates/confirmModalWindowTemplate.html',
 
         'adminTemplate': '../templates/adminTemplate.html',
         'categoryInfoTemplate': '../templates/categoryInfoTemplate.html',
