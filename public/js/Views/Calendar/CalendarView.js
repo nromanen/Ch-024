@@ -169,6 +169,17 @@ define('CalendarView', ['jquery',
             calendarEventModel.setEnd(calendarEventObject.end);
         },
 
+        _updateCalendarEventAfterDrop: function( calendarEventObject, delta, revertFunc, jsEvent, ui, view ) {
+            var calendarEventModel = this.calendarEventsCollection.findWhere({
+                cid: calendarEventObject.cid
+            });
+            if (!calendarEventModel) {
+                return;
+            }
+            calendarEventModel.setStart(calendarEventObject.start);
+            calendarEventModel.setEnd(calendarEventObject.end);
+        },
+
         /**
          * Connect fullCalendar widget.
          */
@@ -190,7 +201,8 @@ define('CalendarView', ['jquery',
                 drop: _.bind(this._addEvent, this),
                 eventClick: _.bind(this._showCalendarEventModal, this),
                 eventMouseover: _.bind(this._showPopover, this),
-                eventResize: _.bind(this._resizeEvent, this)
+                eventResize: _.bind(this._resizeEvent, this),
+                eventDrop: _.bind(this._updateCalendarEventAfterDrop, this)
             });
             $(this.selectors.scroll, this.$el).on('scroll', function() {
                 $('.own-popover').remove();

@@ -72,25 +72,19 @@ define(['jquery',
                     });
                 });
 
-                /*describe('subject title input filled', function () {
-
-                    beforeEach(function () {
-                        spyOn(subjectsView.model, 'save').andCallThrough();
-                    });
+                describe('subject title input filled', function () {
 
                     beforeEach(function () {
                         subjectsView.$el.find('.subjectTitle').val('Subject').trigger('change');
-                    });
-
-                    beforeEach(function () {
                         subjectsView.$el.find('.saveBtn').trigger('click');
                     });
 
-                    it('should save model', function () {
+                    xit('should save model', function () {
+                        spyOn(subjectsView.model, 'save').and().callThrough();
                         expect(subjectsView.model.save).toHaveBeenCalled();
                     });
 
-                });*/
+                });
             });
 
         });
