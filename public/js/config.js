@@ -31,6 +31,7 @@ require.config({
         'SessionModel': 'Models/LoginAndRegistration/SessionModel',
         'UserModel': 'Models/Admin/UserModel',
         'SubscribeModel': 'Models/Calendar/SubscribeModel',
+        'CabinetModel': 'Models/Calendar/CabinetModel',
 
         // Collections
         'CalendarEventsCollection': 'Collections/CalendarEventsCollection',
@@ -40,6 +41,7 @@ require.config({
         'AdminSubjectsCollection': 'Collections/Admin/AdminSubjectsCollection',
         'AdminTeachersCollection': 'Collections/Admin/AdminTeachersCollection',
         'SubscribeCollection': 'Collections/SubscribeCollection',
+        'CabinetCollection': 'Collections/CabinetCollection',
 
         // Views
         'CalendarView': 'Views/Calendar/CalendarView',
@@ -56,7 +58,6 @@ require.config({
         'NavBarTemplateView': 'Views/Templates/NavBarTemplateView',
         'FooterTemplateView': 'Views/Templates/FooterTemplateView',
         'ContainerCalendarTemplateView': 'Views/Templates/ContainerCalendarTemplateView',
-        'AboutTemplateView': 'Views/Templates/AboutTemplateView',
         'HomeTemplateView': 'Views/Templates/HomeTemplateView',
         'SettingsTemplateView': 'Views/Templates/SettingsTemplateView',
         'HelpTemplateView': 'Views/Templates/HelpTemplateView',
@@ -66,9 +67,11 @@ require.config({
         'ControllerView': 'Views/ControllerView',
         'SubscribeView': 'Views/Calendar/SubscribeView',
         'TeacherCabinetTemplateView': 'Views/Templates/TeacherCabinetTemplateView',
+        'ConfirmModalTemplateView': 'Views/Templates/ConfirmModalTemplateView',
+        'CabinetEventView': 'Views/Calendar/CabinetEventView',
+        'CabinetEventsView': 'Views/Calendar/CabinetEventsView',
 
         // Template
-        'aboutTemplate': '../templates/aboutTemplate.html',
         'navBarTemplate': '../templates/navBarTemplate.html',
         'footerTemplate': '../templates/footerTemplate.html',
         'homeTemplate': '../templates/homeTemplate.html',
@@ -86,6 +89,8 @@ require.config({
         'registrationTemplate': '../templates/registrationTemplate.html',
         'containerCalendarTemplate': '../templates/containerCalendarTemplate.html',
         'teacherCabinetTemplate': '../templates/teacherCabinetTemplate.html',
+        'confirmModalWindowTemplate': '../templates/confirmModalWindowTemplate.html',
+        'teacherCabinetEventTemplate': '../templates/teacherCabinetEventTemplate.html',
 
         'adminTemplate': '../templates/adminTemplate.html',
         'categoryInfoTemplate': '../templates/categoryInfoTemplate.html',
@@ -97,7 +102,6 @@ require.config({
         'subjectContainerTemplate': '../templates/subjectContainerTemplate.html',
         'buttonAssignTemplate': '../templates/buttonAssignTemplate.html',
         'alertSuccess': '../templates/alertSuccess.html'
-
     },
 
     shim: {

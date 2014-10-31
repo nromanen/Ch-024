@@ -17,6 +17,11 @@ define('ControllerView', ['jquery', 'underscore', 'backbone', 'text!alertError',
             }
         },
 
+        addCategoryInActiveClass: function() {
+            $('.nav-tabs li:first').addClass('active');
+            $('.tab-content .tab-pane:first').addClass('active');
+        },
+
         showAlertSuccess: function(message) {
             $('.forAlert').append(this.templateAlertSuccess(message))
             .children()

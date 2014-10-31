@@ -1,5 +1,18 @@
-define('RegistrationUserView', ['jquery', 'underscore', 'backbone', 'RegistrationUserModel', 'text!registrationTemplate'],
-    function($, _, Backbone, RegistrationUserModel, registrationTemplate) {
+define('RegistrationUserView', [
+    'jquery',
+    'underscore',
+    'backbone',
+    'RegistrationUserModel',
+    'ControllerView',
+    'text!registrationTemplate'
+], function(
+    $,
+    _,
+    Backbone,
+    RegistrationUserModel,
+    ControllerView,
+    registrationTemplate
+) {
     var RegistrationUserView = Backbone.View.extend({
         selectors: {
             registerButton: '#register',
@@ -31,81 +44,88 @@ define('RegistrationUserView', ['jquery', 'underscore', 'backbone', 'Registratio
         },
 
 
-    _attachEvents: function () {
-        this.$(this.selectors.registerButton).on('click', $.proxy(this._checkForm,this));
-        this.$(this.selectors.cancelButton).on('click', $.proxy(this._shutdownModalWindow, this));
-        
-        this.$(this.selectors.nameInput).on('blur', $.proxy(this._checkField, this, "nameInput"));
-        this.$(this.selectors.surnameInput).on('blur', $.proxy(this._checkField, this, "surnameInput"));
-        this.$(this.selectors.emailInput).on('blur', $.proxy(this._checkField, this, "emailInput"));
-        this.$(this.selectors.passwordInput).on('blur', $.proxy(this._checkField, this, "passwordInput"));
-        this.$(this.selectors.repeatPasswordInput).on('blur', $.proxy(this._checkRepeatPassword, this, "repeatPasswordInput"));
-        this.$(this.selectors.phoneInput).on('blur', $.proxy(this._checkField, this, "phoneInput"));
+        _attachEvents: function() {
+            this.$(this.selectors.registerButton).on('click', $.proxy(this._checkForm, this));
+            this.$(this.selectors.cancelButton).on('click', $.proxy(this._shutdownModalWindow, this));
 
-        this.model.on("invalid", $.proxy(this._defineError, this));
-    },
+            this.$(this.selectors.nameInput).on('blur', $.proxy(this._checkField, this, "nameInput"));
+            this.$(this.selectors.surnameInput).on('blur', $.proxy(this._checkField, this, "surnameInput"));
+            this.$(this.selectors.emailInput).on('blur', $.proxy(this._checkField, this, "emailInput"));
+            this.$(this.selectors.passwordInput).on('blur', $.proxy(this._checkField, this, "passwordInput"));
+            this.$(this.selectors.repeatPasswordInput).on('blur', $.proxy(this._checkRepeatPassword, this, "repeatPasswordInput"));
+            this.$(this.selectors.phoneInput).on('blur', $.proxy(this._checkField, this, "phoneInput"));
 
-    _keyPressEvent: function() {
-            $('html').keypress(jQuery.proxy(function(event){
-                if(event.keyCode === 13){
+            this.model.on("invalid", $.proxy(this._defineError, this));
+        },
+
+        _keyPressEvent: function() {
+            $('html').keypress(jQuery.proxy(function(event) {
+                if (event.keyCode === 13) {
                     $("#register").click();
                 }
             }));
-    },
+        },
 
-    /**
-     * @param {Backbone Model} model
-     * @param {Object} errors
-     *Display errors if they happen
-     */
-    _defineError: function(model, errors){
-        this.$('.errors').html('');
-        _.each(errors, function(error){
-            // this.$('.form-group #'+ error.field + ' + .errors').append('<span>' + error.message + '</span>');
-            this.$('#' + error.field).addClass('borderRed');
-        }, this);
-    },
+        /**
+         * @param {Backbone Model} model
+         * @param {Object} errors
+         *Display errors if they happen
+         */
+        _defineError: function(model, errors) {
+            this.$('.errors').html('');
+            _.each(errors, function(error) {
+                // this.$('.form-group #'+ error.field + ' + .errors').append('<span>' + error.message + '</span>');
+                this.$('#' + error.field).addClass('borderRed');
+            }, this);
+        },
 
-    _checkForm:function(jsEvent){
-        jsEvent.preventDefault();
-        var data = this.$el.serializeJSON();
-       if( this.model.save(data)){
-           this._shutdownModalWindow();
-       }
-    },
-
-
-    _checkField: function(fieldName){
-        this.fieldName = fieldName;
-        var currentInput = this.$(this.selectors[this.fieldName]);
-        if(!this.model.preValidate(this.selectors[this.fieldName], currentInput.val())){
-            currentInput.popover({content: "example: " + this.examples[this.fieldName] , placement: "left"});
-            currentInput.popover('show');
-            currentInput.addClass('borderRed');
-        }
-        else{
-            currentInput.popover('hide');
-            currentInput.removeClass('borderRed');
-        };
-    },
-
-    _checkRepeatPassword: function(fieldName){
-        this.fieldName = fieldName;
-        var currentInput = this.$(this.selectors[this.fieldName]);
-        if(!this.model.preValidate('#repeatPassword', currentInput.val(), this.$(this.selectors.passwordInput).val())){
-            currentInput.popover('show');
-            currentInput.addClass('borderRed');
-        }
-        else{
-            currentInput.popover('hide');
-            currentInput.removeClass('borderRed');
-        };
-    },
+        _checkForm: function(jsEvent) {
+            jsEvent.preventDefault();
+            var that = this;
+            var data = this.$el.serializeJSON();
+            this.model.save(data, {
+                success: function() {
+                    that._shutdownModalWindow();
+                    ControllerView.showAlertSuccess({message: 'Your registration have been successfuly!'});
+                }
+            });
+        },
 
 
-    _addPhoneMask: function() {
-        this.$("#phone").mask("+99(999)999-99-99",{placeholder:"_"});
-    },
+        _checkField: function(fieldName) {
+            this.fieldName = fieldName;
+            var currentInput = this.$(this.selectors[this.fieldName]);
+            if (!this.model.preValidate(this.selectors[this.fieldName], currentInput.val())) {
+                currentInput.popover({
+                    content: "example: " + this.examples[this.fieldName],
+                    placement: "left"
+                });
+                currentInput.popover('show');
+                currentInput.addClass('borderRed');
+            } else {
+                currentInput.popover('hide');
+                currentInput.removeClass('borderRed');
+            };
+        },
+
+        _checkRepeatPassword: function(fieldName) {
+            this.fieldName = fieldName;
+            var currentInput = this.$(this.selectors[this.fieldName]);
+            if (!this.model.preValidate('#repeatPassword', currentInput.val(), this.$(this.selectors.passwordInput).val())) {
+                currentInput.popover('show');
+                currentInput.addClass('borderRed');
+            } else {
+                currentInput.popover('hide');
+                currentInput.removeClass('borderRed');
+            };
+        },
+
+
+        _addPhoneMask: function() {
+            this.$("#phone").mask("+99(999)999-99-99", {
+                placeholder: "_"
+            });
+        },
 
 
         _shutdownModalWindow: function() {

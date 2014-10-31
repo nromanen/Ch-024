@@ -5,7 +5,6 @@ require([
     'NavBarTemplateView',
     'FooterTemplateView',
     'ContainerCalendarTemplateView',
-    'AboutTemplateView',
     'HomeTemplateView',
     'HelpTemplateView',
     'SettingsTemplateView',
@@ -27,14 +26,16 @@ require([
     'AdminSubjectsCollection',
     'AdminCategoriesCollection',
     'ControllerView',
-    'TeacherCabinetTemplateView'
+    'TeacherCabinetTemplateView',
+    'CabinetEventsView',
+    'CabinetCollection',
+    'CabinetModel'
 ], function($,
     _,
     Backbone,
     NavBarTemplateView,
     FooterTemplateView,
     ContainerCalendarTemplateView,
-    AboutTemplateView,
     HomeTemplateView,
     HelpTemplateView,
     SettingsTemplateView,
@@ -56,7 +57,10 @@ require([
     AdminSubjectsCollection,
     AdminCategoriesCollection,
     ControllerView,
-    TeacherCabinetTemplateView) {
+    TeacherCabinetTemplateView,
+    CabinetEventsView,
+    CabinetCollection,
+    CabinetModel) {
 
     window.Calendar = {};
 
@@ -67,7 +71,6 @@ require([
             "": "loginPage",
             "home": "homePage",
             "help": "helpPage",
-            "about": "aboutPage",
             "settings": "settingsPage",
             "cabinet": "cabinetPage",
             "admin": "adminPage"
@@ -137,13 +140,6 @@ require([
 
             });
 
-            this.on('route:aboutPage', function() {
-                new ContainerCalendarTemplateView().render();
-                this._headerFooterContainersRender();
-                new AboutTemplateView().render();
-                ControllerView.selectMenuItem('about-menu');
-            });
-
             this.on('route:settingsPage', function() {
                 new ContainerCalendarTemplateView().render();
                 this._headerFooterContainersRender();
@@ -177,6 +173,9 @@ require([
                 new ContainerCalendarTemplateView().render();
                 this._headerFooterContainersRender();
                 new TeacherCabinetTemplateView().render();
+                new CabinetEventsView({
+                    collection: new CabinetCollection
+                });
             });
         },
 

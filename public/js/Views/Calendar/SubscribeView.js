@@ -20,6 +20,9 @@ define('SubscribeView', ['jquery',
             },
             error: {
                 message: 'You are not assign to this subject'
+            },
+            errorConflict: {
+                message: 'You are already assigned to this event'
             }
         },
 
@@ -42,11 +45,15 @@ define('SubscribeView', ['jquery',
             subscribeModel.setEvent(this.calendarEventModel.toJSON());
 
             var that = this;
-
             $.ajax({
                     url: '/subscribe',
                     type: 'POST',
                     data: subscribeModel.toJSON(),
+                    statusCode: {
+                                409: function() {
+                                    ControllerView.showAlertError(that.messages.errorConflict);
+                                }
+                            }
                 })
                 .done(function() {
                     ControllerView.showAlertSuccess(that.messages.success);
@@ -54,20 +61,20 @@ define('SubscribeView', ['jquery',
                     // that.calendarEventsCollection.fetch();
 
                     $.ajax({
-                        url: '/event/' + that.calendarEventModel.getId(),
-                        type: 'GET'
-                    })
-                    .done(function(model) {
-                        that.calendarEventModel.set(JSON.parse(model));
-                        
-                    })
-                    .fail(function() {
-                        console.log("error");
-                    });
+                            url: '/event/' + that.calendarEventModel.getId(),
+                            type: 'GET'
+                        })
+                        .done(function(model) {
+                            that.calendarEventModel.set(JSON.parse(model));
+
+                        })
+                        .fail(function() {
+                            console.log("error");
+                        });
 
                 })
                 .fail(function() {
-                    ControllerView.showAlertError(that.messages.error);
+                    // ControllerView.showAlertError(that.messages.error);
                 });
         }
 

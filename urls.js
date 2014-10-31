@@ -46,6 +46,9 @@ function Urls(app, userRoles){
     //subscribe api
     app.post('/subscribe', userRoles.can('user'), subscribe.create);
     app.get('/subscribe', userRoles.can('user'), subscribe.getAll);
+
+    // teachers cabinet information
+    app.get('/teachers', teachers.get);
 }
 
 exports.Urls = Urls;

@@ -1,0 +1,28 @@
+<div class="col-md-4">
+    <div class="panel panel-primary">
+
+        <div class="panel-heading cabinetHeaderBar"><%=title%></div>
+
+        <div class="panel-body cabinetContentBar">
+            <span>Start event: <%=event.start%></span>
+            </br>
+            <span>End event: <%=event.start%></span>
+            </br>
+            <span>Classroom: <%=event.classroom%></span>
+            </br>
+            <span>Amount of students: <%=event.amountOfStudents%></span>
+            </br>
+            <span>Amount of free place: <%=event.amountOfStudents - event.currentCount%></span>
+        </div>
+
+        <div class="panel-footer footerCabinetBar">
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <span class="badge"><%=Object.keys(students).length%></span>
+                    Students
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</div>

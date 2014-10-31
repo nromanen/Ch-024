@@ -29,7 +29,7 @@ exports.create = function(req, res) {
 
     var data = new db.subscribeModel({
         event: req.body.event,
-        user: req.body.user,
+        user: req.body.user
     });
 
     var querySubscribe = db.subscribeModel.findOne({
