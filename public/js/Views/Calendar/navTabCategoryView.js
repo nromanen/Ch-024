@@ -6,6 +6,7 @@ define('navTabCategoryView', [
     'pickacolor',
     'ConfirmModalTemplateView',
     'ControllerView',
+    'SessionModel',
     'text!navTabCategoryTemplate'
 ], function(
     $,
@@ -15,6 +16,7 @@ define('navTabCategoryView', [
     pickacolor,
     ConfirmModalTemplateView,
     ControllerView,
+    SessionModel,
     navTabCategoryTemplate) {
 
     var navTabCategoryView = Backbone.View.extend({
@@ -37,8 +39,9 @@ define('navTabCategoryView', [
 
         _showModalConfirm: function() {
             new ConfirmModalTemplateView({
-                categoryModel: this.model,
-                thatOnCategory: this
+                model: this.model,
+                remove: this._removeCategory,
+                thatFromView: this
             }).render();
         },
 
@@ -47,8 +50,15 @@ define('navTabCategoryView', [
             this.model.destroy();
         },
 
+        _removeDeleteButton: function() {
+            if (SessionModel.getRole() === "teacher") {
+                this.$('.removeCategory').remove();
+            }
+        },
+
         render: function() {
             this.$el.html(this.template(this.model.toJSON()));
+            this._removeDeleteButton();
             this._attachEvents();
             return this;
         }

@@ -1,5 +1,21 @@
-define('SubjectView', ['jquery', 'underscore', 'backbone', 'jqueryui', 'fullcalendar',
-    'text!newSubjectTemplate'], function($, _, Backbone, jqueryui, fullcalendar, newSubjectTemplate) {
+define('SubjectView', [
+    'jquery',
+    'underscore',
+    'backbone',
+    'jqueryui',
+    'fullcalendar',
+    'SessionModel',
+    'ConfirmModalTemplateView',
+    'text!newSubjectTemplate'
+], function(
+    $,
+    _,
+    Backbone,
+    jqueryui,
+    fullcalendar,
+    SessionModel,
+    ConfirmModalTemplateView,
+    newSubjectTemplate) {
     var SubjectView = Backbone.View.extend({
 
         selectors: {
@@ -19,9 +35,16 @@ define('SubjectView', ['jquery', 'underscore', 'backbone', 'jqueryui', 'fullcale
          * Handle all events
          */
         _attachEvents: function() {
-            this.$(this.selectors.removeSubjectButton).on('click', $.proxy(this._removeSubject, this));
+            this.$(this.selectors.removeSubjectButton).on('click', $.proxy(this._showModalConfirm, this));
         },
 
+        _showModalConfirm: function() {
+            new ConfirmModalTemplateView({
+                model: this.model,
+                remove: this._removeSubject,
+                thatFromView: this
+            }).render();
+        },
 
         /**
          * Remove subject object.
@@ -29,6 +52,12 @@ define('SubjectView', ['jquery', 'underscore', 'backbone', 'jqueryui', 'fullcale
          */
         _removeSubject: function() {
             this.model.deleteSubject();
+        },
+
+        _removeDeleteButton: function() {
+            if(SessionModel.getRole() === "teacher") {
+                this.$('.removeSubject').remove();
+            }
         },
 
         /* PUBLIC METHODS */
@@ -39,6 +68,7 @@ define('SubjectView', ['jquery', 'underscore', 'backbone', 'jqueryui', 'fullcale
                 revert: true, // will cause the event to go back to its
                 revertDuration: 0 //  original position after the drag
             });
+            this._removeDeleteButton();
             this.$el.addClass('fc-event');
             this.$el.data('subject', this.model);
             this._attachEvents();

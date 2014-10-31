@@ -37,7 +37,6 @@ exports.getRights = function(req, res) {
     }
 };
 
-
 exports.getById = function(req, res) {
     var query = db.userModel.findOne({
         '_id': req.params.id
@@ -51,11 +50,6 @@ exports.getById = function(req, res) {
         }
     });
 };
-
-// В середині модуля не бачить Монгус моделі userModel
-/*
- auth.verify(req.body.email,req.body.hash);
- */
 
 exports.signUp = function(req, res) {
 

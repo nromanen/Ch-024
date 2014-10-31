@@ -104,7 +104,7 @@ require([
 
             this.on('route', function() {
                 this._checkAuth();
-            })
+            });
 
             this.on('route:homePage', function() {
                 new ContainerCalendarTemplateView().render();
@@ -176,6 +176,7 @@ require([
                 new CabinetEventsView({
                     collection: new CabinetCollection
                 });
+                ControllerView.selectMenuItem('сabinet-menu');
             });
         },
 
@@ -188,17 +189,5 @@ require([
     });
 
     Calendar.Controller = new Router;
-    $.ajax({
-        statusCode: {
-            401: function() {
-                    alert('You are not authorized');
-                    window.location.replace('/');
-                }
-                /*403: function() {
-                    alert('Access denied');
-                    window.location.replace('/');
-                }*/
-        }
-    });
     Backbone.history.start();
 });
