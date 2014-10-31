@@ -8,7 +8,7 @@ define('CabinetModel', ['jquery', 'underscore', 'backbone'], function($, _, Back
                 _id: '',
                 title: '',
                 event: {},
-                students: []
+                students: {}
             }
         }
     });
