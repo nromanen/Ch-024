@@ -30,6 +30,7 @@ require.config({
         'SessionModel': 'Models/LoginAndRegistration/SessionModel',
         'UserModel': 'Models/Admin/UserModel',
         'SubscribeModel': 'Models/Calendar/SubscribeModel',
+        'CabinetModel': 'Models/Calendar/CabinetModel',
 
         // Collections
         'CalendarEventsCollection': 'Collections/CalendarEventsCollection',
@@ -39,6 +40,7 @@ require.config({
         'AdminSubjectsCollection': 'Collections/Admin/AdminSubjectsCollection',
         'AdminTeachersCollection': 'Collections/Admin/AdminTeachersCollection',
         'SubscribeCollection': 'Collections/SubscribeCollection',
+        'CabinetCollection': 'Collections/CabinetCollection',
 
         // Views
         'CalendarView': 'Views/Calendar/CalendarView',
@@ -65,6 +67,8 @@ require.config({
         'SubscribeView': 'Views/Calendar/SubscribeView',
         'TeacherCabinetTemplateView': 'Views/Templates/TeacherCabinetTemplateView',
         'ConfirmModalTemplateView': 'Views/Templates/ConfirmModalTemplateView',
+        'CabinetEventView': 'Views/Calendar/CabinetEventView',
+        'CabinetEventsView': 'Views/Calendar/CabinetEventsView',
 
         // Template
         'navBarTemplate': '../templates/navBarTemplate.html',
@@ -85,6 +89,7 @@ require.config({
         'containerCalendarTemplate': '../templates/containerCalendarTemplate.html',
         'teacherCabinetTemplate': '../templates/teacherCabinetTemplate.html',
         'confirmModalWindowTemplate': '../templates/confirmModalWindowTemplate.html',
+        'teacherCabinetEventTemplate': '../templates/teacherCabinetEventTemplate.html',
 
         'adminTemplate': '../templates/adminTemplate.html',
         'categoryInfoTemplate': '../templates/categoryInfoTemplate.html',
@@ -96,7 +101,6 @@ require.config({
         'subjectContainerTemplate': '../templates/subjectContainerTemplate.html',
         'buttonAssignTemplate': '../templates/buttonAssignTemplate.html',
         'alertSuccess': '../templates/alertSuccess.html'
-
     },
 
     shim: {

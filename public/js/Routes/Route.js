@@ -26,7 +26,10 @@ require([
     'AdminSubjectsCollection',
     'AdminCategoriesCollection',
     'ControllerView',
-    'TeacherCabinetTemplateView'
+    'TeacherCabinetTemplateView',
+    'CabinetEventsView',
+    'CabinetCollection',
+    'CabinetModel'
 ], function($,
     _,
     Backbone,
@@ -54,7 +57,10 @@ require([
     AdminSubjectsCollection,
     AdminCategoriesCollection,
     ControllerView,
-    TeacherCabinetTemplateView) {
+    TeacherCabinetTemplateView,
+    CabinetEventsView,
+    CabinetCollection,
+    CabinetModel) {
 
     window.Calendar = {};
 
@@ -167,6 +173,9 @@ require([
                 new ContainerCalendarTemplateView().render();
                 this._headerFooterContainersRender();
                 new TeacherCabinetTemplateView().render();
+                new CabinetEventsView({
+                    collection: new CabinetCollection
+                });
             });
         },
 
