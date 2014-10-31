@@ -163,6 +163,8 @@ require(['underscore', 'jquery', 'jasmine', 'jasmine-html'], function(_, $, jasm
     var specs = [];
 
     specs.push('spec/views/SubjectViewSpec');
+    specs.push('spec/views/SubjectsViewSpec');
+    specs.push('spec/views/RegistrationUserViewSpec');
 
     /**
      * ## Require &amp; Instantiate

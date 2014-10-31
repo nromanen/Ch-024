@@ -9,20 +9,22 @@ define([
     'SubjectView'
 ], function($, _, Backbone, jqueryui, fullcalendar, newSubjectTemplate, SubjectModel, SubjectView) {
     describe("Test Subject View", function() {
-
+        var subjectView;
         beforeEach(function(){
-            this.subjectView = new SubjectView({
-                model: new SubjectModel({})
+            subjectView = new SubjectView({
+                model: new SubjectModel
             });
         });
 
         it("should has defined template", function() {
-            expect(this.subjectView.template).toBeDefined();
+            expect(subjectView.template).toBeDefined();
         });
 
         it("render method should return this", function() {
-            expect(this.subjectView.render()).toEqual(this.subjectView)
+            expect(subjectView.render()).toEqual(subjectView)
         });
     });
+
+
 
 });

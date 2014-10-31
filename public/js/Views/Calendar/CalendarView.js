@@ -61,7 +61,9 @@ define('CalendarView', ['jquery',
 
         _convertHexColorToRGB: function(color) {
             var OPACITY = .5;
-            return "rgba(" + parseInt(color.substring(1, 3), 16) + "," + parseInt(color.substring(3, 5), 16) + "," + parseInt(color.substring(5, 7), 16) + "," +
+            return "rgba(" + parseInt(color.substring(1, 3), 16) + "," +
+                parseInt(color.substring(3, 5), 16) + "," +
+                parseInt(color.substring(5, 7), 16) + "," +
                 OPACITY + ")";
         },
 
