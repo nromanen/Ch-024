@@ -4,6 +4,7 @@ var user = require('./functions/user.js'),
     category = require('./functions/category.js'),
     events = require('./functions/events.js'),
     teachers = require('./functions/teachers.js'),
+    students = require('./functions/students.js'),
     subscribe = require('./functions/subscribe.js'),
     passport = require('passport');
 
@@ -48,7 +49,9 @@ function Urls(app, userRoles){
     app.get('/subscribe', userRoles.can('user'), subscribe.getAll);
 
     // teachers cabinet information
-    app.get('/teachers', teachers.get);
+    app.get('/teachers', userRoles.can('teacher'), teachers.get);
+
+    app.get('/student/:id', students.getAllSubscribe);
 }
 
 exports.Urls = Urls;

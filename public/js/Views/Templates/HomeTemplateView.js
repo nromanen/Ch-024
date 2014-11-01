@@ -5,7 +5,8 @@ define('HomeTemplateView', ['jquery',
     'SessionModel',
     'text',
     'text!homeTemplate',
-    'text!subjectContainerTemplate'
+    'text!subjectContainerTemplate',
+    'text!assignedEventsTemplate'
 ], function($,
     _,
     Backbone,
@@ -13,12 +14,12 @@ define('HomeTemplateView', ['jquery',
     Session,
     text,
     homeTemplate,
-    subjectContainerTemplate) {
+    subjectContainerTemplate,
+    assignedEventsTemplate) {
 
     var HomeTemplateView = Backbone.View.extend({
 
         template: _.template(homeTemplate),
-        subjectTemplate: _.template(subjectContainerTemplate),
 
         selectors: {
             mainTag: 'main',
@@ -31,7 +32,7 @@ define('HomeTemplateView', ['jquery',
             if((this.role === 'admin')||(this.role === 'teacher')) {
                 this.subjectTemplate = _.template(subjectContainerTemplate)();
             } else {
-                this.subjectTemplate = '';
+                this.subjectTemplate = _.template(assignedEventsTemplate)();
             }
         },
 

@@ -29,7 +29,10 @@ require([
     'TeacherCabinetTemplateView',
     'CabinetEventsView',
     'CabinetCollection',
-    'CabinetModel'
+    'CabinetModel',
+    'AssignedEventsView',
+    'SubscribeCollection',
+    'SubscribeModel'
 ], function($,
     _,
     Backbone,
@@ -60,7 +63,10 @@ require([
     TeacherCabinetTemplateView,
     CabinetEventsView,
     CabinetCollection,
-    CabinetModel) {
+    CabinetModel,
+    AssignedEventsView,
+    SubscribeCollection,
+    SubscribeModel) {
 
     window.Calendar = {};
 
@@ -107,6 +113,9 @@ require([
             });
 
             this.on('route:homePage', function() {
+
+                this.role = this.session.getRole();
+
                 new ContainerCalendarTemplateView().render();
                 this._headerFooterContainersRender();
                 new HomeTemplateView().render();
@@ -116,18 +125,29 @@ require([
                     collection: this.eventsCollection
                 }).render();
 
-                this.categoriesCollection = new CategoriesCollection();
-                new CategoriesView({
-                    collection: this.categoriesCollection,
-                    model: new CategoryModel
-                });
+                if ((this.role === 'admin') || (this.role === 'teacher')) {
+                    this.categoriesCollection = new CategoriesCollection();
+                    new CategoriesView({
+                        collection: this.categoriesCollection,
+                        model: new CategoryModel
+                    });
 
-                this.subjectsCollection = new SubjectsCollection();
-                new SubjectsView({
-                    collectionSubject: this.subjectsCollection,
-                    collectionCategory: this.categoriesCollection,
-                    model: new SubjectModel
-                });
+                    this.subjectsCollection = new SubjectsCollection();
+                    new SubjectsView({
+                        collectionSubject: this.subjectsCollection,
+                        collectionCategory: this.categoriesCollection,
+                        model: new SubjectModel
+                    });
+                } else {
+                    this.subscribeCollection = new SubscribeCollection();
+                    new AssignedEventsView({
+                        collection: this.subscribeCollection,
+                        model: new SubscribeModel
+                    });
+                }
+
+
+
                 ControllerView.selectMenuItem('home-menu');
             });
 
@@ -141,6 +161,7 @@ require([
             });
 
             this.on('route:settingsPage', function() {
+
                 new ContainerCalendarTemplateView().render();
                 this._headerFooterContainersRender();
                 new SettingsTemplateView().render();
@@ -150,33 +171,46 @@ require([
                 ControllerView.selectMenuItem('');
 
             });
+
             this.on('route:loginPage', function() {
                 new LoginUserView().render();
             });
 
             this.on('route:adminPage', function() {
-                new ContainerCalendarTemplateView().render();
-                this._headerFooterContainersRender();
-                new AdminTemplateView().render();
-                this.notapprovedTeachersCollection = new AdminTeachersCollection();
-                this.notapprovedSubjectsCollection = new AdminSubjectsCollection();
-                this.notapprovedCategoriesCollection = new AdminCategoriesCollection();
-                new AdminActionBarGroup({
-                    notapprovedTeachersCollection: this.notapprovedTeachersCollection,
-                    notapprovedSubjectsCollection: this.notapprovedSubjectsCollection,
-                    notapprovedCategoriesCollection: this.notapprovedCategoriesCollection
-                });
-                ControllerView.selectMenuItem('admin-menu');
+
+                this.role = this.session.getRole();
+
+                if ((this.role === 'admin')) {
+
+                    new ContainerCalendarTemplateView().render();
+                    this._headerFooterContainersRender();
+                    new AdminTemplateView().render();
+                    this.notapprovedTeachersCollection = new AdminTeachersCollection();
+                    this.notapprovedSubjectsCollection = new AdminSubjectsCollection();
+                    this.notapprovedCategoriesCollection = new AdminCategoriesCollection();
+                    new AdminActionBarGroup({
+                        notapprovedTeachersCollection: this.notapprovedTeachersCollection,
+                        notapprovedSubjectsCollection: this.notapprovedSubjectsCollection,
+                        notapprovedCategoriesCollection: this.notapprovedCategoriesCollection
+                    });
+                    ControllerView.selectMenuItem('admin-menu');
+                }
             });
 
             this.on('route:cabinetPage', function() {
-                new ContainerCalendarTemplateView().render();
-                this._headerFooterContainersRender();
-                new TeacherCabinetTemplateView().render();
-                new CabinetEventsView({
-                    collection: new CabinetCollection
-                });
-                ControllerView.selectMenuItem('сabinet-menu');
+
+                this.role = this.session.getRole();
+
+                if ((this.role === 'teacher')) {
+
+                    new ContainerCalendarTemplateView().render();
+                    this._headerFooterContainersRender();
+                    new TeacherCabinetTemplateView().render();
+                    new CabinetEventsView({
+                        collection: new CabinetCollection
+                    });
+                    ControllerView.selectMenuItem('сabinet-menu');
+                }
             });
         },
 

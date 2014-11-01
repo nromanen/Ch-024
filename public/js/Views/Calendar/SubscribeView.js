@@ -75,6 +75,9 @@ define('SubscribeView', ['jquery',
                 })
                 .fail(function() {
                     // ControllerView.showAlertError(that.messages.error);
+                })
+                .always(function() {
+                    $('.own-popover').remove();
                 });
         }
 
