@@ -33,6 +33,7 @@
     "grunt-contrib-uglify": "^0.6.0",
     "passport": "^0.2.1",
     "passport-local": "^1.0.0",
-    "underscore": "^1.7.0"
+    "underscore": "^1.7.0",
+    "moment": "*"
   }
 }

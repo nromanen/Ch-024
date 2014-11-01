@@ -116,7 +116,6 @@ define('CalendarEventModel', ['jquery', 'underscore', 'backbone', 'SubjectModel'
                     message: 'The number of classroom is required and must be number!'
                 });
             }
-            console.log(attrs.amountOfStud);
             if (isNaN(+(attrs.amountOfStudents))) {
                 errors.push({
                     field: 'amountOfStud',

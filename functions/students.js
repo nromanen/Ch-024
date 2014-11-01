@@ -1,4 +1,5 @@
-var db = require('../lib/mongoose');
+var db = require('../lib/mongoose'),
+    moment = require('moment');
 
 exports.getAllSubscribe = function(req, res) {
 
@@ -6,13 +7,19 @@ exports.getAllSubscribe = function(req, res) {
         'user._id': req.params.id
     });
 
-    console.log(req.query);
-
     subscribeQuery.exec(function(err, queryRes) {
         if (err) {
             return handleError(err)
         } else {
-            res.json(queryRes);
+
+            var dataAllSubscribe = [];
+
+            for (var elements in queryRes) {
+                if (moment(queryRes[elements].event.start) >= moment(req.query.nowTime)) {
+                    dataAllSubscribe.push(queryRes[elements]);
+                }
+            }
+            res.json(dataAllSubscribe);
         }
     });
 };
