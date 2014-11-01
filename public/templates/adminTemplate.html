@@ -1,45 +1,72 @@
 <div class="admin-wrapper row">
     <div class="col-md-12">
         <div class="panel panel-default">
-            <div class="panel-heading">Teachers</div>
-            <div class="panel-body">
-                <table class="teachersInfo table table-hover">
+            <div class="panel-heading" data-toggle="collapse" data-target="#teachersCollapse">Teachers</div>
+            <div class="collapseIcon collapseIconOut" id="teachersCollapseIcon"></div>
+            <div class="panel-body panel-collapse collapse in" id="teachersCollapse">
+                <table class="table table-hover">
                     <thead>
-                        <th class="nameColumn">Name</th>
-                        <th class="sournameColumn">Surname</th>
-                        <th class="emailColumn">E-mail</th>
-                        <th class="phoneColumn">Phone</th>
+                        <th class="nameColumn">
+                            <button class="sortTeachers btn btn-default" data-sort="name" data-type="asc">Name</button>
+                        </th>
+                        <th class="sournameColumn">
+                            <button class="sortTeachers btn btn-default" data-sort="surname" data-type="asc">Surname</button>
+                        </th>
+                        <th class="emailColumn">
+                            <button class="sortTeachers btn btn-default" data-sort="email" data-type="asc">E-mail</button>
+                        </th>
+                        <th class="phoneColumn">
+                            <button class="sortTeachers btn btn-default" data-sort="phone" data-type="asc">Phone</button>
+                        </th>
                         <th class="buttonsColumn">Actions</th>
                     </thead>
+                    <tbody class="teachersInfo">
+                    </tbody>
                 </table>
             </div>
         </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-12">
         <div class="panel panel-default">
-            <div class="panel-heading">Categories</div>
-            <div class="panel-body">
-                <table class="table table-hover categoriesInfo">
+            <div class="panel-heading" data-toggle="collapse" data-target="#categoriesCollapse">Categories</div>
+            <div class="collapseIcon collapseIconOut" id="categoriesCollapseIcon"></div>
+            <div class="panel-body panel-collapse collapse in" id="categoriesCollapse">
+                <table class="table table-hover">
                     <thead>
-                        <th class="titleColumn">Title</th>
-                        <th class="authorColumn">Author</th>
+                        <th class="titleColumn">
+                            <button class="sortCategories btn btn-default" data-sort="title" data-type="asc">Title</button>
+                        </th>
+                        <th class="authorColumn">
+                            <button class="sortCategories btn btn-default" data-sort="author" data-type="asc">Author</button>
+                        </th>
                         <th class="buttonsColumn">Actions</th>
                     </thead>
+                    <tbody class="categoriesInfo">
+                    </tbody>
                 </table>
             </div>
         </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-12">
         <div class="panel panel-default">
-            <div class="panel-heading">Subjects</div>
-            <div class="panel-body">
-                <table class="subjectsInfo table table-hover">
+            <div class="panel-heading" data-toggle="collapse" data-target="#subjectsCollapse">Subjects</div>
+            <div class="collapseIcon collapseIconOut" id="subjectsCollapseIcon"></div>
+            <div class="panel-body panel-collapse collapse in" id="subjectsCollapse">
+                <table class="table table-hover">
                     <thead>
-                        <th class="subjectColumn">Subject</th>
-                        <th class="categoryColumn">Category</th>
-                        <th class="authorColumn">Author</th>
+                        <th class="subjectColumn">
+                            <button class="sortSubjects btn btn-default" data-sort="title" data-type="asc">Subject</button>
+                        </th>
+                        <th class="categoryColumn">
+                            <button class="sortSubjects btn btn-default" data-sort="category" data-type="asc">Category</button>
+                        </th>
+                        <th class="authorColumn">
+                            <button class="sortSubjects btn btn-default" data-sort="author" data-type="asc">Author</button>
+                        </th>
                         <th class="buttonsColumn">Actions</th>
                     </thead>
+                    <tbody class="subjectsInfo">
+                    </tbody>
                 </table>
             </div>
         </div>
