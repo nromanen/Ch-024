@@ -49,7 +49,8 @@ function Urls(app, userRoles){
     app.get('/subscribe', userRoles.can('user'), subscribe.getAll);
 
     // teachers cabinet information
-    app.get('/teachers', userRoles.can('teacher'), teachers.get);
+    app.get('/teachers', teachers.get);
+    app.get('/teachers/students', teachers.students);
 
     app.get('/student/:id', students.getAllSubscribe);
 }
