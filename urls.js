@@ -50,7 +50,7 @@ function Urls(app, userRoles){
 
     // teachers cabinet information
     app.get('/teachers', teachers.get);
-    app.get('/teachers/students', teachers.students);
+    app.get('/teachers/students/:id', teachers.students);
 
     app.get('/student/:id', students.getAllSubscribe);
 }
