@@ -1,7 +1,7 @@
 <div class="col-md-4">
     <div class="panel panel-primary">
 
-        <div class="panel-heading cabinetHeaderBar"><%=title%></div>
+        <div class="panel-heading cabinetHeaderBar"><%=event.title%></div>
 
         <div class="panel-body cabinetContentBar">
             <span>Start event: <%=event.start%></span>
@@ -12,13 +12,13 @@
             </br>
             <span>Amount of students: <%=event.amountOfStudents%></span>
             </br>
-            <span>Amount of free place: <%=event.amountOfStudents - event.currentCount%></span>
+            <span>Amount of free place: <%=amountOfFreePlace%></span>
         </div>
 
         <div class="panel-footer footerCabinetBar">
             <ul class="list-group">
                 <li class="list-group-item">
-                    <span class="badge"><%=Object.keys(students).length%></span>
+                    <button class="badge numberOfStudents" data-toggle="popover" data-placement="bottom"><%=event.amountOfStudents - amountOfFreePlace%></button>
                     Students
                 </li>
             </ul>

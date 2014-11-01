@@ -18,6 +18,9 @@ $.fn.ownpopover = function(action, params) {
         $('body').find('.remove-popover').off('click').on('click', function() {
             $(this).closest('.own-popover').remove();
         });
+        $('body').find('.own-popover').hover(function() {}, function() {
+            $(this).delay(3000).fadeOut('fast');
+        });
         $('.fc-button').off('click', hideAllPopovers).on('click', hideAllPopovers);
     }
 
