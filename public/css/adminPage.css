@@ -9,3 +9,14 @@
   width: 70px;
   margin: 5px;
 }
+.collapseIcon{
+  float: right;
+  width: 20px;
+  height: 16px;
+}
+.collapseIconIn{
+  background: url(../images/collapseIcons.png) 0 0;
+}
+.collapseIconOut{
+  background: url(../images/collapseIcons.png) 0 -16px;
+}

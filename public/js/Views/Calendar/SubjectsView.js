@@ -76,9 +76,12 @@ define('SubjectsView', [
             var categoryModel = this.collectionCategory.findModelById(categoryId);
 
             this.model.setTitle(subjectTitle);
-            this.model.setColor("#" + this.$(this.selectors.colorPickerInput).val());
-            this.model.setCategory(categoryModel);
-            // this.model.isNew(true);
+            //this.model.setColor("#" + this.$(this.selectors.colorPickerInput).val());
+            this.model.setColor("#" + this.$('#backgroundColor').val());
+            this.model.setTextColor("#" + this.$('#textColor').val());
+            this.model.setCategoryId(categoryModel.getId());
+            this.model.setAuthorId(Calendar.Controller.session.getUserId());
+
             if (this.model.save(null, {
                     type: 'POST'
                 })) {

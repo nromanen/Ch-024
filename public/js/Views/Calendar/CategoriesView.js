@@ -69,6 +69,7 @@ define('CategoriesView', ['jquery',
 
             var CategoryTitle = this.$(this.selectors.categoryTitleInput).val();
             this.model.setTitle(CategoryTitle);
+            this.model.setAuthorId(Calendar.Controller.session.getUserId());
             this.model.isNew(true);
             if (this.model.save(null, {
                     type: 'POST'

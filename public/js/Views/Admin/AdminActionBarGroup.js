@@ -46,7 +46,7 @@ define('AdminActionBarGroup', ['jquery', 'underscore', 'backbone', 'AdminActionB
     },
 
     _attachEvents: function() {
-        $('.categoryButton').bind('click', $.proxy(this._collapseIconChange, this));
+        $('.panel-heading').bind('click', $.proxy(this._collapseIconChange, this));
         $('.sortTeachers').bind('click', $.proxy(this._sortTeachers, this));
         $('.sortCategories').bind('click', $.proxy(this._sortCategories, this));
         $('.sortSubjects').bind('click', $.proxy(this._sortSubjects, this));
