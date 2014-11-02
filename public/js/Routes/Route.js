@@ -141,7 +141,7 @@ require([
                     this.subscribeCollection = new SubscribeCollection();
                     new AssignedEventsView({
                         collection: this.subscribeCollection,
-                        model: new SubscribeModel
+                        // model: new SubscribeModel
                     });
                 }
                 ControllerView.selectMenuItem('home-menu');
