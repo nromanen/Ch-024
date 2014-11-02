@@ -19,17 +19,17 @@ define('CabinetEventView', ['jquery', 'underscore', 'backbone', 'text!teacherCab
         _getStudents: function() {
             var that = this;
             $.ajax({
-                url: '/teachers/students',
-                type: 'GET',
-                data: that.model.toJSON()
+                url: '/teachers/students/' + that.model.get('event')._id,
+                type: 'GET'
             })
                 .done(function(res) {
-                    var dataUser = [];
-                    for(var elements in res.students) {
-                        dataUser.push(res.students[elements].user.username);
-                        dataUser.push('\n');
+                    that.model.set({students: res});
+                    console.log(that.model.toJSON());
+                    var studentsData = [];
+                    for(var i in Object.keys(that.model.get('students'))) {
+                        studentsData.push(that.model.get('students')[i].user.username);
                     }
-                    that.$(that.selectors.numberOfStudents).popover({content: dataUser});
+                    that.$(that.selectors.numberOfStudents).popover({content: studentsData});
                     that.$(that.selectors.numberOfStudents).popover('toggle');
                 })
                 .error(function(res) {

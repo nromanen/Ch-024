@@ -116,7 +116,6 @@ require([
 
                 this.role = this.session.getRole();
 
-                new ContainerCalendarTemplateView().render();
                 this._headerFooterContainersRender();
                 new HomeTemplateView().render();
 
@@ -145,15 +144,11 @@ require([
                         model: new SubscribeModel
                     });
                 }
-
-
-
                 ControllerView.selectMenuItem('home-menu');
             });
 
             this.on('route:helpPage', function() {
 
-                new ContainerCalendarTemplateView().render();
                 this._headerFooterContainersRender();
                 new HelpTemplateView().render();
                 ControllerView.selectMenuItem('help-menu');
@@ -162,7 +157,6 @@ require([
 
             this.on('route:settingsPage', function() {
 
-                new ContainerCalendarTemplateView().render();
                 this._headerFooterContainersRender();
                 new SettingsTemplateView().render();
                 new SettingsUserView({
@@ -182,7 +176,6 @@ require([
 
                 if ((this.role === 'admin')) {
 
-                    new ContainerCalendarTemplateView().render();
                     this._headerFooterContainersRender();
                     new AdminTemplateView().render();
                     this.notapprovedTeachersCollection = new AdminTeachersCollection();
@@ -203,7 +196,6 @@ require([
 
                 if ((this.role === 'teacher')) {
 
-                    new ContainerCalendarTemplateView().render();
                     this._headerFooterContainersRender();
                     new TeacherCabinetTemplateView().render();
                     new CabinetEventsView({

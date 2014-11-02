@@ -56,8 +56,8 @@ exports.get = function (req, res) {
 };
 
 exports.students = function(req, res) {
-    var studentsQuery = db.subscribeModel.find({});
-    studentsQuery.select('user.username user.surname user.email');
+    var studentsQuery = db.subscribeModel.find({'event._id': req.params.id});
+    studentsQuery.select('user');
     async.parallel({
         students: function(callback) {
             studentsQuery.exec(function (err, queryRes) {
@@ -70,6 +70,6 @@ exports.students = function(req, res) {
         }
     }, function(err, result) {
         if (err) return handleError(err);
-        res.send(result);
+        res.send(result.students);
     });
 };
