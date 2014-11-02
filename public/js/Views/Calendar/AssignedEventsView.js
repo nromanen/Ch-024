@@ -15,24 +15,53 @@ define('AssignedEventsView', [
 
     var AssignedEventsView = Backbone.View.extend({
 
+        selectors: {
+            buttonShowPastEvents: '.showPastEvents',
+            buttonShowNearestEvents: '.showNearestEvents',
+            assignedContainer: '.assignContainer',
+            titleOfSubscribe: '.titleSubscribe'
+        },
+
         initialize: function(options) {
             this.collection.on('add', this._renderAssignedEvent, this);
-            this.collection.fetchAssignedStudent(Session.getUserId());
+            $(this.selectors.buttonShowPastEvents).on('click', $.proxy(this.showPastEvents, this))
+            $(this.selectors.buttonShowNearestEvents).on('click', $.proxy(this.showNearestEvents, this))
+            this.collection.fetchNearestEvents(Session.getUserId());
+            $(this.selectors.buttonShowNearestEvents).hide();
             this._runClock();
         },
 
-        _runClock: function() {
-            // $('#clock').fitText(1.3);
+        showNearestEvents: function() {
+            var that = this;
+            $(this.selectors.buttonShowNearestEvents).hide();
+            $(this.selectors.buttonShowPastEvents).show();
+            $(this.selectors.titleOfSubscribe).html('Your nearest Events:');
+            $(this.selectors.assignedContainer).fadeOut('fast', function() {
+                    that.collection.fetchNearestEvents(Session.getUserId());
+            })
+            .fadeIn('fast');
+        },
 
+        showPastEvents: function() {
+            var that = this;
+            $(this.selectors.buttonShowPastEvents).hide();
+            $(this.selectors.buttonShowNearestEvents).show();
+            $(this.selectors.titleOfSubscribe).html('Your past Events:');
+            $(this.selectors.assignedContainer).fadeOut('fast', function() {
+                    that.collection.fetchPastEvents(Session.getUserId());
+            })
+            .fadeIn('fast');
+        },
+
+        _runClock: function() {
             function update() {
                 $('#clock').html(moment().format('ddd MMMM D YYYY H:mm:ss'));
             }
-
             setInterval(update, 1000);
         },
 
         _renderAssignedEvent: function(model) {
-            $('.assignContainer').append(
+            $(this.selectors.assignedContainer).append(
                 new AssignedEventView({
                     model: model
                 }).render().el);

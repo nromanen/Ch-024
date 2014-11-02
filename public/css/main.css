@@ -121,3 +121,8 @@ header ul.nav > li > a {
   color: #eee;
   text-align: center;
 }
+.buttonshowEvents {
+  display: table;
+  margin-left: 27px;
+  cursor: pointer;
+}
