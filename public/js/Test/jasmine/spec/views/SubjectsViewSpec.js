@@ -72,7 +72,7 @@ define(['jquery',
                     });
                 });
 
-                describe('subject title input filled', function () {
+                xdescribe('subject title input filled', function () {
 
                     beforeEach(function () {
                         subjectsView.$el.find('.subjectTitle').val('Subject').trigger('change');

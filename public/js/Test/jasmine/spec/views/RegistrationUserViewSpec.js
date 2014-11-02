@@ -58,57 +58,6 @@ define([
 
             });
 
-          /*  describe('when form is submitted', function () {
-                beforeEach(function () {
-                    registrationUserView.render();
-                });
-
-                afterEach(function() {
-                    registrationUserView.remove();
-                    $('.modal-backdrop, .modal').remove();
-                });
-
-                describe('no inputs are filled', function () {
-                    beforeEach(function () {
-                        registrationUserView.$el.find('#name').val('').trigger('change');
-                        registrationUserView.$el.find('#surname').val('').trigger('change');
-                        registrationUserView.$el.find('#email').val('').trigger('change');
-                        registrationUserView.$el.find('#password').val('').trigger('change');
-                        registrationUserView.$el.find('#repeatPassword').val('').trigger('change');
-                    });
-
-
-
-                    beforeEach(function () {
-                        registrationUserView.$el.find('#register').trigger('click');
-                    });
-
-                    it('user name field should be invalidated', function () {
-                        expect(registrationUserView.$el.find('#name').val()).toEqual('');
-                    });
-                });
-*/
-                /*describe('subject title input filled', function () {
-
-                 beforeEach(function () {
-                 spyOn(subjectsView.model, 'save').andCallThrough();
-                 });
-
-                 beforeEach(function () {
-                 subjectsView.$el.find('.subjectTitle').val('Subject').trigger('change');
-                 });
-
-                 beforeEach(function () {
-                 subjectsView.$el.find('.saveBtn').trigger('click');
-                 });
-
-                 it('should save model', function () {
-                 expect(subjectsView.model.save).toHaveBeenCalled();
-                 });
-
-                 });*/
             });
-
-   //     });
 
     });

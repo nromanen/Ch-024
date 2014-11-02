@@ -33,6 +33,7 @@ require.config({
         'SessionModel': '../../Models/LoginAndRegistration/SessionModel',
         'UserModel': '../../Models/Admin/UserModel',
         'SubscribeModel': '../../Models/Calendar/SubscribeModel',
+        'CabinetModel': '../../Models/Calendar/CabinetModel',
 
         // ../../Collections
         'CalendarEventsCollection': '../../Collections/CalendarEventsCollection',
@@ -67,6 +68,8 @@ require.config({
         'AdminTemplateView': '../../Views/Templates/AdminTemplateView',
         'ControllerView': '../../Views/ControllerView',
         'SubscribeView': '../../Views/Calendar/SubscribeView',
+        'CabinetEventView': '../../Views/Calendar/CabinetEventView',
+        'CabinetEventsView': '../../Views/Calendar/CabinetEventsView',
 
         // Template
         'aboutTemplate': '../../../templates/aboutTemplate.html',
@@ -86,6 +89,8 @@ require.config({
         'loginTemplate': '../../../templates/loginTemplate.html',
         'registrationTemplate': '../../../templates/registrationTemplate.html',
         'containerCalendarTemplate': '../../../templates/containerCalendarTemplate.html',
+        'teacherCabinetEventTemplate': '../../../templates/teacherCabinetEventTemplate.html',
+        'teacherCabinetTemplate': '../../../templates/teacherCabinetTemplate.html',
 
         'adminTemplate': '../../../templates/adminTemplate.html',
         'categoryInfoTemplate': '../../../templates/categoryInfoTemplate.html',
@@ -162,10 +167,14 @@ require(['underscore', 'jquery', 'jasmine', 'jasmine-html'], function(_, $, jasm
      */
     var specs = [];
 
+    specs.push('spec/models/SubjectModelSpec');
+    specs.push('spec/models/RegistrationUserModelSpec');
+    specs.push('spec/models/CalendarEventModelSpec');
+
     specs.push('spec/views/SubjectViewSpec');
     specs.push('spec/views/SubjectsViewSpec');
     specs.push('spec/views/RegistrationUserViewSpec');
-
+    specs.push('spec/views/CabinetEventViewSpec');
     /**
      * ## Require &amp; Instantiate
      *
