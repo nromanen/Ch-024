@@ -35,6 +35,9 @@ define('SubscribeCollection', ['jquery',
                 .done(function(data) {
                     ControllerView.clearHtmlOnElement('.assignContainer');
                     that.notSortCollection = data;
+                    if (!that.notSortCollection.length) {
+                        ControllerView.showMassageOfClearContainerSubscribe("You don't have any event, please subscrube to event");
+                    }
                     that._sortByStartDate();
                 })
                 .fail(function() {
@@ -55,6 +58,9 @@ define('SubscribeCollection', ['jquery',
                 .done(function(data) {
                     ControllerView.clearHtmlOnElement('.assignContainer');
                     that.notSortCollection = data;
+                    if (!that.notSortCollection.length) {
+                        ControllerView.showMassageOfClearContainerSubscribe("You didn't have any event");
+                    }
                     that._sortByStartDate();
                 })
                 .fail(function() {

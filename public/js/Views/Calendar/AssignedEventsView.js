@@ -24,8 +24,8 @@ define('AssignedEventsView', [
 
         initialize: function(options) {
             this.collection.on('add', this._renderAssignedEvent, this);
-            $(this.selectors.buttonShowPastEvents).on('click', $.proxy(this.showPastEvents, this))
-            $(this.selectors.buttonShowNearestEvents).on('click', $.proxy(this.showNearestEvents, this))
+            $(this.selectors.buttonShowPastEvents).on('click', $.proxy(this.showPastEvents, this));
+            $(this.selectors.buttonShowNearestEvents).on('click', $.proxy(this.showNearestEvents, this));
             this.collection.fetchNearestEvents(Session.getUserId());
             $(this.selectors.buttonShowNearestEvents).hide();
             this._runClock();
@@ -38,8 +38,8 @@ define('AssignedEventsView', [
             $(this.selectors.titleOfSubscribe).html('Your nearest Events:');
             $(this.selectors.assignedContainer).fadeOut('fast', function() {
                     that.collection.fetchNearestEvents(Session.getUserId());
-            })
-            .fadeIn('fast');
+                })
+                .fadeIn('fast');
         },
 
         showPastEvents: function() {
@@ -49,8 +49,8 @@ define('AssignedEventsView', [
             $(this.selectors.titleOfSubscribe).html('Your past Events:');
             $(this.selectors.assignedContainer).fadeOut('fast', function() {
                     that.collection.fetchPastEvents(Session.getUserId());
-            })
-            .fadeIn('fast');
+                })
+                .fadeIn('fast');
         },
 
         _runClock: function() {
