@@ -7,16 +7,12 @@ define('SubjectModel', ['jquery', 'underscore', 'backbone', 'CategoryModel'], fu
         defaults: function() {
             return {
                 _id: '',
-                category: CategoryModel,
-                categoryId: "",
+                categoryId: '',
                 title: '',
                 textColor: 'red',
                 color: 'red',
-                approved: false,
-                authorName: '',
-                authorSurname: ''
-            //    confirmed: false,
-            //    teacherID: ''
+                authorId: '',
+                approved: false
             }
         },
 
@@ -40,8 +36,8 @@ define('SubjectModel', ['jquery', 'underscore', 'backbone', 'CategoryModel'], fu
             return this.get('color');
         },
 
-        setCategory: function(value) {
-            this.set('category', value);
+        setCategoryId: function(value) {
+            this.set('categoryId', value);
         },
 
         getCategoryId: function() {
@@ -64,20 +60,12 @@ define('SubjectModel', ['jquery', 'underscore', 'backbone', 'CategoryModel'], fu
             return this.get('textColor');
         },
 
-        setAuthorName: function(value) {
-            this.set('authorName', value);
+        setAuthorId: function(value) {
+            this.set('authorId', value);
         },
 
-        getAuthorName: function() {
-            return this.get('authorName');
-        },
-
-        setAuthorSurname: function(value) {
-            this.set('authorSurname', value);
-        },
-
-        getAuthorSurname: function() {
-            return this.get('authorSurname');
+        getAuthorId: function() {
+            return this.get('authorId');
         },
 
         validate: function (attrs) {

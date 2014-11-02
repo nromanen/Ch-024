@@ -112,6 +112,7 @@ define('RegistrationUserView', [
             this.fieldName = fieldName;
             var currentInput = this.$(this.selectors[this.fieldName]);
             if (!this.model.preValidate('#repeatPassword', currentInput.val(), this.$(this.selectors.passwordInput).val())) {
+                currentInput.popover({content: this.examples[this.fieldName] , placement: "left"});
                 currentInput.popover('show');
                 currentInput.addClass('borderRed');
             } else {

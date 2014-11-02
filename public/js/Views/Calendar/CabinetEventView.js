@@ -24,12 +24,16 @@ define('CabinetEventView', ['jquery', 'underscore', 'backbone', 'text!teacherCab
             })
                 .done(function(res) {
                     that.model.set({students: res});
-                    console.log(that.model.toJSON());
-                    var studentsData = [];
+                    var studentsData = '';
                     for(var i in Object.keys(that.model.get('students'))) {
-                        studentsData.push(that.model.get('students')[i].user.username);
+                        studentsData += (that.model.get('students')[i].user.surname + ' : ' + that.model.get('students')[i].user.phone + ' ');
                     }
-                    that.$(that.selectors.numberOfStudents).popover({content: studentsData});
+                    console.log(studentsData);
+                    that.$(that.selectors.numberOfStudents).popover({
+                        content: studentsData,
+                        title: "Students",
+                        template: "<div class='popover' role='tooltip' style='min-width: 250px;'><div class='arrow'></div><h3 class='popover-title'></h3><div class='popover-content'><div class='data-content'></div></div></div>"
+                    });
                     that.$(that.selectors.numberOfStudents).popover('toggle');
                 })
                 .error(function(res) {
