@@ -11,7 +11,9 @@ exports.create = function(req, res) {
     var data = new db.subjectModel({
         title: req.body.title,
         color: req.body.color,
-        categoryId: req.body.category._id
+        textColor: req.body.textColor,
+        categoryId: req.body.categoryId,
+        authorId: req.body.authorId
     });
     
     data.save(function(err) {
@@ -94,7 +96,7 @@ exports.get = function(req, res) {
 
 exports.getNotApproved = function(req, res) {
     var query = db.subjectModel.find({approved: false});
-    query.select('title categoryId color textColor');
+    query.select('title categoryId color textColor authorId');
     query.exec(function(err, queryRes) {
         if (err) {
             return handleError(err)

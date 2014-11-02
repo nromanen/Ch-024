@@ -10,9 +10,11 @@ define([
             if (Storage && localStorage) {
                 this.supportStorage = true;
             }
+            this.getRights();
+        },
 
+        getRights: function() {
             var that = this;
-
             if (!(this.getSession('userSession') === null)) {
                 $.ajax({
                         url: '/rights/' + this.getSession('userSession'),

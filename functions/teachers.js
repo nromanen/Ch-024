@@ -5,21 +5,10 @@ var db = require('../lib/mongoose'),
 exports.get = function (req, res) {
     var eventQuery = db.eventModel.find({});
     var subscribeQuery = db.subscribeModel.find({});
-    var titleQuery = db.eventModel.find({});
-    eventQuery.select('start end classroom amountOfStudents currentCount');
-    subscribeQuery.select('user.username user.surname');
-    titleQuery.select('title');
+    eventQuery.select('title start end classroom amountOfStudents currentCount');
+    subscribeQuery.select('user._id');
 
     async.parallel({
-            title: function (callback) {
-                titleQuery.exec(function (err, queryRes) {
-                    if (err) {
-                        return handleError(err);
-                    } else {
-                        callback(null, queryRes);
-                    }
-                });
-            },
             events: function (callback) {
                 eventQuery.exec(function (err, queryRes) {
                     if (err) {
@@ -40,15 +29,34 @@ exports.get = function (req, res) {
             }
         },
         function (err, result) {
+            if (err) return handleError(err);
             var data = [];
-            for(var elements in result.title) {
-                var tmp = {
-                    title: result.title[elements].title,
-                    event: result.events[elements],
-                    students: result.students[elements]
+
+            for(var elements in result.events) {
+                var tmpEvent = {
+                    event: result.events[elements]
                 };
-                data.push(tmp);
+                data.push(tmpEvent);
             }
             res.send(data);
         });
+};
+
+exports.students = function(req, res) {
+    var studentsQuery = db.subscribeModel.find({'event._id': req.params.id});
+    studentsQuery.select('user');
+    async.parallel({
+        students: function(callback) {
+            studentsQuery.exec(function (err, queryRes) {
+                if (err) {
+                    return handleError(err);
+                } else {
+                    callback(null, queryRes);
+                }
+            });
+        }
+    }, function(err, result) {
+        if (err) return handleError(err);
+        res.send(result.students);
+    });
 };

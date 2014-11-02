@@ -29,7 +29,10 @@ require([
     'TeacherCabinetTemplateView',
     'CabinetEventsView',
     'CabinetCollection',
-    'CabinetModel'
+    'CabinetModel',
+    'AssignedEventsView',
+    'SubscribeCollection',
+    'SubscribeModel'
 ], function($,
     _,
     Backbone,
@@ -60,7 +63,10 @@ require([
     TeacherCabinetTemplateView,
     CabinetEventsView,
     CabinetCollection,
-    CabinetModel) {
+    CabinetModel,
+    AssignedEventsView,
+    SubscribeCollection,
+    SubscribeModel) {
 
     window.Calendar = {};
 
@@ -104,10 +110,12 @@ require([
 
             this.on('route', function() {
                 this._checkAuth();
-            })
+            });
 
             this.on('route:homePage', function() {
-                new ContainerCalendarTemplateView().render();
+
+                this.role = this.session.getRole();
+
                 this._headerFooterContainersRender();
                 new HomeTemplateView().render();
 
@@ -116,24 +124,31 @@ require([
                     collection: this.eventsCollection
                 }).render();
 
-                this.categoriesCollection = new CategoriesCollection();
-                new CategoriesView({
-                    collection: this.categoriesCollection,
-                    model: new CategoryModel
-                });
+                if ((this.role === 'admin') || (this.role === 'teacher')) {
+                    this.categoriesCollection = new CategoriesCollection();
+                    new CategoriesView({
+                        collection: this.categoriesCollection,
+                        model: new CategoryModel
+                    });
 
-                this.subjectsCollection = new SubjectsCollection();
-                new SubjectsView({
-                    collectionSubject: this.subjectsCollection,
-                    collectionCategory: this.categoriesCollection,
-                    model: new SubjectModel
-                });
+                    this.subjectsCollection = new SubjectsCollection();
+                    new SubjectsView({
+                        collectionSubject: this.subjectsCollection,
+                        collectionCategory: this.categoriesCollection,
+                        model: new SubjectModel
+                    });
+                } else {
+                    this.subscribeCollection = new SubscribeCollection();
+                    new AssignedEventsView({
+                        collection: this.subscribeCollection,
+                        // model: new SubscribeModel
+                    });
+                }
                 ControllerView.selectMenuItem('home-menu');
             });
 
             this.on('route:helpPage', function() {
 
-                new ContainerCalendarTemplateView().render();
                 this._headerFooterContainersRender();
                 new HelpTemplateView().render();
                 ControllerView.selectMenuItem('help-menu');
@@ -141,7 +156,7 @@ require([
             });
 
             this.on('route:settingsPage', function() {
-                new ContainerCalendarTemplateView().render();
+
                 this._headerFooterContainersRender();
                 new SettingsTemplateView().render();
                 new SettingsUserView({
@@ -150,32 +165,44 @@ require([
                 ControllerView.selectMenuItem('');
 
             });
+
             this.on('route:loginPage', function() {
                 new LoginUserView().render();
             });
 
             this.on('route:adminPage', function() {
-                new ContainerCalendarTemplateView().render();
-                this._headerFooterContainersRender();
-                new AdminTemplateView().render();
-                this.notapprovedTeachersCollection = new AdminTeachersCollection();
-                this.notapprovedSubjectsCollection = new AdminSubjectsCollection();
-                this.notapprovedCategoriesCollection = new AdminCategoriesCollection();
-                new AdminActionBarGroup({
-                    notapprovedTeachersCollection: this.notapprovedTeachersCollection,
-                    notapprovedSubjectsCollection: this.notapprovedSubjectsCollection,
-                    notapprovedCategoriesCollection: this.notapprovedCategoriesCollection
-                });
-                ControllerView.selectMenuItem('admin-menu');
+
+                this.role = this.session.getRole();
+
+                if ((this.role === 'admin')) {
+
+                    this._headerFooterContainersRender();
+                    new AdminTemplateView().render();
+                    this.notapprovedTeachersCollection = new AdminTeachersCollection();
+                    this.notapprovedSubjectsCollection = new AdminSubjectsCollection();
+                    this.notapprovedCategoriesCollection = new AdminCategoriesCollection();
+                    new AdminActionBarGroup({
+                        notapprovedTeachersCollection: this.notapprovedTeachersCollection,
+                        notapprovedSubjectsCollection: this.notapprovedSubjectsCollection,
+                        notapprovedCategoriesCollection: this.notapprovedCategoriesCollection
+                    });
+                    ControllerView.selectMenuItem('admin-menu');
+                }
             });
 
             this.on('route:cabinetPage', function() {
-                new ContainerCalendarTemplateView().render();
-                this._headerFooterContainersRender();
-                new TeacherCabinetTemplateView().render();
-                new CabinetEventsView({
-                    collection: new CabinetCollection
-                });
+
+                this.role = this.session.getRole();
+
+                if ((this.role === 'teacher')) {
+
+                    this._headerFooterContainersRender();
+                    new TeacherCabinetTemplateView().render();
+                    new CabinetEventsView({
+                        collection: new CabinetCollection
+                    });
+                    ControllerView.selectMenuItem('сabinet-menu');
+                }
             });
         },
 
@@ -188,17 +215,5 @@ require([
     });
 
     Calendar.Controller = new Router;
-    $.ajax({
-        statusCode: {
-            401: function() {
-                    alert('You are not authorized');
-                    window.location.replace('/');
-                }
-                /*403: function() {
-                    alert('Access denied');
-                    window.location.replace('/');
-                }*/
-        }
-    });
     Backbone.history.start();
 });

@@ -3,7 +3,8 @@ var db = require('../lib/mongoose');
 exports.create = function (req, res) {
 
     var data = new db.categoryModel({
-        title: req.body.title
+        title: req.body.title,
+        authorId: req.body.authorId
     });
 
     data.save(function (err) {
@@ -56,7 +57,7 @@ exports.get = function (req, res) {
 
 exports.getNotApproved = function (req, res) {
     var query = db.categoryModel.find({approved: false});
-    query.select('title');
+    query.select('title authorId');
     query.exec(function (err, queryRes) {
         if (err) {
             return handleError(err)

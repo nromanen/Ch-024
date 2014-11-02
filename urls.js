@@ -4,6 +4,7 @@ var user = require('./functions/user.js'),
     category = require('./functions/category.js'),
     events = require('./functions/events.js'),
     teachers = require('./functions/teachers.js'),
+    students = require('./functions/students.js'),
     subscribe = require('./functions/subscribe.js'),
     passport = require('passport');
 
@@ -49,6 +50,10 @@ function Urls(app, userRoles){
 
     // teachers cabinet information
     app.get('/teachers', teachers.get);
+    app.get('/teachers/students/:id', teachers.students);
+
+    app.get('/nearestevents/:id', students.getAllNearestEvents);
+    app.get('/pastevents/:id', students.getAllPastEvents);
 }
 
 exports.Urls = Urls;

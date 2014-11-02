@@ -1,5 +1,15 @@
-define('ControllerView', ['jquery', 'underscore', 'backbone', 'text!alertError', 'text!alertSuccess'],
-    function($, _, Backbone, alertError, alertSuccess) {
+define('ControllerView', [
+    'jquery',
+    'underscore',
+    'backbone',
+    'text!alertError',
+    'text!alertSuccess'
+], function(
+    $,
+    _,
+    Backbone,
+    alertError,
+    alertSuccess) {
 
     var ControllerView = Backbone.View.extend({
 
@@ -10,11 +20,19 @@ define('ControllerView', ['jquery', 'underscore', 'backbone', 'text!alertError',
             $('.incorrectLogin').fadeIn(200);
         },
 
+        clearHtmlOnElement: function(selectors) {
+            $(selectors).html('');
+        },
+
         selectMenuItem: function(menuItem) {
             $('.navbar .nav li').removeClass('active');
             if (menuItem) {
                 $('.' + menuItem).addClass('active');
             }
+        },
+
+        showMassageOfClearContainerSubscribe: function(message) {
+                $('.assignContainer').html(message);
         },
 
         addCategoryInActiveClass: function() {
@@ -24,18 +42,18 @@ define('ControllerView', ['jquery', 'underscore', 'backbone', 'text!alertError',
 
         showAlertSuccess: function(message) {
             $('.forAlert').append(this.templateAlertSuccess(message))
-            .children()
-            .last()
-            .delay(5000)
-            .fadeOut(1000);
+                .children()
+                .last()
+                .delay(5000)
+                .fadeOut(1000);
         },
 
         showAlertError: function(message) {
             $('.forAlert').append(this.templateAlertError(message))
-            .children()
-            .last()
-            .delay(5000)
-            .fadeOut(1000);
+                .children()
+                .last()
+                .delay(5000)
+                .fadeOut(1000);
         }
 
     });

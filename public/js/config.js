@@ -16,7 +16,6 @@ require.config({
         'jqueryjson': 'Vendor/jqueryJSON',
         'text': 'Vendor/text',
         'maskedinput': 'Vendor/jquery.maskedinput',
-        
 
         /*
         Our models, collections, views, etc
@@ -70,6 +69,8 @@ require.config({
         'ConfirmModalTemplateView': 'Views/Templates/ConfirmModalTemplateView',
         'CabinetEventView': 'Views/Calendar/CabinetEventView',
         'CabinetEventsView': 'Views/Calendar/CabinetEventsView',
+        'AssignedEventsView': 'Views/Calendar/AssignedEventsView',
+        'AssignedEventView': 'Views/Calendar/AssignedEventView',
 
         // Template
         'navBarTemplate': '../templates/navBarTemplate.html',
@@ -91,6 +92,8 @@ require.config({
         'teacherCabinetTemplate': '../templates/teacherCabinetTemplate.html',
         'confirmModalWindowTemplate': '../templates/confirmModalWindowTemplate.html',
         'teacherCabinetEventTemplate': '../templates/teacherCabinetEventTemplate.html',
+        'assignedEventsTemplate': '../templates/assignedEventsTemplate.html',
+        'assignedEventTemplate': '../templates/assignedEventTemplate.html',
 
         'adminTemplate': '../templates/adminTemplate.html',
         'categoryInfoTemplate': '../templates/categoryInfoTemplate.html',

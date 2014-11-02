@@ -9,10 +9,8 @@ define('CategoryModel', ['jquery', 'underscore', 'backbone'], function($, _, Bac
                 _id: '',
                 cid: this.cid,
                 title: '',
-                authorName: '',
-                authorSurname: ''
-               // confirmed: false,
-                //teacherID: ''
+                authorId: '',
+                approved: false
             }
         },
 
@@ -28,20 +26,12 @@ define('CategoryModel', ['jquery', 'underscore', 'backbone'], function($, _, Bac
             return this.get('title');
         },
 
-        setAuthorName: function(value) {
-            this.set('authorName', value);
+        setAuthorId: function(value) {
+            this.set('authorId', value);
         },
 
-        getAuthorName: function() {
-            return this.get('authorName');
-        },
-
-        setAuthorSurname: function(value) {
-            this.set('authorSurname', value);
-        },
-
-        getAuthorSurname: function() {
-            return this.get('authorSurname');
+        getAuthorId: function() {
+            return this.get('authorId');
         },
 
         getId: function() {
