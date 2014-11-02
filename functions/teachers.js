@@ -9,15 +9,6 @@ exports.get = function (req, res) {
     subscribeQuery.select('user._id');
 
     async.parallel({
-            //title: function (callback) {
-            //    titleQuery.exec(function (err, queryRes) {
-            //        if (err) {
-            //            return handleError(err);
-            //        } else {
-            //            callback(null, queryRes);
-            //        }
-            //    });
-            //},
             events: function (callback) {
                 eventQuery.exec(function (err, queryRes) {
                     if (err) {
@@ -47,10 +38,6 @@ exports.get = function (req, res) {
                 };
                 data.push(tmpEvent);
             }
-            //var tmpStudents = {
-            //    students: result.students
-            //};
-            //data.push(tmpStudents);
             res.send(data);
         });
 };
