@@ -126,3 +126,8 @@ header ul.nav > li > a {
   margin-left: 27px;
   cursor: pointer;
 }
+.colorDiv{
+  width: 49%;
+  margin: 1px;
+  display: inline-block;
+}
