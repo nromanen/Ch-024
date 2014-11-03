@@ -74,6 +74,7 @@ define('CalendarView', [
                 title: originalSubjectModel.getTitle(),
                 color: this._convertHexColorToRGB(originalSubjectModel.getColor()),
                 start: date
+
             });
 
             calendarEventModel.setCid(calendarEventModel.cid);

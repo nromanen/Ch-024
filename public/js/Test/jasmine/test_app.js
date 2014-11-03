@@ -70,6 +70,7 @@ require.config({
         'SubscribeView': '../../Views/Calendar/SubscribeView',
         'CabinetEventView': '../../Views/Calendar/CabinetEventView',
         'CabinetEventsView': '../../Views/Calendar/CabinetEventsView',
+        'ConfirmModalTemplateView': '../../Views/Templates/ConfirmModalTemplateView',
 
         // Template
         'aboutTemplate': '../../../templates/aboutTemplate.html',
@@ -91,6 +92,7 @@ require.config({
         'containerCalendarTemplate': '../../../templates/containerCalendarTemplate.html',
         'teacherCabinetEventTemplate': '../../../templates/teacherCabinetEventTemplate.html',
         'teacherCabinetTemplate': '../../../templates/teacherCabinetTemplate.html',
+        'confirmModalWindowTemplate': '../../../templates/confirmModalWindowTemplate.html',
 
         'adminTemplate': '../../../templates/adminTemplate.html',
         'categoryInfoTemplate': '../../../templates/categoryInfoTemplate.html',
@@ -170,6 +172,9 @@ require(['underscore', 'jquery', 'jasmine', 'jasmine-html'], function(_, $, jasm
     specs.push('spec/models/SubjectModelSpec');
     specs.push('spec/models/RegistrationUserModelSpec');
     specs.push('spec/models/CalendarEventModelSpec');
+    specs.push('spec/models/CabinetModelSpec');
+    specs.push('spec/models/CategoryModelSpec');
+    specs.push('spec/models/SubscribeModelSpec');
 
     specs.push('spec/views/SubjectViewSpec');
     specs.push('spec/views/SubjectsViewSpec');
