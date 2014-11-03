@@ -20,9 +20,11 @@ define('SubjectsView', [
     SubjectView,
     createSubjectModalWindowTemplate,
     optionForSelect) {
+
     window.tinycolor = tinycolor;
 
     var SubjectsView = Backbone.View.extend({
+
         selectors: {
             addSubjectButton: '.create',
             cancelButton: '.cancelBtn',
@@ -43,8 +45,6 @@ define('SubjectsView', [
             this.collectionSubject.on('add', $.proxy(this._renderSubject, this));
             this.collectionSubject.fetch();
         },
-
-        /* PRIVATE METHODS */
 
         _attachEvents: function() {
             this.$(this.selectors.createSubjectButton).on('click', $.proxy(this._addNewSubject, this));
@@ -67,16 +67,12 @@ define('SubjectsView', [
             }, this);
         },
 
-        /**
-         * Add new subject in collection
-         */
         _addNewSubject: function() {
             var subjectTitle = this.$(this.selectors.subjectTitleInput).val();
             var categoryId = this.$(this.selectors.categoryTitleInput).val();
             var categoryModel = this.collectionCategory.findModelById(categoryId);
 
             this.model.setTitle(subjectTitle);
-            //this.model.setColor("#" + this.$(this.selectors.colorPickerInput).val());
             this.model.setColor("#" + this.$('#backgroundColor').val());
             this.model.setTextColor("#" + this.$('#textColor').val());
             this.model.setCategoryId(categoryModel.getId());
@@ -105,9 +101,6 @@ define('SubjectsView', [
             $(this.selectors.categoryTitleInput).html('');
         },
 
-        /**
-         * Add categories into list
-         */
         _fillCategoryList: function() {
             this._clearFieldsInModal();
 
@@ -117,10 +110,8 @@ define('SubjectsView', [
         },
         _cancelModalWindow: function() {
             this.remove();
-            //this.$el.modal('hide');
             $('.modal-backdrop').hide();
         },
-        /* PUBLIC METHODS */
 
         render: function() {
             this.$el = $(this.template());
@@ -130,6 +121,9 @@ define('SubjectsView', [
             this._attachEvents();
             return this;
         }
+
     });
+
     return SubjectsView;
+
 });

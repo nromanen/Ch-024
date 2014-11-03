@@ -32,7 +32,7 @@ define('ControllerView', [
         },
 
         showMassageOfClearContainerSubscribe: function(message) {
-                $('.assignContainer').html(message);
+            $('.assignContainer').html(message);
         },
 
         addCategoryInActiveClass: function() {
@@ -57,5 +57,7 @@ define('ControllerView', [
         }
 
     });
+
     return new ControllerView;
+
 });

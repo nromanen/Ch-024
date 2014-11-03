@@ -1,35 +1,48 @@
-define('CategoryView', ['jquery', 'underscore', 'backbone', 'navTabPaneCategoryView', 'navTabCategoryView'],
-    function($, _, Backbone, navTabPaneCategoryView, navTabCategoryView) {
-        var CategoryView = Backbone.View.extend({
+define('CategoryView', [
+    'jquery',
+    'underscore',
+    'backbone',
+    'navTabPaneCategoryView',
+    'navTabCategoryView'
+], function(
+    $,
+    _,
+    Backbone,
+    navTabPaneCategoryView,
+    navTabCategoryView) {
 
-            initialize: function() {
-                this.model.bind('destroy', this.remove, this);
-            },
+    var CategoryView = Backbone.View.extend({
 
-            selectors: {
-                navTabContainer: "#navTabContainer",
-                navTabPaneContainer: "#navTabPaneContainer"
-            },
+        initialize: function() {
+            this.model.bind('destroy', this.remove, this);
+        },
 
-            _createNavTabPane: function() {
-                return new navTabPaneCategoryView({
-                    model: this.model
-                }).render().el;
-            },
+        selectors: {
+            navTabContainer: "#navTabContainer",
+            navTabPaneContainer: "#navTabPaneContainer"
+        },
 
-            _createNavTab: function() {
-                return new navTabCategoryView({
-                    model: this.model
-                }).render().el;
-            },
+        _createNavTabPane: function() {
+            return new navTabPaneCategoryView({
+                model: this.model
+            }).render().el;
+        },
 
+        _createNavTab: function() {
+            return new navTabCategoryView({
+                model: this.model
+            }).render().el;
+        },
 
-            render: function() {
-                $('main #subjectContainer #navTabContainer').append(this._createNavTab());
-                $('main #subjectContainer #navTabPaneContainer').append(this._createNavTabPane());
+        render: function() {
+            $('main #subjectContainer #navTabContainer').append(this._createNavTab());
+            $('main #subjectContainer #navTabPaneContainer').append(this._createNavTabPane());
 
-                return this;
-            }
-        });
-        return CategoryView;
+            return this;
+        }
+
     });
+
+    return CategoryView;
+
+});

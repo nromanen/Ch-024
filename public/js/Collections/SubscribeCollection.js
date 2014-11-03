@@ -1,19 +1,21 @@
-define('SubscribeCollection', ['jquery',
+define('SubscribeCollection', [
+    'jquery',
     'underscore',
     'backbone',
     'SubscribeModel',
     'ControllerView',
     'moment'
-], function($,
+], function(
+    $,
     _,
     Backbone,
     SubscribeModel,
     ControllerView,
     moment) {
+
     var SubscribeCollection = Backbone.Collection.extend({
 
         url: '/subscribe',
-
         model: SubscribeModel,
 
         _sortByStartDate: function() {
@@ -67,7 +69,9 @@ define('SubscribeCollection', ['jquery',
                     console.log("error");
                 });
         }
+
     });
 
     return SubscribeCollection;
+
 });

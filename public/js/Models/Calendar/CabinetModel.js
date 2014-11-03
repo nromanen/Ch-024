@@ -1,4 +1,12 @@
-define('CabinetModel', ['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
+define('CabinetModel', [
+    'jquery',
+    'underscore',
+    'backbone'
+], function(
+    $,
+    _,
+    Backbone) {
+
     var CabinetModel = Backbone.Model.extend({
 
         urlRoot: '/teachers',
@@ -11,8 +19,9 @@ define('CabinetModel', ['jquery', 'underscore', 'backbone'], function($, _, Back
                 students: {}
             }
         }
+
     });
 
     return CabinetModel;
-});
 
+});

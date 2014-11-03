@@ -1,4 +1,14 @@
-define('SubjectModel', ['jquery', 'underscore', 'backbone', 'CategoryModel'], function($, _, Backbone, CategoryModel) {
+define('SubjectModel', [
+    'jquery',
+    'underscore',
+    'backbone',
+    'CategoryModel'
+], function(
+    $,
+    _,
+    Backbone,
+    CategoryModel) {
+
     var SubjectModel = Backbone.Model.extend({
 
         urlRoot: '/subject',
@@ -68,12 +78,13 @@ define('SubjectModel', ['jquery', 'underscore', 'backbone', 'CategoryModel'], fu
             return this.get('authorId');
         },
 
-        validate: function (attrs) {
+        validate: function(attrs) {
             var errors = [];
-            if ( attrs.title <= 1 ) {
+            if (attrs.title <= 1) {
                 errors.push({
                     field: 'subjectTitle',
-                    message: 'Title must be longer then 1 sign!'});
+                    message: 'Title must be longer then 1 sign!'
+                });
             }
 
             return errors.length ? errors : false;
@@ -82,4 +93,5 @@ define('SubjectModel', ['jquery', 'underscore', 'backbone', 'CategoryModel'], fu
     });
 
     return SubjectModel;
+
 });

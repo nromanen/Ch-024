@@ -1,13 +1,16 @@
-define('CalendarEventView', ['jquery',
+define('CalendarEventView', [
+    'jquery',
     'underscore',
     'backbone',
     'text!saveEventModalWindowTemplate',
     'text!deleteEventModalWindowTemplate'
-], function($,
+], function(
+    $,
     _,
     Backbone,
     saveEventModalWindowTemplate,
     deleteEventModalWindowTemplate) {
+
     var CalendarEventView = Backbone.View.extend({
 
         selectors: {
@@ -119,4 +122,5 @@ define('CalendarEventView', ['jquery',
     });
 
     return CalendarEventView;
+
 });

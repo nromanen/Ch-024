@@ -1,4 +1,14 @@
-define('CabinetEventView', ['jquery', 'underscore', 'backbone', 'text!teacherCabinetEventTemplate'], function($, _, Backbone, teacherCabinetEventTemplate) {
+define('CabinetEventView', [
+    'jquery',
+    'underscore',
+    'backbone',
+    'text!teacherCabinetEventTemplate'
+], function(
+    $,
+    _,
+    Backbone,
+    teacherCabinetEventTemplate) {
+
     var CabinetEventView = Backbone.View.extend({
 
         template: _.template(teacherCabinetEventTemplate),
@@ -19,16 +29,17 @@ define('CabinetEventView', ['jquery', 'underscore', 'backbone', 'text!teacherCab
         _getStudents: function() {
             var that = this;
             $.ajax({
-                url: '/teachers/students/' + that.model.get('event')._id,
-                type: 'GET'
-            })
+                    url: '/teachers/students/' + that.model.get('event')._id,
+                    type: 'GET'
+                })
                 .done(function(res) {
-                    that.model.set({students: res});
+                    that.model.set({
+                        students: res
+                    });
                     var studentsData = '';
-                    for(var i in Object.keys(that.model.get('students'))) {
+                    for (var i in Object.keys(that.model.get('students'))) {
                         studentsData += (that.model.get('students')[i].user.surname + ' : ' + that.model.get('students')[i].user.phone + ' ');
                     }
-                    console.log(studentsData);
                     that.$(that.selectors.numberOfStudents).popover({
                         content: studentsData,
                         title: "Students",
@@ -55,4 +66,5 @@ define('CabinetEventView', ['jquery', 'underscore', 'backbone', 'text!teacherCab
     });
 
     return CabinetEventView;
+
 });

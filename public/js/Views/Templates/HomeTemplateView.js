@@ -1,4 +1,5 @@
-define('HomeTemplateView', ['jquery',
+define('HomeTemplateView', [
+    'jquery',
     'underscore',
     'backbone',
     'ControllerView',
@@ -7,7 +8,8 @@ define('HomeTemplateView', ['jquery',
     'text!homeTemplate',
     'text!subjectContainerTemplate',
     'text!assignedEventsTemplate'
-], function($,
+], function(
+    $,
     _,
     Backbone,
     ControllerView,
@@ -29,7 +31,7 @@ define('HomeTemplateView', ['jquery',
 
         _changeTemplate: function() {
             this.role = Session.getRole();
-            if((this.role === 'admin')||(this.role === 'teacher')) {
+            if ((this.role === 'admin') || (this.role === 'teacher')) {
                 this.subjectTemplate = _.template(subjectContainerTemplate)();
             } else {
                 this.subjectTemplate = _.template(assignedEventsTemplate)();
@@ -38,11 +40,16 @@ define('HomeTemplateView', ['jquery',
 
         render: function() {
             this._changeTemplate();
-            this.$el.html(this.template({subjectContainer: this.subjectTemplate}));
+            this.$el.html(this.template({
+                subjectContainer: this.subjectTemplate
+            }));
             $(this.selectors.mainTag).html(this.$el);
 
             return this;
         }
+
     });
+
     return HomeTemplateView;
+
 });

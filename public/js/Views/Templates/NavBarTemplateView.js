@@ -1,4 +1,5 @@
-define('NavBarTemplateView', ['jquery',
+define('NavBarTemplateView', [
+    'jquery',
     'underscore',
     'backbone',
     'ControllerView',
@@ -7,7 +8,8 @@ define('NavBarTemplateView', ['jquery',
     'text!navBarTemplate',
     'text!adminMenuTemplate',
     'text!teacherMenuTemplate'
-], function($,
+], function(
+    $,
     _,
     Backbone,
     ControllerView,
@@ -32,7 +34,9 @@ define('NavBarTemplateView', ['jquery',
         initialize: function() {
             this.session = Session;
             this._choseTemplateMenu();
-            this.$el.html(this.template({liMenu: this.menuTemplate}));
+            this.$el.html(this.template({
+                liMenu: this.menuTemplate
+            }));
             this._attachEvents();
         },
 
@@ -47,9 +51,9 @@ define('NavBarTemplateView', ['jquery',
 
         _choseTemplateMenu: function() {
             var role = Session.getRole();
-            if(role === 'admin') this.menuTemplate = this.adminMenuTemplate();
-            if(role === 'teacher') this.menuTemplate = this.teacherMenuTemplate();
-            if(role === 'user')  this.menuTemplate = ' ';
+            if (role === 'admin') this.menuTemplate = this.adminMenuTemplate();
+            if (role === 'teacher') this.menuTemplate = this.teacherMenuTemplate();
+            if (role === 'user') this.menuTemplate = ' ';
         },
 
         render: function() {
@@ -58,6 +62,9 @@ define('NavBarTemplateView', ['jquery',
             $(this.selectors.headerTeg).html(this.$el);
             return this;
         }
+
     });
+
     return NavBarTemplateView;
+
 });

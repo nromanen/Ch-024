@@ -24,6 +24,7 @@ define('ConfirmModalTemplateView', [
             this.$el.modal('show');
             return this;
         }
+
     });
 
     return ConfirmModalTemplateView;

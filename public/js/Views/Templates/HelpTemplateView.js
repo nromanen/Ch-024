@@ -1,8 +1,18 @@
-define('HelpTemplateView', ['jquery', 'underscore', 'backbone', 'text', 'text!helpTemplate'],
-    function($, _, Backbone, text, helpTemplate) {
+define('HelpTemplateView', [
+    'jquery',
+    'underscore',
+    'backbone',
+    'text',
+    'text!helpTemplate'
+], function(
+    $,
+    _,
+    Backbone,
+    text,
+    helpTemplate) {
 
     var HelpTemplateView = Backbone.View.extend({
-        
+
         template: _.template(helpTemplate),
 
         selectors: {
@@ -13,6 +23,9 @@ define('HelpTemplateView', ['jquery', 'underscore', 'backbone', 'text', 'text!he
             $(this.selectors.mainTag).html(this.template());
             return this;
         }
+
     });
+
     return HelpTemplateView;
+
 });

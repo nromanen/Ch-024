@@ -1,11 +1,21 @@
-define('CalendarEventsCollection', ['jquery', 'underscore', 'backbone', 'CalendarEventModel'], function($, _, Backbone, CalendarEventModel) {
+define('CalendarEventsCollection', [
+    'jquery',
+    'underscore',
+    'backbone',
+    'CalendarEventModel'
+], function(
+    $,
+    _,
+    Backbone,
+    CalendarEventModel) {
+
     var CalendarEventsCollection = Backbone.Collection.extend({
 
-    	url: '/events',
-
+        url: '/events',
         model: CalendarEventModel
-        
+
     });
 
     return CalendarEventsCollection;
+
 });

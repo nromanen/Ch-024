@@ -1,5 +1,15 @@
-define('FooterTemplateView', ['jquery', 'underscore', 'backbone', 'text', 'text!footerTemplate'],
-    function($, _, Backbone, text, footerTemplate) {
+define('FooterTemplateView', [
+    'jquery',
+    'underscore',
+    'backbone',
+    'text',
+    'text!footerTemplate'
+], function(
+    $,
+    _,
+    Backbone,
+    text,
+    footerTemplate) {
 
     var FooterTemplateView = Backbone.View.extend({
 
@@ -13,6 +23,9 @@ define('FooterTemplateView', ['jquery', 'underscore', 'backbone', 'text', 'text!
             $(this.selectors.footerTag).html(this.template());
             return this;
         }
+
     });
+
     return FooterTemplateView;
+
 });

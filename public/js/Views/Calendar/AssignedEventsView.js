@@ -66,6 +66,9 @@ define('AssignedEventsView', [
                     model: model
                 }).render().el);
         }
+
     });
+
     return AssignedEventsView;
+
 });

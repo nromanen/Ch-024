@@ -1,13 +1,16 @@
-define('SubscribeView', ['jquery',
+define('SubscribeView', [
+    'jquery',
     'underscore',
     'backbone',
     'SubscribeModel',
     'ControllerView'
-], function($,
+], function(
+    $,
     _,
     Backbone,
     SubscribeModel,
     ControllerView) {
+
     var SubscribeView = Backbone.View.extend({
 
         selectors: {
@@ -32,11 +35,6 @@ define('SubscribeView', ['jquery',
             this.calendarEventsCollection = options.calendarEventsCollection;
             this.calendarEventModel = options.calendarEventModel;
             $(this.selectors.assignButton).on('click', $.proxy(this._assignToSubject, this));
-            this.calendarEventModel.on('change', this._updateCalendarEventCollection, this);
-        },
-
-        _updateCalendarEventCollection: function(model) {
-            // console.log(model);
         },
 
         _assignToSubject: function() {
@@ -45,20 +43,20 @@ define('SubscribeView', ['jquery',
             subscribeModel.setEvent(this.calendarEventModel.toJSON());
 
             var that = this;
+
             $.ajax({
                     url: '/subscribe',
                     type: 'POST',
                     data: subscribeModel.toJSON(),
                     statusCode: {
-                                409: function() {
-                                    ControllerView.showAlertError(that.messages.errorConflict);
-                                }
-                            }
+                        409: function() {
+                            ControllerView.showAlertError(that.messages.errorConflict);
+                        }
+                    }
                 })
                 .done(function() {
                     ControllerView.showAlertSuccess(that.messages.success);
                     that.subscribeCollection.fetch();
-                    // that.calendarEventsCollection.fetch();
 
                     $.ajax({
                             url: '/event/' + that.calendarEventModel.getId(),
@@ -71,10 +69,6 @@ define('SubscribeView', ['jquery',
                         .fail(function() {
                             console.log("error");
                         });
-
-                })
-                .fail(function() {
-                    // ControllerView.showAlertError(that.messages.error);
                 })
                 .always(function() {
                     $('.own-popover').remove();
@@ -84,4 +78,5 @@ define('SubscribeView', ['jquery',
     });
 
     return SubscribeView;
+
 });

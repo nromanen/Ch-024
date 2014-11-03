@@ -1,4 +1,5 @@
-define('CalendarView', ['jquery',
+define('CalendarView', [
+    'jquery',
     'underscore',
     'backbone',
     'moment',
@@ -13,7 +14,8 @@ define('CalendarView', ['jquery',
     'SessionModel',
     'text!ownPopoverTemplate',
     'text!buttonAssignTemplate'
-], function($,
+], function(
+    $,
     _,
     Backbone,
     moment,
@@ -33,9 +35,6 @@ define('CalendarView', ['jquery',
 
         id: 'calendar',
 
-        /**
-         * Describes all the selectors we need.
-         */
         selectors: {
             weekButton: '.fc-agendaWeek-button',
             scroll: '.fc-scroller'
@@ -50,11 +49,6 @@ define('CalendarView', ['jquery',
             this._fetchUserModel();
         },
 
-        /* PRIVATE METHODS */
-
-        /**
-         * Connect all widgets
-         */
         _initWidgets: function() {
             this._initCalendarWidget();
         },
@@ -73,11 +67,6 @@ define('CalendarView', ['jquery',
             }), true);
         },
 
-        /**
-         * @param {Date} date
-         * @param {JS Event} jsEvent
-         * Add new event object after dropping subject object into calendar.
-         */
         _addEvent: function(date, jsEvent, ui) {
             var originalSubjectModel = $(jsEvent.target).data('subject');
             var calendarEventModel = new CalendarEventModel({
@@ -89,19 +78,14 @@ define('CalendarView', ['jquery',
 
             calendarEventModel.setCid(calendarEventModel.cid);
             this.calendarEventsCollection.add(calendarEventModel);
-            //this.$el.fullCalendar('renderEvent', calendarEventModel.toJSON(), true);
         },
 
-        /**
-         * @param {Object} eventObject
-         * Create Event View for updating and deleting event model.
-         */
         _showCalendarEventModal: function(calendarEventObject) {
             var role = Session.getRole();
             var calendarEventModel = this.calendarEventsCollection.findWhere({
                 cid: calendarEventObject.cid
             });
-            if(!(role === 'user')) {
+            if (!(role === 'user')) {
                 calendarEventModel.trigger('showCalendarEventModal');
             }
             new CalendarEventView({
@@ -169,7 +153,7 @@ define('CalendarView', ['jquery',
             calendarEventModel.setEnd(calendarEventObject.end);
         },
 
-        _updateCalendarEventAfterDrop: function( calendarEventObject, delta, revertFunc, jsEvent, ui, view ) {
+        _updateCalendarEventAfterDrop: function(calendarEventObject, delta, revertFunc, jsEvent, ui, view) {
             var calendarEventModel = this.calendarEventsCollection.findWhere({
                 cid: calendarEventObject.cid
             });
@@ -180,9 +164,6 @@ define('CalendarView', ['jquery',
             calendarEventModel.setEnd(calendarEventObject.end);
         },
 
-        /**
-         * Connect fullCalendar widget.
-         */
         _initCalendarWidget: function() {
             this.$el.fullCalendar({
                 header: {
@@ -211,8 +192,6 @@ define('CalendarView', ['jquery',
             this.calendarEventsCollection.fetch();
         },
 
-        /* PUBLIC METHODS */
-
         render: function() {
             $('#calendarContainer').html(this.$el);
             this._initWidgets();
@@ -220,5 +199,7 @@ define('CalendarView', ['jquery',
         }
 
     });
+
     return CalendarView;
+
 });

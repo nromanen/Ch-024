@@ -10,6 +10,7 @@ define('AssignedEventView', [
     Backbone,
     moment,
     assignedEventTemplate) {
+
     var AssignedEventView = Backbone.View.extend({
 
         template: _.template(assignedEventTemplate),
@@ -30,4 +31,5 @@ define('AssignedEventView', [
     });
 
     return AssignedEventView;
+
 });

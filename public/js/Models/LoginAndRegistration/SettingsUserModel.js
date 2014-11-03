@@ -1,5 +1,14 @@
-define('SettingsUserModel', ['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
+define('SettingsUserModel', [
+    'jquery',
+    'underscore',
+    'backbone'
+], function(
+    $,
+    _,
+    Backbone) {
+
     var SettingsUserModel = Backbone.Model.extend({
+
         defaults: {
             editEmail: '',
             currentPassword: '',
@@ -8,10 +17,10 @@ define('SettingsUserModel', ['jquery', 'underscore', 'backbone'], function($, _,
             editPhone: ''
         },
 
-    validate: function(attrs) {
-        var errors = [];
-        var PATTERN_MAIL = /^\w+[-_\.]*\w+@\w+-?\w+\.[a-z]{2,4}$/;
-        var PATTERN_PHONE = /^[+](380)-\d{2}-\d{3}-\d{2}-\d{2}$/;
+        validate: function(attrs) {
+            var errors = [];
+            var PATTERN_MAIL = /^\w+[-_\.]*\w+@\w+-?\w+\.[a-z]{2,4}$/;
+            var PATTERN_PHONE = /^[+](380)-\d{2}-\d{3}-\d{2}-\d{2}$/;
 
 
             if (attrs.editEmail.search(PATTERN_MAIL) === -1) {
@@ -46,7 +55,9 @@ define('SettingsUserModel', ['jquery', 'underscore', 'backbone'], function($, _,
 
             return errors;
         }
+
     });
 
     return SettingsUserModel;
+
 });

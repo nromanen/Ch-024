@@ -1,11 +1,21 @@
-define('navTabPaneCategoryView', ['jquery', 'underscore', 'backbone', 'tinycolor', 'pickacolor'],
-    function($, _, Backbone, tinycolor, pickacolor) {
+define('navTabPaneCategoryView', [
+    'jquery',
+    'underscore',
+    'backbone',
+    'tinycolor',
+    'pickacolor'
+], function(
+    $,
+    _,
+    Backbone,
+    tinycolor,
+    pickacolor) {
 
-        var navTabPaneCategoryView = Backbone.View.extend({
+    var navTabPaneCategoryView = Backbone.View.extend({
 
         className: 'tab-pane',
 
-        id : function() {
+        id: function() {
             return this.model.getCid();
         },
 
@@ -16,6 +26,9 @@ define('navTabPaneCategoryView', ['jquery', 'underscore', 'backbone', 'tinycolor
         render: function() {
             return this;
         }
+
     });
+
     return navTabPaneCategoryView;
+
 });

@@ -1,9 +1,11 @@
-define('SubscribeModel', ['jquery',
+define('SubscribeModel', [
+    'jquery',
     'underscore',
     'backbone',
     'UserModel',
     'CalendarEventModel'
-], function($,
+], function(
+    $,
     _,
     Backbone,
     UserModel,
@@ -39,4 +41,5 @@ define('SubscribeModel', ['jquery',
     });
 
     return SubscribeModel;
+
 });

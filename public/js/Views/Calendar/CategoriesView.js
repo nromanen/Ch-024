@@ -1,15 +1,18 @@
-define('CategoriesView', ['jquery',
+define('CategoriesView', [
+    'jquery',
     'underscore',
     'backbone',
     'CategoryModel',
     'CategoryView',
     'text!createCategoryModalWindowTemplate'
-], function($,
+], function(
+    $,
     _,
     Backbone,
     CategoryModel,
     CategoryView,
     createCategoryModalWindowTemplate) {
+
     var CategoriesView = Backbone.View.extend({
 
         selectors: {
@@ -38,8 +41,6 @@ define('CategoriesView', ['jquery',
             this.$el.on('keydown', $.proxy(this._keydownEnterEvent, this));
             this.$(this.selectors.cancelButton).off().on('click', $.proxy(this._cancelModalWindow, this));
             this.model.on("invalid", $.proxy(this._defineValidationError, this));
-
-
         },
 
         _keydownEnterEvent: function(event) {
@@ -89,6 +90,9 @@ define('CategoriesView', ['jquery',
             this._attachEvents();
             return this;
         }
+
     });
+
     return CategoriesView;
+
 });

@@ -1,8 +1,18 @@
-define('SettingsTemplateView', ['jquery', 'underscore', 'backbone', 'text', 'text!settingsTemplate'],
-    function($, _, Backbone, text, settingsTemplate) {
+define('SettingsTemplateView', [
+    'jquery',
+    'underscore',
+    'backbone',
+    'text',
+    'text!settingsTemplate'
+], function(
+    $,
+    _,
+    Backbone,
+    text,
+    settingsTemplate) {
 
     var SettingsTemplateView = Backbone.View.extend({
-        
+
         template: _.template(settingsTemplate),
 
         selectors: {
@@ -13,6 +23,9 @@ define('SettingsTemplateView', ['jquery', 'underscore', 'backbone', 'text', 'tex
             $(this.selectors.mainTag).html(this.template());
             return this;
         }
+
     });
+
     return SettingsTemplateView;
+
 });

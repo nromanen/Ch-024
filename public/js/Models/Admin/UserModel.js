@@ -1,74 +1,83 @@
-define('UserModel', ['jquery', 'underscore', 'backbone'],
-    function($, _, Backbone) {
-        var UserModel = Backbone.Model.extend({
+define('UserModel', [
+    'jquery',
+    'underscore',
+    'backbone'
+], function(
+    $,
+    _,
+    Backbone) {
 
-            urlRoot: '/user',
-            idAttribute: "_id",
+    var UserModel = Backbone.Model.extend({
 
-            defaults: function() {
-                return {
-                    _id: '', //- model id will be replaced with id from db
-                    username: '',
-                    surname: '',
-                    email: '',
-                    phone: '',
-                    role: '',
-                    approved: false
-                }
-            },
+        urlRoot: '/user',
+        idAttribute: "_id",
 
-            deleteThis: function() {
-                this.destroy();
-            },
-
-            setName: function(value) {
-                this.set('username', value);
-            },
-
-            getName: function() {
-                return this.get('username');
-            },
-
-            setSurname: function(value) {
-                this.set('sourname', value);
-            },
-
-            getSurname: function() {
-                return this.get('sourname');
-            },
-
-            setEmail: function(value) {
-                this.set('email', value);
-            },
-
-            getEmail: function() {
-                return this.get('email');
-            },
-
-            setPhone: function(value) {
-                this.set('phone', value);
-            },
-
-            getPhone: function() {
-                return this.get('phone');
-            },
-
-            setRole: function(value) {
-                this.set('role', value);
-            },
-
-            getRole: function() {
-                return this.get('role');
-            },
-
-            setConfirmed: function(value) {
-                this.set('confirmed', value);
-            },
-
-            getConfirmed: function() {
-                return this.get('confirmed');
+        defaults: function() {
+            return {
+                _id: '', //- model id will be replaced with id from db
+                username: '',
+                surname: '',
+                email: '',
+                phone: '',
+                role: '',
+                approved: false
             }
-            
-        });
-        return UserModel;
+        },
+
+        deleteThis: function() {
+            this.destroy();
+        },
+
+        setName: function(value) {
+            this.set('username', value);
+        },
+
+        getName: function() {
+            return this.get('username');
+        },
+
+        setSurname: function(value) {
+            this.set('sourname', value);
+        },
+
+        getSurname: function() {
+            return this.get('sourname');
+        },
+
+        setEmail: function(value) {
+            this.set('email', value);
+        },
+
+        getEmail: function() {
+            return this.get('email');
+        },
+
+        setPhone: function(value) {
+            this.set('phone', value);
+        },
+
+        getPhone: function() {
+            return this.get('phone');
+        },
+
+        setRole: function(value) {
+            this.set('role', value);
+        },
+
+        getRole: function() {
+            return this.get('role');
+        },
+
+        setConfirmed: function(value) {
+            this.set('confirmed', value);
+        },
+
+        getConfirmed: function() {
+            return this.get('confirmed');
+        }
+
     });
+
+    return UserModel;
+
+});

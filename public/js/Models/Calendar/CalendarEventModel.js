@@ -1,4 +1,14 @@
-define('CalendarEventModel', ['jquery', 'underscore', 'backbone', 'SubjectModel'], function($, _, Backbone, SubjectModel) {
+define('CalendarEventModel', [
+    'jquery',
+    'underscore',
+    'backbone',
+    'SubjectModel'
+], function(
+    $,
+    _,
+    Backbone,
+    SubjectModel) {
+
     var CalendarEventModel = Backbone.Model.extend({
 
         urlRoot: '/events',
@@ -122,11 +132,12 @@ define('CalendarEventModel', ['jquery', 'underscore', 'backbone', 'SubjectModel'
                     message: 'The amount of students is required and must be number!!'
                 });
             }
-            
+
             return errors.length ? errors : false;
         }
 
     });
 
     return CalendarEventModel;
+
 });

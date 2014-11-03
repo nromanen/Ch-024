@@ -11,9 +11,10 @@ define('RegistrationUserView', [
     Backbone,
     RegistrationUserModel,
     ControllerView,
-    registrationTemplate
-) {
+    registrationTemplate) {
+
     var RegistrationUserView = Backbone.View.extend({
+
         selectors: {
             registerButton: '#register',
             cancelButton: '#cancel',
@@ -40,9 +41,7 @@ define('RegistrationUserView', [
 
         initialize: function() {
             return true;
-
         },
-
 
         _attachEvents: function() {
             this.$(this.selectors.registerButton).on('click', $.proxy(this._checkForm, this));
@@ -66,15 +65,9 @@ define('RegistrationUserView', [
             }));
         },
 
-        /**
-         * @param {Backbone Model} model
-         * @param {Object} errors
-         *Display errors if they happen
-         */
         _defineError: function(model, errors) {
             this.$('.errors').html('');
             _.each(errors, function(error) {
-                // this.$('.form-group #'+ error.field + ' + .errors').append('<span>' + error.message + '</span>');
                 this.$('#' + error.field).addClass('borderRed');
             }, this);
         },
@@ -86,11 +79,12 @@ define('RegistrationUserView', [
             this.model.save(data, {
                 success: function() {
                     that._shutdownModalWindow();
-                    ControllerView.showAlertSuccess({message: 'Your registration have been successfuly!'});
+                    ControllerView.showAlertSuccess({
+                        message: 'Your registration have been successfuly!'
+                    });
                 }
             });
         },
-
 
         _checkField: function(fieldName) {
             this.fieldName = fieldName;
@@ -112,7 +106,10 @@ define('RegistrationUserView', [
             this.fieldName = fieldName;
             var currentInput = this.$(this.selectors[this.fieldName]);
             if (!this.model.preValidate('#repeatPassword', currentInput.val(), this.$(this.selectors.passwordInput).val())) {
-                currentInput.popover({content: this.examples[this.fieldName] , placement: "left"});
+                currentInput.popover({
+                    content: this.examples[this.fieldName],
+                    placement: "left"
+                });
                 currentInput.popover('show');
                 currentInput.addClass('borderRed');
             } else {
@@ -121,13 +118,11 @@ define('RegistrationUserView', [
             };
         },
 
-
         _addPhoneMask: function() {
             this.$("#phone").mask("+99(999)999-99-99", {
                 placeholder: "_"
             });
         },
-
 
         _shutdownModalWindow: function() {
             this.remove();
@@ -142,7 +137,9 @@ define('RegistrationUserView', [
             this._attachEvents();
             return this;
         }
+
     });
 
     return RegistrationUserView;
+
 });

@@ -1,4 +1,12 @@
-define('CategoryModel', ['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
+define('CategoryModel', [
+    'jquery',
+    'underscore',
+    'backbone'
+], function(
+    $,
+    _,
+    Backbone) {
+
     var CategoryModel = Backbone.Model.extend({
 
         urlRoot: '/category',
@@ -42,18 +50,19 @@ define('CategoryModel', ['jquery', 'underscore', 'backbone'], function($, _, Bac
             return this.get('cid');
         },
 
-        validate: function (attrs) {
+        validate: function(attrs) {
             var errors = [];
-            if ( attrs.title <= 1 ) {
+            if (attrs.title <= 1) {
                 errors.push({
                     field: 'categoryTitle',
-                    message: 'Title must be longer then 1 sign!'});
+                    message: 'Title must be longer then 1 sign!'
+                });
             }
-
             return errors.length ? errors : false;
         }
 
-
     });
+
     return CategoryModel;
+
 });

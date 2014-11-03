@@ -1,8 +1,18 @@
-define('AdminTemplateView', ['jquery', 'underscore', 'backbone', 'text', 'text!adminTemplate'],
-    function($, _, Backbone, text, adminTemplate) {
+define('AdminTemplateView', [
+    'jquery',
+    'underscore',
+    'backbone',
+    'text',
+    'text!adminTemplate'
+], function(
+    $,
+    _,
+    Backbone,
+    text,
+    adminTemplate) {
 
     var AdminTemplateView = Backbone.View.extend({
-        
+
         template: _.template(adminTemplate),
 
         selectors: {
@@ -13,6 +23,9 @@ define('AdminTemplateView', ['jquery', 'underscore', 'backbone', 'text', 'text!a
             $(this.selectors.mainTag).html(this.template());
             return this;
         }
+
     });
+
     return AdminTemplateView;
+
 });

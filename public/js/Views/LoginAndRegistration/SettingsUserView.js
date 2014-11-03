@@ -1,5 +1,14 @@
-define('SettingsUserView', ['jquery', 'underscore', 'backbone'], function($, _, Backbone) {
+define('SettingsUserView', [
+    'jquery',
+    'underscore',
+    'backbone'
+], function(
+    $,
+    _,
+    Backbone) {
+
     var SettingsUserView = Backbone.View.extend({
+
         selectors: {
             editEmail: "#editEmail",
             currentPassword: "#currentPassword",
@@ -15,17 +24,13 @@ define('SettingsUserView', ['jquery', 'underscore', 'backbone'], function($, _, 
         },
 
         _keyPressEvent: function() {
-            $('html').keypress(jQuery.proxy(function(event){
-                if(event.keyCode === 13){
+            $('html').keypress(jQuery.proxy(function(event) {
+                if (event.keyCode === 13) {
                     $("#saveProfileButton").click();
                 }
             }));
         },
-        /**
-         * @param {Backbone Model} model
-         * @param {Object} errors
-         *Display errors
-         */
+
         _defineError: function(model, errors) {
             $('.errors').html('');
             $('.form-group input').removeClass('borderRed');
@@ -37,9 +42,6 @@ define('SettingsUserView', ['jquery', 'underscore', 'backbone'], function($, _, 
             console.log(errors);
         },
 
-        /**
-         *Validate user settings form
-         */
         _checkForm: function() {
             var data = {};
             data.editEmail = $(this.selectors.editEmail).val();
@@ -58,7 +60,9 @@ define('SettingsUserView', ['jquery', 'underscore', 'backbone'], function($, _, 
             this._keyPressEvent();
             return this;
         }
+
     });
 
     return SettingsUserView;
+
 });

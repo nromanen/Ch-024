@@ -2,7 +2,10 @@ define([
     'jquery',
     'backbone',
     'ControllerView'
-], function($, Backbone, ControllerView) {
+], function(
+    $,
+    Backbone,
+    ControllerView) {
 
     var SessionModel = Backbone.Model.extend({
 
@@ -125,7 +128,9 @@ define([
             }
             return userId;
         }
+
     });
 
     return new SessionModel();
+
 });

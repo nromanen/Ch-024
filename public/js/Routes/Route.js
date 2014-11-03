@@ -71,6 +71,7 @@ require([
     window.Calendar = {};
 
     var Router = Backbone.Router.extend({
+
         session: null,
 
         routes: {
@@ -216,4 +217,5 @@ require([
 
     Calendar.Controller = new Router;
     Backbone.history.start();
+
 });

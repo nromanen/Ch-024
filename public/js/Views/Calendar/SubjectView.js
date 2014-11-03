@@ -16,6 +16,7 @@ define('SubjectView', [
     SessionModel,
     ConfirmModalTemplateView,
     newSubjectTemplate) {
+
     var SubjectView = Backbone.View.extend({
 
         selectors: {
@@ -29,11 +30,6 @@ define('SubjectView', [
             this.model.bind('destroy', this.remove, this);
         },
 
-        /* PRIVATE METHODS */
-
-        /**
-         * Handle all events
-         */
         _attachEvents: function() {
             this.$(this.selectors.removeSubjectButton).on('click', $.proxy(this._showModalConfirm, this));
         },
@@ -46,21 +42,15 @@ define('SubjectView', [
             }).render();
         },
 
-        /**
-         * Remove subject object.
-         * deleteSubject() is the SubjectModel function for removing models
-         */
         _removeSubject: function() {
             this.model.deleteSubject();
         },
 
         _removeDeleteButton: function() {
-            if(SessionModel.getRole() === "teacher") {
+            if (SessionModel.getRole() === "teacher") {
                 this.$('.removeSubject').remove();
             }
         },
-
-        /* PUBLIC METHODS */
 
         render: function() {
             this.$el.html(this.template(this.model.toJSON())).draggable({
@@ -78,4 +68,5 @@ define('SubjectView', [
     });
 
     return SubjectView;
+
 });

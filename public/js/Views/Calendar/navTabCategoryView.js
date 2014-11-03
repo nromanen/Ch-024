@@ -64,5 +64,7 @@ define('navTabCategoryView', [
         }
 
     });
+
     return navTabCategoryView;
+
 });
