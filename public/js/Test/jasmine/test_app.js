@@ -175,6 +175,7 @@ require(['underscore', 'jquery', 'jasmine', 'jasmine-html'], function(_, $, jasm
     specs.push('spec/models/CabinetModelSpec');
     specs.push('spec/models/CategoryModelSpec');
     specs.push('spec/models/SubscribeModelSpec');
+    specs.push('spec/models/UserModelSpec');
 
     specs.push('spec/views/SubjectViewSpec');
     specs.push('spec/views/SubjectsViewSpec');

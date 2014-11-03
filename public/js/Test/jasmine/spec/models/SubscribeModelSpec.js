@@ -13,6 +13,11 @@ define([
             var subscribeModel = new SubscribeModel();
             expect(subscribeModel).toBeDefined();
         });
+
+        it('can be instantiated', function() {
+            var subscribeModel = new SubscribeModel();
+            expect(subscribeModel).not.toBeNull();
+        });
     });
 
 });
