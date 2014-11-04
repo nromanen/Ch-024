@@ -63,7 +63,6 @@ define('CategoriesView', [
             }).render();
             $(this.selectors.navTabContainer + " li:first").addClass('active');
             $(this.selectors.navTabPaneContainer + " div:first").addClass('active');
-
         },
 
         _addNewCategory: function() {

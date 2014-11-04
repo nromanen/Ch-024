@@ -21,8 +21,8 @@ define('AssignedEventView', [
             this.$el.html(this.template({
                 color: CalendarEvent.color,
                 title: CalendarEvent.title,
-                start: moment(CalendarEvent.start).format('YYYY-MM-DD HH:mm'),
-                end: moment(CalendarEvent.end).format('YYYY-MM-DD HH:mm'),
+                start: moment(CalendarEvent.start).format('HH:mm Do MMM YYYY'),
+                end: moment(CalendarEvent.end).format('HH:mm Do MMM YYYY'),
                 classroom: CalendarEvent.classroom
             }));
             return this;
