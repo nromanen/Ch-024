@@ -23,7 +23,7 @@ define('RegistrationUserModel', [
             role: ''
         },
 
-        constants: {
+        regex: {
             PATTERN_NAME: /^[A-Z][a-z]+[-]?[A-Za-z]*$/,
             PATTERN_SURNAME: /^[A-Z][a-z]+[-]?[A-Za-z]*$/,
             PATTERN_MAIL: /^\w+[-_\.]*\w+@[\w+-]?\w+\.[a-z]{2,4}$/,
@@ -32,87 +32,85 @@ define('RegistrationUserModel', [
             PASS_LENGTH: 6
         },
 
+        validateName: function(value) {
+            this.value = value;
+            return (this.value.search(this.regex.PATTERN_NAME) === -1 ||
+                    this.value.length <= this.regex.NAME_LENGTH) ? false : true;
+        },
+
+        validateSurname: function(value) {
+            this.value = value;
+            return (this.value.search(this.regex.PATTERN_SURNAME) === -1 ||
+                    this.value.length <= this.regex.NAME_LENGTH) ? false : true;
+        },
+
+        validateEmail: function(value) {
+            this.value = value;
+            return (this.value.search(this.regex.PATTERN_MAIL) === -1) ? false : true;
+        },
+
+        validatePassword: function(value) {
+            this.value = value;
+            return (this.value.length <= this.regex.PASS_LENGTH) ? false : true;
+        },
+
+        validateRepeatPassword: function(value, password) {
+            this.value = value;
+            this.password = password;
+            return (this.value !== this.password || this.value === '') ? false : true;
+        },
+
+        validatePhone: function(value) {
+            this.value = value;
+            return (this.value.search(this.regex.PATTERN_PHONE) === -1) ? false : true;
+        },
+
         validate: function(attrs) {
 
             var errors = [];
-            if (attrs.name.search(this.constants.PATTERN_NAME) === -1 ||
-                attrs.name.length <= this.constants.NAME_LENGTH) {
+            if (! this.validateName(attrs.name)) {
                 errors.push({
                     field: 'name',
                     message: 'Name is not correct!'
                 });
             }
 
-            if (attrs.surname.search(this.constants.PATTERN_SURNAME) === -1 ||
-                attrs.surname.length <= this.constants.NAME_LENGTH) {
+            if (! this.validateSurname(attrs.surname)) {
                 errors.push({
                     field: 'surname',
                     message: 'Surname is not correct!'
                 });
             }
 
-            if (attrs.email.search(this.constants.PATTERN_MAIL) === -1) {
+            if (! this.validateEmail(attrs.email)) {
                 errors.push({
                     field: 'email',
                     message: 'Mail is not correct!'
                 });
             }
 
-            if (attrs.password.length <= this.constants.PASS_LENGTH) {
+            if (! this.validatePassword(attrs.password)) {
                 errors.push({
                     field: 'password',
                     message: 'Password is short!'
                 });
             }
 
-            if (attrs.password !== attrs.repeatPassword) {
+            if (! this.validateRepeatPassword(attrs.repeatPassword, attrs.password)) {
                 errors.push({
                     field: 'repeatPassword',
                     message: 'Password adn repeat password do not similar!'
                 });
             }
 
-            if (attrs.phone.search(this.constants.PATTERN_PHONE) === -1) {
+            if (! this.validatePhone(attrs.phone)) {
                 errors.push({
                     field: 'phone',
                     message: 'Phone is not correct!'
                 });
             }
             return errors.length ? errors : false;
-            // return false;
-
-        },
-
-        preValidate: function(fieldName, value, password) {
-            if (typeof password != 'undefined') {
-                this.password = password
-            };
-            this.fieldName = fieldName;
-            this.value = value;
-            switch (this.fieldName) {
-                case '#name':
-                    return (this.value.search(this.constants.PATTERN_NAME) === -1 ||
-                        this.value.length <= this.constants.NAME_LENGTH) ? false : true;
-
-                case '#surname':
-                    return (this.value.search(this.constants.PATTERN_SURNAME) === -1 ||
-                        this.value.length <= this.constants.NAME_LENGTH) ? false : true;
-
-                case '#email':
-                    return (this.value.search(this.constants.PATTERN_MAIL) === -1) ? false : true;
-
-                case '#password':
-                    return (this.value.length <= this.constants.PASS_LENGTH) ? false : true;
-
-                case '#repeatPassword':
-                    return (this.value !== this.password) ? false : true;
-
-                case '#phone':
-                    return (this.value.search(this.constants.PATTERN_PHONE) === -1) ? false : true;
-
-            };
         }
-
     });
 
     return RegistrationUserModel;

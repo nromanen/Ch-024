@@ -47,12 +47,12 @@ define('RegistrationUserView', [
             this.$(this.selectors.registerButton).on('click', $.proxy(this._checkForm, this));
             this.$(this.selectors.cancelButton).on('click', $.proxy(this._shutdownModalWindow, this));
 
-            this.$(this.selectors.nameInput).on('blur', $.proxy(this._checkField, this, "nameInput"));
-            this.$(this.selectors.surnameInput).on('blur', $.proxy(this._checkField, this, "surnameInput"));
-            this.$(this.selectors.emailInput).on('blur', $.proxy(this._checkField, this, "emailInput"));
-            this.$(this.selectors.passwordInput).on('blur', $.proxy(this._checkField, this, "passwordInput"));
-            this.$(this.selectors.repeatPasswordInput).on('blur', $.proxy(this._checkRepeatPassword, this, "repeatPasswordInput"));
-            this.$(this.selectors.phoneInput).on('blur', $.proxy(this._checkField, this, "phoneInput"));
+            this.$(this.selectors.nameInput).on('blur', $.proxy(this._checkName, this));
+            this.$(this.selectors.surnameInput).on('blur', $.proxy(this._checkSurname, this));
+            this.$(this.selectors.emailInput).on('blur', $.proxy(this._checkEmail, this));
+            this.$(this.selectors.passwordInput).on('blur', $.proxy(this._checkPassword, this));
+            this.$(this.selectors.repeatPasswordInput).on('blur', $.proxy(this._checkRepeatPassword, this));
+            this.$(this.selectors.phoneInput).on('blur', $.proxy(this._checkPhone, this));
 
             this.model.on("invalid", $.proxy(this._defineError, this));
         },
@@ -86,12 +86,53 @@ define('RegistrationUserView', [
             });
         },
 
-        _checkField: function(fieldName) {
-            this.fieldName = fieldName;
-            var currentInput = this.$(this.selectors[this.fieldName]);
-            if (!this.model.preValidate(this.selectors[this.fieldName], currentInput.val())) {
+        _checkName: function() {
+            var currentInput = this.$('#name');
+            if (!this.model.validateName(currentInput.val())) {
                 currentInput.popover({
-                    content: "example: " + this.examples[this.fieldName],
+                    content: "example: " + this.examples.nameInput,
+                    placement: "left"
+                });
+                currentInput.popover('show');
+                currentInput.addClass('borderRed');
+            } else {
+                currentInput.popover('hide');
+                currentInput.removeClass('borderRed');
+            };
+        },
+        _checkSurname: function() {
+            var currentInput = this.$('#surname');
+            if (!this.model.validateSurname(currentInput.val())) {
+                currentInput.popover({
+                    content: "example: " + this.examples.surnameInput,
+                    placement: "left"
+                });
+                currentInput.popover('show');
+                currentInput.addClass('borderRed');
+            } else {
+                currentInput.popover('hide');
+                currentInput.removeClass('borderRed');
+            };
+        },
+        _checkEmail: function() {
+            var currentInput = this.$('#email');
+            if (!this.model.validateEmail(currentInput.val())) {
+                currentInput.popover({
+                    content: "example: " + this.examples.emailInput,
+                    placement: "left"
+                });
+                currentInput.popover('show');
+                currentInput.addClass('borderRed');
+            } else {
+                currentInput.popover('hide');
+                currentInput.removeClass('borderRed');
+            };
+        },
+        _checkPassword: function() {
+            var currentInput = this.$('#password');
+            if (!this.model.validatePassword(currentInput.val())) {
+                currentInput.popover({
+                    content: "example: " + this.examples.passwordInput,
                     placement: "left"
                 });
                 currentInput.popover('show');
@@ -102,12 +143,26 @@ define('RegistrationUserView', [
             };
         },
 
-        _checkRepeatPassword: function(fieldName) {
-            this.fieldName = fieldName;
-            var currentInput = this.$(this.selectors[this.fieldName]);
-            if (!this.model.preValidate('#repeatPassword', currentInput.val(), this.$(this.selectors.passwordInput).val())) {
+        _checkRepeatPassword: function() {
+            var currentInput = this.$('#repeatPassword');
+            if (!this.model.validateRepeatPassword(currentInput.val(), this.$('#password').val())) {
                 currentInput.popover({
-                    content: this.examples[this.fieldName],
+                    content: this.examples.repeatPasswordInput,
+                    placement: "left"
+                });
+                currentInput.popover('show');
+                currentInput.addClass('borderRed');
+            } else {
+                currentInput.popover('hide');
+                currentInput.removeClass('borderRed');
+            };
+        },
+
+        _checkPhone: function() {
+            var currentInput = this.$('#phone');
+            if (!this.model.validatePhone(currentInput.val())) {
+                currentInput.popover({
+                    content: "example: " + this.examples.phoneInput,
                     placement: "left"
                 });
                 currentInput.popover('show');
