@@ -72,10 +72,10 @@ define('AdminActionBarGroup', [
             var sortedArray = _.sortBy(this.notapprovedTeachersCollection.models, function(element) {
                 return element.attributes[that.currentTarget.dataset.sort];
             });
-            if (this.sortType === "desc") {
+            if (this.sortType === 'false') {
                 sortedArray.reverse();
             }
-            $(that.currentTarget).context.dataset.type = (this.sortType === "asc") ? "desc" : "asc";
+            $(that.currentTarget).context.dataset.type = (this.sortType === 'true') ? false : true;
             _.each(sortedArray, function(number, value) {
                 this._renderTeacher(sortedArray[value]);
             }, this);
@@ -87,10 +87,10 @@ define('AdminActionBarGroup', [
             var sortedArray = _.sortBy(this.notapprovedCategoriesCollection.models, function(element) {
                 return element.attributes[that.currentTarget.dataset.sort];
             });
-            if (this.sortType === "desc") {
+            if (this.sortType === 'false') {
                 sortedArray.reverse();
             }
-            $(that.currentTarget).context.dataset.type = (this.sortType === "asc") ? "desc" : "asc";
+            $(that.currentTarget).context.dataset.type = (this.sortType === 'true') ? false : true;
             _.each(sortedArray, function(number, value) {
                 this._renderCategory(sortedArray[value]);
             }, this);
@@ -102,10 +102,10 @@ define('AdminActionBarGroup', [
             var sortedArray = _.sortBy(this.notapprovedSubjectsCollection.models, function(element) {
                 return element.attributes[that.currentTarget.dataset.sort];
             });
-            if (this.sortType === "desc") {
+            if (this.sortType === 'false') {
                 sortedArray.reverse();
             }
-            $(that.currentTarget).context.dataset.type = (this.sortType === "asc") ? "desc" : "asc";
+            $(that.currentTarget).context.dataset.type = (this.sortType === 'true') ? false : true;
             _.each(sortedArray, function(number, value) {
                 this._renderSubject(sortedArray[value]);
             }, this);
