@@ -19,8 +19,6 @@ define('ConfirmModalTemplateView', [
             this.model = options.model;
             this.$el = $(this.template(options.model.toJSON()));
             this.$('.confirmDeleteBtn').off().on('click', $.proxy(this._confirmDelete, this));
-            //this.$('.cancelDeleteBtn').off().on('click', $.proxy(this._confirmDelete, this));
-
         },
 
         _confirmDelete: function() {

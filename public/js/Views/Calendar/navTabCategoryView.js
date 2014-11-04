@@ -5,7 +5,6 @@ define('navTabCategoryView', [
     'tinycolor',
     'pickacolor',
     'ConfirmModalTemplateView',
-    'ControllerView',
     'SessionModel',
     'text!navTabCategoryTemplate'
 ], function(
@@ -15,7 +14,6 @@ define('navTabCategoryView', [
     tinycolor,
     pickacolor,
     ConfirmModalTemplateView,
-    ControllerView,
     SessionModel,
     navTabCategoryTemplate) {
 
