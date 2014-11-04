@@ -29,10 +29,7 @@ require([
     'TeacherCabinetTemplateView',
     'CabinetEventsView',
     'CabinetCollection',
-    'CabinetModel',
-    'AssignedEventsView',
-    'SubscribeCollection',
-    'SubscribeModel'
+    'CabinetModel'
 ], function($,
     _,
     Backbone,
@@ -63,10 +60,7 @@ require([
     TeacherCabinetTemplateView,
     CabinetEventsView,
     CabinetCollection,
-    CabinetModel,
-    AssignedEventsView,
-    SubscribeCollection,
-    SubscribeModel) {
+    CabinetModel) {
 
     window.Calendar = {};
 
@@ -137,12 +131,6 @@ require([
                         collectionSubject: this.subjectsCollection,
                         collectionCategory: this.categoriesCollection,
                         model: new SubjectModel
-                    });
-                } else {
-                    this.subscribeCollection = new SubscribeCollection();
-                    new AssignedEventsView({
-                        collection: this.subscribeCollection,
-                        // model: new SubscribeModel
                     });
                 }
                 ControllerView.selectMenuItem('home-menu');

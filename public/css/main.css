@@ -132,3 +132,7 @@ header ul.nav > li > a {
   margin: 1px;
   display: inline-block;
 }
+
+.popover {
+  min-width: 250px;
+}

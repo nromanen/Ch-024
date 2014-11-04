@@ -17,4 +17,4 @@ define([
             expect(registrationUserModel).toBeDefined();
         });
     });
-    });
+ });

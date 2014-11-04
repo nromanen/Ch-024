@@ -4,20 +4,24 @@ define('HomeTemplateView', [
     'backbone',
     'ControllerView',
     'SessionModel',
+    'AssignedEventsView',
+    'SubscribeCollection',
+    'SubscribeModel',
     'text',
     'text!homeTemplate',
-    'text!subjectContainerTemplate',
-    'text!assignedEventsTemplate'
+    'text!subjectContainerTemplate'
 ], function(
     $,
     _,
     Backbone,
     ControllerView,
     Session,
+    AssignedEventsView,
+    SubscribeCollection,
+    SubscribeModel,
     text,
     homeTemplate,
-    subjectContainerTemplate,
-    assignedEventsTemplate) {
+    subjectContainerTemplate) {
 
     var HomeTemplateView = Backbone.View.extend({
 
@@ -34,15 +38,18 @@ define('HomeTemplateView', [
             if ((this.role === 'admin') || (this.role === 'teacher')) {
                 this.subjectTemplate = _.template(subjectContainerTemplate)();
             } else {
-                this.subjectTemplate = _.template(assignedEventsTemplate)();
+                this.subscribeCollection = new SubscribeCollection();
+
+                this.subjectTemplate = new AssignedEventsView({
+                    collection: this.subscribeCollection
+                }).render();
             }
         },
 
         render: function() {
             this._changeTemplate();
-            this.$el.html(this.template({
-                subjectContainer: this.subjectTemplate
-            }));
+            this.$el.html(this.template());
+            this.$('.subjectContainer').append(this.subjectTemplate);
             $(this.selectors.mainTag).html(this.$el);
 
             return this;

@@ -19,7 +19,7 @@ define([
 
         };
 
-        it('should be able to create its application test objects', function() {
+        it('should be able to create model', function() {
             var subject = new SubjectModel({
                 category: new CategoryModel
             });

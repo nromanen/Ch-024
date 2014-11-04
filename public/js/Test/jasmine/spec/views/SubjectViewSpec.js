@@ -4,10 +4,11 @@ define([
     'backbone',
     'jqueryui',
     'fullcalendar',
+    'ConfirmModalTemplateView',
     'text!newSubjectTemplate',
     'SubjectModel',
     'SubjectView'
-], function($, _, Backbone, jqueryui, fullcalendar, newSubjectTemplate, SubjectModel, SubjectView) {
+], function($, _, Backbone, jqueryui, fullcalendar, ConfirmModalTemplateView, newSubjectTemplate, SubjectModel, SubjectView) {
     describe("Test Subject View", function() {
         var subjectView;
         beforeEach(function(){

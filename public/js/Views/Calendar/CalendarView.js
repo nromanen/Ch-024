@@ -74,6 +74,7 @@ define('CalendarView', [
                 title: originalSubjectModel.getTitle(),
                 color: this._convertHexColorToRGB(originalSubjectModel.getColor()),
                 start: date
+
             });
 
             calendarEventModel.setCid(calendarEventModel.cid);
@@ -126,8 +127,8 @@ define('CalendarView', [
             $(jsEvent.target).ownpopover('show', {
                 html: _.template(ownPopoverTemplate),
                 content: _.extend(calendarEventModelObject, {
-                    start: moment(calendarEventModelObject.start).format('YYYY-MM-DD HH:mm'),
-                    end: moment(calendarEventModelObject.end).format('YYYY-MM-DD HH:mm'),
+                    start: moment(calendarEventModelObject.start).format('HH:mm Do MMM YYYY'),
+                    end: moment(calendarEventModelObject.end).format('HH:mm Do MMM YYYY'),
                     amountFreePlace: (calendarEventModelObject.amountOfStudents - calendarEventModelObject.currentCount),
                     buttonAssign: this.buttonAssign
                 })

@@ -18,6 +18,18 @@ define('CabinetModel', [
                 event: {},
                 students: {}
             }
+        },
+
+        getStudents: function() {
+            return this.get('students');
+        },
+
+        getEvent: function() {
+            return this.get('event');
+        },
+
+        setStudents: function(value) {
+            return this.set('students', value);
         }
 
     });

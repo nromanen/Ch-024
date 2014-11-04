@@ -23,6 +23,7 @@ define('CalendarEventView', [
 
         initialize: function(options) {
             this.calendarEventObject = options.calendarEventObject;
+            this.model = options.model;
             this.model.off().on('showCalendarEventModal', this.render, this);
             this.model.bind('destroy', this.remove, this);
             this.model.on("invalid", $.proxy(this._defineValidationError, this));
@@ -81,8 +82,13 @@ define('CalendarEventView', [
 
         },
 
-        _deleteEvent: function() {
-            var that = this;
+        _deleteEvent: function(model) {
+           /* console.log(this);
+            this.model.destroy( {
+                type: 'DELETE'
+            });
+            $("#calendar").fullCalendar('removeEvents', this.calendarEventObject._id);*/
+           var that = this;
             $.ajax({
                     url: '/events/' + that.calendarEventObject._id,
                     type: 'DELETE',

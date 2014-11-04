@@ -37,11 +37,11 @@ define('UserModel', [
         },
 
         setSurname: function(value) {
-            this.set('sourname', value);
+            this.set('surname', value);
         },
 
         getSurname: function() {
-            return this.get('sourname');
+            return this.get('surname');
         },
 
         setEmail: function(value) {
@@ -69,11 +69,11 @@ define('UserModel', [
         },
 
         setConfirmed: function(value) {
-            this.set('confirmed', value);
+            this.set('approved', value);
         },
 
         getConfirmed: function() {
-            return this.get('confirmed');
+            return this.get('approved');
         }
 
     });
