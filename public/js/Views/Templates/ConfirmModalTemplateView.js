@@ -16,8 +16,17 @@ define('ConfirmModalTemplateView', [
         template: _.template(confirmModalWindowTemplate),
 
         initialize: function(options) {
+            this.model = options.model;
             this.$el = $(this.template(options.model.toJSON()));
-            this.$('.deleteCategoryBtn').off().on('click', $.proxy(options.remove, options.thatFromView));
+            this.$('.confirmDeleteBtn').off().on('click', $.proxy(this._confirmDelete, this));
+            //this.$('.cancelDeleteBtn').off().on('click', $.proxy(this._confirmDelete, this));
+
+        },
+
+        _confirmDelete: function() {
+            this.model.destroy();
+            this.remove();
+            $('.modal-backdrop').hide();
         },
 
         render: function() {

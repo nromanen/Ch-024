@@ -34,21 +34,15 @@ define('navTabCategoryView', [
         },
 
         _attachEvents: function() {
-            this.$(this.selectors.removeCategoryButton).on('click', $.proxy(this._showModalConfirm, this));
+            this.$(this.selectors.removeCategoryButton).on('click', $.proxy(this._showModalForConfirmDelete, this));
         },
 
-        _showModalConfirm: function() {
+        _showModalForConfirmDelete: function() {
             new ConfirmModalTemplateView({
-                model: this.model,
-                remove: this._removeCategory,
-                thatFromView: this
+                model: this.model
             }).render();
         },
 
-        _removeCategory: function() {
-            ControllerView.addCategoryInActiveClass();
-            this.model.destroy();
-        },
 
         _removeDeleteButton: function() {
             if (SessionModel.getRole() === "teacher") {
