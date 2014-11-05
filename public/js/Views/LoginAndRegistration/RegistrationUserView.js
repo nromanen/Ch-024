@@ -39,10 +39,6 @@ define('RegistrationUserView', [
 
         template: _.template(registrationTemplate),
 
-        initialize: function() {
-            return true;
-        },
-
         _attachEvents: function() {
             this.$(this.selectors.registerButton).on('click', $.proxy(this._checkForm, this));
             this.$(this.selectors.cancelButton).on('click', $.proxy(this._shutdownModalWindow, this));
@@ -73,7 +69,7 @@ define('RegistrationUserView', [
         },
 
         _checkForm: function(jsEvent) {
-            jsEvent.preventDefault();
+            jsEvent.stopPropaganation();
             var that = this;
             var data = this.$el.serializeJSON();
             this.model.save(data, {
