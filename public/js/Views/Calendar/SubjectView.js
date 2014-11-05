@@ -36,6 +36,7 @@ define('SubjectView', [
         _showModalForConfirmDelete: function() {
             new ConfirmModalTemplateView({
                 model: this.model
+
             }).render();
         },
 
