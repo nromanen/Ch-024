@@ -12,10 +12,10 @@ define('CalendarEventModel', [
     var CalendarEventModel = Backbone.Model.extend({
 
         urlRoot: '/events',
+        idAttribute: "_id",
 
         defaults: function() {
             return {
-                _id: '',
                 subject: SubjectModel,
                 title: '',
                 start: null,
