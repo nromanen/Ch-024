@@ -1,7 +1,9 @@
 /**
  * Created by akomatc on 9/16/2014.
  */
-var db = require('../lib/mongoose');
+var db = require('../lib/mongoose'),
+    async = require('async'),
+    _ = require('underscore');
 
 var getSubjects = function() {
 
@@ -95,9 +97,65 @@ exports.get = function(req, res) {
 };
 
 exports.getNotApproved = function(req, res) {
-    var query = db.subjectModel.find({approved: false});
-    query.select('title categoryId color textColor authorId');
-    query.exec(function(err, queryRes) {
+    var subjectsQuery = db.subjectModel.find({approved: false});
+    subjectsQuery.select('title categoryId color textColor authorId');
+    // var categoryQuery = db.categoryModel.find({approved: true});
+    // categoryQuery.select('title');
+    // var usersQuery = db.userModel.find({
+    //     $or:[{role: 'teacher'}, {role: 'admin'}]
+    // });
+    // usersQuery.select('username surname');
+    // async.parallel({
+    //     subjects: function(callback) {
+    //         subjectsQuery.exec(function (err, queryRes){
+    //             if (err) {
+    //                 return handleError(err)
+    //             } else {
+    //                 callback(null, queryRes);
+    //             }
+    //         });
+    //     },
+    //     categories: function(callback) {
+    //         categoryQuery.exec(function (err, queryRes) {
+    //             if (err) {
+    //                 return handleError(err)
+    //             } else {
+    //                 callback(null, queryRes);
+    //             }
+    //         });
+    //     },
+    //     users: function(callback){
+    //         usersQuery.exec(function (err, queryRes) {
+    //             if (err) {
+    //                 return handleError(err)
+    //             } else {
+    //                 callback(null, queryRes);
+    //             }
+    //         });
+    //     },
+
+    // },
+
+    // function (err, result) {
+    //         if (err) return handleError(err);
+    //         var data = [];
+    //         _.each(result.subjects, function(number, value){
+    //             var author = _.findWhere(result.users, { id: result.subjects[value].authorId});
+    //             var category = _.findWhere(result.categories, { id: result.subjects[value].categoryId});
+    //             var subject = {
+    //                 id: result.subjects[value].id,
+    //                 title: result.subjects[value].title,
+    //                 color: result.subjects[value].color,
+    //                 textColor: result.subjects[value].textColor,
+    //                 category: category.title,
+    //                 author: author.username+" "+author.surname
+    //             }
+    //             data.push(subject);
+    //         })
+    //         res.send(data);
+    // });
+
+    subjectsQuery.exec(function(err, queryRes) {
         if (err) {
             return handleError(err)
         } else {

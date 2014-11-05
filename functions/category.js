@@ -59,14 +59,10 @@ exports.get = function (req, res) {
 exports.getNotApproved = function (req, res) {
     var categoryQuery = db.categoryModel.find({approved: false});
     categoryQuery.select('title authorId');
-    categoryQuery.exec(function (err, queryRes) {
-        if (err) {
-            return handleError(err)
-        } else {
-            res.json(queryRes);
-        }
-    });
-    // var usersQuery = db.userModel.find({$or:[{role: 'teacher'}, {role: 'admin'}]})
+    // var usersQuery = db.userModel.find({
+    //     $or:[{role: 'teacher'}, {role: 'admin'}]
+    // });
+    // usersQuery.select('username surname');
     // async.parallel({
     //     categories: function(callback) {
     //            categoryQuery.exec(function (err, queryRes) {
@@ -92,17 +88,22 @@ exports.getNotApproved = function (req, res) {
     // function (err, result) {
     //         if (err) return handleError(err);
     //         var data = [];
-
-    //         for(var elements in result.categories) {
-    //             var authorInfo = {
-    //                 //name: result.users[elements.authorId],
-    //                 name: result.users.find(result.categories.authorId),
-                    
-    //             };
-    //             data.push(authorInfo);
-    //         }
-    //         res.send(categories);
-    //         // console.log(result.categories);
-    //         // console.log(result.users);
+    //         _.each(result.categories, function(number, value){
+    //             var author = _.findWhere(result.users, { id: result.categories[value].authorId});
+    //             var category = {
+    //                 id: result.categories[value].id,
+    //                 title: result.categories[value].title,
+    //                 author: author.username+" "+author.surname
+    //             }
+    //             data.push(category);
+    //         })
+    //         res.send(data);
     // });
+    categoryQuery.exec(function(err, queryRes) {
+        if (err) {
+            return handleError(err)
+        } else {
+            res.json(queryRes);
+        }
+    });
 };
