@@ -69,8 +69,7 @@ define('CategoriesView', [
             new CategoryView({
                 model: model
             }).render();
-            $(this.selectors.navTabContainer + " li:first").addClass('active');
-            $(this.selectors.navTabPaneContainer + " div:first").addClass('active');
+            ControllerView.addCategoryInActiveClass();
         },
 
         _addNewCategory: function() {

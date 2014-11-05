@@ -12,10 +12,10 @@ define('CalendarEventModel', [
     var CalendarEventModel = Backbone.Model.extend({
 
         urlRoot: '/events',
+        idAttribute: "_id",
 
         defaults: function() {
             return {
-                _id: '',
                 subject: SubjectModel,
                 title: '',
                 start: null,
@@ -24,6 +24,7 @@ define('CalendarEventModel', [
                 color: '',
                 textColor: 'red',
                 classroom: '',
+                authorId: '',
                 amountOfStudents: 0,
                 currentCount: 0,
                 cid: 0
@@ -116,6 +117,14 @@ define('CalendarEventModel', [
 
         setCid: function(value) {
             return this.set('cid', value);
+        },
+
+        getAuthorId: function() {
+            return this.get('authorId');
+        },
+
+        setAuthorId: function(value) {
+            return this.set('authorId', value);
         },
 
         validate: function(attrs) {

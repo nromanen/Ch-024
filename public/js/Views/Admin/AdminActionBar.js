@@ -48,7 +48,7 @@ define('AdminActionBar', [
 
         _refuseView: function() {
             var thisView = this;
-            this.$el.fadeOut('200', function() { //fadeOut for slow element hiding
+            this.$el.fadeOut('200', function() {
                 thisView.model.destroy();
             });
         },

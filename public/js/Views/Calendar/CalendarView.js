@@ -83,8 +83,13 @@ define('CalendarView', [
         _showCalendarEventModal: function(calendarEventObject) {
             var role = Session.getRole();
             var calendarEventModel = this.calendarEventsCollection.findWhere({
-                cid: calendarEventObject.cid
+                _id: calendarEventObject._id
             });
+            if(!calendarEventModel){
+                calendarEventModel = this.calendarEventsCollection.findWhere({
+                    cid: calendarEventObject.cid
+                });
+            }
             if (!(role === 'user')) {
                 calendarEventModel.trigger('showCalendarEventModal');
             }

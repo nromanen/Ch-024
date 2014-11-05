@@ -13,6 +13,7 @@ exports.create = function(req, res) {
         color: req.body.color,
         textColor: req.body.textColor,
         classroom: req.body.classroom,
+        authorId: req.body.authorId,
         currentCount: req.body.currentCount,
         amountOfStudents: req.body.amountOfStudents
     });
