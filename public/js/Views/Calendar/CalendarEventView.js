@@ -63,6 +63,7 @@ define('CalendarEventView', [
             this.model.setEditable(false);
             this.model.setTextColor('black');
             this.model.setColor(this.calendarEventObject.color.substr(0, this.calendarEventObject.color.length - 4) + '1)');
+            this.model.setAuthorId(localStorage.getItem('userSession'));
             this.calendarEventObject.editable = false;
             this.calendarEventObject.textColor = 'black';
             this.calendarEventObject.color = this.calendarEventObject.color.substr(0, this.calendarEventObject.color.length - 4) + '1)';

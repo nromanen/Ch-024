@@ -24,7 +24,7 @@ define('CalendarEventModel', [
                 color: '',
                 textColor: 'red',
                 classroom: '',
-                authorId: ''
+                authorId: '',
                 amountOfStudents: 0,
                 currentCount: 0,
                 cid: 0
@@ -117,6 +117,14 @@ define('CalendarEventModel', [
 
         setCid: function(value) {
             return this.set('cid', value);
+        },
+
+        getAuthorId: function() {
+            return this.get('authorId');
+        },
+
+        setAuthorId: function(value) {
+            return this.set('authorId', value);
         },
 
         validate: function(attrs) {
