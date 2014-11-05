@@ -50,7 +50,7 @@
             "events": {
                 "create": true,
                 "update": true,
-                "subscribe": true,
+                "subscribe": false,
                 "watch": true,
                 "delete": true
             },

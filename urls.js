@@ -19,7 +19,7 @@ function Urls(app, userRoles){
     app.get('/rights/:sessionId', user.getRights);
     app.post('/logout', userRoles.can('user'), user.logOut);
     app.get('/user/:id', userRoles.can('user'), user.getById);
-    app.get('/users/notapproved',userRoles.can('admin'), user.getNotApproved);
+    app.get('/users/notapproved',userRoles.can('teacher'), user.getNotApproved);
     app.put('/user/:id', userRoles.can('admin'), user.confirm);
 
 
