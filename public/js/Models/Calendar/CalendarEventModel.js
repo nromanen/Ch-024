@@ -24,6 +24,7 @@ define('CalendarEventModel', [
                 color: '',
                 textColor: 'red',
                 classroom: '',
+                authorId: ''
                 amountOfStudents: 0,
                 currentCount: 0,
                 cid: 0
