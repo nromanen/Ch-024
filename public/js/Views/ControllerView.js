@@ -36,8 +36,8 @@ define('ControllerView', [
         },
 
         addCategoryInActiveClass: function() {
-            $('.nav-tabs li:first').addClass('active');
-            $('.tab-content .tab-pane:first').addClass('active');
+            $('#navTabContainer li:first').addClass('active');
+            $('#navTabPaneContainer div:first').addClass('active');
         },
 
         showAlertSuccess: function(message) {

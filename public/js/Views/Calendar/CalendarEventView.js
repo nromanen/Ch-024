@@ -82,13 +82,11 @@ define('CalendarEventView', [
 
         },
 
-        _deleteEvent: function(model) {
-           /* console.log(this);
-            this.model.destroy( {
-                type: 'DELETE'
-            });
-            $("#calendar").fullCalendar('removeEvents', this.calendarEventObject._id);*/
-           var that = this;
+        _deleteEvent: function() {
+            /*
+            this.model.destroy();
+            $("#calendar").fullCalendar('removeEvents', this.calendarEventObject._id);
+         var that = this;
             $.ajax({
                     url: '/events/' + that.calendarEventObject._id,
                     type: 'DELETE',
@@ -96,7 +94,7 @@ define('CalendarEventView', [
                 })
                 .done(function() {
                     $("#calendar").fullCalendar('removeEvents', that.calendarEventObject._id);
-                });
+                });*/
         },
 
         /**

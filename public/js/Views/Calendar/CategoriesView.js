@@ -4,6 +4,7 @@ define('CategoriesView', [
     'backbone',
     'CategoryModel',
     'CategoryView',
+    'ControllerView',
     'text!createCategoryModalWindowTemplate'
 ], function(
     $,
@@ -11,6 +12,7 @@ define('CategoriesView', [
     Backbone,
     CategoryModel,
     CategoryView,
+    ControllerView,
     createCategoryModalWindowTemplate) {
 
     var CategoriesView = Backbone.View.extend({
@@ -33,6 +35,8 @@ define('CategoriesView', [
             this.collection.fetch();
 
             this.collection.on('add', $.proxy(this._renderCategory, this));
+            this.collection.on('remove', $.proxy(this._makeActiveTabAfterDelete, this));
+
         },
 
         _attachEvents: function() {
@@ -41,6 +45,10 @@ define('CategoriesView', [
             this.$el.on('keydown', $.proxy(this._keydownEnterEvent, this));
             this.$(this.selectors.cancelButton).off().on('click', $.proxy(this._cancelModalWindow, this));
             this.model.on("invalid", $.proxy(this._defineValidationError, this));
+        },
+
+        _makeActiveTabAfterDelete: function() {
+            ControllerView.addCategoryInActiveClass();
         },
 
         _keydownEnterEvent: function(event) {

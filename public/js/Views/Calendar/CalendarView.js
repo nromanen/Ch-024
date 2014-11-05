@@ -74,10 +74,9 @@ define('CalendarView', [
                 title: originalSubjectModel.getTitle(),
                 color: this._convertHexColorToRGB(originalSubjectModel.getColor()),
                 start: date
-
-            });
-
+             });
             calendarEventModel.setCid(calendarEventModel.cid);
+            calendarEventModel.setEnd(moment(calendarEventModel.getStart()).add(2,'h'));
             this.calendarEventsCollection.add(calendarEventModel);
         },
 

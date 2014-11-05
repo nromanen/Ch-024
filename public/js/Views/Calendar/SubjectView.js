@@ -20,8 +20,7 @@ define('SubjectView', [
     var SubjectView = Backbone.View.extend({
 
         selectors: {
-            removeSubjectButton: ".removeSubject",
-            subjectButton: ".divSubject"
+            removeSubjectBtn: ".removeSubject"
         },
 
         template: _.template(newSubjectTemplate),
@@ -31,20 +30,15 @@ define('SubjectView', [
         },
 
         _attachEvents: function() {
-            this.$(this.selectors.removeSubjectButton).on('click', $.proxy(this._showModalConfirm, this));
+            this.$(this.selectors.removeSubjectBtn).on('click', $.proxy(this._showModalForConfirmDelete, this));
         },
 
-        _showModalConfirm: function() {
+        _showModalForConfirmDelete: function() {
             new ConfirmModalTemplateView({
-                model: this.model,
-                remove: this._removeSubject,
-                thatFromView: this
+                model: this.model
             }).render();
         },
 
-        _removeSubject: function() {
-            this.model.deleteSubject();
-        },
 
         _removeDeleteButton: function() {
             if (SessionModel.getRole() === "teacher") {
