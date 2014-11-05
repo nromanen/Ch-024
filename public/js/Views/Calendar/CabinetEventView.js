@@ -51,7 +51,7 @@ define('CabinetEventView', [
                 })
                 .always(function() {
                     that.$(that.selectors.numberOfStudents).popover('show');
-                });
+            });
         },
 
         _removePopoverToggle: function() {

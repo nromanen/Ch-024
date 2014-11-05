@@ -99,67 +99,67 @@ exports.get = function(req, res) {
 exports.getNotApproved = function(req, res) {
     var subjectsQuery = db.subjectModel.find({approved: false});
     subjectsQuery.select('title categoryId color textColor authorId');
-    // var categoryQuery = db.categoryModel.find({approved: true});
-    // categoryQuery.select('title');
-    // var usersQuery = db.userModel.find({
-    //     $or:[{role: 'teacher'}, {role: 'admin'}]
-    // });
-    // usersQuery.select('username surname');
-    // async.parallel({
-    //     subjects: function(callback) {
-    //         subjectsQuery.exec(function (err, queryRes){
-    //             if (err) {
-    //                 return handleError(err)
-    //             } else {
-    //                 callback(null, queryRes);
-    //             }
-    //         });
-    //     },
-    //     categories: function(callback) {
-    //         categoryQuery.exec(function (err, queryRes) {
-    //             if (err) {
-    //                 return handleError(err)
-    //             } else {
-    //                 callback(null, queryRes);
-    //             }
-    //         });
-    //     },
-    //     users: function(callback){
-    //         usersQuery.exec(function (err, queryRes) {
-    //             if (err) {
-    //                 return handleError(err)
-    //             } else {
-    //                 callback(null, queryRes);
-    //             }
-    //         });
-    //     },
-
-    // },
-
-    // function (err, result) {
-    //         if (err) return handleError(err);
-    //         var data = [];
-    //         _.each(result.subjects, function(number, value){
-    //             var author = _.findWhere(result.users, { id: result.subjects[value].authorId});
-    //             var category = _.findWhere(result.categories, { id: result.subjects[value].categoryId});
-    //             var subject = {
-    //                 id: result.subjects[value].id,
-    //                 title: result.subjects[value].title,
-    //                 color: result.subjects[value].color,
-    //                 textColor: result.subjects[value].textColor,
-    //                 category: category.title,
-    //                 author: author.username+" "+author.surname
-    //             }
-    //             data.push(subject);
-    //         })
-    //         res.send(data);
-    // });
-
-    subjectsQuery.exec(function(err, queryRes) {
-        if (err) {
-            return handleError(err)
-        } else {
-            res.json(queryRes);
-        }
+    var categoryQuery = db.categoryModel.find({approved: true});
+    categoryQuery.select('title');
+    var usersQuery = db.userModel.find({
+        $or:[{role: 'teacher'}, {role: 'admin'}]
     });
+    usersQuery.select('username surname');
+    async.parallel({
+        subjects: function(callback) {
+            subjectsQuery.exec(function (err, queryRes){
+                if (err) {
+                    return handleError(err)
+                } else {
+                    callback(null, queryRes);
+                }
+            });
+        },
+        categories: function(callback) {
+            categoryQuery.exec(function (err, queryRes) {
+                if (err) {
+                    return handleError(err)
+                } else {
+                    callback(null, queryRes);
+                }
+            });
+        },
+        users: function(callback){
+            usersQuery.exec(function (err, queryRes) {
+                if (err) {
+                    return handleError(err)
+                } else {
+                    callback(null, queryRes);
+                }
+            });
+        },
+
+    },
+
+    function (err, result) {
+            if (err) return handleError(err);
+            var data = [];
+            _.each(result.subjects, function(value, number){
+                var author = _.findWhere(result.users, { id: result.subjects[number].authorId});
+                var category = _.findWhere(result.categories, { id: result.subjects[number].categoryId});
+                var subject = {
+                    _id: result.subjects[number].id,
+                    title: result.subjects[number].title,
+                    color: result.subjects[number].color,
+                    textColor: result.subjects[number].textColor,
+                    categoryId: category.title,
+                    authorId: author.username+" "+author.surname
+                }
+                data.push(subject);
+            })
+            res.json(data);
+    });
+
+    // subjectsQuery.exec(function(err, queryRes) {
+    //     if (err) {
+    //         return handleError(err)
+    //     } else {
+    //         res.json(queryRes);
+    //     }
+    // });
 };
