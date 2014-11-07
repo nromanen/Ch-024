@@ -72,9 +72,9 @@ define('CalendarView', [
                 title: originalSubjectModel.getTitle(),
                 color: this._convertHexColorToRGB(originalSubjectModel.getColor()),
                 start: date
-             });
+            });
             calendarEventModel.setCid(calendarEventModel.cid);
-            calendarEventModel.setEnd(moment(calendarEventModel.getStart()).add(2,'h'));
+            calendarEventModel.setEnd(moment(calendarEventModel.getStart()).add(2, 'h'));
             this.calendarEventsCollection.add(calendarEventModel);
         },
 
@@ -82,13 +82,13 @@ define('CalendarView', [
             var calendarEventModel = this.calendarEventsCollection.findWhere({
                 _id: calendarEventObject._id
             });
-            if(!calendarEventModel){
+            if (!calendarEventModel) {
                 calendarEventModel = this.calendarEventsCollection.findWhere({
                     cid: calendarEventObject.cid
                 });
             }
-            if (Calendar.Controller.session.hasPermission('events','create') ||
-                    Calendar.Controller.session.hasPermission('events','delete')) {
+            if (Calendar.Controller.session.hasPermission('events', 'create') ||
+                Calendar.Controller.session.hasPermission('events', 'delete')) {
                 calendarEventModel.trigger('showCalendarEventModal');
             }
             new CalendarEventView({
@@ -104,7 +104,7 @@ define('CalendarView', [
 
         _showAssignButton: function(amountOfStudents, currentCount) {
             this.buttonAssign = null;
-            if (Calendar.Controller.session.hasPermission('events','subscribe')) {
+            if (Calendar.Controller.session.hasPermission('events', 'subscribe')) {
                 if (!(amountOfStudents === currentCount)) {
                     this.buttonAssign = buttonAssignTemplate;
                 } else {

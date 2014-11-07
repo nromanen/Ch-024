@@ -128,9 +128,12 @@ header ul.nav > li > a {
   cursor: pointer;
 }
 .colorDiv{
-  width: 49%;
-  margin: 1px;
-  display: inline-block;
+  width: 35%;
+  display: inline-table;
+}
+
+.subjectPreview{
+  display: inline-table;
 }
 
 .popover {
