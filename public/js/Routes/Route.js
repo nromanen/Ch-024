@@ -7,7 +7,6 @@ require([
     'ContainerCalendarTemplateView',
     'HomeTemplateView',
     'HelpTemplateView',
-    'SettingsTemplateView',
     'AdminTemplateView',
     'SessionModel',
     'LoginUserView',
@@ -39,7 +38,6 @@ require([
     ContainerCalendarTemplateView,
     HomeTemplateView,
     HelpTemplateView,
-    SettingsTemplateView,
     AdminTemplateView,
     Session,
     LoginUserView,
@@ -149,7 +147,6 @@ require([
             this.on('route:settingsPage', function() {
 
                 this._headerFooterContainersRender();
-                new SettingsTemplateView().render();
                 new SettingsUserView({
                     profileModel: new SettingsProfileModel,
                     passwordModel: new SettingsPasswordModel

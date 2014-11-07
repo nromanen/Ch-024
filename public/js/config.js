@@ -59,7 +59,6 @@ require.config({
         'FooterTemplateView': 'Views/Templates/FooterTemplateView',
         'ContainerCalendarTemplateView': 'Views/Templates/ContainerCalendarTemplateView',
         'HomeTemplateView': 'Views/Templates/HomeTemplateView',
-        'SettingsTemplateView': 'Views/Templates/SettingsTemplateView',
         'HelpTemplateView': 'Views/Templates/HelpTemplateView',
         'AdminActionBar': 'Views/Admin/AdminActionBar',
         'AdminActionBarGroup': 'Views/Admin/AdminActionBarGroup',
