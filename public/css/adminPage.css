@@ -2,12 +2,12 @@
   padding: 10px;
 }
 .buttonsColumn {
-  width: 25%;
+  width: 17%;
 }
 .confirmButton,
 .refuseButton {
-  width: 70px;
-  margin: 5px;
+  width: 48%;
+  margin: 0px;
 }
 .collapseIcon{
   float: right;
@@ -19,4 +19,13 @@
 }
 .collapseIconOut{
   background: url(../images/collapseIcons.png) 0 -16px;
+}
+.sortSubjects{
+	cursor: pointer;
+}
+.sortCategories{
+	cursor: pointer;
+}
+.sortTeachers{
+	cursor: pointer;
 }
