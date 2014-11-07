@@ -97,7 +97,9 @@ define('CalendarEventView', [
                 this.template = _.template(saveEventModalWindowTemplate);
                 return;
             }
-            this.template = _.template(deleteEventModalWindowTemplate);
+            if(Calendar.Controller.session.getUserId() === this.model.getAuthorId()) {
+                this.template = _.template(deleteEventModalWindowTemplate);
+            }
         },
 
         _cancelModalWindow: function() {

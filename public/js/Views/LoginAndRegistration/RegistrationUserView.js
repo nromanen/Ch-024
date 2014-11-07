@@ -69,7 +69,7 @@ define('RegistrationUserView', [
         },
 
         _checkForm: function(jsEvent) {
-            jsEvent.stopPropaganation();
+            jsEvent.stopPropagation();
             var that = this;
             var data = this.$el.serializeJSON();
             this.model.save(data, {
@@ -80,6 +80,7 @@ define('RegistrationUserView', [
                     });
                 }
             });
+            return false;
         },
 
         _checkName: function() {
