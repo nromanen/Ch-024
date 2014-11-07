@@ -104,7 +104,8 @@ require.config({
         'teacherMenuTemplate': '../templates/teacherMenuTemplate.html',
         'subjectContainerTemplate': '../templates/subjectContainerTemplate.html',
         'buttonAssignTemplate': '../templates/buttonAssignTemplate.html',
-        'alertSuccess': '../templates/alertSuccess.html'
+        'alertSuccess': '../templates/alertSuccess.html',
+        'subjectPreviewTemplate': '../templates/subjectPreviewTemplate.html'
     },
 
     shim: {

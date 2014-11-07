@@ -93,7 +93,7 @@ exports.getNotApproved = function (req, res) {
                 var category = {
                     _id: result.categories[value].id,
                     title: result.categories[value].title,
-                    authorId: author.username+" "+author.surname
+                    author: author.username+" "+author.surname
                 }
                 data.push(category);
             })

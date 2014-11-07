@@ -147,8 +147,8 @@ exports.getNotApproved = function(req, res) {
                     title: result.subjects[number].title,
                     color: result.subjects[number].color,
                     textColor: result.subjects[number].textColor,
-                    categoryId: category.title,
-                    authorId: author.username+" "+author.surname
+                    category: category.title,
+                    author: author.username+" "+author.surname
                 }
                 data.push(subject);
             })

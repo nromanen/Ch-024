@@ -8,7 +8,8 @@ define('SubjectsView', [
     'CategoryModel',
     'SubjectView',
     'text!createSubjectModalWindowTemplate',
-    'text!optionForSelect'
+    'text!optionForSelect',
+    'text!subjectPreviewTemplate'
 ], function(
     $,
     _,
@@ -19,7 +20,8 @@ define('SubjectsView', [
     CategoryModel,
     SubjectView,
     createSubjectModalWindowTemplate,
-    optionForSelect) {
+    optionForSelect,
+    subjectPreviewTemplate) {
 
     window.tinycolor = tinycolor;
 
@@ -32,11 +34,16 @@ define('SubjectsView', [
             subjectTitleInput: '.subjectTitle',
             colorPickerInput: '.pick-a-color',
             categoryTitleInput: '.categoryTitle',
-            subjectContainer: '.tab-content #'
+            subjectContainer: '.tab-content #',
+            subjectPreview: '#subjectPreview',
+            colorPick: '#backgroundColor',
+            textColorPick: '#textColor'
         },
 
         template: _.template(createSubjectModalWindowTemplate),
         templateOptionForSelectCategory: _.template(optionForSelect),
+        templateSubjectPreview: _.template(subjectPreviewTemplate),
+
 
         initialize: function(options) {
             $(this.selectors.addSubjectButton).on('click', $.proxy(this.render, this));
@@ -49,6 +56,10 @@ define('SubjectsView', [
         _attachEvents: function() {
             this.$(this.selectors.createSubjectButton).on('click', $.proxy(this._addNewSubject, this));
             this.$el.on('keydown', $.proxy(this._keydownEnterEvent, this));
+            this.model.on('change', this._renderSubjectPreview, this);
+            this.$(this.selectors.subjectTitleInput).on('input', $.proxy(this._titleChange, this));
+            this.$(this.selectors.colorPick).on('change', $.proxy(this._colorChange, this));
+            this.$(this.selectors.textColorPick).on('change', $.proxy(this._textColorChange, this));
             this.$(this.selectors.cancelButton).on('click', $.proxy(this._cancelModalWindow, this));
             this.model.on("invalid", $.proxy(this._defineValidationError, this));
         },
@@ -73,8 +84,8 @@ define('SubjectsView', [
             var categoryModel = this.collectionCategory.findModelById(categoryId);
 
             this.model.setTitle(subjectTitle);
-            this.model.setColor("#" + this.$('#backgroundColor').val());
-            this.model.setTextColor("#" + this.$('#textColor').val());
+            this.model.setColor("#" + this.$(this.selectors.colorPick).val());
+            this.model.setTextColor("#" + this.$(this.selectors.textColorPick).val());
             this.model.setCategoryId(categoryModel.getId());
             this.model.setAuthorId(Calendar.Controller.session.getUserId());
 
@@ -108,6 +119,23 @@ define('SubjectsView', [
                 this.$(this.selectors.categoryTitleInput).append(this.templateOptionForSelectCategory(model.toJSON()));
             }, this);
         },
+
+        _renderSubjectPreview: function() {
+            this.$(this.selectors.subjectPreview).html(this.templateSubjectPreview(this.model.toJSON()));
+        },
+
+        _titleChange: function() {
+            this.model.setTitle(this.$(this.selectors.subjectTitleInput).val());
+        },
+
+        _colorChange: function() {
+            this.model.setColor("#" + this.$(this.selectors.colorPick).val());
+        },
+
+        _textColorChange: function() {
+            this.model.setTextColor("#" + this.$(this.selectors.textColorPick).val());
+        },
+
         _cancelModalWindow: function() {
             this.remove();
             $('.modal-backdrop').hide();
@@ -116,6 +144,9 @@ define('SubjectsView', [
         render: function() {
             this.$el = $(this.template());
             this.$(this.selectors.colorPickerInput).pickAColor();
+            this.model.setColor("#" + this.$(this.selectors.colorPick).val());
+            this.model.setTextColor("#" + this.$(this.selectors.textColorPick).val());
+            this._renderSubjectPreview();
             this.$el.modal('show');
             this._fillCategoryList();
             this._attachEvents();
