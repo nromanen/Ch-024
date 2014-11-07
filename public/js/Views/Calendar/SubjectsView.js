@@ -144,8 +144,9 @@ define('SubjectsView', [
         render: function() {
             this.$el = $(this.template());
             this.$(this.selectors.colorPickerInput).pickAColor();
-            this.model.setColor("#" + this.$(this.selectors.colorPick).val());
-            this.model.setTextColor("#" + this.$(this.selectors.textColorPick).val());
+            this._titleChange();
+            this._colorChange();
+            this._textColorChange();
             this._renderSubjectPreview();
             this.$el.modal('show');
             this._fillCategoryList();
