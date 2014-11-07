@@ -20,7 +20,8 @@ require([
     'CategoriesView',
     'CategoriesCollection',
     'SettingsUserView',
-    'SettingsUserModel',
+    'SettingsProfileModel',
+    'SettingsPasswordModel',
     'AdminActionBarGroup',
     'AdminTeachersCollection',
     'AdminSubjectsCollection',
@@ -51,7 +52,8 @@ require([
     CategoriesView,
     CategoriesCollection,
     SettingsUserView,
-    SettingsUserModel,
+    SettingsProfileModel,
+    SettingsPasswordModel,
     AdminActionBarGroup,
     AdminTeachersCollection,
     AdminSubjectsCollection,
@@ -149,7 +151,8 @@ require([
                 this._headerFooterContainersRender();
                 new SettingsTemplateView().render();
                 new SettingsUserView({
-                    model: new SettingsUserModel
+                    profileModel: new SettingsProfileModel,
+                    passwordModel: new SettingsPasswordModel
                 }).render();
                 ControllerView.selectMenuItem('');
 

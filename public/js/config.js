@@ -24,7 +24,8 @@ require.config({
         // Models
         'CalendarEventModel': 'Models/Calendar/CalendarEventModel',
         'SubjectModel': 'Models/Calendar/SubjectModel',
-        'SettingsUserModel': 'Models/LoginAndRegistration/SettingsUserModel',
+        'SettingsProfileModel': 'Models/LoginAndRegistration/SettingsProfileModel',
+        'SettingsPasswordModel': 'Models/LoginAndRegistration/SettingsPasswordModel',
         'RegistrationUserModel': 'Models/LoginAndRegistration/RegistrationUserModel',
         'CategoryModel': 'Models/Calendar/CategoryModel',
         'SessionModel': 'Models/LoginAndRegistration/SessionModel',
