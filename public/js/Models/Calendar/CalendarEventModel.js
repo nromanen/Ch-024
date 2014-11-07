@@ -14,6 +14,10 @@ define('CalendarEventModel', [
         urlRoot: '/events',
         idAttribute: "_id",
 
+        regex: {
+            PATTERN_CLASSROOM: /^\d+\w*$/,
+        },
+
         defaults: function() {
             return {
                 subject: SubjectModel,
@@ -129,16 +133,16 @@ define('CalendarEventModel', [
 
         validate: function(attrs) {
             var errors = [];
-            if (attrs.classroom <= 1) {
+            if (attrs.classroom.search(this.regex.PATTERN_CLASSROOM) === -1){
                 errors.push({
                     field: 'classForExam',
-                    message: 'The number of classroom is required and must be number!'
+                    message: 'The number of classroom is not correct!'
                 });
             }
             if (isNaN(+(attrs.amountOfStudents))) {
                 errors.push({
                     field: 'amountOfStud',
-                    message: 'The amount of students is required and must be number!!'
+                    message: 'The amount of students is not correct!'
                 });
             }
 
