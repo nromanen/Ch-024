@@ -11,7 +11,7 @@
   display: block;
 }
 .tab-content .active {
-  min-height: 73px;
+  height: 73px;
 }
 .tab-pane {
   padding: 10px;
@@ -88,11 +88,11 @@ nav li:hover {
   background-color: #4B8BAF;
 }
 .titleTextDecoration {
-  font-size: 24px;
-  color: #2f4f4f;
+  font-size: 18pt;
+  color: darkslategray;
 }
 .textDelete {
-  font-size: 22px;
+  font-size: 16pt;
 }
 .create {
   margin-top: 5px;
@@ -123,7 +123,7 @@ nav li:hover {
   border: inset 2px gray;
 }
 .own-popover .popover-header .header-content {
-  padding-left: 80px;
+  padding-left: 5em;
   font-weight: bolder;
 }
 .own-popover .removePopover:after {
@@ -161,5 +161,3 @@ nav li:hover {
 .dropdown a > span {
   margin: 0 8px;
 }
-
-

@@ -4,19 +4,17 @@
 .buttonsColumn {
   width: 25%;
 }
-.confirmButton,
-.refuseButton {
-  width: 70px;
+.buttonsColumn input {
   margin: 5px;
 }
-.collapseIcon{
+.collapseIcon {
   float: right;
   width: 20px;
   height: 16px;
 }
-.collapseIconIn{
+.collapseIconIn {
   background: url(../images/collapseIcons.png) 0 0;
 }
-.collapseIconOut{
+.collapseIconOut {
   background: url(../images/collapseIcons.png) 0 -16px;
 }

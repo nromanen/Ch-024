@@ -1,61 +1,72 @@
 <div class="col-md-12">
     <div class="thumbnail settingsBody">
-        <div class="row">
+        <div class="row ">
             <form role="form">
-
-                <div class="form-group">
+                <div class="form-group col-md-3">
                     <ul class="media-list">
                         <li class="media">
-                            <a class="pull-left">
-                                <div class="col-md-12">
-                                    <div class="thumbnail avatar">
-                                        <img src="http://www.gravatar.com/avatar/c4ca4238a0b923820dcc509a6f75849b" alt="Avatar">
+                            <div class="col-md-12">
+                                <div class="thumbnail avatar pull-left">
+                                    <img src="http://www.gravatar.com/avatar/c4ca4238a0b923820dcc509a6f75849b"
+                                         alt="Avatar">
+                                    <div class="media-body">
+                                        <label>Do you want to change your picture?</label>
+                                        <div id="avatarUpload">
+                                            Upload
+                                            <input type="file">
+                                        </div>
+
+                                        <p class="inf">Formats: JPG, PNG, GIF</p>
                                     </div>
                                 </div>
-                            </a>
 
-                            <div class="media-body">
-                                <label>Edit avatars:</label>
-                                <div id="avatarUpload">
-                                    <input type="file">
-                                </div>
-                                <p class="help-block">Formats: JPG, PNG, GIF</p>
+
                             </div>
+
+
                         </li>
                     </ul>
                 </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="editEmail">Edit email:</label>
+                        <input type="email" class="form-control" placeholder="Edit Email" id="editEmail">
 
-                <div class="form-group">
-                    <label for="editEmail">Edit email:</label>
-                    <input type="email" class="form-control" placeholder="Edit Email" id="editEmail">
-                    <div class="errors text-danger"></div>
+                        <div class="errors text-danger"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editPhone">Edit phone:</label>
+                        <input type="tel" class="form-control" placeholder="Edit Phone" id="editPhone">
+
+                        <div class="errors text-danger"></div>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="currentPassword">Current password:</label>
+                        <input type="password" class="form-control" placeholder="Current Password" id="currentPassword">
+
+                        <div class="errors text-danger"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="changePassword">Change password:</label>
+                        <input type="password" class="form-control" placeholder="Change Password" id="changePassword">
+
+                        <div class="errors text-danger"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="repeatPassword">Repeat password:</label>
+                        <input type="password" class="form-control" placeholder="Repeat Password" id="repeatPassword">
+
+                        <div class="errors text-danger"></div>
+                    </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="currentPassword">Current password:</label>
-                    <input type="password" class="form-control" placeholder="Current Password" id="currentPassword">
-                    <div class="errors text-danger"></div>
-                </div>
 
-                <div class="form-group">
-                    <label for="changePassword">Change password:</label>
-                    <input type="password" class="form-control" placeholder="Change Password" id="changePassword">
-                    <div class="errors text-danger"></div>
-                </div>
-
-                <div class="form-group">
-                    <label for="repeatPassword">Repeat password:</label>
-                    <input type="password" class="form-control" placeholder="Repeat Password" id="repeatPassword">
-                    <div class="errors text-danger"></div>
-                </div>
-
-                <div class="form-group">
-                    <label for="editPhone">Edit phone:</label>
-                    <input type="tel" class="form-control" placeholder="Edit Phone" id="editPhone">
-                    <div class="errors text-danger"></div>
-                </div>
-
-                <input type="button" class="btn btn-success" value="Save Profile" id="saveProfileButton" />
+                <input type="button" class=" col-md-12 btn btn-success" value="Save Profile" id="saveProfileButton"/>
             </form>
         </div>
     </div>

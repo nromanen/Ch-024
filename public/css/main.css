@@ -96,20 +96,16 @@ header ul.nav > li > a {
   text-align: center;
   z-index: 999;
 }
-
 .subscribeContainer {
   margin: 15px;
 }
-
 .assignHeaderBar {
   padding: 5px 15px;
 }
-
 .titleSubscribe {
   display: inline-block;
   margin-left: 25px;
 }
-
 .clock {
   display: inline-block;
   float: right;
@@ -121,18 +117,11 @@ header ul.nav > li > a {
   color: #eee;
   text-align: center;
 }
-
 .buttonshowEvents {
   display: table;
   margin-left: 27px;
   cursor: pointer;
 }
-.colorDiv{
-  width: 49%;
-  margin: 1px;
-  display: inline-block;
-}
-
 .popover {
   min-width: 250px;
 }
