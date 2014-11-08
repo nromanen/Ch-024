@@ -51,9 +51,15 @@ define('NavBarTemplateView', [
 
         _choseTemplateMenu: function() {
             var role = Session.getRole();
-            if (role === 'admin') this.menuTemplate = this.adminMenuTemplate();
-            if (role === 'teacher') this.menuTemplate = this.teacherMenuTemplate();
-            if (role === 'user') this.menuTemplate = ' ';
+            if (role === 'admin'){
+                this.menuTemplate = this.adminMenuTemplate();
+            }
+            if (role === 'teacher'){
+                this.menuTemplate = this.teacherMenuTemplate();
+            }
+            if (role === 'user'){
+                this.menuTemplate = ' ';
+            }
         },
 
         render: function() {

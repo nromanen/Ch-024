@@ -11,7 +11,6 @@ define('CalendarView', [
     'UserModel',
     'SubscribeCollection',
     'SubscribeView',
-    'SessionModel',
     'text!ownPopoverTemplate',
     'text!buttonAssignTemplate'
 ], function(
@@ -27,7 +26,6 @@ define('CalendarView', [
     UserModel,
     SubscribeCollection,
     SubscribeView,
-    Session,
     ownPopoverTemplate,
     buttonAssignTemplate) {
 
@@ -74,23 +72,23 @@ define('CalendarView', [
                 title: originalSubjectModel.getTitle(),
                 color: this._convertHexColorToRGB(originalSubjectModel.getColor()),
                 start: date
-             });
+            });
             calendarEventModel.setCid(calendarEventModel.cid);
-            calendarEventModel.setEnd(moment(calendarEventModel.getStart()).add(2,'h'));
+            calendarEventModel.setEnd(moment(calendarEventModel.getStart()).add(2, 'h'));
             this.calendarEventsCollection.add(calendarEventModel);
         },
 
         _showCalendarEventModal: function(calendarEventObject) {
-            var role = Session.getRole();
             var calendarEventModel = this.calendarEventsCollection.findWhere({
                 _id: calendarEventObject._id
             });
-            if(!calendarEventModel){
+            if (!calendarEventModel) {
                 calendarEventModel = this.calendarEventsCollection.findWhere({
                     cid: calendarEventObject.cid
                 });
             }
-            if (!(role === 'user')) {
+            if (Calendar.Controller.session.hasPermission('events', 'create') ||
+                Calendar.Controller.session.hasPermission('events', 'delete')) {
                 calendarEventModel.trigger('showCalendarEventModal');
             }
             new CalendarEventView({
@@ -105,9 +103,8 @@ define('CalendarView', [
         },
 
         _showAssignButton: function(amountOfStudents, currentCount) {
-            var role = Session.getRole();
             this.buttonAssign = null;
-            if (role === 'user') {
+            if (Calendar.Controller.session.hasPermission('events', 'subscribe')) {
                 if (!(amountOfStudents === currentCount)) {
                     this.buttonAssign = buttonAssignTemplate;
                 } else {

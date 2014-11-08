@@ -37,6 +37,7 @@ define('AdminActionBarGroup', [
         },
 
         _renderSubject: function(model) {
+            console.log(model);
             $('.subjectsInfo').append(
                 new AdminActionBar({
                     model: model,

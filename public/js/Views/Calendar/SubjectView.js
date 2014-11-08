@@ -4,7 +4,6 @@ define('SubjectView', [
     'backbone',
     'jqueryui',
     'fullcalendar',
-    'SessionModel',
     'ConfirmModalTemplateView',
     'text!newSubjectTemplate'
 ], function(
@@ -13,7 +12,6 @@ define('SubjectView', [
     Backbone,
     jqueryui,
     fullcalendar,
-    SessionModel,
     ConfirmModalTemplateView,
     newSubjectTemplate) {
 
@@ -42,16 +40,16 @@ define('SubjectView', [
 
 
         _removeDeleteButton: function() {
-            if (SessionModel.getRole() === "teacher") {
+            if (!Calendar.Controller.session.hasPermission('subject','delete')) {
                 this.$('.removeSubject').remove();
-            }
+           }
         },
 
         render: function() {
             this.$el.html(this.template(this.model.toJSON())).draggable({
                 zIndex: 999,
-                revert: true, // will cause the event to go back to its
-                revertDuration: 0 //  original position after the drag
+                revert: true,
+                revertDuration: 0
             });
             this._removeDeleteButton();
             this.$el.addClass('fc-event');

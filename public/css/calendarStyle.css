@@ -25,6 +25,7 @@
   font-size: 14px;
   padding: 7px;
   width: 150px;
+  min-height: 32px;
   cursor: pointer;
   text-align: center;
   border: none;

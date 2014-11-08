@@ -7,7 +7,6 @@ require([
     'ContainerCalendarTemplateView',
     'HomeTemplateView',
     'HelpTemplateView',
-    'SettingsTemplateView',
     'AdminTemplateView',
     'SessionModel',
     'LoginUserView',
@@ -20,7 +19,8 @@ require([
     'CategoriesView',
     'CategoriesCollection',
     'SettingsUserView',
-    'SettingsUserModel',
+    'SettingsProfileModel',
+    'SettingsPasswordModel',
     'AdminActionBarGroup',
     'AdminTeachersCollection',
     'AdminSubjectsCollection',
@@ -38,7 +38,6 @@ require([
     ContainerCalendarTemplateView,
     HomeTemplateView,
     HelpTemplateView,
-    SettingsTemplateView,
     AdminTemplateView,
     Session,
     LoginUserView,
@@ -51,7 +50,8 @@ require([
     CategoriesView,
     CategoriesCollection,
     SettingsUserView,
-    SettingsUserModel,
+    SettingsProfileModel,
+    SettingsPasswordModel,
     AdminActionBarGroup,
     AdminTeachersCollection,
     AdminSubjectsCollection,
@@ -147,9 +147,9 @@ require([
             this.on('route:settingsPage', function() {
 
                 this._headerFooterContainersRender();
-                new SettingsTemplateView().render();
                 new SettingsUserView({
-                    model: new SettingsUserModel
+                    profileModel: new SettingsProfileModel,
+                    passwordModel: new SettingsPasswordModel
                 }).render();
                 ControllerView.selectMenuItem('');
 

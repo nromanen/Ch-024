@@ -24,7 +24,8 @@ require.config({
         // Models
         'CalendarEventModel': 'Models/Calendar/CalendarEventModel',
         'SubjectModel': 'Models/Calendar/SubjectModel',
-        'SettingsUserModel': 'Models/LoginAndRegistration/SettingsUserModel',
+        'SettingsProfileModel': 'Models/LoginAndRegistration/SettingsProfileModel',
+        'SettingsPasswordModel': 'Models/LoginAndRegistration/SettingsPasswordModel',
         'RegistrationUserModel': 'Models/LoginAndRegistration/RegistrationUserModel',
         'CategoryModel': 'Models/Calendar/CategoryModel',
         'SessionModel': 'Models/LoginAndRegistration/SessionModel',
@@ -58,7 +59,6 @@ require.config({
         'FooterTemplateView': 'Views/Templates/FooterTemplateView',
         'ContainerCalendarTemplateView': 'Views/Templates/ContainerCalendarTemplateView',
         'HomeTemplateView': 'Views/Templates/HomeTemplateView',
-        'SettingsTemplateView': 'Views/Templates/SettingsTemplateView',
         'HelpTemplateView': 'Views/Templates/HelpTemplateView',
         'AdminActionBar': 'Views/Admin/AdminActionBar',
         'AdminActionBarGroup': 'Views/Admin/AdminActionBarGroup',
@@ -104,7 +104,8 @@ require.config({
         'teacherMenuTemplate': '../templates/teacherMenuTemplate.html',
         'subjectContainerTemplate': '../templates/subjectContainerTemplate.html',
         'buttonAssignTemplate': '../templates/buttonAssignTemplate.html',
-        'alertSuccess': '../templates/alertSuccess.html'
+        'alertSuccess': '../templates/alertSuccess.html',
+        'subjectPreviewTemplate': '../templates/subjectPreviewTemplate.html'
     },
 
     shim: {

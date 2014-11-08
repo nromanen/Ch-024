@@ -1,56 +1,92 @@
 define('SettingsUserView', [
     'jquery',
     'underscore',
-    'backbone'
+    'backbone',
+    'text',
+    'text!settingsTemplate'
 ], function(
     $,
     _,
-    Backbone) {
+    Backbone,
+    text,
+    settingsTemplate) {
 
     var SettingsUserView = Backbone.View.extend({
 
+        template: _.template(settingsTemplate),
+
         selectors: {
-            editEmail: "#editEmail",
+            changeSurname: "#changeSurname",
+            changePhone: "#changePhone",
             currentPassword: "#currentPassword",
             changePassword: "#changePassword",
             repeatPassword: "#repeatPassword",
-            editPhone: "#editPhone",
-            saveProfileButton: "#saveProfileButton"
+        },
+
+        initialize: function(options) {
+            this.$el.html(this.template());
+
+            this.profileModel = options.profileModel;
+            this.passwordModel = options.passwordModel;
+            this.profileModel.on("invalid", $.proxy(this._defineErrorProfile, this));
+            this.passwordModel.on("invalid", $.proxy(this._defineErrorPassword, this));
         },
 
         _attachEvents: function() {
-            $(this.selectors.saveProfileButton).on('click', $.proxy(this._checkForm, this));
-            this.model.on("invalid", $.proxy(this._defineError, this));
+            this.$('#saveProfileButton').on('click', $.proxy(this._checkFormProfile, this));
+            this.$('#savePasswordButton').on('click', $.proxy(this._checkFormPassword, this));
         },
 
         _keyPressEvent: function() {
             $('html').keypress(jQuery.proxy(function(event) {
                 if (event.keyCode === 13) {
-                    $("#saveProfileButton").click();
+                    this.$("#saveProfileButton").click();
                 }
             }));
         },
 
-        _defineError: function(model, errors) {
-            $('.errors').html('');
-            $('.form-group input').removeClass('borderRed');
+        _defineErrorProfile: function(model, errors) {
+            // console.log(model);
+            $('.groupProfile .errors').html('');
+            $('.groupProfile input').removeClass('borderRed');
             _.each(errors, function(error) {
-                $('#' + error.field).removeClass('borderRed');
-                $('.form-group #' + error.field + ' + .errors').append('<span>' + error.message + '</span>');
-                $('#' + error.field).addClass('borderRed');
+                this.$('#' + error.field).removeClass('borderRed');
+                this.$('.form-group #' + error.field + ' + .errors').append('<span>' + error.message + '</span>');
+                this.$('#' + error.field).addClass('borderRed');
             }, this);
-            console.log(errors);
         },
 
-        _checkForm: function() {
-            var data = {};
-            data.editEmail = $(this.selectors.editEmail).val();
-            data.currentPassword = $(this.selectors.currentPassword).val();
-            data.changePassword = $(this.selectors.changePassword).val();
-            data.repeatPassword = $(this.selectors.repeatPassword).val();
-            data.editPhone = $(this.selectors.editPhone).val();
+        _defineErrorPassword: function(model, errors) {
+            // console.log(model);
+            $('.groupPassword .errors').html('');
+            $('.groupPassword input').removeClass('borderRed');
+            _.each(errors, function(error) {
+                this.$('#' + error.field).removeClass('borderRed');
+                this.$('.form-group #' + error.field + ' + .errors').append('<span>' + error.message + '</span>');
+                this.$('#' + error.field).addClass('borderRed');
+            }, this);
+        },
 
-            this.model.set(data, {
+        _checkFormProfile: function() {
+            var dataProfile = {};
+
+            dataProfile.changeName = $('#changeName').val();
+            dataProfile.changeSurname = $(this.selectors.changeSurname).val();
+            dataProfile.changePhone = $(this.selectors.changePhone).val();
+
+            this.profileModel.set(dataProfile, {
+                validate: true
+            });
+        },
+
+        _checkFormPassword: function() {
+            var dataPassword = {};
+
+            dataPassword.currentPassword = $(this.selectors.currentPassword).val();
+            dataPassword.changePassword = $(this.selectors.changePassword).val();
+            dataPassword.repeatPassword = $(this.selectors.repeatPassword).val();
+
+            this.passwordModel.set(dataPassword, {
                 validate: true
             });
         },
@@ -58,6 +94,7 @@ define('SettingsUserView', [
         render: function() {
             this._attachEvents();
             this._keyPressEvent();
+            $('main').html(this.$el);
             return this;
         }
 

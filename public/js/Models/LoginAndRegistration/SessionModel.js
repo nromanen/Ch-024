@@ -81,6 +81,8 @@ define([
                 });
                 return false;
             });
+            console.log(this.get("rights"));
+
         },
 
         logout: function() {
@@ -103,6 +105,11 @@ define([
                 return false;
             }
             return user.role;
+        },
+
+        hasPermission: function(feature, action) {
+            var rights = this.get("rights");
+            return rights[feature][action];
         },
 
         getGravatarLink: function() {
