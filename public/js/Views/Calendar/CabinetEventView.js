@@ -2,12 +2,14 @@ define('CabinetEventView', [
     'jquery',
     'underscore',
     'backbone',
+    'moment',
     'text!teacherCabinetEventTemplate',
     'ControllerView'
 ], function(
     $,
     _,
     Backbone,
+    moment,
     teacherCabinetEventTemplate,
     ControllerView) {
 
@@ -60,6 +62,8 @@ define('CabinetEventView', [
 
         render: function() {
             this.model.set('amountOfFreePlace', this.model.get('event').amountOfStudents - this.model.getEvent().currentCount);
+            this.model.set('start', moment(this.model.getEvent().start).format('HH:mm Do MMM YYYY'));
+            this.model.set('end', moment(this.model.getEvent().end).format('HH:mm Do MMM YYYY'));
             this.$el.html(this.template(this.model.toJSON()));
             this.attachEvents();
             return this;

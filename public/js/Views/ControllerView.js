@@ -41,10 +41,12 @@ define('ControllerView', [
         },
 
         showAlertSuccess: function(message) {
+            $('.forAlert').html('');
             $('.forAlert').append(this.templateAlertSuccess(message));
         },
 
         showAlertError: function(message) {
+            $('.forAlert').html('');
             $('.forAlert').append(this.templateAlertError(message));
         }
 

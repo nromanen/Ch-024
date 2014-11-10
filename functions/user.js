@@ -148,82 +148,85 @@ exports.updateProfile = function(req, res) {
     var query = db.userModel.findOne({
         '_id': req.user._id
     });
-    query.update({
-        username: req.body.changeName,
-        surname: req.body.changeSurname,
-        phone: req.body.changePhone
-    }, function(err, queryRes) {
-        if (err) {
-            return handleError(err)
-        } else {
-            res.send(201);
-        }
-    });
+    console.log(req.body);
+    if ((req.body.username === req.body.changeName) &&
+        (req.body.surname === req.body.changeSurname) &&
+        (req.body.phone === req.body.changePhone)) {
+        res.send(409);
+    } else {
+        query.update({
+            username: req.body.changeName,
+            surname: req.body.changeSurname,
+            phone: req.body.changePhone
+        }, function(err, queryRes) {
+            if (err) {
+                return handleError(err)
+            } else {
+                res.send(201);
+            }
+        });
+    }
+
 };
 
-// exports.update = function() {
-//     var multiparty = require('multiparty'),
-//         fs = require('fs');
-//     var form = new multiparty.Form();
-//     var uploadFile = {
-//         uploadPath: '',
-//         type: '',
-//         size: 0
-//     };
-//     var maxSize = 2 * 1024 * 1024;
-//     var supportMimeTypes = ['image/jpg', 'image/jpeg', 'image/png'];
-//     var errors = [];
-//     form.on('error', function(err) {
-//         if (fs.existsSync(uploadFile.path)) {
-//             fs.unlinkSync(uploadFile.path);
-//             console.log('error');
-//         }
-//     });
+exports.updateAvatar = function() {
+    var multiparty = require('multiparty'),
+        fs = require('fs');
+    var form = new multiparty.Form();
+    var uploadFile = {
+        uploadPath: '',
+        type: '',
+        size: 0
+    };
+    var maxSize = 2 * 1024 * 1024;
+    var supportMimeTypes = ['image/jpg', 'image/jpeg', 'image/png'];
+    var errors = [];
+    form.on('error', function(err) {
+        if (fs.existsSync(uploadFile.path)) {
+            fs.unlinkSync(uploadFile.path);
+            console.log('error');
+        }
+    });
 
-//     form.on('close', function() {
-//         if (errors.length == 0) {
-//             res.send({
-//                 status: 'ok',
-//                 text: 'Success'
-//             });
-//         } else {
-//             if (fs.existsSync(uploadFile.path)) {
-//                 fs.unlinkSync(uploadFile.path);
-//             }
-//             res.send({
-//                 status: 'bad',
-//                 errors: errors
-//             });
-//         }
-//     });
-//     form.on('part', function(part) {
-//         uploadFile.size = part.byteCount;
-//         uploadFile.type = part.headers['content-type'];
-//         uploadFile.path = './files/' + part.filename;
-//         if (uploadFile.size > maxSize) {
-//             errors.push('File size is ' + uploadFile.size + '. Limit is' + (maxSize / 1024 / 1024) + 'MB.');
-//         }
-//         if (supportMimeTypes.indexOf(uploadFile.type) == -1) {
-//             errors.push('Unsupported mimetype ' + uploadFile.type);
-//         }
-//         if (errors.length == 0) {
-//             var out = fs.createWriteStream(uploadFile.path);
-//             part.pipe(out);
-//         } else {
-//             part.resume();
-//         }
-//     });
-//     var path = uploadFile.path
-//     path[0] = '';
-//     var avatarLink = req.protocol + '://' + req.hostname + path;
-//     var user_id = req.param.id;
-//     var data = {
-//         username: req.body.name,
-//         surname: req.body.surname,
-//         email: req.body.email,
-//         phone: req.body.phone,
-//         password: cryptor.md5(req.body.password),
-//         avatarLink: avatarLink
-//     };
-//     db.userModel.findByIdAndUpdate(user_id, data);
-// };
+    form.on('close', function() {
+        if (errors.length == 0) {
+            res.send({
+                status: 'ok',
+                text: 'Success'
+            });
+        } else {
+            if (fs.existsSync(uploadFile.path)) {
+                fs.unlinkSync(uploadFile.path);
+            }
+            res.send({
+                status: 'bad',
+                errors: errors
+            });
+        }
+    });
+    form.on('part', function(part) {
+        uploadFile.size = part.byteCount;
+        uploadFile.type = part.headers['content-type'];
+        uploadFile.path = './files/' + part.filename;
+        if (uploadFile.size > maxSize) {
+            errors.push('File size is ' + uploadFile.size + '. Limit is' + (maxSize / 1024 / 1024) + 'MB.');
+        }
+        if (supportMimeTypes.indexOf(uploadFile.type) == -1) {
+            errors.push('Unsupported mimetype ' + uploadFile.type);
+        }
+        if (errors.length == 0) {
+            var out = fs.createWriteStream(uploadFile.path);
+            part.pipe(out);
+        } else {
+            part.resume();
+        }
+    });
+    var path = uploadFile.path
+    path[0] = '';
+    var avatarLink = req.protocol + '://' + req.hostname + path;
+    var user_id = req.user._id;
+    var data = {
+        avatarLink: avatarLink
+    };
+    db.userModel.findByIdAndUpdate(user_id, data);
+};

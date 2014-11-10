@@ -8,7 +8,7 @@ var user = require('./functions/user.js'),
     subscribe = require('./functions/subscribe.js'),
     passport = require('passport');
 
-function Urls(app, userRoles){
+function Urls(app, userRoles) {
     // response to home root get req
     app.get('/', routes.index);
 
@@ -19,11 +19,13 @@ function Urls(app, userRoles){
     app.get('/rights/:sessionId', user.getRights);
     app.post('/logout', userRoles.can('user'), user.logOut);
     app.get('/user/:id', userRoles.can('user'), user.getById);
-    app.get('/users/notapproved',userRoles.can('teacher'), user.getNotApproved);
+    app.get('/users/notapproved', userRoles.can('teacher'), user.getNotApproved);
     app.put('/user/:id', userRoles.can('admin'), user.confirm);
     app.get('/profile', user.getProfile);
     app.put('/updatepass', user.updatePassword);
     app.put('/profile', user.updateProfile);
+    app.post('/uploadavatar', user.updateAvatar);
+
 
     //subjects api
     app.post('/subject', userRoles.can('teacher'), subject.create);
@@ -36,7 +38,7 @@ function Urls(app, userRoles){
     //categories api
     app.get('/category', userRoles.can('teacher'), category.get);
     app.post('/category', userRoles.can('teacher'), category.create);
-    app.get('/categories/notapproved',userRoles.can('admin'), category.getNotApproved);
+    app.get('/categories/notapproved', userRoles.can('admin'), category.getNotApproved);
     app.del('/category/:id', userRoles.can('admin'), category.delete);
     app.put('/category/:id', userRoles.can('admin'), category.confirm);
 

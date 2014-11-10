@@ -109,6 +109,11 @@ define('SettingsUserView', [
                             ControllerView.showAlertSuccess({
                                 message: "Your profile has changed"
                             });
+                        },
+                        409: function() {
+                            ControllerView.showAlertError({
+                                message: "You must change any field"
+                            });
                         }
                     }
                 });
