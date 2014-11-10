@@ -15,7 +15,7 @@ define('CalendarEventModel', [
         idAttribute: "_id",
 
         regex: {
-            PATTERN_CLASSROOM: /^\d+\w*$/,
+            PATTERN_CLASSROOM: /^\d+\w*$/
         },
 
         defaults: function() {

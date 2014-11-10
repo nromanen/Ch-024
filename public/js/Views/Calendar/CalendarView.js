@@ -87,14 +87,16 @@ define('CalendarView', [
                     cid: calendarEventObject.cid
                 });
             }
-            if (Calendar.Controller.session.hasPermission('events', 'create') ||
-                Calendar.Controller.session.hasPermission('events', 'delete')) {
-                calendarEventModel.trigger('showCalendarEventModal');
-            }
+            
             new CalendarEventView({
                 model: calendarEventModel,
                 calendarEventObject: calendarEventObject
             });
+
+            if (Calendar.Controller.session.hasPermission('events', 'create') ||
+                Calendar.Controller.session.hasPermission('events', 'delete')) {
+                calendarEventModel.trigger('showCalendarEventModal');
+            }     
         },
 
         _fetchUserModel: function() {
