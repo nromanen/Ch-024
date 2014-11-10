@@ -9,19 +9,14 @@ define('SettingsProfileModel', [
 
     var SettingsProfileModel = Backbone.Model.extend({
 
-        defaults: {
-            changeName: '',
-            changeSurname: '',
-            changePhone: ''
-        },
+        url: '/profile',
 
         validate: function(attrs) {
             var errors = [];
+
             var PATTERN_PHONE = /^[+]\d{2}[(]\d{3}[)]\d{3}-\d{2}-\d{2}$/,
                 PATTERN_NAME = /^[A-Z][a-z]+[-]?[A-Za-z]*$/,
-                PATTERN_SURNAME =  /^[A-Z][a-z]+[-]?[A-Za-z]*$/;
-
-            //we must check current password
+                PATTERN_SURNAME = /^[A-Z][a-z]+[-]?[A-Za-z]*$/;
 
             if (attrs.changeName.search(PATTERN_NAME) === -1) {
                 errors.push({
@@ -44,7 +39,9 @@ define('SettingsProfileModel', [
                 });
             }
 
-            return errors;
+            if (errors.length) {
+                return errors;
+            }
         }
 
     });

@@ -41,19 +41,11 @@ define('ControllerView', [
         },
 
         showAlertSuccess: function(message) {
-            $('.forAlert').append(this.templateAlertSuccess(message))
-                .children()
-                .last()
-                .delay(5000)
-                .fadeOut(1000);
+            $('.forAlert').append(this.templateAlertSuccess(message));
         },
 
         showAlertError: function(message) {
-            $('.forAlert').append(this.templateAlertError(message))
-                .children()
-                .last()
-                .delay(5000)
-                .fadeOut(1000);
+            $('.forAlert').append(this.templateAlertError(message));
         }
 
     });

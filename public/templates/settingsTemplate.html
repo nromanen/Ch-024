@@ -5,58 +5,77 @@
         </li>
         <li role="presentation"><a href="#changePasswordTab" role="tab" data-toggle="tab">Change Password</a>
         </li>
-        <li role="presentation"><a href="#uploadGravatarTab" role="tab" data-toggle="tab">Upload Gravatar</a>
-        </li>
     </ul>
 
     <!-- Tab panes -->
     <div class="tab-content">
         <div role="tabpanel" class="tab-pane active" id="editProfileTab">
-            <form>
-                <div class="form-group">
-                    <label for="changeName">Change Name:</label>
-                    <input type="text" class="form-control" placeholder="Change Name" id="changeName">
-                    <div class="errors text-danger"></div>
-                </div>
+            <div class="row">
+                <div class="col-xs-4 col-sm-3 col-md-3 col-lg-2">
+                    <div class="thumbnail avatar pull-left">
+                        <img src="http://www.gravatar.com/avatar/c4ca4238a0b923820dcc509a6f75849b" alt="Avatar">
+                        <div class="media-body">
+                            <label>Do you want to change your picture?</label>
+                            <div id="avatarUpload">
+                                Upload
+                                <input type="file">
+                            </div>
 
-                <div class="form-group">
-                    <label for="changeSurname">Change Surname:</label>
-                    <input type="text" class="form-control" placeholder="Change Surname" id="changeSurname">
-                    <div class="errors text-danger"></div>
+                            <p class="inf">Formats: JPG, PNG, GIF</p>
+                        </div>
+                    </div>
                 </div>
+                <div class="col-xs-8 col-sm-9 col-md-9 col-lg-10">
+                    <form>
+                        <div class="form-group groupProfile">
+                            <label for="changeName">Change Name:</label>
+                            <input type="text" class="form-control" placeholder="Change Name" id="changeName">
+                            <div class="errors text-danger"></div>
+                        </div>
 
-                <div class="form-group">
-                    <label for="changePhone">Change phone:</label>
-                    <input type="tel" class="form-control" placeholder="Change Phone" id="changePhone">
-                    <div class="errors text-danger"></div>
+                        <div class="form-group groupProfile">
+                            <label for="changeSurname">Change Surname:</label>
+                            <input type="text" class="form-control" placeholder="Change Surname" id="changeSurname">
+                            <div class="errors text-danger"></div>
+                        </div>
+
+                        <div class="form-group groupProfile">
+                            <label for="changePhone">Change phone:</label>
+                            <input type="tel" class="form-control" placeholder="Change Phone" id="changePhone">
+                            <div class="errors text-danger"></div>
+                        </div>
+
+                        <input type="button" class="btn btn-success" value="Save Profile" id="saveProfileButton" />
+                    </form>
                 </div>
-
-                <input type="button" class="btn btn-success" value="Save Profile" id="saveProfileButton" />
-            </form>
+            </div>
         </div>
         <div role="tabpanel" class="tab-pane" id="changePasswordTab">
-            <form>
-                <div class="form-group">
-                    <label for="currentPassword">Current password:</label>
-                    <input type="password" class="form-control" placeholder="Current Password" id="currentPassword">
-                    <div class="errors text-danger"></div>
-                </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <form>
+                        <div class="form-group groupPassword">
+                            <label for="currentPassword">Current password:</label>
+                            <input type="password" class="form-control" placeholder="Current Password" id="currentPassword">
+                            <div class="errors text-danger"></div>
+                        </div>
 
-                <div class="form-group">
-                    <label for="changePassword">Change password:</label>
-                    <input type="password" class="form-control" placeholder="Change Password" id="changePassword">
-                    <div class="errors text-danger"></div>
-                </div>
+                        <div class="form-group groupPassword">
+                            <label for="changePassword">Change password:</label>
+                            <input type="password" class="form-control" placeholder="Change Password" id="changePassword">
+                            <div class="errors text-danger"></div>
+                        </div>
 
-                <div class="form-group">
-                    <label for="repeatPassword">Repeat password:</label>
-                    <input type="password" class="form-control" placeholder="Repeat Password" id="repeatPassword">
-                    <div class="errors text-danger"></div>
-                </div>
+                        <div class="form-group groupPassword">
+                            <label for="repeatPassword">Repeat password:</label>
+                            <input type="password" class="form-control" placeholder="Repeat Password" id="repeatPassword">
+                            <div class="errors text-danger"></div>
+                        </div>
 
-                <input type="button" class="btn btn-success" value="Save Profile" id="saveProfileButton" />
-            </form>
+                        <input type="button" class="btn btn-success" value="Save Password" id="savePasswordButton" />
+                    </form>
+                </div>
+            </div>
         </div>
-        <div role="tabpanel" class="tab-pane" id="uploadGravatarTab">...</div>
     </div>
 </div>

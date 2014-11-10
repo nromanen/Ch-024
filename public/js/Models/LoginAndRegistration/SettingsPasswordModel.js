@@ -9,16 +9,24 @@ define('SettingsPasswordModel', [
 
     var SettingsPasswordModel = Backbone.Model.extend({
 
-        defaults: {
-            currentPassword: '',
-            changePassword: '',
-            repeatPassword: ''
-        },
+        url: '/updatepass',
 
         validate: function(attrs) {
             var errors = [];
 
-            //we must check current password
+            if (attrs.currentPassword.length <= 6) {
+                errors.push({
+                    field: 'currentPassword',
+                    message: 'Password is short! Must be over 6 symbol'
+                });
+            }
+
+            if (attrs.currentPassword == attrs.changePassword) {
+                errors.push({
+                    field: 'currentPassword',
+                    message: 'Old password mustn\'t be similar your new password'
+                });
+            }
 
             if (attrs.changePassword.length <= 6) {
                 errors.push({
@@ -27,14 +35,16 @@ define('SettingsPasswordModel', [
                 });
             }
 
-            if (attrs.editPassword !== attrs.repeatPassword) {
+            if (attrs.changePassword !== attrs.repeatPassword) {
                 errors.push({
                     field: 'repeatPassword',
                     message: 'Password and repeat password do not similar!'
                 });
             }
 
-            return errors;
+            if (errors.length) {
+                return errors;
+            }
         }
 
     });

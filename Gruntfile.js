@@ -1,4 +1,4 @@
-module.exports = function(grunt) {
+module.exports = function (grunt) {
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
@@ -28,7 +28,9 @@ module.exports = function(grunt) {
             static: {
                 options: {
                     optimizationLevel: 3,
-                    svgoPlugins: [{ removeViewBox: false }]
+                    svgoPlugins: [{
+                        removeViewBox: false
+                    }]
                 },
                 files: {
                     'dist/img.png': 'src/img.png',
@@ -47,24 +49,25 @@ module.exports = function(grunt) {
         },
         uglify: {
             options: {
-            banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
-            '<%= grunt.template.today("yyyy-mm-dd") %> */'
-        },
-        compilejs: {
-            files: {
-                'public/build/<%= pkg.name %>.min.js': ['public/build/project.js']
+                banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
+                    '<%= grunt.template.today("yyyy-mm-dd") %> */'
+            },
+            compilejs: {
+                files: {
+                    'public/build/<%= pkg.name %>.min.js': ['public/build/project.js']
                 }
             }
         },
         clean: {
-            js: ['public/build/project.js']
+            js: ['public/build/project.js'],
+            css: ['public/css/tmp.css']
         },
         cssmin: {
             compilecss: {
                 options: {
-                banner: '/* <%= pkg.name %> */',
-                keepSpecialComments: 0
-            },
+                    banner: '/* <%= pkg.name %> */',
+                    keepSpecialComments: 0
+                },
                 files: {
                     'public/build/<%= pkg.name %>.min.css': ['public/**/*.css']
                 }
@@ -78,6 +81,16 @@ module.exports = function(grunt) {
                 dest: 'public/build/fonts',
                 flatten: true
             }
+        },
+        less: {
+            compile: {
+                options: {
+                    paths: ["public/css"]
+                },
+                files: {
+                    "public/css/tmp.css": "public/css/*.less"
+                }
+            }
         }
     });
 
@@ -88,9 +101,10 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-copy');
-    
+    grunt.loadNpmTasks('grunt-contrib-less');
+
     //grunt.registerTask('connect', ['connect']);
-    grunt.registerTask('start', ['requirejs:compile', 'imagemin:dynamic', 'uglify:compilejs', 'clean:js', 'cssmin:compilecss', 'copy:fonts']);
+    grunt.registerTask('start', ['requirejs:compile', 'imagemin:dynamic', 'uglify:compilejs', 'clean:js', 'copy:fonts', 'less:compile', 'cssmin:compilecss', 'clean:css']);
     grunt.registerTask('default', []);
 
 };
