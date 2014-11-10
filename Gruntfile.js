@@ -85,7 +85,7 @@ module.exports = function (grunt) {
         less: {
             compile: {
                 options: {
-                    paths: ["public/css"]
+                    paths: ["public/compiled/css"]
                 },
                 files: {
                     "public/css/tmp.css": "public/css/*.less"
