@@ -1,8 +1,7 @@
-var transporter = require('../lib/mailTransport');
-
-exports.sendMail = function (mailData) {
+var nodemailer = require('nodemailer');
 
 
+exports.registeredMail = function (mailData) {
 // create reusable transporter object using SMTP transport
     //mailData example
 /*
@@ -16,16 +15,19 @@ exports.sendMail = function (mailData) {
     */
 // NB! No need to recreate the transporter object. You can use
 // the same transporter object for all e-mails
-
 // setup e-mail data with unicode symbols
-
-
+    var transporter = nodemailer.createTransport({
+        service: 'Gmail',
+        auth: {
+            user: 'ticapac@gmail.com',
+            pass: 'charming273008'
+        }
+    });
     var mailOptions = {
         from: 'SoftServe EXAM ✔ <ticapac@gmail.com>', // sender address
         to: mailData.to, // list of receivers
-        subject: mailData.subject, // Subject line
-        text: mailData.plainText, // plaintext body
-        html: mailData.htmlBody // html body
+        subject: 'SoftServe IT Academy', // Subject line
+        htmlBody:'You have successfully signed up for <b>SoftServe IT Academy program!</b>'
     };
 
 // send mail with defined transport object
