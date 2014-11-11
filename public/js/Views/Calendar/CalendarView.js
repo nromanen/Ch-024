@@ -35,16 +35,25 @@ define('CalendarView', [
 
         selectors: {
             weekButton: '.fc-agendaWeek-button',
-            scroll: '.fc-scroller'
+            scroll: '.fc-scroller',
+            showOwnEvents: '.watchMyEvents',
+            showAllEvents: '.watchAllEvents'
+
         },
 
         initialize: function(options) {
             this.calendarEventsCollection = options.collection;
-            this.calendarEventsCollection.on('add', this._renderCalendarEvent, this);
+            this._attachEvents();
             this.userModel = new UserModel;
             this.subscribeCollection = new SubscribeCollection;
             this.subscribeCollection.fetch();
             this._fetchUserModel();
+        },
+
+        _attachEvents: function() {
+            this.calendarEventsCollection.on('add', this._renderCalendarEvent, this);
+            $(this.selectors.showOwnEvents).on('click', $.proxy(this._showOwnEvents, this));
+            $(this.selectors.showAllEvents).on('click', $.proxy(this._showAllEvents, this));
         },
 
         _initWidgets: function() {
@@ -66,8 +75,8 @@ define('CalendarView', [
         },
 
         _addEvent: function(date, jsEvent, ui) {
-            var originalSubjectModel = $(jsEvent.target).data('subject');
-            var calendarEventModel = new CalendarEventModel({
+            var originalSubjectModel = $(jsEvent.target).data('subject'),
+                calendarEventModel = new CalendarEventModel({
                 subject: originalSubjectModel,
                 title: originalSubjectModel.getTitle(),
                 color: this._convertHexColorToRGB(originalSubjectModel.getColor()),
@@ -125,7 +134,7 @@ define('CalendarView', [
                 return;
             }
 
-            calendarEventModelObject = calendarEventModel.toJSON();
+           var calendarEventModelObject = calendarEventModel.toJSON();
             this._showAssignButton(calendarEventModelObject.amountOfStudents, calendarEventModelObject.currentCount);
 
             $(jsEvent.target).ownpopover('show', {
@@ -195,6 +204,30 @@ define('CalendarView', [
             });
 
             this.calendarEventsCollection.fetch();
+        },
+
+        _showOwnEvents: function() {
+            var allEvents = this.$el.fullCalendar('clientEvents'),
+                that = this;
+
+            allEvents.forEach(function(event) {
+                if (event.authorId != Calendar.Controller.session.getUserId()) {
+                    that.$el.fullCalendar('removeEvents', event._id)
+                }
+            });
+
+        },
+
+        _showAllEvents: function() {
+                var that = this;
+
+            this.$el.fullCalendar( 'removeEvents');
+            _.each(that.calendarEventsCollection.models, function(model){
+                that.$el.fullCalendar('renderEvent', _.extend(model.toJSON(), {
+                    className: 'calendar-event'
+               }), true);
+            });
+
         },
 
         render: function() {

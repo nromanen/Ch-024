@@ -36,7 +36,6 @@ exports.create = function(req, res) {
 exports.getAll = function(req, res) {
 
     var query = db.eventModel.find({});
-    // query.select('subjectId');
     query.exec(function(err, queryRes) {
         if (err) {
             return handleError(err)

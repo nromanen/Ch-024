@@ -29,7 +29,6 @@ function Urls(app, userRoles) {
 
     //subjects api
     app.post('/subject', userRoles.can('teacher'), subject.create);
-    //app.get('/subject/:cat', userRoles.can('user'), subject.get);
     app.get('/subject', userRoles.can('teacher'), subject.get);
     app.get('/subjects/notapproved', userRoles.can('admin'), subject.getNotApproved);
     app.del('/subject/:id', userRoles.can('admin'), subject.delete);
@@ -45,7 +44,7 @@ function Urls(app, userRoles) {
     //events api
     app.get('/events', userRoles.can('user'), events.getAll);
     app.post('/events', userRoles.can('teacher'), events.create);
-    app.del('/events/:id', userRoles.can('admin'), events.delete);
+    app.del('/events/:id', userRoles.can('teacher'), events.delete);
     app.get('/event/:id', userRoles.can('user'), events.getOne);
 
     //subscribe api
