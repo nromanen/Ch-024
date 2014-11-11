@@ -2,7 +2,7 @@ var db = require('../lib/mongoose'),
     config = require('../lib/config.js'),
     cryptor = require('cryptor'),
     gravatar = require('./gravatar'),
-    nodemailer = require('./mail');
+    mailTransporter = require('./mail');
 
 
 exports.logOut = function(req, res) {
@@ -21,6 +21,9 @@ exports.logIn = function(req, res) {
             return next(err);
         };
     });
+
+
+
     res.json(userData);
 };
 
@@ -65,6 +68,9 @@ exports.signUp = function(req, res) {
 
     data.save(function(err) {
         if (!err) {
+            mailTransporter.registeredMail({
+                to: req.body.email
+            });
             res.send(201);
             res.end;
         } else {
