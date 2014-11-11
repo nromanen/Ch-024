@@ -18,11 +18,10 @@ exports.create = function(req, res) {
         amountOfStudents: req.body.amountOfStudents
     });
 
-    data.save(function(err) {
+
+    data.save(function(err, model) {
         if (!err) {
-            res.send({
-                action: "saved"
-            });
+            res.json(model);
             res.end;
         } else {
 

@@ -77,6 +77,7 @@ define('CalendarEventView', [
                 })) {
                 $("#calendar").fullCalendar('updateEvent', this.calendarEventObject);
                 this._cancelModalWindow();
+                this.model.fetch();
             }
 
         },
