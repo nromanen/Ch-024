@@ -18,9 +18,17 @@ $.fn.ownpopover = function(action, params) {
         $('body').find('.remove-popover').off('click').on('click', function() {
             $(this).closest('.own-popover').remove();
         });
-        $('body').find('.own-popover').hover(function() {}, function() {
-            $(this).delay(3000).fadeOut('fast');
+
+        popoverTime = setTimeout(function() {
+            $('body').find('.own-popover').fadeOut('fast');
+        }, 2000);
+        $('body').find('.own-popover').mousemove(function() {
+            clearInterval(popoverTime);
         });
+        $('body').find('.own-popover').mouseleave(function() {
+            $('body').find('.own-popover').fadeOut('fast');
+        });
+
         $('.fc-button').off('click', hideAllPopovers).on('click', hideAllPopovers);
     }
 
