@@ -19,8 +19,6 @@ define('CabinetEventsView', [
         },
 
         _renderCabinetEvent: function (model) {
-            console.log(model.getEvent().authorId);
-            console.log("Session : " + Calendar.Controller.session.getUserId());
             if (model.getEvent().authorId === Calendar.Controller.session.getUserId()) {
                 $('.teacherCabinet').append(
                     new CabinetEventView({

@@ -71,6 +71,7 @@ require.config({
         'CabinetEventsView': 'Views/Calendar/CabinetEventsView',
         'AssignedEventsView': 'Views/Calendar/AssignedEventsView',
         'AssignedEventView': 'Views/Calendar/AssignedEventView',
+        'CabinetModalView': 'Views/Calendar/CabinetModalView',
 
         // Template
         'navBarTemplate': '../templates/navBarTemplate.html',
@@ -94,6 +95,7 @@ require.config({
         'teacherCabinetEventTemplate': '../templates/teacherCabinetEventTemplate.html',
         'assignedEventsTemplate': '../templates/assignedEventsTemplate.html',
         'assignedEventTemplate': '../templates/assignedEventTemplate.html',
+        'teacherCabinetModalTemplate': '../templates/teacherCabinetModalTemplate.html',
 
         'adminTemplate': '../templates/adminTemplate.html',
         'categoryInfoTemplate': '../templates/categoryInfoTemplate.html',
