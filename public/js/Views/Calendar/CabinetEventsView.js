@@ -4,7 +4,7 @@ define('CabinetEventsView', [
     'backbone',
     'CabinetEventView',
     'CabinetModel'
-], function(
+], function (
     $,
     _,
     Backbone,
@@ -13,19 +13,23 @@ define('CabinetEventsView', [
 
     var CabinetEventsView = Backbone.View.extend({
 
-        initialize: function(options) {
+        initialize: function (options) {
             this.collection.on('add', this._renderCabinetEvent, this);
             this.collection.fetch();
         },
 
-        _renderCabinetEvent: function(model) {
-            $('.teacherCabinet').append(
-                new CabinetEventView({
-                    model: model
-                }).render().el);
+        _renderCabinetEvent: function (model) {
+            console.log(model.getEvent().authorId);
+            console.log("Session : " + Calendar.Controller.session.getUserId());
+            if (model.getEvent().authorId === Calendar.Controller.session.getUserId()) {
+                $('.teacherCabinet').append(
+                    new CabinetEventView({
+                        model: model
+                    }).render().el);
+            }
         },
 
-        render: function() {
+        render: function () {
             this._renderCabinetEvent();
             return this;
         }

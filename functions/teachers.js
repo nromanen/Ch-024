@@ -5,7 +5,7 @@ var db = require('../lib/mongoose'),
 exports.get = function (req, res) {
     var eventQuery = db.eventModel.find({});
     var subscribeQuery = db.subscribeModel.find({});
-    eventQuery.select('title start end classroom amountOfStudents currentCount');
+    eventQuery.select('title start end classroom amountOfStudents currentCount authorId');
     subscribeQuery.select('user._id');
 
     async.parallel({
