@@ -18,11 +18,10 @@ exports.create = function(req, res) {
         amountOfStudents: req.body.amountOfStudents
     });
 
-    data.save(function(err) {
+
+    data.save(function(err, model) {
         if (!err) {
-            res.send({
-                action: "saved"
-            });
+            res.json(model);
             res.end;
         } else {
 
@@ -37,7 +36,6 @@ exports.create = function(req, res) {
 exports.getAll = function(req, res) {
 
     var query = db.eventModel.find({});
-    // query.select('subjectId');
     query.exec(function(err, queryRes) {
         if (err) {
             return handleError(err)

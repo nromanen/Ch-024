@@ -4,14 +4,16 @@ define('CabinetEventView', [
     'backbone',
     'moment',
     'text!teacherCabinetEventTemplate',
-    'ControllerView'
+    'ControllerView',
+    'CabinetModalView'
 ], function(
     $,
     _,
     Backbone,
     moment,
     teacherCabinetEventTemplate,
-    ControllerView) {
+    ControllerView,
+    CabinetModalView) {
 
     var CabinetEventView = Backbone.View.extend({
 
@@ -27,8 +29,7 @@ define('CabinetEventView', [
         },
 
         attachEvents: function() {
-            this.$(this.selectors.numberOfStudents).on('mouseover', $.proxy(this._getStudents, this));
-            this.$(this.selectors.numberOfStudents).on('mouseleave', $.proxy(this._removePopoverToggle, this));
+            this.$(this.selectors.numberOfStudents).on('click', $.proxy(this._getStudents, this));
         },
 
         _getStudents: function() {
@@ -39,14 +40,7 @@ define('CabinetEventView', [
                 })
                 .done(function(res) {
                     that.model.setStudents(res);
-                    var studentsData = '';
-                    _.each(that.model.getStudents(), function(element, index) {
-                        studentsData += (that.model.getStudents()[index].user.surname + ' : ' + that.model.getStudents()[index].user.phone + ' ');
-                    });
-                    that.$(that.selectors.numberOfStudents).popover({
-                        content: studentsData,
-                        title: "Students"
-                    });
+                    new CabinetModalView({model: that.model}).render();
                 })
                 .error(function(res) {
                     ControllerView.showAlertError({message: 'Sorry, but our service has a unknown error!'});

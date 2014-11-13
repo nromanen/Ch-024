@@ -71,13 +71,13 @@ define('CalendarEventView', [
          * Update fullCalendar
          */
         _saveEvent: function() {
-            this._updateCalendarEvent();
-            if (this.model.save(null, {
-                    type: 'POST'
-                })) {
+            var success = _.bind(function(model, response) {
+                this.calendarEventObject._id = this.model.get('_id');
                 $("#calendar").fullCalendar('updateEvent', this.calendarEventObject);
                 this._cancelModalWindow();
-            }
+            }, this);
+            this._updateCalendarEvent();
+            this.model.save(null,{success:success});
 
         },
 
