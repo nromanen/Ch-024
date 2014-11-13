@@ -14,13 +14,17 @@ define('SubjectModel', [
         urlRoot: '/subject',
         idAttribute: "_id",
 
+        regex: {
+            MAX_TITLE_LENGTH: 30
+        },
+
         defaults: function() {
             return {
                 _id: '',
                 categoryId: '',
                 title: '',
-                textColor: 'red',
-                color: 'red',
+                textColor: '',
+                color: '',
                 authorId: '',
                 approved: false
             }
@@ -80,10 +84,10 @@ define('SubjectModel', [
 
         validate: function(attrs) {
             var errors = [];
-            if (attrs.title <= 1) {
+            if (attrs.title.length < 1 || attrs.title.length > this.regex.MAX_TITLE_LENGTH){
                 errors.push({
                     field: 'subjectTitle',
-                    message: 'Title must be longer then 1 sign!'
+                    message: 'Title must contain at least 1 symbol and not be longer 30 symbols!'
                 });
             }
 
