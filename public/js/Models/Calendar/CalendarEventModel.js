@@ -15,7 +15,9 @@ define('CalendarEventModel', [
         idAttribute: "_id",
 
         regex: {
-            PATTERN_CLASSROOM: /^\d+\w*$/
+            PATTERN_CLASSROOM: /^\d+\w*$/,
+            MAX_CLASSROOM_LENGTH: 7,
+            MAX_AMOUNT_OF_STUDENTS: 100
         },
 
         defaults: function() {
@@ -133,16 +135,16 @@ define('CalendarEventModel', [
 
         validate: function(attrs) {
             var errors = [];
-            if (attrs.classroom.search(this.regex.PATTERN_CLASSROOM) === -1){
+            if (attrs.classroom.search(this.regex.PATTERN_CLASSROOM) === -1 || attrs.classroom.length > this.regex.MAX_CLASSROOM_LENGTH){
                 errors.push({
                     field: 'classForExam',
                     message: 'The number of classroom is not correct!'
                 });
             }
-            if (isNaN(+(attrs.amountOfStudents))) {
+            if (isNaN(+(attrs.amountOfStudents)) || Number(attrs.amountOfStudents) > this.regex.MAX_AMOUNT_OF_STUDENTS) {
                 errors.push({
                     field: 'amountOfStud',
-                    message: 'The amount of students is not correct!'
+                    message: 'The amount of students is not correct! '+this.regex.MAX_AMOUNT_OF_STUDENTS+"is maximum."
                 });
             }
 

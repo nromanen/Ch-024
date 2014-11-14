@@ -31,7 +31,7 @@ define('RegistrationUserView', [
             nameInput: 'Oleksij',
             surnameInput: 'Ivasiuk',
             emailInput: 'tverezo@gmail.com',
-            passwordInput: "365_Days!\n(at least 7 characters)",
+            passwordInput: '365_Days!\n(at least 7 characters)',
             repeatPasswordInput: 'passwords should be the same',
             phoneInput: '+380963282780'
         },
@@ -40,7 +40,7 @@ define('RegistrationUserView', [
         template: _.template(registrationTemplate),
 
         _attachEvents: function() {
-            this.$(this.selectors.registerButton).on('click', $.proxy(this._checkForm, this));
+            this.$(this.selectors.registerButton).on('click', $.proxy(this._sendFormData, this));
             this.$(this.selectors.cancelButton).on('click', $.proxy(this._shutdownModalWindow, this));
 
             this.$(this.selectors.nameInput).on('blur', $.proxy(this._checkName, this));
@@ -68,18 +68,49 @@ define('RegistrationUserView', [
             }, this);
         },
 
-        _checkForm: function(jsEvent) {
-            jsEvent.stopPropagation();
+        _sendFormData: function(jsEvent) {
+            // jsEvent.stopPropagation();
+            // jsEvent.preventDefault();
             var that = this;
             var data = this.$el.serializeJSON();
+            // this.model.attributes = data;
             this.model.save(data, {
+                always: function() { 
+                    setTimeout(1000);
+                },
                 success: function() {
                     that._shutdownModalWindow();
                     ControllerView.showAlertSuccess({
                         message: 'Your registration have been successfuly!'
                     });
+                },
+                error: function() {
+                    ControllerView.showAlertError({
+                        message: 'Your registration is fail.'
+                    });
                 }
             });
+
+            // var request = $.ajax({
+            //     url: '/signup',
+            //     type: "POST",
+            //     data: data,
+            //     dataType: "json"
+            // });
+            // request.always( function(){
+            //     setTimeout(1000);
+            // });
+            // request.done( function() {
+            //     that._shutdownModalWindow();
+            //     ControllerView.showAlertSuccess({
+            //         message: 'Your registration have been successfuly!'
+            //     });
+            // });
+            // request.fail( function(){
+            //     ControllerView.showAlertError({
+            //         message: 'Your registration is fail.'
+            //     });
+            // })
             return false;
         },
 
