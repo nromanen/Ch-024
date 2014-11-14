@@ -19,17 +19,13 @@ define('CabinetEventView', [
 
         template: _.template(teacherCabinetEventTemplate),
 
-        selectors: {
-            numberOfStudents: '.numberOfStudents'
-        },
-
         initialize: function() {
             this.model.on('destroy', this.render, this);
             this.model.on('change', this.render, this);
         },
 
         attachEvents: function() {
-            this.$(this.selectors.numberOfStudents).on('click', $.proxy(this._getStudents, this));
+            this.$('.numberOfStudents').on('click', $.proxy(this._getStudents, this));
         },
 
         _getStudents: function() {
@@ -46,12 +42,12 @@ define('CabinetEventView', [
                     ControllerView.showAlertError({message: 'Sorry, but our service has a unknown error!'});
                 })
                 .always(function() {
-                    that.$(that.selectors.numberOfStudents).popover('show');
+                    that.$('.numberOfStudents').popover('show');
             });
         },
 
         _removePopoverToggle: function() {
-            this.$(this.selectors.numberOfStudents).popover('destroy');
+            this.$('.numberOfStudents').popover('destroy');
         },
 
         render: function() {
