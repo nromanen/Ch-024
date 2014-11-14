@@ -140,8 +140,9 @@ define('CalendarView', [
             $(jsEvent.target).ownpopover('show', {
                 html: _.template(ownPopoverTemplate),
                 content: _.extend(calendarEventModelObject, {
-                    start: moment(calendarEventModelObject.start).format('HH:mm Do MMM YYYY'),
-                    end: moment(calendarEventModelObject.end).format('HH:mm Do MMM YYYY'),
+                    start: moment(calendarEventModelObject.start).format('HH:mm '),
+                    end: moment(calendarEventModelObject.end).format('HH:mm'),
+                    thisDay: moment(calendarEventModelObject.end).format('Do MMM'),
                     amountFreePlace: (calendarEventModelObject.amountOfStudents - calendarEventModelObject.currentCount),
                     buttonAssign: this.buttonAssign
                 })

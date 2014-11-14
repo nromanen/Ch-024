@@ -12,15 +12,10 @@
             <tbody>
             <tr>
 
-                <td>Start event:</td>
-                <td> <%=start%></td>
+                <td>Start/End event:</td>
+                <td> <%=start%> - <%=end%> of <%= thisDay%></td>
             </tr>
-            <tr>
 
-                <td>End event:</td>
-                <td> <%=end%></td>
-
-            </tr>
             <tr>
 
                 <td>Classroom:</td>
@@ -29,13 +24,8 @@
 
             <tr>
 
-                <td>Amount of students:</td>
-                <td> <%=amountOfStudents%></td>
-            </tr>
-            <tr>
-
-                <td>Amount of free place:</td>
-                <td> <%=amountFreePlace%></td>
+                <td>Amount of free places/all:</td>
+                <td> <b><%=amountFreePlace%></b> / <%=amountOfStudents%></td>
             </tr>
             </tbody>
         </table>
