@@ -28,12 +28,12 @@ define('RegistrationUserView', [
         },
 
         examples: {
-            nameInput: 'Oleksij',
-            surnameInput: 'Ivasiuk',
-            emailInput: 'tverezo@gmail.com',
-            passwordInput: '365_Days!\n(at least 7 characters)',
+            nameInput: 'example: Oleksij',
+            surnameInput: 'example: Ivasiuk',
+            emailInput: 'example: tverezo@gmail.com',
+            passwordInput: 'example: 365_Days!  (at least 7 characters)',
             repeatPasswordInput: 'passwords should be the same',
-            phoneInput: '+380963282780'
+            phoneInput: 'example: +380963282780'
         },
 
 
@@ -42,7 +42,6 @@ define('RegistrationUserView', [
         _attachEvents: function() {
             this.$(this.selectors.registerButton).on('click', $.proxy(this._sendFormData, this));
             this.$(this.selectors.cancelButton).on('click', $.proxy(this._shutdownModalWindow, this));
-
             this.$(this.selectors.nameInput).on('blur', $.proxy(this._checkName, this));
             this.$(this.selectors.surnameInput).on('blur', $.proxy(this._checkSurname, this));
             this.$(this.selectors.emailInput).on('blur', $.proxy(this._checkEmail, this));
@@ -73,11 +72,8 @@ define('RegistrationUserView', [
             // jsEvent.preventDefault();
             var that = this;
             var data = this.$el.serializeJSON();
-            // this.model.attributes = data;
+
             this.model.save(data, {
-                always: function() { 
-                    setTimeout(1000);
-                },
                 success: function() {
                     that._shutdownModalWindow();
                     ControllerView.showAlertSuccess({
@@ -116,88 +112,46 @@ define('RegistrationUserView', [
 
         _checkName: function() {
             var currentInput = this.$('#name');
-            if (!this.model.validateName(currentInput.val())) {
-                currentInput.popover({
-                    content: "example: " + this.examples.nameInput,
-                    placement: "left"
-                });
-                currentInput.popover('show');
-                currentInput.addClass('borderRed');
-            } else {
-                currentInput.popover('hide');
-                currentInput.removeClass('borderRed');
-            };
+            this._operateField(currentInput, this.examples.nameInput, this.model.validateName(currentInput.val()));
         },
+
         _checkSurname: function() {
             var currentInput = this.$('#surname');
-            if (!this.model.validateSurname(currentInput.val())) {
-                currentInput.popover({
-                    content: "example: " + this.examples.surnameInput,
-                    placement: "left"
-                });
-                currentInput.popover('show');
-                currentInput.addClass('borderRed');
-            } else {
-                currentInput.popover('hide');
-                currentInput.removeClass('borderRed');
-            };
+            this._operateField(currentInput, this.examples.surnameInput, this.model.validateSurname(currentInput.val()));
         },
+
         _checkEmail: function() {
             var currentInput = this.$('#email');
-            if (!this.model.validateEmail(currentInput.val())) {
-                currentInput.popover({
-                    content: "example: " + this.examples.emailInput,
-                    placement: "left"
-                });
-                currentInput.popover('show');
-                currentInput.addClass('borderRed');
-            } else {
-                currentInput.popover('hide');
-                currentInput.removeClass('borderRed');
-            };
+            this._operateField(currentInput, this.examples.emailInput, this.model.validateEmail(currentInput.val()));
         },
+
         _checkPassword: function() {
             var currentInput = this.$('#password');
-            if (!this.model.validatePassword(currentInput.val())) {
-                currentInput.popover({
-                    content: "example: " + this.examples.passwordInput,
-                    placement: "left"
-                });
-                currentInput.popover('show');
-                currentInput.addClass('borderRed');
-            } else {
-                currentInput.popover('hide');
-                currentInput.removeClass('borderRed');
-            };
+            this._operateField(currentInput, this.examples.passwordInput, this.model.validatePassword(currentInput.val()));
         },
 
         _checkRepeatPassword: function() {
             var currentInput = this.$('#repeatPassword');
-            if (!this.model.validateRepeatPassword(currentInput.val(), this.$('#password').val())) {
-                currentInput.popover({
-                    content: this.examples.repeatPasswordInput,
-                    placement: "left"
-                });
-                currentInput.popover('show');
-                currentInput.addClass('borderRed');
-            } else {
-                currentInput.popover('hide');
-                currentInput.removeClass('borderRed');
-            };
+            this._operateField(currentInput, this.examples.repeatPasswordInput, 
+                this.model.validateRepeatPassword(currentInput.val(), this.$('#password').val()));
         },
 
         _checkPhone: function() {
             var currentInput = this.$('#phone');
-            if (!this.model.validatePhone(currentInput.val())) {
+            this._operateField(currentInput, this.examples.phoneInput, this.model.validatePhone(currentInput.val()));
+        },
+
+        _operateField: function(currentInput, example, correct) {
+            if (correct) {
+                currentInput.popover('hide');
+                currentInput.removeClass('borderRed');
+            } else {
                 currentInput.popover({
-                    content: "example: " + this.examples.phoneInput,
+                    content: example,
                     placement: "left"
                 });
                 currentInput.popover('show');
                 currentInput.addClass('borderRed');
-            } else {
-                currentInput.popover('hide');
-                currentInput.removeClass('borderRed');
             };
         },
 
