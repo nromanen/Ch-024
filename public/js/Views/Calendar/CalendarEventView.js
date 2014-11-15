@@ -77,14 +77,16 @@ define('CalendarEventView', [
                 this._cancelModalWindow();
             }, this);
             this._updateCalendarEvent();
-            this.model.save(null,{success:success});
+            this.model.save(null, {
+                success: success
+            });
 
         },
 
         _deleteEvent: function() {
             this.model.destroy();
             $("#calendar").fullCalendar('removeEvents', this.calendarEventObject._id);
-           this._cancelModalWindow();
+            this._cancelModalWindow();
         },
 
         /**
@@ -95,7 +97,7 @@ define('CalendarEventView', [
                 this.template = _.template(saveEventModalWindowTemplate);
                 return;
             }
-            if(Calendar.Controller.session.getUserId() === this.model.getAuthorId()) {
+            if (Calendar.Controller.session.getUserId() === this.model.getAuthorId()) {
                 this.template = _.template(deleteEventModalWindowTemplate);
             }
         },
@@ -109,9 +111,11 @@ define('CalendarEventView', [
 
         render: function() {
             this._setTemplate();
-            this.$el = $(this.template(this.model.toJSON()));
-            this.$el.modal('show');
-            this._attachEvents();
+            if (this.template) {
+                this.$el = $(this.template(this.model.toJSON()));
+                this.$el.modal('show');
+                this._attachEvents();
+            }
             return this;
         }
 

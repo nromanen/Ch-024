@@ -11,6 +11,7 @@ define('CalendarView', [
     'UserModel',
     'SubscribeCollection',
     'SubscribeView',
+    'ControllerView',
     'text!ownPopoverTemplate',
     'text!buttonAssignTemplate'
 ], function(
@@ -26,6 +27,7 @@ define('CalendarView', [
     UserModel,
     SubscribeCollection,
     SubscribeView,
+    ControllerView,
     ownPopoverTemplate,
     buttonAssignTemplate) {
 
@@ -77,36 +79,45 @@ define('CalendarView', [
         _addEvent: function(date, jsEvent, ui) {
             var originalSubjectModel = $(jsEvent.target).data('subject'),
                 calendarEventModel = new CalendarEventModel({
-                subject: originalSubjectModel,
-                title: originalSubjectModel.getTitle(),
-                color: this._convertHexColorToRGB(originalSubjectModel.getColor()),
-                textColor: originalSubjectModel.getTextColor(),
-                start: date
-            });
+                    subject: originalSubjectModel,
+                    title: originalSubjectModel.getTitle(),
+                    color: this._convertHexColorToRGB(originalSubjectModel.getColor()),
+                    textColor: originalSubjectModel.getTextColor(),
+                    start: date
+                });
             calendarEventModel.setCid(calendarEventModel.cid);
             calendarEventModel.setEnd(moment(calendarEventModel.getStart()).add(2, 'h'));
             this.calendarEventsCollection.add(calendarEventModel);
         },
 
         _showCalendarEventModal: function(calendarEventObject) {
-            var calendarEventModel = this.calendarEventsCollection.findWhere({
-                _id: calendarEventObject._id
-            });
-            if (!calendarEventModel) {
-                calendarEventModel = this.calendarEventsCollection.findWhere({
-                    cid: calendarEventObject.cid
-                });
-            }
-            
-            new CalendarEventView({
-                model: calendarEventModel,
-                calendarEventObject: calendarEventObject
-            });
-
             if (Calendar.Controller.session.hasPermission('events', 'create') ||
                 Calendar.Controller.session.hasPermission('events', 'delete')) {
+                var calendarEventModel = this.calendarEventsCollection.findWhere({
+                    _id: calendarEventObject._id
+                });
+                if (!calendarEventModel) {
+                    calendarEventModel = this.calendarEventsCollection.findWhere({
+                        cid: calendarEventObject.cid
+                    });
+                }
+
+                new CalendarEventView({
+                    model: calendarEventModel,
+                    calendarEventObject: calendarEventObject
+                });
+
+                if ((moment(calendarEventModel.getStart()) < moment()) &&
+                    calendarEventModel.getEditable()) {
+                    ControllerView.showAlertError({
+                        message: 'Start Time must be early than now Time! Please move your Event!'
+                    });
+                    calendarEventModel.off('showCalendarEventModal');
+                }
+
                 calendarEventModel.trigger('showCalendarEventModal');
-            }     
+
+            }
         },
 
         _fetchUserModel: function() {
@@ -114,49 +125,57 @@ define('CalendarView', [
             this.userModel.fetch();
         },
 
-        _showAssignButton: function(amountOfStudents, currentCount) {
+        _showAssignButton: function(calendarEventObject) {
             this.buttonAssign = null;
             if (Calendar.Controller.session.hasPermission('events', 'subscribe')) {
-                if (!(amountOfStudents === currentCount)) {
+                if (!(calendarEventObject.amountOfStudents === calendarEventObject.currentCount)) {
                     this.buttonAssign = buttonAssignTemplate;
-                } else {
-                    this.buttonAssign = '<span class="glyphicon glyphicon-ok"></span>'
+                }
+                if (moment(calendarEventObject.start) < moment()) {
+                    this.buttonAssign = null;
                 }
             }
         },
 
-        _showPopover: _.debounce(function(calendarEventObject, jsEvent, ui) {
+        _showPopover: function(calendarEventObject, jsEvent, ui) {
+            var that = this;
+            clearInterval(this.intervalAppearPopover);
+            this.intervalAppearPopover = setTimeout(function() {
+                var calendarEventModel = that.calendarEventsCollection.findWhere({
+                    _id: calendarEventObject._id
+                });
+                if (!calendarEventModel) {
+                    return;
+                }
 
-            var calendarEventModel = this.calendarEventsCollection.findWhere({
-                _id: calendarEventObject._id
-            });
-            if (!calendarEventModel) {
-                return;
-            }
+                var calendarEventModelObject = calendarEventModel.toJSON();
+                that._showAssignButton(calendarEventModelObject);
 
-           var calendarEventModelObject = calendarEventModel.toJSON();
-            this._showAssignButton(calendarEventModelObject.amountOfStudents, calendarEventModelObject.currentCount);
+                $(jsEvent.target).ownpopover('show', {
+                    html: _.template(ownPopoverTemplate),
+                    content: _.extend(calendarEventModelObject, {
+                        start: moment(calendarEventModelObject.start).format('HH:mm '),
+                        end: moment(calendarEventModelObject.end).format('HH:mm'),
+                        thisDay: moment(calendarEventModelObject.end).format('Do MMM'),
+                        amountFreePlace: (calendarEventModelObject.amountOfStudents - calendarEventModelObject.currentCount),
+                        buttonAssign: that.buttonAssign
+                    })
+                });
 
-            $(jsEvent.target).ownpopover('show', {
-                html: _.template(ownPopoverTemplate),
-                content: _.extend(calendarEventModelObject, {
-                    start: moment(calendarEventModelObject.start).format('HH:mm '),
-                    end: moment(calendarEventModelObject.end).format('HH:mm'),
-                    thisDay: moment(calendarEventModelObject.end).format('Do MMM'),
-                    amountFreePlace: (calendarEventModelObject.amountOfStudents - calendarEventModelObject.currentCount),
-                    buttonAssign: this.buttonAssign
-                })
-            });
+                new SubscribeView({
+                    subscribeCollection: that.subscribeCollection,
+                    userModel: that.userModel,
+                    calendarEventModel: calendarEventModel,
+                    calendarEventsCollection: that.calendarEventsCollection
+                });
 
-            new SubscribeView({
-                subscribeCollection: this.subscribeCollection,
-                userModel: this.userModel,
-                calendarEventModel: calendarEventModel,
-                calendarEventsCollection: this.calendarEventsCollection
-            });
+                jsEvent.stopPropagation();
+            }, 500);
+        },
 
-            jsEvent.stopPropagation();
-        }, 500, false),
+        _clearInterval: function() {
+            clearInterval(this.intervalAppearPopover);
+        },
 
         _resizeEvent: function(calendarEventObject) {
             var calendarEventModel = this.calendarEventsCollection.findWhere({
@@ -197,6 +216,7 @@ define('CalendarView', [
                 drop: _.bind(this._addEvent, this),
                 eventClick: _.bind(this._showCalendarEventModal, this),
                 eventMouseover: _.bind(this._showPopover, this),
+                eventMouseout: _.bind(this._clearInterval, this),
                 eventResize: _.bind(this._resizeEvent, this),
                 eventDrop: _.bind(this._updateCalendarEventAfterDrop, this)
             });
@@ -220,13 +240,13 @@ define('CalendarView', [
         },
 
         _showAllEvents: function() {
-                var that = this;
+            var that = this;
 
-            this.$el.fullCalendar( 'removeEvents');
-            _.each(that.calendarEventsCollection.models, function(model){
+            this.$el.fullCalendar('removeEvents');
+            _.each(that.calendarEventsCollection.models, function(model) {
                 that.$el.fullCalendar('renderEvent', _.extend(model.toJSON(), {
                     className: 'calendar-event'
-               }), true);
+                }), true);
             });
 
         },

@@ -57,6 +57,7 @@ define('SubscribeView', [
                 .done(function() {
                     ControllerView.showAlertSuccess(that.messages.success);
                     that.subscribeCollection.fetch();
+                    $('.showNearestEvents ').trigger('click');
 
                     $.ajax({
                             url: '/event/' + that.calendarEventModel.getId(),
@@ -71,7 +72,7 @@ define('SubscribeView', [
                         });
                 })
                 .always(function() {
-                    $('.own-popover').remove();
+                    $('.own-popover').fadeOut('fast');
                 });
         }
 
