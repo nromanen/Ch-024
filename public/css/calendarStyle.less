@@ -1,11 +1,11 @@
 @containerColor: #EDF1F2;
 
 .mainWrapper {
-  background        : url("../images/222.jpeg") top center fixed;
-background-size: cover;
-  padding           : 50px 0;
-  min-width         : 100%;
-  min-height        : 100%;
+  background      : url("../images/222.jpeg") top center fixed;
+  background-size : cover;
+  padding         : 50px 0;
+  min-width       : 100%;
+  min-height      : 100%;
 
 }
 
@@ -28,6 +28,16 @@ background-size: cover;
 
 }
 
+.subjectsTab {
+
+  .tab-pane {
+	height     : 115px;
+	overflow-y : scroll;
+
+  }
+
+}
+
 .tab-content {
   margin-bottom : 10px;
   border        : 1px solid #DDDDDD;
@@ -37,16 +47,25 @@ background-size: cover;
   .active {
 	min-height : 73px;
   }
+
   .tab-pane {
 	padding    : 10px;
 	background : white;
-	height     : 115px;
-	overflow-y : scroll;
+
   }
 
   .ui-draggable {
 	display : inline-block;
 	margin  : 10px;
+  }
+}
+
+.dropdown-menu {
+
+  li {
+	span {
+	  margin : 5px 10px 0 0;
+	}
   }
 }
 
