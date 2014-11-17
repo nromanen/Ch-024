@@ -1,97 +1,82 @@
+@mainColor: rgba(80, 163, 255, 0.9);
+
+
 .wideBlock {
-  width: 100%;
+  width : 100%;
 }
 
 header {
-  padding: 20px;
 
-  .logo {
-    font-size: 26px;
-    color: #464646;
-    margin-top: 30px;
-    float: left;
+  .it_a img {
+	height     : 64px;
+	margin-top : 20px;
   }
-}
 
-header .it_a {
-  float: left;
-  margin-top: 10px;
-}
-
-header .it_a img {
-  height: 64px;
-}
-
-.b_regForm {
-  background: #f7f7f7;
-  padding: 10px;
-  margin-top: 15px;
-
-}
-
-.b_regForm .form-control {
-  margin-bottom: 10px;
-}
-
-.b_reg {
-  display: none;
-}
-
-.b_login h3 {
-  margin: 0;
-  padding: 5px 0 15px 0;
 }
 
 .cover {
-  min-height: 400px;
-  padding-bottom: 15px;
-  overflow: hidden;
-  /* background: #353535 url("../images/octicons-bg.png") center repeat;*/
-  background: url("../images/hd-wide-wallpapers_15987_1920x1200.jpg") center;
-  margin-top: 20px;
-}
+  min-height     : 500px;
+  padding-bottom : 15px;
+  overflow       : hidden;
+  background     : url("../images/222.jpeg") center;
+  margin-top     : 20px;
 
-.cover .promo {
-  float: left;
-  margin-top: 10px;
-  background: rgba(224, 64, 0, 0.75);
-  padding: 8px 15px;
-}
+  .promo {
+	margin-top : 30%;
+	background : @mainColor;
+	padding    : 8px 15px;
+	color      : #FFFFFF;
 
-.cover .promo h1,
-.cover .promo h2,
-.cover .promo h3,
-.cover .promo h4 {
-  color: #fff;
-  margin: 0;
-}
+	h1 {
+	  font-size : 28px;
+	  margin    : 0;
+	}
+	h3 {
+	  font-size   : 18px;
+	  margin      : 10px 0 0 0;
+	  font-weight : normal;
+	}
+  }
 
-.cover .cover_img {
-  width: 42%;
-  margin-top: 15px;
+  .b_regForm {
+	background : #F7F7F7;
+	padding    : 10px;
+
+	.form-control {
+	  margin-bottom : 10px;
+	}
+
+	.wideButtons {
+	  width : 49%;
+	}
+
+	h3 {
+	  margin  : 0;
+	  padding : 5px 0 15px 0;
+	}
+
+	.incorrectLogin {
+	  clear       : both;
+	  display     : none;
+	  padding     : 0px 0 10px 3px;
+	  color       : @mainColor;
+	  font-size   : 14px;
+	  font-weight : normal;
+	}
+  }
+
 }
 
 footer {
-  padding-top: 20px;
+  padding-top : 20px;
+
+  nav {
+
+	li {
+	  display : inline;
+	  margin  : 0px 10px;
+	}
+
+  }
 }
 
-footer nav li {
-  display: inline;
-  margin: 0px 10px;
-}
-
-.borderRed {
-  border: 1px solid red;
-}
-
-.incorrectLogin {
-  clear: both;
-  display: none;
-  padding: 0px 0 10px 3px;
-  color: rgba(120, 0, 0, 0.84);
-  font-size: 14px;
-  font-weight: normal;
-}
-.wideButtons{
-  width: 49%;
-}

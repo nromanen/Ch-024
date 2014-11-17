@@ -4,31 +4,32 @@ define('navTabPaneCategoryView', [
     'backbone',
     'tinycolor',
     'pickacolor'
-], function(
-    $,
-    _,
-    Backbone,
-    tinycolor,
-    pickacolor) {
+],
+    function(
+        $,
+        _,
+        Backbone) {
 
-    var navTabPaneCategoryView = Backbone.View.extend({
+        var navTabPaneCategoryView = Backbone.View.extend({
 
-        className: 'tab-pane',
+            className: 'tab-pane',
 
-        id: function() {
-            return this.model.getCid();
-        },
+            id: function() {
+                return this.model.getCid();
+            },
 
-        initialize: function() {
-            this.model.bind('destroy', this.remove, this);
-        },
+            initialize: function() {
+                this.model.bind('destroy', this.remove, this);
+            },
 
-        render: function() {
-            return this;
-        }
+            render: function() {
+                return this;
+            }
 
-    });
+        });
 
-    return navTabPaneCategoryView;
+        return navTabPaneCategoryView;
 
-});
+    }
+
+);
