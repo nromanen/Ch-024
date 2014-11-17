@@ -134,6 +134,11 @@ define('CalendarEventModel', [
                 return this.set('authorId', value);
             },
 
+            getCurrentCount: function() {
+                return this.get('currentCount');
+            },
+
+
             validate: function(attrs) {
                 var errors = [];
 
