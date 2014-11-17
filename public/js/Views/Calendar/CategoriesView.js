@@ -88,6 +88,7 @@ define('CategoriesView', [
         _cancelModalWindow: function() {
             this.remove();
             $('.modal-backdrop').remove();
+            $('body').removeClass('modal-open');
         },
 
         render: function() {
