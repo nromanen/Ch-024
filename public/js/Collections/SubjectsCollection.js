@@ -3,19 +3,22 @@ define('SubjectsCollection', [
     'underscore',
     'backbone',
     'SubjectModel'
-], function(
-    $,
-    _,
-    Backbone,
-    SubjectModel) {
+],
+    function(
+        $,
+        _,
+        Backbone,
+        SubjectModel) {
 
-    var SubjectsCollection = Backbone.Collection.extend({
+        var SubjectsCollection = Backbone.Collection.extend({
 
-        url: "/subject",
-        model: SubjectModel
+            url: "/subject",
+            model: SubjectModel
 
-    });
+        });
 
-    return SubjectsCollection;
+        return SubjectsCollection;
 
-});
+    }
+
+);

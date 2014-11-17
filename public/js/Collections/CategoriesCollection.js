@@ -3,25 +3,28 @@ define('CategoriesCollection', [
     'underscore',
     'backbone',
     'CategoryModel'
-], function(
-    $,
-    _,
-    Backbone,
-    CategoryModel) {
+],
+    function(
+        $,
+        _,
+        Backbone,
+        CategoryModel) {
 
-    var CategoriesCollection = Backbone.Collection.extend({
+        var CategoriesCollection = Backbone.Collection.extend({
 
-        url: '/category',
-        model: CategoryModel,
+            url: '/category',
+            model: CategoryModel,
 
-        findModelById: function(id) {
-            return this.findWhere({
-                cid: id
-            });
-        }
+            findModelById: function(id) {
+                return this.findWhere({
+                    cid: id
+                });
+            }
 
-    });
+        });
 
-    return CategoriesCollection;
+        return CategoriesCollection;
 
-});
+    }
+
+);

@@ -4,33 +4,37 @@ define('AssignedEventView', [
     'backbone',
     'moment',
     'text!assignedEventTemplate'
-], function(
-    $,
-    _,
-    Backbone,
-    moment,
-    assignedEventTemplate) {
+],
+    function(
+        $,
+        _,
+        Backbone,
+        moment,
+        assignedEventTemplate) {
 
-    var AssignedEventView = Backbone.View.extend({
+        var AssignedEventView = Backbone.View.extend({
 
-        template: _.template(assignedEventTemplate),
+            template: _.template(assignedEventTemplate),
 
-        render: function() {
-            var CalendarEvent = this.model.get('event');
+            render: function() {
+                var CalendarEvent = this.model.get('event');
 
-            this.$el.html(this.template({
-                color: CalendarEvent.color,
-                textColor: CalendarEvent.textColor,
-                title: CalendarEvent.title,
-                start: moment(CalendarEvent.start).format('HH:mm Do MMM YYYY'),
-                end: moment(CalendarEvent.end).format('HH:mm Do MMM YYYY'),
-                classroom: CalendarEvent.classroom
-            }));
-            return this;
-        }
+                this.$el.html(this.template({
+                    color: CalendarEvent.color,
+                    textColor: CalendarEvent.textColor,
+                    title: CalendarEvent.title,
+                    start: moment(CalendarEvent.start).format('HH:mm Do MMM YYYY'),
+                    end: moment(CalendarEvent.end).format('HH:mm Do MMM YYYY'),
+                    classroom: CalendarEvent.classroom
+                }));
 
-    });
+                return this;
+            }
 
-    return AssignedEventView;
+        });
 
-});
+        return AssignedEventView;
+
+    }
+
+);

@@ -3,19 +3,22 @@ define('AdminSubjectsCollection', [
     'underscore',
     'backbone',
     'SubjectModel'
-], function(
-    $,
-    _,
-    Backbone,
-    SubjectModel) {
+],
+    function(
+        $,
+        _,
+        Backbone,
+        SubjectModel) {
 
-    var AdminSubjectsCollection = Backbone.Collection.extend({
+        var AdminSubjectsCollection = Backbone.Collection.extend({
 
-        url: '/subjects/notapproved',
-        model: SubjectModel
+            url: '/subjects/notapproved',
+            model: SubjectModel
 
-    });
+        });
 
-    return AdminSubjectsCollection;
+        return AdminSubjectsCollection;
 
-});
+    }
+
+);
