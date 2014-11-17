@@ -112,22 +112,26 @@ define('RegistrationUserView', [
 
         _checkName: function() {
             var currentInput = this.$('#name');
-            this._operateField(currentInput, this.examples.nameInput, this.model.validateName(currentInput.val()));
+            this._operateField(currentInput, this.examples.nameInput, 
+                this.model.validateName(currentInput.val()));
         },
 
         _checkSurname: function() {
             var currentInput = this.$('#surname');
-            this._operateField(currentInput, this.examples.surnameInput, this.model.validateSurname(currentInput.val()));
+            this._operateField(currentInput, this.examples.surnameInput, 
+                this.model.validateSurname(currentInput.val()));
         },
 
         _checkEmail: function() {
             var currentInput = this.$('#email');
-            this._operateField(currentInput, this.examples.emailInput, this.model.validateEmail(currentInput.val()));
+            this._operateField(currentInput, this.examples.emailInput, 
+                this.model.validateEmail(currentInput.val()));
         },
 
         _checkPassword: function() {
             var currentInput = this.$('#password');
-            this._operateField(currentInput, this.examples.passwordInput, this.model.validatePassword(currentInput.val()));
+            this._operateField(currentInput, this.examples.passwordInput, 
+                this.model.validatePassword(currentInput.val()));
         },
 
         _checkRepeatPassword: function() {
@@ -138,7 +142,8 @@ define('RegistrationUserView', [
 
         _checkPhone: function() {
             var currentInput = this.$('#phone');
-            this._operateField(currentInput, this.examples.phoneInput, this.model.validatePhone(currentInput.val()));
+            this._operateField(currentInput, this.examples.phoneInput, 
+                this.model.validatePhone(currentInput.val()));
         },
 
         _operateField: function(currentInput, example, correct) {
