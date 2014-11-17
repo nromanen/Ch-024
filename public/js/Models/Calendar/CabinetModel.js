@@ -2,35 +2,41 @@ define('CabinetModel', [
     'jquery',
     'underscore',
     'backbone'
-], function( $, _, Backbone) {
+],
+    function(
+        $,
+        _,
+        Backbone) {
 
-    var CabinetModel = Backbone.Model.extend({
+        var CabinetModel = Backbone.Model.extend({
 
-        urlRoot: '/teachers',
+            urlRoot: '/teachers',
 
-        defaults: function() {
-            return {
-                _id: '',
-                title: '',
-                event: {},
-                students: {}
+            defaults: function() {
+                return {
+                    _id: '',
+                    title: '',
+                    event: {},
+                    students: {}
+                }
+            },
+
+            getStudents: function() {
+                return this.get('students');
+            },
+
+            getEvent: function() {
+                return this.get('event');
+            },
+
+            setStudents: function(value) {
+                return this.set('students', value);
             }
-        },
 
-        getStudents: function() {
-            return this.get('students');
-        },
+        });
 
-        getEvent: function() {
-            return this.get('event');
-        },
+        return CabinetModel;
 
-        setStudents: function(value) {
-            return this.set('students', value);
-        }
+    }
 
-    });
-
-    return CabinetModel;
-
-});
+);

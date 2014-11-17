@@ -3,19 +3,21 @@ define('CabinetCollection', [
     'underscore',
     'backbone',
     'CabinetModel'
-], function(
-    $,
-    _,
-    Backbone,
-    CabinetModel) {
+],
+    function(
+        $,
+        _,
+        Backbone,
+        CabinetModel) {
 
-    var CabinetCollection = Backbone.Collection.extend({
+        var CabinetCollection = Backbone.Collection.extend({
 
-        url: '/teachers',
-        model: CabinetModel
+            url: '/teachers',
+            model: CabinetModel
 
-    });
+        });
 
-    return CabinetCollection;
+        return CabinetCollection;
 
-});
+    }
+);
