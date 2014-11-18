@@ -154,12 +154,4 @@ exports.getNotApproved = function(req, res) {
             })
             res.json(data);
     });
-
-    // subjectsQuery.exec(function(err, queryRes) {
-    //     if (err) {
-    //         return handleError(err)
-    //     } else {
-    //         res.json(queryRes);
-    //     }
-    // });
 };
