@@ -99,11 +99,4 @@ exports.getNotApproved = function (req, res) {
             })
             res.send(data);
     });
-    // categoryQuery.exec(function(err, queryRes) {
-    //     if (err) {
-    //         return handleError(err)
-    //     } else {
-    //         res.json(queryRes);
-    //     }
-    // });
 };

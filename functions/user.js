@@ -71,6 +71,8 @@ exports.signUp = function(req, res) {
             mailTransporter.registeredMail({
                 to: req.body.email
             });
+
+
             res.send(201);
             res.end;
         } else {

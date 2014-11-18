@@ -35,30 +35,6 @@ exports.create = function(req, res) {
     });
 
 
-    /*    var query = db.categoryModel.find({_id: req.body.category._id});
-     query.select('title');
-     query.exec(function (err, queryRes) {
-     if (err) {
-     return handleError(err)
-     } else {
-
-     var data = new db.subjectModel({
-     title: req.body.title,
-     color: req.body.color,
-     catId: queryRes
-     });
-     data.save(function (err) {
-     if (!err) {
-     res.send({action: "saved"});
-     res.end;
-     } else {
-
-     res.send({action: "failSave"});
-     console.log(err);
-     res.end;
-     }
-     })
-     }*/
 };
 
 exports.confirm = function(req, res) {
@@ -155,11 +131,4 @@ exports.getNotApproved = function(req, res) {
             res.json(data);
     });
 
-    // subjectsQuery.exec(function(err, queryRes) {
-    //     if (err) {
-    //         return handleError(err)
-    //     } else {
-    //         res.json(queryRes);
-    //     }
-    // });
 };

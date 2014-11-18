@@ -49,7 +49,7 @@ exports.getAll = function(req, res) {
 exports.getOne = function(req, res) {
 
     var query = db.eventModel.findOne({'_id': req.params.id});
-    // query.select('subjectId');
+
     query.exec(function(err, queryRes) {
         if (err) {
             return handleError(err)

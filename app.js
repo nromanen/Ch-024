@@ -12,6 +12,7 @@ var express = require('express'),
     db = require('./lib/mongoose'),
     userRoles = require('./lib/authorization').Auth(),
     Urls = require('./urls').Urls;
+
 /*
  * Express@3 USE's section
  *
@@ -34,6 +35,8 @@ app.configure(function() {
     app.use(userRoles.middleware());
 // Enable express router, module help us to route queries
     app.use(app.router);
+
+
 //Static path (default page)
     app.use(express.static(path.join(__dirname, 'public')));
 
