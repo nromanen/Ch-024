@@ -71,13 +71,11 @@ exports.signUp = function(req, res) {
             mailTransporter.registeredMail({
                 to: req.body.email
             });
-            res.send(201);
+            res.send(200);
             res.end;
         } else {
 
-            res.send({
-                action: "failRegister"
-            });
+            res.send(400);
             console.log(err);
             res.end;
         }
