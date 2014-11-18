@@ -23,6 +23,7 @@ define('CabinetModalView', [
             _cabinetDelete: function() {
                 this.model.destroy();
                 this.remove();
+                $('body').removeClass('modal-open');
                 $('.modal-backdrop').hide();
             },
 
