@@ -31,7 +31,7 @@ exports.registeredMail = function (mailData) {
         to: mailData.to,                             // list of receivers
         subject: 'SoftServe IT Academy',             // Subject line
         htmlBody: 'You have successfully signed up for <b>SoftServe IT Academy program!</b>'
-        plainText: 'You have successfully signed up for <b>SoftServe IT Academy program!</b>'
+
     };
 
 // send mail with defined transport object
