@@ -100,6 +100,7 @@ define('CalendarEventView', [
             _cancelModalWindow: function() {
                 this.remove();
                 $('.modal-backdrop').hide();
+                $('body').removeClass('modal-open');
             },
 
 

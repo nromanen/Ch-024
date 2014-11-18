@@ -143,6 +143,7 @@ define('SubjectsView', [
 
             _cancelModalWindow: function() {
                 this.remove();
+                $('body').removeClass('modal-open');
                 $('.modal-backdrop').hide();
             },
 
