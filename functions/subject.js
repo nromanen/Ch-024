@@ -130,5 +130,4 @@ exports.getNotApproved = function(req, res) {
             })
             res.json(data);
     });
-
 };

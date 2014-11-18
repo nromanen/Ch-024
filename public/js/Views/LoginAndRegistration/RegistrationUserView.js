@@ -69,11 +69,11 @@ define('RegistrationUserView', [
             },
 
             _sendFormData: function(jsEvent) {
-
                 var that = this;
                 var data = this.$el.serializeJSON();
-
-                this.model.save(data, {
+                var newUser = new RegistrationUserModel(data);
+                newUser.save(null, {
+                    dataType: 'text',
                     success: function() {
                         that._shutdownModalWindow();
                         ControllerView.showAlertSuccess({

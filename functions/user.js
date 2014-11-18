@@ -72,14 +72,11 @@ exports.signUp = function(req, res) {
                 to: req.body.email
             });
 
-
             res.send(201);
             res.end;
         } else {
 
-            res.send({
-                action: "failRegister"
-            });
+            res.send(400);
             console.log(err);
             res.end;
         }
