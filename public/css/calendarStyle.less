@@ -1,155 +1,129 @@
 @containerColor: #EDF1F2;
 
-.calendarWrap {
-  padding: 12px;
+.mainWrapper {
+  background      : url("../images/222.jpeg") top center fixed;
+  background-size : cover;
+  padding         : 50px 0;
+  min-width       : 100%;
+  min-height      : 100%;
 
 }
 
 .row {
-  margin: 5px;
+  margin : 5px;
+}
+
+.nav-tabs {
+
+  li {
+
+	a {
+	  padding-top   : 6px;
+	  padding-right : 35px;
+	}
+	&.active .removeCategory {
+	  visibility : visible;
+	}
+  }
+
+}
+
+.subjectsTab {
+
+  .tab-pane {
+	height     : 115px;
+	overflow-y : scroll;
+
+  }
+
 }
 
 .tab-content {
-  margin-bottom: 10px;
-  border: 1px solid #dddddd;
-  border-top: none;
-  display: block;
+  margin-bottom : 10px;
+  border        : 1px solid #DDDDDD;
+  border-top    : none;
+  display       : block;
 
   .active {
-    min-height: 73px;
+	min-height : 73px;
+  }
+
+  .tab-pane {
+	padding    : 10px;
+	background : white;
+
+  }
+
+  .ui-draggable {
+	display : inline-block;
+	margin  : 10px;
   }
 }
 
-.tab-pane {
-  padding: 10px;
-  background: white;
-}
+.dropdown-menu {
 
-.ui-draggable {
-  display: inline-block;
-  margin: 10px;
+  li {
+	span {
+	  margin : 5px 10px 0 0;
+	}
+  }
 }
 
 .divSubject {
-  font-size: 14px;
-  padding: 7px;
-  width: 150px;
-  min-height: 32px;
-  cursor: pointer;
-  text-align: center;
-  border: none;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
+  font-size     : 14px;
+  padding       : 7px;
+  width         : 150px;
+  min-height    : 32px;
+  cursor        : pointer;
+  text-align    : left;
+  border        : none;
+  overflow      : hidden;
+  text-overflow : ellipsis;
 
-.divSubject:hover .removeSubject {
-  cursor: pointer;
-  visibility: visible;
-}
+  &:hover .removeSubject {
+	cursor     : pointer;
+	visibility : visible;
+  }
 
-.removeSubject {
-  /* visibility: hidden;*/
-  position: absolute;
-  left: 128px;
-  text-align: left;
-  top: 9px;
-
-}
-
-span.divSubject {
-  text-align: left;
-}
-
-.removeSubject:hover {
-  /* visibility: hidden;*/
-  -webkit-transform: scale(1.4);
-  -moz-transform: scale(1.4);
-  -ms-transform: scale(1.4);
-  -o-transform: scale(1.4);
-  transform: scale(1.4);;
-}
-
-#navTabContainer li:hover .removeCategory {
-  cursor: pointer;
-  visibility: visible;
-}
-
-.removeCategory {
-  visibility: hidden;
-  float: right;
-  padding: 2px 12px;
-}
-
-.removeCategory:hover {
-  -webkit-transform: scale(1.4);
-  -moz-transform: scale(1.4);
-  -ms-transform: scale(1.4);
-  -o-transform: scale(1.4);
-  transform: scale(1.4);;
 }
 
 .calendarContainer {
-  background: @containerColor;
-  margin-top: 50px;
-  margin-bottom: 50px;
-  position: relative;
-
+  background : @containerColor;
+  position   : relative;
 }
 
-#clip {
-  position: relative;
-  top: -20px;
-  background: url('../images/paperClipStart.png') repeat-x;
-  height: 60px;
-}
+.removeSubject, .removeCategory {
+  position   : absolute;
+  right      : 5px;
+  top        : 9px;
+  cursor     : pointer;
+  visibility : hidden;
+  &:hover {
+	-webkit-transform : scale(1.4);
+	-moz-transform    : scale(1.4);
+	-ms-transform     : scale(1.4);
+	-o-transform      : scale(1.4);
+	transform         : scale(1.4);;
+  }
 
-.nav .navbar-nav .active {
-  background-color: #428bca;
 }
-
-nav li:hover {
-  background-color: #4B8BAF;
-}
-
-.titleTextDecoration {
-  font-size: 18pt;
-  color: darkslategray;
-}
-
-.textDelete {
-  font-size: 16pt;
-}
-
-.create {
-  margin-top: 5px;
-}
-
-/*popover*/
 
 .own-popover {
-  position: absolute;
-  min-width: 200px;
-  font-size: 12px;
-/*  border: 1px #000;
-  border-radius: 2px;
-  background-color: #000;
-  background-color: rgba(0,0,0, .3);
-  line-height: 1.4em;
-  color: white;
-
-  padding: 3px;*/
-  z-index: 10;
+  position  : absolute;
+  min-width : 200px;
+  font-size : 12px;
+  z-index   : 10;
 
   table {
 	padding-bottom : 5px;
   }
   .remove-popover {
-    float: right;
-    margin: 3px 5px 0 0px;
-    cursor: pointer;
+	float  : right;
+	margin : 3px 5px 0 0px;
+	cursor : pointer;
   }
   .footer-content {
-    text-align: center;
+	text-align : center;
   }
   .popover-content {
 	padding : 0;
@@ -157,35 +131,12 @@ nav li:hover {
 
 }
 
+#external-events {
 
-#subjectContainer {
-  margin: 10px 0;
+  input {
+	width         : 90%;
+	margin-bottom : 5px;
+	text-align    : left;
+  }
+
 }
-
-#external-events input {
-  min-width: 110px;
-  text-align: left;
-  margin-bottom: 2px;
-  padding-left: 20px;
-}
-
-#buttonCreate {
-  margin-top: 41px;
-  padding-left: 0;
-}
-
-.dropdown a > span {
-  margin: 0 8px;
-}
-
-.hideOverflow{
-    overflow: hidden;
-    text-overflow: ellipsis; 
-    display: block;
-    max-width: 550px;
-}
-
-.numberOfStudents{
-  cursor: pointer;
-}
-

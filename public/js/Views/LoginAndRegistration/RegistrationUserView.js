@@ -90,46 +90,51 @@ define('RegistrationUserView', [
                 return false;
             },
 
-            _checkName: function() {
-                var currentInput = this.$('#name');
-                this._operateField(currentInput, this.examples.nameInput, this.model.validateName(currentInput.val()));
-            },
+        _checkName: function() {
+            var currentInput = this.$('#name');
+            this._operateField(currentInput, this.examples.nameInput, 
+                this.model.validateName(currentInput.val()));
+        },
 
-            _checkSurname: function() {
-                var currentInput = this.$('#surname');
-                this._operateField(currentInput, this.examples.surnameInput, this.model.validateSurname(currentInput.val()));
-            },
+        _checkSurname: function() {
+            var currentInput = this.$('#surname');
+            this._operateField(currentInput, this.examples.surnameInput, 
+                this.model.validateSurname(currentInput.val()));
+        },
 
-            _checkEmail: function() {
-                var currentInput = this.$('#email');
-                this._operateField(currentInput, this.examples.emailInput, this.model.validateEmail(currentInput.val()));
-            },
+        _checkEmail: function() {
+            var currentInput = this.$('#email');
+            this._operateField(currentInput, this.examples.emailInput, 
+                this.model.validateEmail(currentInput.val()));
+        },
 
-            _checkPassword: function() {
-                var currentInput = this.$('#password');
-                this._operateField(currentInput, this.examples.passwordInput, this.model.validatePassword(currentInput.val()));
-            },
+        _checkPassword: function() {
+            var currentInput = this.$('#password');
+            this._operateField(currentInput, this.examples.passwordInput, 
+                this.model.validatePassword(currentInput.val()));
+        },
 
-            _checkRepeatPassword: function() {
-                var currentInput = this.$('#repeatPassword');
-                this._operateField(currentInput, this.examples.repeatPasswordInput,
-                    this.model.validateRepeatPassword(currentInput.val(), this.$('#password').val()));
-            },
+        _checkRepeatPassword: function() {
+            var currentInput = this.$('#repeatPassword');
+            this._operateField(currentInput, this.examples.repeatPasswordInput, 
+                this.model.validateRepeatPassword(currentInput.val(), this.$('#password').val()));
+        },
 
-            _checkPhone: function() {
-                var currentInput = this.$('#phone');
-                this._operateField(currentInput, this.examples.phoneInput, this.model.validatePhone(currentInput.val()));
-            },
+        _checkPhone: function() {
+            var currentInput = this.$('#phone');
+            this._operateField(currentInput, this.examples.phoneInput, 
+                this.model.validatePhone(currentInput.val()));
+        },
 
-            _operateField: function(currentInput, example, correct) {
-                if (correct) {
-                    currentInput.popover('hide');
-                    currentInput.removeClass('borderRed');
-                } else {
-                    currentInput.popover({
-                        content: example,
-                        placement: "left"
-                    });
+        _operateField: function(currentInput, example, correct) {
+            if (correct) {
+                currentInput.popover('hide');
+                currentInput.removeClass('borderRed');
+            } else {
+                currentInput.popover({
+                    content: example,
+                    placement: "left"
+                });
                     currentInput.popover('show');
                     currentInput.addClass('borderRed');
                 };

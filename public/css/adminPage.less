@@ -1,39 +1,41 @@
-.admin-wrapper {
-  padding: 10px;
-}
 .buttonsColumn {
   width: 17%;
 
-input {
-  margin: 5px;
-}
+  input {
+	margin:    5px;
+	min-width: 70px;
+  }
+
 }
 
-.collapseIcon{
-  float: right;
-  width: 20px;
+.collapseIcon {
+  float:  right;
+  width:  20px;
   height: 16px;
+  cursor: pointer;
+
+  &.collapseIconIn {
+	background: url(../images/collapseIcons.png) 0 0;
+  }
+
+  &.collapseIconOut {
+	background: url(../images/collapseIcons.png) 0 -16px;
+  }
+}
+&.sortSubjects,.sortCategories, .sortTeachers {
+  cursor: pointer;
 }
 
-.collapseIconIn{
-  background: url(../images/collapseIcons.png) 0 0;
+.waterMark {
+  color: #E5D7D7;
+  font-size: 18px;
+  -webkit-transform: rotate(-24deg);
+  -moz-transform: rotate(-24deg);
+  top: -21px;
+  left: 78px;
+  opacity: 0.7;
+  position: absolute;
 }
-.collapseIconOut{
-  background: url(../images/collapseIcons.png) 0 -16px;
-}
-
-.confirmButton,
-.refuseButton {
-  width: 40%;
-  margin: 0px;
-}
-
-.sortSubjects{
-	cursor: pointer;
-}
-.sortCategories{
-	cursor: pointer;
-}
-.sortTeachers{
-	cursor: pointer;
+.defaultCursor{
+  cursor: default;
 }

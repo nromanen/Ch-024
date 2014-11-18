@@ -2,14 +2,20 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
                 </button>
                 <h4 class="modal-title" id="myModalLabel">Students:</h4>
             </div>
             <div class="modal-body">
                 <%_.each(students, function(element, index) {%>
-                    <strong><%=students[index].user.username%> <%=students[index].user.surname%></strong> : <p><%=students[index].user.phone%></p>
-                    <%})%>
+                    <strong>
+                        <%=students[index].user.username%>
+                            <%=students[index].user.surname%>
+                    </strong>: <%=students[index].user.phone%><br>  
+                <%})
+                %>
             </div>
             <div class="modal-footer">
                 <button id="closeTeacherModal" type="button" class="btn btn-default" data-dismiss="modal">Close</button>

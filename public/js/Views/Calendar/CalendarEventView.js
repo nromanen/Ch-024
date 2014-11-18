@@ -1,10 +1,10 @@
 define('CalendarEventView', [
-    'jquery',
-    'underscore',
-    'backbone',
-    'text!saveEventModalWindowTemplate',
-    'text!deleteEventModalWindowTemplate'
-],
+        'jquery',
+        'underscore',
+        'backbone',
+        'text!saveEventModalWindowTemplate',
+        'text!deleteEventModalWindowTemplate'
+    ],
     function(
         $,
         _,
@@ -54,18 +54,22 @@ define('CalendarEventView', [
 
 
             _updateCalendarEvent: function() {
-                this.model.setAmountOfStudents(this.$(this.selectors.amountOfStudentsInput).val());
-                this.model.setClassroom(this.$(this.selectors.classroomForExamInput).val());
-                this.model.setEditable(false);
-                this.model.setColor(this.calendarEventObject.color.substr(0, this.calendarEventObject.color.length - 4) + '1)');
-                this.model.setAuthorId(localStorage.getItem('userSession'));
-                this.calendarEventObject.editable = false;
-                this.calendarEventObject.color = this.model.getColor();
+                data = {
+                    amountOfStudents: this.$(this.selectors.amountOfStudentsInput).val(),
+                    classroom: this.$(this.selectors.classroomForExamInput).val(),
+                    editable: false,
+                    color: this.calendarEventObject.color.substr(0, this.calendarEventObject.color.length - 4) + '1)',
+                    authorId: localStorage.getItem('userSession')
+                };
+                this.model.set(data, {
+                    validate: true
+                });
             },
-
 
             _saveEvent: function() {
                 var success = _.bind(function(model, response) {
+                    this.calendarEventObject.editable = false;
+                    this.calendarEventObject.color = this.model.getColor();
                     this.calendarEventObject._id = this.model.get('_id');
                     $("#calendar").fullCalendar('updateEvent', this.calendarEventObject);
                     this._cancelModalWindow();
@@ -74,7 +78,6 @@ define('CalendarEventView', [
                 this.model.save(null, {
                     success: success
                 });
-
             },
 
             _deleteEvent: function() {
@@ -82,7 +85,6 @@ define('CalendarEventView', [
                 $("#calendar").fullCalendar('removeEvents', this.calendarEventObject._id);
                 this._cancelModalWindow();
             },
-
 
             _setTemplate: function() {
                 if (this.model.getEditable() === true) {
@@ -115,4 +117,4 @@ define('CalendarEventView', [
 
         return CalendarEventView;
 
-});
+    });
